@@ -1,6 +1,6 @@
 import './App.css'
 import 'bootstrap-icons/font/bootstrap-icons.css';
-import Login from './Components/Login/Login'
+// import Login from './Components/Login/Login'
 import Registration from './Components/Registration/Registration'
 
 function App() {
@@ -9,7 +9,7 @@ function App() {
   return (
     <div>
       <Registration/>
-      <Login/>
+      {/* <Login/> */}
     </div>
   )
 }
