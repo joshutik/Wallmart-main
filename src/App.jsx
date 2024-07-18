@@ -5,6 +5,7 @@ import 'bootstrap-icons/font/bootstrap-icons.css';
 import Homepage from './Components/Homepage/Homepage';
 import Usercomision from './Components/Usercomision/Usercomision';
 import Partners from './Components/Partners/Partners';
+import NavigationBar from './Components/NavigationBar/NavigationBar';
 
 function App() {
  
@@ -14,6 +15,7 @@ function App() {
       <Homepage/>
       <Usercomision/>
       <Partners/>
+      <NavigationBar/>
     </div>
   )
 }
