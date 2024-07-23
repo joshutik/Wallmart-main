@@ -34,10 +34,10 @@ const Login = () => {
     const payload = {
       phone: formData.phone,
       password: formData.password,
-    };
+    }; 
 
     try {
-      const response = await fetch("https://your-backend-endpoint/api/login", {
+      const response = await fetch("http://127.0.0.1:9090/api/accounts/login/", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

@@ -51,7 +51,8 @@ const Registration = () => {
     };
 
     try {
-      const response = await fetch('#', {
+      //const response = await fetch(`${http://127.0.0.1:9090}/api/accounts/users/}`, {
+      const response = await fetch(`http://127.0.0.1:9090/api/accounts/users/`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
