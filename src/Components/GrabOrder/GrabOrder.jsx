@@ -599,6 +599,8 @@
 // };
 
 // export default GrabOrder;
+
+
 import { useState } from 'react';
 import './GrabOrder.css';
 import diamond from '../assets/diamond-icon.png';
@@ -608,8 +610,10 @@ import { Circle } from 'rc-progress';
 import Modal1 from '../Modal/Modal1';
 import axios from 'axios';
 
+
 const GrabOrder = () => {
   // State variables
+
   const [balance, setBalance] = useState(30);
   const [orderCount, setOrderCount] = useState(0);
   const [progress, setProgress] = useState(0);
@@ -649,6 +653,7 @@ const GrabOrder = () => {
   const handleClose = () => {
     setShowModal(false); // Hide the modal
   };
+
 
   return (
     <div className="container-fluid">

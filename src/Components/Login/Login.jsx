@@ -6,6 +6,8 @@ import img3 from "../assets/reg-img.png";
 import "bootstrap-icons/font/bootstrap-icons.css";
 
 const Login = () => {
+
+  const apiHostname = process.env.REACT_APP_API_HOSTNAME2;
   const [formData, setFormData] = useState({
     phone: "",
     password: "",
@@ -37,7 +39,8 @@ const Login = () => {
     }; 
 
     try {
-      const response = await fetch("http://127.0.0.1:9090/api/accounts/login/", {
+      //const response = await fetch(`${apiHostname}/api/accounts/login/`, {
+      const response = await fetch('https://wall-mart-api.onrender.com/api/accounts/login/', {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
