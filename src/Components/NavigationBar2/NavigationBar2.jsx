@@ -34,4 +34,3 @@ function NavigationBar2() {
 }
 
 export default NavigationBar2;
-
