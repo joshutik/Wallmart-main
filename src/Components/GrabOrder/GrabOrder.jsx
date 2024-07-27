@@ -601,7 +601,7 @@
 // export default GrabOrder;
 
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import './GrabOrder.css';
 import diamond from '../assets/diamond-icon.png';
 import data from '../assets/data-icon.png';
@@ -614,10 +614,11 @@ import axios from 'axios';
 const GrabOrder = () => {
   // State variables
 
-  const [balance, setBalance] = useState(30);
+  const [balance, setBalance] = useState(0);
   const [orderCount, setOrderCount] = useState(0);
   const [progress, setProgress] = useState(0);
-  const [commission, setCommission] = useState(0);
+  const [commission1, setCommission1] = useState(0);
+  const [commission2, setCommission2] = useState(0);
   const [showModal, setShowModal] = useState(false);
   const amount = 10; // Default amount
 
@@ -625,6 +626,7 @@ const GrabOrder = () => {
   const handleGrabClick = () => {
     setShowModal(true); // Show the modal
   };
+
 
   const handlePay = async () => {
     if (orderCount < 3 && balance >= amount) {
@@ -655,6 +657,36 @@ const GrabOrder = () => {
   };
 
 
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get('http://127.0.0.1:9090/api/accounts/users/1/', {
+          headers: {
+            'Authorization': 'Token 9c0e1266678b9d8a00f5b0ff3e51162ac9b2596b'
+          }
+        });
+
+        const data = response.data;
+
+        // console.log(data)
+
+        setCommission1(data.commission1); // Assuming the response contains a balance field
+        setCommission2(data.commission2); // Assuming the response contains a balance field
+        setBalance(data.balance); // Assuming the response contains a balance field
+        // setCommission(data.commission); // Assuming the response contains a commission field
+        setOrderCount(data.grabbed_orders_count); // Assuming the response contains an orderCount field
+
+    
+
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+
   return (
     <div className="container-fluid">
       <h1 className="text-center fw-bold">Order</h1>
@@ -671,7 +703,7 @@ const GrabOrder = () => {
                 </p>
                 <div>
                   <p className="current-balance fw-bold fs-2">
-                    $ <span className="display-1 fw-bold">{balance.toFixed(2)}</span> USD
+                    $ <span className="display-1 fw-bold">{balance}</span> USD
                   </p>
                 </div>
                 <div className="text-end">
@@ -686,7 +718,7 @@ const GrabOrder = () => {
                 <p>Yesterday Commission</p>
               </div>
               <div className="px-4">
-                <p className="commission fw-bold fs-1">$0.00</p>
+                <p className="commission fw-bold fs-1">${commission1}</p>
               </div>
             </div>
           </div>
@@ -717,7 +749,7 @@ const GrabOrder = () => {
                   <p>Today Commission</p>
                 </div>
                 <div className="px-4">
-                  <p className="commission fw-bold fs-1">${commission.toFixed(2)}</p>
+                  <p className="commission fw-bold fs-1">${commission2}</p>
                 </div>
               </div>
             </div>
