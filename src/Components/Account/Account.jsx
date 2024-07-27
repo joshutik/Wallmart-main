@@ -1,9 +1,10 @@
 // import React from "react";
-import { Button } from "react-bootstrap";
+// import { Button } from "react-bootstrap";
 import profile from "../assets/profile.png";
 import { Circle } from "rc-progress";
 import diamond from "../assets/diamond-icon.png";
 import "./Account.css"; // Make sure to create and style this CSS file
+import { Link } from "react-router-dom";
 
 const Account = () => {
   const progress = 50; // Example progress value
@@ -121,11 +122,11 @@ const Account = () => {
               </div>
             </div>
 
-            <div className="mt-4 text-center">
-              <Button variant="secondary" className="me-3">
-                Quick Withdrawal
-              </Button>
-              <Button variant="secondary">Top up now</Button>
+            <div className="mt-4 text-center links d-flex justify-content-center rounded-pill py-3 w-50 mx-auto">
+              <Link to={'/'} className="me-3 fw-bold border border-2 text-light text-decoration-none px-3 rounded-pill">
+              <i className="bi bi-wallet2 fs-3"></i> Quick Withdrawal
+              </Link>
+              <Link to={'/'} variant="secondary" className="border fw-bold border-2 text-light text-decoration-none px-4 rounded-pill"><i className="bi bi-cash-stack fs-3"></i> Top up now</Link>
             </div>
           </div>
         </div>

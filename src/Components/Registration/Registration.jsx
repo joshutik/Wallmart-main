@@ -3,11 +3,12 @@ import "./registration.css";
 import img1 from "../assets/tabler_brand-walmart.png";
 import img2 from '../assets/bg.png';
 import img3 from '../assets/reg-img.png';
+import { Link, useNavigate } from 'react-router-dom';
 
 
 const Registration = () => {
-
-  const apiHostname = process.env.REACT_APP_API_HOSTNAME2;
+const navigate = useNavigate();
+  // const apiHostname = process.env.REACT_APP_API_HOSTNAME2;
   const [formData, setFormData] = useState({
     phone: '',
     password: '',
@@ -19,6 +20,7 @@ const Registration = () => {
 
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
+  const [loading, setLoading] = useState(false); // New loading state
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -44,6 +46,8 @@ const Registration = () => {
 
     setError('');
     setSuccess('');
+    setLoading(true); // Set loading to true when the form is submitted
+
 
     // Prepare data for the backend
     const payload = {
@@ -70,11 +74,14 @@ const Registration = () => {
 
       const result = await response.json();
       setSuccess('Registration successful');
+      navigate('/login')
       console.log('Form data submitted:', result);
       // Optionally, you can clear the form or redirect the user
     } catch (error) {
       setError('Registration failed: ' + error.message);
       console.error('Error:', error);
+    } finally {
+      setLoading(false); // Set loading to false once the request is completed
     }
   };
 
@@ -156,16 +163,22 @@ const Registration = () => {
               {error && <div className="text-danger">{error}</div>}
               {success && <div className="text-success">{success}</div>}
               <div className="regs-btn my-4 fw-bold fs-4">
-                <button type="submit" className="w-100 rounded-5 text-light py-2 reg-btn border-0">
-                  Register
+                <button type="submit" className="w-100 rounded-5 text-light py-2 reg-btn border-0" disabled={loading}>
+                {loading ? (
+                    <div className="spinner-border text-light" role="status">
+                      <span className="visually-hidden">Loading...</span>
+                    </div>
+                  ) : (
+                    "Register"
+                  )}
                 </button>
               </div>
               <div>
                 <p>
                   Already have an account?{" "}
-                  <a href="#" className="sub-login">
+                  <Link to={'/login'} className="sub-login">
                     Login
-                  </a>
+                  </Link>
                 </p>
               </div>
             </form>

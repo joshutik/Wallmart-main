@@ -3,10 +3,12 @@ import "./Login.css";
 import img1 from "../assets/tabler_brand-walmart.png";
 import img2 from "../assets/bg.png";
 import img3 from "../assets/reg-img.png";
+import { Link, useNavigate } from "react-router-dom";
 import "bootstrap-icons/font/bootstrap-icons.css";
 
 const Login = () => {
 
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     phone: "",
     password: "",
@@ -16,6 +18,7 @@ const Login = () => {
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
   const [showPassword, setShowPassword] = useState(false);
+  const [loading, setLoading] = useState(false); // New loading state
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -30,7 +33,7 @@ const Login = () => {
 
     setError("");
     setSuccess("");
-
+    setLoading(true); // Set loading to true when the form is submitted
     // Prepare data for the backend
     const payload = {
       phone: formData.phone,
@@ -54,6 +57,7 @@ const Login = () => {
 
       const result = await response.json();
       setSuccess("Login successful");
+      navigate('/homepage')
       console.log("Form data submitted:");
     
       localStorage.setItem("token", result.token)
@@ -63,6 +67,8 @@ const Login = () => {
     } catch (error) {
       setError("Login failed: " + error.message);
       console.error("Error:", error);
+    } finally {
+      setLoading(false); // Set loading to false once the request is completed
     }
   };
 
@@ -133,17 +139,23 @@ const Login = () => {
               <div className="regs-btn my-4 fw-bold fs-4">
                 <button
                   type="submit"
-                  className="w-100 rounded-5 text-light py-2 reg-btn border-0"
+                  className="w-100 rounded-5 text-light py-2 reg-btn border-0" disabled={loading} 
                 >
-                  Login
+                   {loading ? (
+                    <div className="spinner-border text-light" role="status">
+                      <span className="visually-hidden">Loading...</span>
+                    </div>
+                  ) : (
+                    "Login"
+                  )}
                 </button>
               </div>
               <div>
                 <p>
                   Don&apos;t have an account?{" "}
-                  <a href="#" className="sub-login">
+                  <Link to={'/registration'} className="sub-login">
                     Sign up
-                  </a>
+                  </Link>
                 </p>
               </div>
             </form>
