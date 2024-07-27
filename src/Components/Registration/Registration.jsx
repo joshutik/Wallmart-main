@@ -4,7 +4,10 @@ import img1 from "../assets/tabler_brand-walmart.png";
 import img2 from '../assets/bg.png';
 import img3 from '../assets/reg-img.png';
 
+
 const Registration = () => {
+
+  const apiHostname = process.env.REACT_APP_API_HOSTNAME2;
   const [formData, setFormData] = useState({
     phone: '',
     password: '',
@@ -51,7 +54,9 @@ const Registration = () => {
     };
 
     try {
-      const response = await fetch('#', {
+      //const response = await fetch(`${http://127.0.0.1:9090}/api/accounts/users/}`, {
+      // const response = await fetch(`${apiHostname}/api/accounts/users/`, {
+      const response = await fetch('https://wall-mart-api.onrender.com/api/accounts/users/', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

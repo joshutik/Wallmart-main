@@ -12,7 +12,6 @@ import Account from './Components/Account/Account';
 
 function App() {
  
-
   return (
     <div>
       {/* <Homepage/> */}
