@@ -660,9 +660,13 @@ const GrabOrder = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get('http://127.0.0.1:9090/api/accounts/users/1/', {
+
+        token = localStorage.getItem('token')
+        user = localStorage.getItem('user_id')
+        const response = await axios.get(`http://127.0.0.1:9090/api/accounts/users/${user}/`, {
+         
           headers: {
-            'Authorization': 'Token 9c0e1266678b9d8a00f5b0ff3e51162ac9b2596b'
+            'Authorization': `Token ${token}`
           }
         });
 
