@@ -674,7 +674,7 @@ const handleClose = () => {
         const token = localStorage.getItem('token')
         const user = localStorage.getItem('user_id')
     
-        const response = await axios.get(`http://127.0.0.1:9090/api/accounts/users/${user}/`, {
+        const response = await axios.get(`https://wall-mart-api.onrender.com/api/accounts/users/${user}/`, {
          
           headers: {
             'Authorization': `Token ${token}`

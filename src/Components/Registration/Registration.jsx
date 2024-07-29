@@ -58,7 +58,7 @@ const navigate = useNavigate();
     };
 
     try {
-      const response = await fetch('http://127.0.0.1:9090/api/accounts/users/', {
+      const response = await fetch('https://wall-mart-api.onrender.com/api/accounts/users/', {
       // const response = await fetch(`${apiHostname}/api/accounts/users/`, {
       //const response = await fetch('https://wall-mart-api.onrender.com/api/accounts/users/', {
         method: 'POST',

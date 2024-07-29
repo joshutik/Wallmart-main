@@ -22,7 +22,7 @@ const Modal1 = ({ show, handleClose, amount, orderCount, balance }) => {
 
         try {
             // Send data to the backend with the authorization token in the headers
-            await axios.post('http://127.0.0.1:9090/api/orders/order-grabbings/', {
+            await axios.post('https://wall-mart-api.onrender.com/api/orders/order-grabbings/', {
             //await axios.post('https://wall-mart-api.onrender.com/api/orders/order-grabbings/', {
                 order: 1,
                 amount: amount,
