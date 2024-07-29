@@ -666,11 +666,10 @@ const handleClose = () => {
     setShowModal(false); // Hide the modal
 };
 
-
+ 
   useEffect(() => {
     const fetchData = async () => {
       try {
-
         const token = localStorage.getItem('token')
         const user = localStorage.getItem('user_id')
     
@@ -690,8 +689,6 @@ const handleClose = () => {
         setBalance(data.balance); // Assuming the response contains a balance field
         // setCommission(data.commission); // Assuming the response contains a commission field
         setOrderCount(data.grabbed_orders_count); // Assuming the response contains an orderCount field
-
-    
 
       } catch (error) {
         console.error('Error fetching data:', error);

@@ -21,10 +21,10 @@ function App() {
       {/* <Partners/> */}
       {/* <NavigationBar/> */}
       {/* <NavigationBar2/> */}
-      <GrabOrder/>
+      {/* <GrabOrder/> */}
       {/* <Login/> */}
       {/* <Registration/> */}
-      {/* <Account/> */}
+      <Account/>
 
 
     </div>
