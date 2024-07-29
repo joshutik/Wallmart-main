@@ -622,6 +622,8 @@ const GrabOrder = () => {
   const [showModal, setShowModal] = useState(false);
   const amount = 10; // Default amount
 
+ 
+
   // Handler for the "Start grabbing" button click
   const handleGrabClick = () => {
     setShowModal(true); // Show the modal
@@ -629,35 +631,36 @@ const GrabOrder = () => {
 
 
 
-const handlePay = async () => {
-    if (orderCount < 3 && balance >= amount) {
-        const commissionAmount = amount * 0.2; // 20% commission
-        const authToken = localStorage.getItem('token'); // Replace with the actual token
+// const handlePay = async () => {
+//     if (orderCount < 3 && balance >= amount) {
+//         const commissionAmount = amount * 0.2; // 20% commission
+//         const authToken = localStorage.getItem('token'); // Replace with the actual token
 
-        try {
-            // Send data to the backend with the authorization token in the headers
-            await axios.post('http://127.0.0.1:9090/api/orders/order-grabbings/', {
-                order: 1,
-                amount: amount,
-                commission: commissionAmount
-            }, {
-                headers: {
-                    'Authorization': `Token ${authToken}`
-                }
-            });
+//         try {
+//             // Send data to the backend with the authorization token in the headers
+//             await axios.post('http://127.0.0.1:9090/api/orders/order-grabbings/', {
+//             //await axios.post('https://wall-mart-api.onrender.com/api/orders/order-grabbings/', {
+//                 order: 1,
+//                 amount: amount,
+//                 commission: commissionAmount
+//             }, {
+//                 headers: {
+//                     'Authorization': `Token ${authToken}`
+//                 }
+//             });
 
-            // Update state after successful payment
-            setBalance(balance - amount);
-            setOrderCount(orderCount + 1);
-            setProgress(progress + 33.3333);
-            setCommission(commission + commissionAmount); // Add the commission to the commission state
-        } catch (error) {
-            console.error("Error during payment:", error);
-            // Handle error (show message to the user, etc.)
-        }
-    }
-    setShowModal(false); // Hide the modal after payment
-};
+//             // Update state after successful payment
+//             setBalance(balance - amount);
+//             setOrderCount(orderCount + 1);
+//             setProgress(progress + 33.3333);
+//             setCommission(commission + commissionAmount); // Add the commission to the commission state
+//         } catch (error) {
+//             console.error("Error during payment:", error);
+//             // Handle error (show message to the user, etc.)
+//         }
+//     }
+//     setShowModal(false); // Hide the modal after payment
+// };
 
 const handleClose = () => {
     setShowModal(false); // Hide the modal
@@ -671,8 +674,6 @@ const handleClose = () => {
         const token = localStorage.getItem('token')
         const user = localStorage.getItem('user_id')
     
-
-        console.log(user)
         const response = await axios.get(`http://127.0.0.1:9090/api/accounts/users/${user}/`, {
          
           headers: {
@@ -779,7 +780,7 @@ const handleClose = () => {
           </button>
         </div>
       </div>
-      <Modal1 show={showModal} handleClose={handleClose} handlePay={handlePay} amount={amount} />
+      <Modal1 show={showModal} handleClose={handleClose} amount={amount} orderCount= {orderCount} balance =  {balance} />
     </div>
   );
 };

@@ -1,15 +1,50 @@
 // import React from "react";
 import PropTypes from "prop-types"; // Import PropTypes
 import "./Modal1.css";
+import axios from 'axios';
 import { FaTimes } from "react-icons/fa"; // Import the "X" icon from react-icons
 
-const Modal1 = ({ show, handleClose, handlePay, amount }) => {
+const Modal1 = ({ show, handleClose, amount, orderCount, balance }) => {
   if (!show) return null;
+
+  
 
   const now = new Date();
   const formattedDate = now.toLocaleDateString();
   const formattedTime = now.toLocaleTimeString();
   const commissionAmount = amount * 0.2;
+
+
+  const handlePay = async () => {
+    if (orderCount < 3 && balance >= amount) {
+        const commissionAmount = amount * 0.2; // 20% commission
+        const authToken = localStorage.getItem('token'); // Replace with the actual token
+
+        try {
+            // Send data to the backend with the authorization token in the headers
+            await axios.post('http://127.0.0.1:9090/api/orders/order-grabbings/', {
+            //await axios.post('https://wall-mart-api.onrender.com/api/orders/order-grabbings/', {
+                order: 1,
+                amount: amount,
+                commission: commissionAmount
+            }, {
+                headers: {
+                    'Authorization': `Token ${authToken}`
+                }
+            });
+
+            // Update state after successful payment
+            // setBalance(balance - amount);
+            // setOrderCount(orderCount + 1);
+            setProgress(progress + 33.3333);
+            // setCommission(commission + commissionAmount); // Add the commission to the commission state
+        } catch (error) {
+            console.error("Error during payment:", error);
+            // Handle error (show message to the user, etc.)
+        }
+    }
+    setShowModal(false); // Hide the modal after payment
+};
 
   return (
     <div className="modal-overlay">
@@ -52,7 +87,7 @@ const Modal1 = ({ show, handleClose, handlePay, amount }) => {
 Modal1.propTypes = {
   show: PropTypes.bool.isRequired,
   handleClose: PropTypes.func.isRequired,
-  handlePay: PropTypes.func.isRequired,
+  // handlePay: PropTypes.func.isRequired,
   amount: PropTypes.number.isRequired,
 };
 
