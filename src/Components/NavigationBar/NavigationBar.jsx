@@ -52,16 +52,17 @@
 
 // import React from 'react';
 import { Container, Nav, Navbar } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 import { HouseDoor, FileEarmarkText, Bell, Person } from 'react-bootstrap-icons';
 import './NavigationBar.css';
 
 const NavigationBar = () => {
   return (
-    <Navbar bg="light" className="custom-navbar">
+    <Navbar bg="light" className="custom-navbar fixed-bottom">
       <Container className="justify-content-center">
         <Nav className="d-flex justify-content-around w-100">
           <Nav.Item className="nav-item">
-            <Nav.Link href="#home" className="d-flex flex-column align-items-center">
+            <Nav.Link to={'/'} className="d-flex flex-column align-items-center">
               <HouseDoor className="nav-icon" />
               <span className="nav-text">Home</span>
             </Nav.Link>
@@ -73,19 +74,19 @@ const NavigationBar = () => {
             </Nav.Link>
           </Nav.Item>
           <Nav.Item className="nav-item grab-order">
-            <Nav.Link href="#grab-order" className="d-flex flex-column align-items-center">
+            <Link to={"/grab-order"} className="d-flex flex-column align-items-center">
               <HouseDoor className="nav-icon grab-order-icon" />
               <span className="nav-text">Grab Order</span>
-            </Nav.Link>
+            </Link>
           </Nav.Item>
           <Nav.Item className="nav-item">
-            <Nav.Link href="#notification" className="d-flex flex-column align-items-center">
+            <Nav.Link to={'/'} className="d-flex flex-column align-items-center">
               <Bell className="nav-icon" />
               <span className="nav-text">Notification</span>
             </Nav.Link>
           </Nav.Item>
           <Nav.Item className="nav-item">
-            <Nav.Link href="#profile" className="d-flex flex-column align-items-center">
+            <Nav.Link to={'/my-profile'} className="d-flex flex-column align-items-center">
               <Person className="nav-icon" />
               <span className="nav-text">Account Profile</span>
             </Nav.Link>

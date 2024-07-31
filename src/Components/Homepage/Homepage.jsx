@@ -6,6 +6,7 @@ import img3 from "../assets/slider-3.jpg";
 import img4 from "../assets/recharge.png";
 import img5 from "../assets/withdrawal.png";
 import img6 from "../assets/invite.png";
+import NavigationBar from "../NavigationBar/NavigationBar";
 
 const Homepage = () => {
   return (
@@ -97,6 +98,7 @@ const Homepage = () => {
           </div>
         </div>
       </div>
+      <NavigationBar/>
     </div>
   );
 };
