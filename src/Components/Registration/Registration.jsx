@@ -8,7 +8,8 @@ import { Link, useNavigate } from 'react-router-dom';
 
 const Registration = () => {
 const navigate = useNavigate();
-  // const apiHostname = process.env.REACT_APP_API_HOSTNAME2;
+const djangoHostname = import.meta.env.VITE_DJANGO_HOSTNAME;
+
   const [formData, setFormData] = useState({
     phone: '',
     password: '',
@@ -58,7 +59,7 @@ const navigate = useNavigate();
     };
 
     try {
-      const response = await fetch('https://wall-mart-api.onrender.com/api/accounts/users/', {
+      const response = await fetch(`${djangoHostname}/api/accounts/users/`, {
       // const response = await fetch(`${apiHostname}/api/accounts/users/`, {
       //const response = await fetch('https://wall-mart-api.onrender.com/api/accounts/users/', {
         method: 'POST',
