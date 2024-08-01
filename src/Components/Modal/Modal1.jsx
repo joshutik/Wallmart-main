@@ -6,6 +6,7 @@ import { FaTimes } from "react-icons/fa"; // Import the "X" icon from react-icon
 
 const Modal1 = ({ show, handleClose, amount, orderCount, balance }) => {
   if (!show) return null;
+  const djangoHostname = import.meta.env.VITE_DJANGO_HOSTNAME;
 
   
 
@@ -22,7 +23,7 @@ const Modal1 = ({ show, handleClose, amount, orderCount, balance }) => {
 
         try {
             // Send data to the backend with the authorization token in the headers
-            await axios.post('https://wall-mart-api.onrender.com/api/orders/order-grabbings/', {
+            await axios.post(`${djangoHostname}/api/orders/order-grabbings/`, {
             //await axios.post('https://wall-mart-api.onrender.com/api/orders/order-grabbings/', {
                 order: 1,
                 amount: amount,

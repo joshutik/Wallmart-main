@@ -209,13 +209,22 @@
 // export default Account;
 
 import { useState } from "react";
+import { useState, useEffect } from 'react';
 import profile from "../assets/profile.png";
 import { Circle } from "rc-progress";
 import diamond from "../assets/diamond-icon.png";
 import "./Account.css";
 import { Link } from "react-router-dom";
+import axios from 'axios';
 
 const Account = () => {
+  const djangoHostname = import.meta.env.VITE_DJANGO_HOSTNAME;
+
+  const [invite_code, setInvite_code] = useState(0);
+  const [balance, setBalance] = useState(0);
+  const [phone, setPhone] = useState(0);
+
+
   const progress = 33.3333;
   const [showModal, setShowModal] = useState(false);
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -244,6 +253,35 @@ const Account = () => {
     }
   };
 
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const token = localStorage.getItem('token')
+        const user = localStorage.getItem('user_id')
+        const user_invitation_code = localStorage.getItem('user_invitation_code')
+    
+        const response = await axios.get(`${djangoHostname}/api/accounts/users/${user}/`, {
+         
+          headers: {
+            'Authorization': `Token ${token}`
+          }
+        });
+
+        const data = response.data;
+        // console.log(data)
+
+        setInvite_code(user_invitation_code); // Assuming the response contains a balance field
+        setBalance(data.balance); // Assuming the response contains a balance field
+        setPhone(data.phone); // Assuming the response contains a balance field
+
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
+
+    fetchData();
+  }, []);
+
   return (
     <div className="container-fluid dashboard-container">
       <div className="row pb-5 mb-5">
@@ -262,10 +300,10 @@ const Account = () => {
             />
             <div className="profile-info px-5">
               <p>
-                <strong>Number:</strong> 8766-766-5654
+                <strong>Number:</strong> {phone}
               </p>
               <p>
-                <strong>Invitation code:</strong> 00943
+                <strong>Invitation code:</strong> {invite_code}
               </p>
             </div>
           </div>
@@ -334,7 +372,7 @@ const Account = () => {
                     <h4 className="border border-3 py-2 text-light rounded-pill fs-5">
                       Account Balance
                     </h4>
-                    <p className="fw-bold display-1 text-start text-center">$30</p>
+                    <p className="fw-bold display-3 text-start">${balance}</p>
                   </div>
                   <div className="col-lg-1 mt-5 d-none d-lg-block">
                     <div className="vr h-100"></div>

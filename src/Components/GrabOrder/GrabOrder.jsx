@@ -966,6 +966,8 @@ import axios from 'axios';
 
 const GrabOrder = () => {
   // State variables
+  const djangoHostname = import.meta.env.VITE_DJANGO_HOSTNAME;
+
   const [balance, setBalance] = useState(0);
   const [orderCount, setOrderCount] = useState(0);
   const [progress, setProgress] = useState(0);
@@ -1021,6 +1023,11 @@ const GrabOrder = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
+        const token = localStorage.getItem('token')
+        const user = localStorage.getItem('user_id')
+    
+        const response = await axios.get(`${djangoHostname}/api/accounts/users/${user}/`, {
+         
         const token = localStorage.getItem('token');
         const user = localStorage.getItem('user_id');
 
