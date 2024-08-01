@@ -208,7 +208,6 @@
 
 // export default Account;
 
-import { useState } from "react";
 import { useState, useEffect } from 'react';
 import profile from "../assets/profile.png";
 import { Circle } from "rc-progress";
@@ -223,7 +222,6 @@ const Account = () => {
   const [invite_code, setInvite_code] = useState(0);
   const [balance, setBalance] = useState(0);
   const [phone, setPhone] = useState(0);
-
 
   const progress = 33.3333;
   const [showModal, setShowModal] = useState(false);
@@ -256,23 +254,21 @@ const Account = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const token = localStorage.getItem('token')
-        const user = localStorage.getItem('user_id')
-        const user_invitation_code = localStorage.getItem('user_invitation_code')
+        const token = localStorage.getItem('token');
+        const user = localStorage.getItem('user_id');
+        const user_invitation_code = localStorage.getItem('user_invitation_code');
     
         const response = await axios.get(`${djangoHostname}/api/accounts/users/${user}/`, {
-         
           headers: {
             'Authorization': `Token ${token}`
           }
         });
 
         const data = response.data;
-        // console.log(data)
 
-        setInvite_code(user_invitation_code); // Assuming the response contains a balance field
-        setBalance(data.balance); // Assuming the response contains a balance field
-        setPhone(data.phone); // Assuming the response contains a balance field
+        setInvite_code(user_invitation_code);
+        setBalance(data.balance);
+        setPhone(data.phone);
 
       } catch (error) {
         console.error('Error fetching data:', error);
@@ -280,7 +276,7 @@ const Account = () => {
     };
 
     fetchData();
-  }, []);
+  }, [djangoHostname]);
 
   return (
     <div className="container-fluid dashboard-container">
@@ -372,7 +368,7 @@ const Account = () => {
                     <h4 className="border border-3 py-2 text-light rounded-pill fs-5">
                       Account Balance
                     </h4>
-                    <p className="fw-bold display-3 text-start">${balance}</p>
+                    <p className="fw-bold display-3 text-center display-1">${balance}</p>
                   </div>
                   <div className="col-lg-1 mt-5 d-none d-lg-block">
                     <div className="vr h-100"></div>
