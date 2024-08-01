@@ -10,6 +10,7 @@ import './index.css'
 import Registration from './Components/Registration/Registration.jsx';
 import Login from './Components/Login/Login.jsx';
 import GrabOrder from './Components/GrabOrder/GrabOrder.jsx'
+import Account from './Components/Account/Account.jsx'
 
 
 const router = createBrowserRouter([
@@ -32,6 +33,10 @@ const router = createBrowserRouter([
   {
     path: "/grab-order",
     element: <GrabOrder/>,
+  },
+  {
+    path: "/account",
+    element: <Account/>,
   },
 ]);
 ReactDOM.createRoot(document.getElementById('root')).render(
