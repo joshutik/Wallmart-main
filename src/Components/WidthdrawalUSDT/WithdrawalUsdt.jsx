@@ -185,7 +185,8 @@ const WithdrawalUsdt = () => {
     const fetchBalance = async () => {
       try {
         const token = localStorage.getItem("token"); // Replace with actual token
-        const response = await axios.get("https://example.com/api/balance", {
+        const user = localStorage.getItem("user_id"); // Replace with actual token
+        const response = await axios.get(`${djangoHostname}/api/accounts/users/${user}/`, {
           headers: {
             Authorization: `Token ${token}`,
           },

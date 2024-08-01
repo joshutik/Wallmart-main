@@ -18,8 +18,8 @@ function App() {
   return (
     <div>
       {/* <Homepage/> */}
-      {/* <Usercomision/> */}
-      {/* <Partners/> */}
+      {/* <Usercomision/>
+      <Partners/> */}
       {/* <NavigationBar/> */}
       {/* <NavigationBar2/> */}
       {/* <GrabOrder/> */}
