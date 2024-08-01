@@ -207,8 +207,6 @@
 // };
 
 // export default Account;
-
-import { useState } from "react";
 import { useState, useEffect } from 'react';
 import profile from "../assets/profile.png";
 import { Circle } from "rc-progress";

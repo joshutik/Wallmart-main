@@ -1026,12 +1026,9 @@ const GrabOrder = () => {
         const token = localStorage.getItem('token')
         const user = localStorage.getItem('user_id')
     
-        const response = await axios.get(`${djangoHostname}/api/accounts/users/${user}/`, {
+        // const response = await axios.get(`${djangoHostname}/api/accounts/users/${user}/`, {
          
-        const token = localStorage.getItem('token');
-        const user = localStorage.getItem('user_id');
-
-        const response = await axios.get(`https://wall-mart-api.onrender.com/api/accounts/users/${user}/`, {
+        const response = await axios.get(`${djangoHostname}/api/accounts/users/${user}/`, {
           headers: {
             'Authorization': `Token ${token}`
           }
