@@ -339,7 +339,7 @@ const Account = () => {
         </div>
 
         {/* Sidebar Toggle Button */}
-        <button className="sidebar-toggle d-md-none" onClick={toggleSidebar}>
+        <button className="sidebar-toggle d-md-none bg-transparent border-dark border-3" onClick={toggleSidebar}>
           ☰
         </button>
 
@@ -362,13 +362,13 @@ const Account = () => {
               <div className="container">
                 <div className="row justify-content-center align-items-center">
                   <div className="col-lg-4 col-md-6 col-sm-12 text-light">
-                    <div className="text-start py-3">
+                    <div className="text-start py-2 mt-1">
                       <img src={diamond} alt="Diamond" className="img-fluid" />
                     </div>
                     <h4 className="border border-3 py-2 text-light rounded-pill fs-5">
                       Account Balance
                     </h4>
-                    <p className="fw-bold display-3 text-center display-1">${balance}</p>
+                    <p className="fw-bold text-center display-1">${balance}</p>
                   </div>
                   <div className="col-lg-1 mt-5 d-none d-lg-block">
                     <div className="vr h-100"></div>
@@ -403,10 +403,10 @@ const Account = () => {
 
             <div className="my-5 text-center mb-5">
               <div className="card links">
-                <div className="row justify-content-center pt-5 px-5  rounded-pill pb-5">
+                <div className="row justify-content-center pt-5 px-5 rounded-pill pb-5">
                   <div className="col-lg-4 col-md-6 col-sm-6 mb-3 mb-md-0">
                     <Link
-                      to="/"
+                      to="/widthdraw"
                       className="fw-bold border border-2 text-light action text-decoration-none px-3 py-2 rounded-pill d-block "
                     >
                       <i className="bi bi-wallet2 fs-3"></i> Quick Withdrawal

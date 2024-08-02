@@ -80,7 +80,7 @@ const Homepage = () => {
             <div className="col-lg-4 col-md-4 col-sm-12">
               <button className="btn W-25 py-2 px-4 bg-transparent rounded-5 border-3 action">
                 <img src={img4} className="img-fluid mb-3" alt="" />{" "}
-                <span className="fw-bold text-light">Recharge now</span>
+                <span className="fw-bold text-light">Recharge Now</span>
               </button>
             </div>
             <div className="col-lg-4 col-md-4 col-sm-12">
@@ -92,7 +92,7 @@ const Homepage = () => {
             <div className="col-lg-4 col-md-4 col-sm-12">
               <button className="btn W-25 py-2 px-4 bg-transparent rounded-5 action">
                 <img src={img6} className="img-fluid mb-2" alt="" />{" "}
-                <span className="fw-bold text-light">Invite friend</span>
+                <span className="fw-bold text-light">Invite Friend</span>
               </button>
             </div>
           </div>

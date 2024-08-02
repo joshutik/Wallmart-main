@@ -95,7 +95,7 @@ const Login = () => {
                   type="tel"
                   name="phone"
                   className="form-control py-3 rounded-5 my-4"
-                  placeholder="+234| Enter your number"
+                  placeholder=" Enter your number"
                   value={formData.phone}
                   onChange={handleChange}
                 />

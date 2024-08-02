@@ -53,7 +53,7 @@
 // import React from 'react';
 import { Container, Nav, Navbar } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
-import { HouseDoor, FileEarmarkText, Bell, Person } from 'react-bootstrap-icons';
+import { HouseDoor, FileEarmarkText, Person } from 'react-bootstrap-icons';
 import './NavigationBar.css';
 
 const NavigationBar = () => {
@@ -74,21 +74,22 @@ const NavigationBar = () => {
             </Nav.Link>
           </Nav.Item>
           <Nav.Item className="nav-item grab-order">
-            <Link to={"/grab-order"} className="d-flex flex-column align-items-center">
-              <HouseDoor className="nav-icon grab-order-icon" />
+            <Link to={"/grab-order"} className="d-flex flex-column align-items-center text-decoration-none">
+            <i className="bi bi-bag-plus nav-icon grab-order-icon"></i>
+              {/* <HouseDoor className="nav-icon grab-order-icon" /> */}
               <span className="nav-text">Grab Order</span>
             </Link>
           </Nav.Item>
-          <Nav.Item className="nav-item">
+          {/* <Nav.Item className="nav-item">
             <Nav.Link to={'/'} className="d-flex flex-column align-items-center">
               <Bell className="nav-icon" />
               <span className="nav-text">Notification</span>
             </Nav.Link>
-          </Nav.Item>
+          </Nav.Item> */}
           <Nav.Item className="nav-item">
             <Nav.Link to={'/my-profile'} className="d-flex flex-column align-items-center">
               <Person className="nav-icon" />
-              <span className="nav-text">Account Profile</span>
+              <span className="nav-text"> Profile</span>
             </Nav.Link>
           </Nav.Item>
         </Nav>

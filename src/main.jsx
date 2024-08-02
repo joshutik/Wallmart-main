@@ -11,6 +11,7 @@ import Registration from './Components/Registration/Registration.jsx';
 import Login from './Components/Login/Login.jsx';
 import GrabOrder from './Components/GrabOrder/GrabOrder.jsx'
 import Account from './Components/Account/Account.jsx'
+import WithdrawUstd from './Components/WidthdrawalUSDT/WithdrawalUsdt.jsx'
 
 
 const router = createBrowserRouter([
@@ -37,6 +38,10 @@ const router = createBrowserRouter([
   {
     path: "/account",
     element: <Account/>,
+  },
+  {
+    path: "/widthdraw",
+    element: <WithdrawUstd/>,
   },
 ]);
 ReactDOM.createRoot(document.getElementById('root')).render(
