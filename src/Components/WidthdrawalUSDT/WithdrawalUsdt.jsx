@@ -169,8 +169,7 @@ import SliderToggle from "../SliderToggle/SliderToggle";
 import { Link } from "react-router-dom";
 import axios from "axios"; // Assuming you're using axios for API requests
 
-const Withdrawal = () => {
-  const djangoHostname = import.meta.env.VITE_DJANGO_HOSTNAME;
+const WithdrawalUsdt = () => {
   const [selectedMethod, setSelectedMethod] = useState("crypto");
   const [amount, setAmount] = useState("");
   const [availableBalance, setAvailableBalance] = useState(0);
@@ -404,4 +403,4 @@ const Withdrawal = () => {
   );
 };
 
-export default Withdrawal;
+export default WithdrawalUsdt;
