@@ -454,7 +454,7 @@ const Account = () => {
                           <button className="btn border fw-bold w-100 mx-2">$50</button>
                         </div>
                         <div className="col-lg-12 col-md-6 col-sm-12 d-flex recharge-btn">
-                          <button className="btn border fw-bold w-100 mx-2">$60</button>
+                          <button className="btn border fw-bo w-100 mx-2">$60</button>
                           <button className="btn border fw-bold w-100 mx-2">$80</button>
                         </div>
                           <div className="mt-5">
