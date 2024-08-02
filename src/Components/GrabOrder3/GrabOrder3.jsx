@@ -176,7 +176,7 @@
 
 // export default GrabOrder;
 import { useState, useEffect } from 'react';
-import './GrabOrder.css';
+import './GrabOrder3.css';
 import diamond from '../assets/diamond-icon.png';
 import data from '../assets/data-icon.png';
 import semilogo from '../assets/walmart-semi-logo.png';
@@ -184,7 +184,7 @@ import { Circle } from 'rc-progress';
 import Modal1 from '../Modal/Modal1';
 import axios from 'axios';
 
-const GrabOrder = () => {
+const GrabOrder3 = () => {
   // State variables
   const djangoHostname = import.meta.env.VITE_DJANGO_HOSTNAME;
 
@@ -271,7 +271,7 @@ const GrabOrder = () => {
       <h1 className="text-center fw-bold my-5">Order</h1>
       <div className="container py-5">
         <div className="row align-items-center min-vh-100">
-          <div className="col-lg-6 col-md-12 col-sm-12 mt-5">
+          <div className="col-lg-6 col-md-6 col-sm-12 mt-5">
             <div className="card parent-card rounded-5 p-4 border-0">
               <div className="card child-card w-75 py-3 px-5 border-0 mx-auto text-light rounded-5">
                 <div className="icon pb-3">
@@ -301,7 +301,7 @@ const GrabOrder = () => {
               </div>
             </div>
           </div>
-          <div className="col-lg-6 col-md-12 col-sm-12">
+          <div className="col-lg-6 col-md-6 col-sm-12">
             <div className="card parent-card h-50 border-0 rounded-5">
               <div className="card parent-card rounded-5 p-4 border-0">
                 <div className="w-50 mx-auto ">
@@ -349,4 +349,4 @@ const GrabOrder = () => {
   );
 };
 
-export default GrabOrder;
+export default GrabOrder3;

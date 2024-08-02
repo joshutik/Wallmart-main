@@ -48,9 +48,9 @@
   font-size: 2rem;
 }
 
-/* .order-count {
-  /* margin-left: 5rem !important; 
-} */
+.order-count {
+  margin-left: 5rem !important;
+}
 
 @media (max-width: 768px) {
 
@@ -67,13 +67,6 @@
   .btn {
     width: 100%;
   }
-
-  .order-count {
-    margin-top: 0.3rem !important;
-    margin-left: 0.5em !important;
-    margin-bottom: 5rem !important;
-    word-wrap: break-word;
-  }
 }
 
 @media (min-width: 769px) {
@@ -82,30 +75,6 @@
   }
 
   .order-count {
-    margin-left: 0.7em !important;
-    font-size: 3.3em;
-  
-  }
-}
-@media (max-width: 1205px) {
-  .btn {
-    width: 50%;
-  }
-
-  .order-count {
-    margin-left: 0.7em !important;
-    /* font-size: 3.3em; */
-  
-  }
-}
-@media (max-width: 548px) {
-  .btn {
-    width: 50%;
-  }
-
-  .order-count {
-    margin-left: 0.7em !important;
-    font-size: 2em;
-  
+    margin-left: 0.4em !important;
   }
 }

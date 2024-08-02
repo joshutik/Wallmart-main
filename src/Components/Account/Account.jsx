@@ -287,6 +287,11 @@ const Account = () => {
             <label htmlFor="profile-pic-upload" className="profile-pic-label">
               <img src={profilePic} className="img-fluid h-25 w-50 profile-pic rounded-circle" alt="Profile" />
             </label>
+            <div className="w-50 mx-auto">
+                <button className="btn btn-outline-dark">
+                  <i className="bi bi-camera"></i>
+                </button>
+              </div>
             <input
               type="file"
               id="profile-pic-upload"
@@ -351,11 +356,11 @@ const Account = () => {
                 <h2 className="fs-1 fw-bold">Hey JAMES,</h2>
                 <p>Welcome back! Ready to grab and get commission.</p>
               </div>
-              <div className="w-50 text-end me-5">
+              {/* <div className="w-50 text-end me-5">
                 <button className="btn btn-outline-light">
                   <i className="bi bi-camera"></i> Change cover
                 </button>
-              </div>
+              </div> */}
             </div>
 
             <div className="card text-center balance-card rounded-5 w-75 mx-auto">
