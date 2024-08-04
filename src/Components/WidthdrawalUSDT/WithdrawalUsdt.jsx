@@ -164,12 +164,14 @@
 // };
 
 // export default Withdrawal;
+
+
 import { useState, useEffect } from 'react';
-import SliderToggle from "../SliderToggle/SliderToggle";
+// import SliderToggle from "../SliderToggle/SliderToggle";
 import { Link } from "react-router-dom";
 import axios from "axios"; // Assuming you're using axios for API requests
 
-const WithdrawalUsdt = () => {
+const Withdrawal = () => {
   const [selectedMethod, setSelectedMethod] = useState("crypto");
   const [amount, setAmount] = useState("");
   const [availableBalance, setAvailableBalance] = useState(0);
@@ -185,8 +187,7 @@ const WithdrawalUsdt = () => {
     const fetchBalance = async () => {
       try {
         const token = localStorage.getItem("token"); // Replace with actual token
-        const user = localStorage.getItem("user_id"); // Replace with actual token
-        const response = await axios.get(`${djangoHostname}/api/accounts/users/${user}/`, {
+        const response = await axios.get("https://example.com/api/balance", {
           headers: {
             Authorization: `Token ${token}`,
           },
@@ -265,7 +266,7 @@ const WithdrawalUsdt = () => {
         </div>
       </div>
       <div>
-        <SliderToggle onToggle={setSelectedMethod} />
+      
       </div>
       <div>
         <form className="px-2" onSubmit={handleSubmit}>
@@ -309,7 +310,7 @@ const WithdrawalUsdt = () => {
                 <select
                   name="cryptowallet"
                   id="cryptowallet"
-                  className="form-select py-3 fw-bold"
+                  className="form-select"
                   value={cryptoWallet}
                   onChange={(e) => setCryptoWallet(e.target.value)}
                   required
@@ -403,4 +404,4 @@ const WithdrawalUsdt = () => {
   );
 };
 
-export default WithdrawalUsdt;
+export default Withdrawal;

@@ -411,7 +411,7 @@ const Account = () => {
                 <div className="row justify-content-center pt-5 px-5 rounded-pill pb-5">
                   <div className="col-lg-4 col-md-6 col-sm-6 mb-3 mb-md-0">
                     <Link
-                      to="/widthdraw"
+                      to="/withdraw"
                       className="fw-bold border border-2 text-light action text-decoration-none px-3 py-2 rounded-pill d-block "
                     >
                       <i className="bi bi-wallet2 fs-3"></i> Quick Withdrawal

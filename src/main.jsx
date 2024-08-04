@@ -11,7 +11,9 @@ import Registration from './Components/Registration/Registration.jsx';
 import Login from './Components/Login/Login.jsx';
 import GrabOrder from './Components/GrabOrder/GrabOrder.jsx'
 import Account from './Components/Account/Account.jsx'
-import WithdrawUstd from './Components/WidthdrawalUSDT/WithdrawalUsdt.jsx'
+import Withdrawal from './Components/WithdrawalPage/Withdrawal.jsx';
+// import WithdrawUstd from './Components/WidthdrawalUSDT/WithdrawalUsdt.jsx'
+// import SliderToggle from './Components/SliderToggle/SliderToggle.jsx';
 
 
 const router = createBrowserRouter([
@@ -40,9 +42,10 @@ const router = createBrowserRouter([
     element: <Account/>,
   },
   {
-    path: "/widthdraw",
-    element: <WithdrawUstd/>,
+    path: "/withdraw",
+    element: <Withdrawal/>,
   },
+ 
 ]);
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>

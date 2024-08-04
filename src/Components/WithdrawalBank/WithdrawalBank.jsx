@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import SliderToggle from "../SliderToggle/SliderToggle";
+// import SliderToggle from "../SliderToggle/SliderToggle";
 import "./WithdrawalBank.css";
 import { Link } from "react-router-dom";
 import axios from "axios"; // Assuming you're using axios for API requests
@@ -70,7 +70,7 @@ const WithdrawalBank = () => {
   };
 
   return (
-    <div className="container">
+    <div className="container-fluid">
       <div className="row my-5">
         <div className="col-auto">
           <Link to={"/account"}>
@@ -80,9 +80,6 @@ const WithdrawalBank = () => {
         <div className="col-auto mx-auto">
           <h1>Withdrawal</h1>
         </div>
-      </div>
-      <div>
-        <SliderToggle />
       </div>
       <div>
         <form className="px-2" onSubmit={handleSubmit}>
@@ -168,7 +165,7 @@ const WithdrawalBank = () => {
           </div>
           <div className="my-4 text-center">
             <button
-              className="rounded-pill py-2 w-75 border-0 withdraw fw-bold text-light fs-5"
+              className="rounded-pill py-2 w-75 border-0 draw-btn fw-bold text-light fs-5"
               type="submit"
             >
               Withdraw Now

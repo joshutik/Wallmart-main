@@ -1,39 +1,38 @@
-import { useState } from 'react';
-import './SliderToggle.css'; // Create this CSS file to style the component
+// import { useState } from 'react';
+// import './SliderToggle.css'; // Create this CSS file to style the component
 
-const SliderToggle = () => {
-  const [activeTab, setActiveTab] = useState('wallet');
+// const SliderToggle = () => {
+//   const [activeTab, setActiveTab] = useState('wallet');
 
-  const handleTabClick = (tab) => {
-    setActiveTab(tab);
-  };
+//   const handleTabClick = (tab) => {
+//     setActiveTab(tab);
+//   };
 
-  return (
-    <div className="container toggle-slider mx-auto my-5 w-100">
-      <div
-        className={`tab ${activeTab === 'wallet' ? 'active' : ''}`}
-        onClick={() => handleTabClick('wallet')}
-      >
-        Crypto Wallet
-      </div>
-      <div
-        className={`tab ${activeTab === 'bank' ? 'active' : ''}`}
-        onClick={() => handleTabClick('bank')}
-      >
-        Bank Card
-      </div>
-    </div>
-  );
-};
+//   return (
+//     <div className="container toggle-slider mx-auto my-5 w-100">
+//       <div
+//         className={`tab ${activeTab === 'wallet' ? 'active' : ''}`}
+//         onClick={() => handleTabClick('wallet')}
+//       >
+//         Crypto Wallet
+//       </div>
+//       <div
+//         className={`tab ${activeTab === 'bank' ? 'active' : ''}`}
+//         onClick={() => handleTabClick('bank')}
+//       >
+//         Bank Card
+//       </div>
+//     </div>
+//   );
+// };
 
-export default SliderToggle;
-// import React from "react";
-// import "./SliderToggle.css";
+// export default SliderToggle;
 
 
 // import "./SliderToggle.css";
 
-// const SliderToggle = ({ onToggle }) => {
+// const SliderToggle = () => {
+
 //   return (
 //     <div className="slider-toggle">
 //       <button className="toggle-button" onClick={() => onToggle("crypto")}>
@@ -47,3 +46,33 @@ export default SliderToggle;
 // };
 
 // export default SliderToggle;
+
+// import React from "react";
+import PropTypes from "prop-types";
+import "./SliderToggle.css";
+
+const SliderToggle = ({ selectedMethod, setSelectedMethod }) => {
+  return (
+    <div className="slider-toggle">
+      <button
+        className={`toggle-button rounded-start-5 ${selectedMethod === "crypto" ? "active" : ""}`}
+        onClick={() => setSelectedMethod("crypto")}
+      >
+        Wallet Payment
+      </button>
+      <button
+        className={`toggle-button rounded-end-5 ${selectedMethod === "bank" ? "active" : ""}`}
+        onClick={() => setSelectedMethod("bank")}
+      >
+        Bank
+      </button>
+    </div>
+  );
+};
+
+SliderToggle.propTypes = {
+  selectedMethod: PropTypes.string.isRequired,
+  setSelectedMethod: PropTypes.func.isRequired,
+};
+
+export default SliderToggle;
