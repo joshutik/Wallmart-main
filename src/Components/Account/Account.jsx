@@ -461,7 +461,7 @@ const Account = () => {
                           <button className="btn border fw-bold w-100 mx-2">$80</button>
                         </div>
                           <div className="mt-5">
-                            <button className="recharge text-light fw-bold rounded-pill w-75 border-0 py-2">Recharge now</button>
+                            <Link to={"/recharge-account"} className="recharge text-light fw-bold rounded-pill w-75 border-0 py-2">Recharge now</Link>
                           </div>
                       </div>
 
