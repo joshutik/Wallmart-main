@@ -7,7 +7,7 @@ import Account from './Components/Account/Account';
 // import WithdrawalBank from './Components/WithdrawalBank/WithdrawalBank';
 // import Withdrawal from './Components/WithdrawalPage/Withdrawal';
 // import NavigationBar2 from './Components/NavigationBar2/NavigationBar2';
-// import GrabOrder from './Components/GrabOrder/GrabOrder';
+ import GrabOrder from './Components/GrabOrder/GrabOrder';
 //  import Login from './Components/Login/Login'
 // import Registration from './Components/Registration/Registration';
 // import Registration from './Components/Registration/Registration'
@@ -25,10 +25,10 @@ function App() {
       {/* <Partners/> */}
       {/* <NavigationBar/> */}
       {/* <NavigationBar2/> */}
-      {/* <GrabOrder/> */}
+      <GrabOrder/>
       {/* <Login/> */}
       {/* <Registration/> */}
-      <Account/>
+      {/* <Account/> */}
       {/* <Withdrawal/> */}
       {/* <WithdrawalBank/> */}
       {/* <Withdrawal/> */}

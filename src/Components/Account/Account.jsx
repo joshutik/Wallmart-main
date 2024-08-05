@@ -208,6 +208,7 @@
 
 // export default Account;
 
+
 import { useState, useEffect } from 'react';
 import profile from "../assets/profile.png";
 import { Circle } from "rc-progress";
@@ -227,6 +228,49 @@ const Account = () => {
   const [showModal, setShowModal] = useState(false);
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [profilePic, setProfilePic] = useState(profile);
+  const [amount, setAmount] = useState(0);
+  const [loading, setLoading] = useState(false);
+  const [level, setLevel] = useState("VIP1");
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const token = localStorage.getItem('token');
+        const user = localStorage.getItem('user_id');
+        const user_invitation_code = localStorage.getItem('user_invitation_code');
+    
+        const response = await axios.get(`${djangoHostname}/api/accounts/users/${user}/`, {
+          headers: {
+            'Authorization': `Token ${token}`
+          }
+        });
+
+        const data = response.data;
+
+        setInvite_code(user_invitation_code);
+        setBalance(data.balance);
+        setPhone(data.phone);
+        setLevel(data.level);
+
+
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
+
+    fetchData();
+  }, [djangoHostname]);
+
+  useEffect(() => {
+    // Load the Flutterwave script dynamically
+    const script = document.createElement('script');
+    script.src = 'https://checkout.flutterwave.com/v3.js';
+    script.async = true;
+    document.body.appendChild(script);
+    return () => {
+      document.body.removeChild(script);
+    };
+  }, []);
 
   const handleTopUpClick = () => {
     setShowModal(true);
@@ -251,32 +295,50 @@ const Account = () => {
     }
   };
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const token = localStorage.getItem('token');
-        const user = localStorage.getItem('user_id');
-        const user_invitation_code = localStorage.getItem('user_invitation_code');
-    
-        const response = await axios.get(`${djangoHostname}/api/accounts/users/${user}/`, {
-          headers: {
-            'Authorization': `Token ${token}`
+  const makePayment = () => {
+    FlutterwaveCheckout({
+      public_key: "FLWPUBK_TEST-SANDBOXDEMOKEY-X",
+      tx_ref: "titanic-48981487343MDI0NzMx",
+      amount: amount,
+      currency: "USD",
+      payment_options: "card, mobilemoneyghana, ussd",
+      callback: function(payment) {
+        // Send AJAX verification request to backend
+        // verifyTransactionOnBackend(payment.id);
+      },
+      onclose: function(incomplete) {
+        if (incomplete || window.verified === false) {
+          document.querySelector("#payment-failed").style.display = 'block';
+        } else {
+          document.querySelector("form").style.display = 'none';
+          if (window.verified == true) {
+            document.querySelector("#payment-success").style.display = 'block';
+          } else {
+            document.querySelector("#payment-pending").style.display = 'block';
           }
-        });
-
-        const data = response.data;
-
-        setInvite_code(user_invitation_code);
-        setBalance(data.balance);
-        setPhone(data.phone);
-
-      } catch (error) {
-        console.error('Error fetching data:', error);
+        }
+      },
+      // redirect_url: "https://wallmart-main.vercel.app/",
+      meta: {
+        consumer_id: 23,
+        consumer_mac: "92a3-912ba-1192a",
+      },
+      customer: {
+        email: localStorage.getItem('phone') || "08146955393",
+        phone_number: localStorage.getItem('phone') || "08146955393",
+        name: localStorage.getItem('phone') || "08146955393",
+      },
+      customizations: {
+        title: "The Titanic Store",
+        description: "Payment for an awesome cruise",
+        logo: "https://www.logolynx.com/images/logolynx/22/2239ca38f5505fbfce7e55bbc0604386.jpeg",
       }
-    };
+    });
+  };
 
-    fetchData();
-  }, [djangoHostname]);
+  const handleAmountClick = (amount) => {
+    setAmount(amount);
+  };
 
   return (
     <div className="container-fluid dashboard-container">
@@ -397,7 +459,8 @@ const Account = () => {
                           gapPosition="bottom"
                         />
                         <h2 className="vip-count position-absolute top-50 start-0 end-0 translate-middle-y display-5 w-75 mx-4 my-3 fw-bold text-center">
-                          VIP<br/> <span id="count">1</span>
+                          {level}
+                          {/* {level}<br/> <span id="count">1</span> */}
                         </h2>
                       </div>
                     </div>
@@ -448,20 +511,27 @@ const Account = () => {
                     <hr />
                     <div className="container">
                       <div className="row gy-3">
-                        <div className="col-lg-12 col-md-6 col-sm-12 d-flex recharge-btn recharge-btn">
-                          <button className="btn border w-100 fw-bold mx-2">$10</button>
-                          <button className="btn border fw-bold w-100 mx-2">$30</button>
-                        </div>
-                        <div className="col-lg-12 col-md-6 col-sm-12 d-flex recharge-btn">
-                          <button className="btn border fw-bold w-100 mx-2">$40</button>
-                          <button className="btn border fw-bold w-100 mx-2">$50</button>
-                        </div>
-                        <div className="col-lg-12 col-md-6 col-sm-12 d-flex recharge-btn">
-                          <button className="btn border fw-bo w-100 mx-2">$60</button>
-                          <button className="btn border fw-bold w-100 mx-2">$80</button>
-                        </div>
+                      <div className="col-lg-12 col-md-6 col-sm-12 d-flex recharge-btn">
+                            <button className="btn border w-100 fw-bold mx-2" onClick={() => handleAmountClick(10)}>$10</button>
+                            <button className="btn border fw-bold w-100 mx-2" onClick={() => handleAmountClick(30)}>$30</button>
+                          </div>
+                          <div className="col-lg-12 col-md-6 col-sm-12 d-flex recharge-btn">
+                            <button className="btn border fw-bold w-100 mx-2" onClick={() => handleAmountClick(40)}>$40</button>
+                            <button className="btn border fw-bold w-100 mx-2" onClick={() => handleAmountClick(50)}>$50</button>
+                          </div>
+                          <div className="col-lg-12 col-md-6 col-sm-12 d-flex recharge-btn">
+                            <button className="btn border fw-bold w-100 mx-2" onClick={() => handleAmountClick(60)}>$60</button>
+                            <button className="btn border fw-bold w-100 mx-2" onClick={() => handleAmountClick(80)}>$80</button>
+                          </div>
                           <div className="mt-5">
-                            <button className="recharge text-light fw-bold rounded-pill w-75 border-0 py-2">Recharge now</button>
+                            <button
+                              type="button"
+                              className="recharge text-light fw-bold rounded-pill w-75 border-0 py-2"
+                              onClick={makePayment}
+                              disabled={amount === 0 || loading}
+                            >
+                              {loading ? 'Processing...' : 'Recharge now'}
+                            </button>
                           </div>
                       </div>
 

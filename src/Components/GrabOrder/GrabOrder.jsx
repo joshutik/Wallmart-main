@@ -222,11 +222,12 @@ const GrabOrder = () => {
           }
         });
 
+      
         // Update state after successful payment
-        setBalance(balance - amount);
-        setOrderCount(orderCount + 1);
-        setProgress(progress + 33.3333);
-        setCommission2(commission2 + commissionAmount); // Add the commission to the commission state
+        // setBalance(balance - amount);
+        // setOrderCount(orderCount + 1);
+        // setProgress(progress + 33.3333);
+        // setCommission2(commission2 + commissionAmount); // Add the commission to the commission state
       } catch (error) {
         console.error("Error during payment:", error);
         // Handle error (show message to the user, etc.)
@@ -265,6 +266,7 @@ const GrabOrder = () => {
 
     fetchData();
   }, [djangoHostname]);
+
 
   return (
     <div className="container-fluid">
@@ -344,7 +346,7 @@ const GrabOrder = () => {
           </button>
         </div>
       </div>
-      <Modal1 show={showModal} handleClose={handleClose} handlePay={handlePay} amount={amount} />
+      <Modal1 show={showModal} handleClose={handleClose} handlePay={handlePay} amount={amount} balance = {balance} orderCounts = {orderCount}/>
     </div>
   );
 };
