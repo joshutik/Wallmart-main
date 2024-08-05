@@ -163,14 +163,14 @@
 @media (max-width: 425px) {
 
   .sidebar-toggle{
-    top: 13px;
+    top: 20px;
     left: 300px;
   }
 }
 @media (max-width: 320px) {
 
   .sidebar-toggle{
-    top: 13px;
+    top: 18px;
     left: 250px;
   }
 }
