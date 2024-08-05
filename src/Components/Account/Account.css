@@ -1,3 +1,9 @@
+/* *{
+  padding: 0px !important;
+  margin: 0px !important;
+  box-sizing: border-box;
+} */
+
 .account-section li a:hover {
   background-color: rgba(255, 173, 49, 1) !important;
   color: white !important;
@@ -13,7 +19,7 @@
   background-image: url(../assets/Account-bg-2.png);
   background-size: cover;
   background-position: center;
-  min-height: 45vh;
+  min-height: 45vh !important;
   margin-top: -3rem;
 }
 
@@ -24,7 +30,7 @@
 .profile-section {
   text-align: center;
   margin-bottom: 1rem;
-  text-shadow:1px 1px #6c757d;
+  text-shadow: 1px 1px #6c757d;
 }
 
 .profile-pic {
@@ -36,16 +42,20 @@
 }
 
 .profile-pic {
-  width: 150px; /* Adjust the width as needed */
-  height: 150px; /* Adjust the height as needed */
+  width: 150px;
+  /* Adjust the width as needed */
+  height: 150px;
+  /* Adjust the height as needed */
   object-fit: cover;
   border-radius: 50%;
-  border: 2px solid #fff; /* Optional: Add a border for better visibility */
+  border: 2px solid #fff;
+  /* Optional: Add a border for better visibility */
   transition: border 0.3s;
 }
 
 .profile-pic:hover {
-  border: 2px solid #FFAD31; /* Optional: Change border color on hover */
+  border: 2px solid #FFAD31;
+  /* Optional: Change border color on hover */
 }
 
 
@@ -80,32 +90,41 @@
 
 @media (max-width: 768px) {
   .sidebar {
-      position: fixed;
-      left: -100%;
-      top: 0;
-      width: 100%;
-      height: 100vh;
-      background-color: white;
-      z-index: 1000;
-      transition: left 0.3s;
-      overflow-y: auto;
+    position: fixed;
+    left: -100%;
+    top: 0;
+    width: 100%;
+    height: 100vh;
+    background-color: white;
+    z-index: 1000;
+    transition: left 0.3s;
+    overflow-y: auto;
   }
 
+  .main-content {
+    background-image: url(../assets/account-bg.png);
+    background-size: cover !important;
+    height: 80vh !important;
+  }
+
+
+
   .sidebar.open {
-      left: 0;
+    left: 0;
   }
 
   .sidebar-toggle {
-      position: fixed;
-      /* top: 10px; */
-      left: 10px;
-      z-index: 1001;
-      background-color: #fff;
-      border: none;
-      font-size: 24px;
-      padding: 10px;
-      cursor: pointer;
-      width: 20%;
+    position: fixed;
+    /* top: 10px; */
+    left: 30px;
+    z-index: 1001;
+    /* background-color: #aeaeae; */
+    border: none;
+    font-size: 24px;
+    padding: 10px;
+    margin-bottom: 1rem;
+    cursor: pointer;
+    width: 20%;
   }
 
   .vip-count {
@@ -113,7 +132,7 @@
   }
 
   .main-content {
-      margin-left: 0;
+    margin-left: 0;
   }
 }
 
@@ -130,6 +149,25 @@
 }
 
 .recharge-btn button:focus {
-background-color: #FFAD31 !important;
-color: white !important;
+  background-color: #FFAD31 !important;
+  color: white !important;
+}
+
+@media (max-width: 500px) {
+
+  .sidebar-toggle{
+    left: 370px;
+  }
+}
+@media (max-width: 425px) {
+
+  .sidebar-toggle{
+    left: 330px;
+  }
+}
+@media (max-width: 320px) {
+
+  .sidebar-toggle{
+    left: 250px;
+  }
 }

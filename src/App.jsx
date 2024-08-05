@@ -1,6 +1,6 @@
 import './App.css'
 import 'bootstrap-icons/font/bootstrap-icons.css';
-// import Account from './Components/Account/Account';
+import Account from './Components/Account/Account';
 // import Recharge from './Components/Recharge/Recharge';
 // import SliderToggle from './Components/SliderToggle/SliderToggle';
 // import Withdrawal from './Components/WidthdrawalUSDT/WithdrawalUsdt';
@@ -8,7 +8,7 @@ import 'bootstrap-icons/font/bootstrap-icons.css';
 // import Withdrawal from './Components/WithdrawalPage/Withdrawal';
 // import NavigationBar2 from './Components/NavigationBar2/NavigationBar2';
 // import GrabOrder from './Components/GrabOrder/GrabOrder';
- import Login from './Components/Login/Login'
+//  import Login from './Components/Login/Login'
 // import Registration from './Components/Registration/Registration';
 // import Registration from './Components/Registration/Registration'
 // import Homepage from './Components/Homepage/Homepage';
@@ -26,9 +26,9 @@ function App() {
       {/* <NavigationBar/> */}
       {/* <NavigationBar2/> */}
       {/* <GrabOrder/> */}
-      <Login/>
+      {/* <Login/> */}
       {/* <Registration/> */}
-      {/* <Account/> */}
+      <Account/>
       {/* <Withdrawal/> */}
       {/* <WithdrawalBank/> */}
       {/* <Withdrawal/> */}
