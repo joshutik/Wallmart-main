@@ -1,7 +1,6 @@
 import './App.css'
 import 'bootstrap-icons/font/bootstrap-icons.css';
-// import Account from './Components/Account/Account';
-import Recharge from './Components/Recharge/Recharge';
+import Account from './Components/Account/Account';
 // import SliderToggle from './Components/SliderToggle/SliderToggle';
 
 // import Withdrawal from './Components/WidthdrawalUSDT/WithdrawalUsdt';
@@ -26,14 +25,13 @@ function App() {
       {/* <Partners/> */}
       {/* <NavigationBar/> */}
       {/* <NavigationBar2/> */}
-      {/* <GrabOrder/> */}
+      <GrabOrder/>
       {/* <Login/> */}
       {/* <Registration/> */}
       {/* <Account/> */}
       {/* <Withdrawal/> */}
       {/* <WithdrawalBank/> */}
       {/* <Withdrawal/> */}
-      <Recharge/>
 
     </div>
   )
