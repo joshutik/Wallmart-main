@@ -63,6 +63,7 @@ const Login = () => {
     
       localStorage.setItem("token", result.token)
       localStorage.setItem("user_id", result.user_id)
+      localStorage.setItem("phone", result.phone)
       // Access the `code` property directly from the `user_invitation_code` object
       const userInvitationCode = result.user_invitation_code.code;
             

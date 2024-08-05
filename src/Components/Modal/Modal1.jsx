@@ -4,7 +4,7 @@ import "./Modal1.css";
 import axios from 'axios';
 import { FaTimes } from "react-icons/fa"; // Import the "X" icon from react-icons
 
-const Modal1 = ({ show, handleClose, amount, orderCount, balance }) => {
+const Modal1 = ({ show, handleClose, amount, orderCount, balance, orderCounts }) => {
   if (!show) return null;
   const djangoHostname = import.meta.env.VITE_DJANGO_HOSTNAME;
 
@@ -17,14 +17,18 @@ const Modal1 = ({ show, handleClose, amount, orderCount, balance }) => {
 
 
   const handlePay = async () => {
-    if (orderCount < 3 && balance >= amount) {
+   
+    if (orderCounts < 3 && balance >= amount) {
+      alert(balance)
+      alert(orderCounts)
+      alert("Ready to Grab")
+       
         const commissionAmount = amount * 0.2; // 20% commission
         const authToken = localStorage.getItem('token'); // Replace with the actual token
 
         try {
             // Send data to the backend with the authorization token in the headers
             await axios.post(`${djangoHostname}/api/orders/order-grabbings/`, {
-            //await axios.post('https://wall-mart-api.onrender.com/api/orders/order-grabbings/', {
                 order: 1,
                 amount: amount,
                 commission: commissionAmount
@@ -44,7 +48,7 @@ const Modal1 = ({ show, handleClose, amount, orderCount, balance }) => {
             // Handle error (show message to the user, etc.)
         }
     }
-    setShowModal(false); // Hide the modal after payment
+    // setShowModal(false); // Hide the modal after payment
 };
 
   return (

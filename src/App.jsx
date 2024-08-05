@@ -3,7 +3,6 @@ import 'bootstrap-icons/font/bootstrap-icons.css';
 // import Account from './Components/Account/Account';
 // import Recharge from './Components/Recharge/Recharge';
 // import SliderToggle from './Components/SliderToggle/SliderToggle';
-
 // import Withdrawal from './Components/WidthdrawalUSDT/WithdrawalUsdt';
 // import WithdrawalBank from './Components/WithdrawalBank/WithdrawalBank';
 // import Withdrawal from './Components/WithdrawalPage/Withdrawal';
