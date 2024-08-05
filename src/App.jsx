@@ -1,5 +1,6 @@
 import './App.css'
 import 'bootstrap-icons/font/bootstrap-icons.css';
+// import './i18next/i18n'; // Import i18n configuration
 // import Account from './Components/Account/Account';
 // import Recharge from './Components/Recharge/Recharge';
 // import SliderToggle from './Components/SliderToggle/SliderToggle';

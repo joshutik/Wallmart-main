@@ -209,7 +209,7 @@
 // export default Account;
 
 import { useState, useEffect } from "react";
-import profile from "../assets/profile.png";
+import user from "../assets/user.png";
 import { Circle } from "rc-progress";
 import diamond from "../assets/diamond-icon.png";
 import "./Account.css";
@@ -226,7 +226,7 @@ const Account = () => {
   const progress = 33.3333;
   const [showModal, setShowModal] = useState(false);
   const [sidebarOpen, setSidebarOpen] = useState(false);
-  const [profilePic, setProfilePic] = useState(profile);
+  const [profilePic, setProfilePic] = useState(user);
   const [amount, setAmount] = useState(0);
   const [loading, setLoading] = useState(false);
   const [level, setLevel] = useState("VIP1");

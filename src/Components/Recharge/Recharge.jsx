@@ -401,7 +401,7 @@ const Recharge = () => {
     <div className="container px-3">
       <div className="row my-5">
         <div className="col-auto">
-          <Link to={"/account"}>
+          <Link to={"/homepage"}>
             <i className="bi bi-arrow-left fs-3 text-dark"></i>
           </Link>
         </div>
