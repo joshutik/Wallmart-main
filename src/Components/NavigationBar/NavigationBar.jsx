@@ -62,7 +62,7 @@ const NavigationBar = () => {
       <Container className="justify-content-center">
         <Nav className="d-flex justify-content-around w-100">
           <Nav.Item className="nav-item">
-            <Nav.Link to={'/'} className="d-flex flex-column align-items-center">
+            <Nav.Link to={'/homepage'} className="d-flex flex-column align-items-center">
               <HouseDoor className="nav-icon" />
               <span className="nav-text">Home</span>
             </Nav.Link>
