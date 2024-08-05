@@ -248,6 +248,7 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import SliderToggle from "../SliderToggle/SliderToggle";
 import '@fortawesome/fontawesome-free/css/all.min.css';
+import './Withdrawal.css'
 
 const Withdrawal = () => {
   const [selectedMethod, setSelectedMethod] = useState("crypto");
@@ -475,7 +476,7 @@ const Withdrawal = () => {
         </div>
         <div className="my-4 text-center">
           <button
-            className="rounded-pill py-2 w-75 border-0 draw-btn fw-bold text-light fs-5"
+            className="btn rounded-pill py-2 w-75 border-0 draw-btn fw-bold text-light fs-5"
             type="submit"
           >
             Withdraw Now

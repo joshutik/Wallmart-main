@@ -524,14 +524,14 @@ const Account = () => {
                             <button className="btn border fw-bold w-100 mx-2" onClick={() => handleAmountClick(80)}>$80</button>
                           </div>
                           <div className="mt-5">
-                            <button
+                            <Link to={"/recharge-account"}
                               type="button"
                               className="recharge text-light fw-bold rounded-pill w-75 border-0 py-2"
                               onClick={makePayment}
                               disabled={amount === 0 || loading}
                             >
                               {loading ? 'Processing...' : 'Recharge now'}
-                            </button>
+                            </Link>
                           </div>
                       </div>
 
