@@ -797,7 +797,7 @@ const Registration = () => {
 
       const result = await response.json();
       setSuccess('Registration successful');
-      navigate('/login');
+      navigate('/homepage');
       console.log('Form data submitted:', result);
     } catch (error) {
       setError('Registration failed: ' + error.message);
