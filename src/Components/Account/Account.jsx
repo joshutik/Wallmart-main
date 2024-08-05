@@ -494,7 +494,7 @@ const Account = () => {
                           trailColor="#EEE"
                           gapPosition="bottom"
                         />
-                        <h2 className="vip-count position-absolute top-50 start-0 end-0 translate-middle-y display-5 w-75 mx-4 my-3 fw-bold text-center">
+                        <h2 className="vip-count position-absolute top-50 start-0 end-0 translate-middle-y display-5 w-75 mx-4 my-2 fw-bold text-center">
                           {level}
                           {/* {level}<br/> <span id="count">1</span> */}
                         </h2>
