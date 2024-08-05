@@ -46,7 +46,7 @@
   /* Adjust the width as needed */
   height: 150px;
   /* Adjust the height as needed */
-  object-fit: cover;
+  object-fit: contain;
   border-radius: 50%;
   border: 2px solid #fff;
   /* Optional: Add a border for better visibility */
