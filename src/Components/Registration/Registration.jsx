@@ -695,6 +695,7 @@ import img2 from '../assets/bg.png';
 import img3 from '../assets/reg-img.png';
 import { Link, useNavigate } from 'react-router-dom';
 import "bootstrap-icons/font/bootstrap-icons.css";
+import NavigationBar2 from '../NavigationBar2/NavigationBar2';
 
 const Registration = () => {
   const navigate = useNavigate();
@@ -809,6 +810,7 @@ const Registration = () => {
 
   return (
     <div className="container-fluid header">
+      <NavigationBar2/>
       <section className="container">
         <div className="row justify-content-center align-items-center">
           <div className="col-lg-6 col-md-6 col-sm-12 text-center mt-5">

@@ -275,7 +275,7 @@ const GrabOrder = () => {
         <div className="row align-items-center min-vh-100">
           <div className="col-lg-6 col-md-12 col-sm-12 mt-5">
             <div className="card parent-card rounded-5 p-4 border-0">
-              <div className="card child-card w-75 py-3 px-5 border-0 mx-auto text-light rounded-5">
+              <div className=" child-card w-75 py-3 px-5 border-0 mx-auto text-light rounded-5">
                 <div className="icon pb-3">
                   <img src={diamond} alt="diamond-icon" />
                 </div>
@@ -307,7 +307,7 @@ const GrabOrder = () => {
             <div className="card parent-card h-50 border-0 rounded-5">
               <div className="card parent-card rounded-5 p-4 border-0">
                 <div className="w-50 mx-auto ">
-                  <div className="rounded-circle position-relative w-100 p-3 bg-light">
+                  <div className="rounded-circle position-relative w-100 p-1 bg-light">
                     <Circle
                       percent={progress}
                       strokeWidth={10}

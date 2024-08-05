@@ -55,17 +55,19 @@ import { Container, Nav, Navbar } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { HouseDoor, FileEarmarkText, Person } from 'react-bootstrap-icons';
 import './NavigationBar.css';
+// import NavigationBar2 from '../CountryCode/CountryCode';
 
 const NavigationBar = () => {
   return (
+
     <Navbar bg="light" className="custom-navbar fixed-bottom">
-      <Container className="justify-content-center">
+      <Container className="justify-content-center align-items-center">
         <Nav className="d-flex justify-content-around w-100">
           <Nav.Item className="nav-item">
-            <Nav.Link to={'/homepage'} className="d-flex flex-column align-items-center">
+            <Link to={'/homepage'} className="d-flex flex-column align-items-center text-decoration-none text-dark">
               <HouseDoor className="nav-icon" />
               <span className="nav-text">Home</span>
-            </Nav.Link>
+            </Link>
           </Nav.Item>
           <Nav.Item className="nav-item">
             <Nav.Link href="#record" className="d-flex flex-column align-items-center">
@@ -87,10 +89,10 @@ const NavigationBar = () => {
             </Nav.Link>
           </Nav.Item> */}
           <Nav.Item className="nav-item">
-            <Nav.Link to={'/my-profile'} className="d-flex flex-column align-items-center">
+            <Link to={'/account'} className="d-flex flex-column mt-2 text-dark align-items-center text-decoration-none">
               <Person className="nav-icon" />
-              <span className="nav-text"> Profile</span>
-            </Nav.Link>
+              <span className="nav-text">Profile</span>
+            </Link>
           </Nav.Item>
         </Nav>
       </Container>

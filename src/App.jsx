@@ -1,7 +1,7 @@
 import './App.css'
 import 'bootstrap-icons/font/bootstrap-icons.css';
 // import './i18next/i18n'; // Import i18n configuration
-// import Account from './Components/Account/Account';
+import Account from './Components/Account/Account';
 // import Recharge from './Components/Recharge/Recharge';
 // import SliderToggle from './Components/SliderToggle/SliderToggle';
 // import Withdrawal from './Components/WidthdrawalUSDT/WithdrawalUsdt';
@@ -12,7 +12,7 @@ import 'bootstrap-icons/font/bootstrap-icons.css';
  import Login from './Components/Login/Login'
 // import Registration from './Components/Registration/Registration';
 // import Registration from './Components/Registration/Registration'
-// import Homepage from './Components/Homepage/Homepage';
+import Homepage from './Components/Homepage/Homepage';
 // import Usercomision from './Components/Usercomision/Usercomision';
 // import Partners from './Components/Partners/Partners';
 // import NavigationBar from './Components/NavigationBar/NavigationBar';
@@ -21,7 +21,7 @@ function App() {
  
   return (
     <div>
-      {/* <Homepage/> */}
+      <Homepage/>
       {/* <Usercomision/> */}
       {/* <Partners/> */}
       {/* <NavigationBar/> */}
@@ -29,7 +29,7 @@ function App() {
       {/* <GrabOrder/> */}
       <Login/>
       {/* <Registration/> */}
-      {/* <Account/> */}
+      <Account/>
       {/* <Withdrawal/> */}
       {/* <WithdrawalBank/> */}
       {/* <Withdrawal/> */}

@@ -215,6 +215,7 @@ import diamond from "../assets/diamond-icon.png";
 import "./Account.css";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import NavigationBar from "../NavigationBar/NavigationBar";
 
 const Account = () => {
   const djangoHostname = import.meta.env.VITE_DJANGO_HOSTNAME;
@@ -619,6 +620,7 @@ const Account = () => {
               </div>
             </div>
           )}
+          <NavigationBar/>
         </div>
       </div>
     </div>

@@ -13,8 +13,7 @@ import GrabOrder from './Components/GrabOrder/GrabOrder.jsx'
 import Account from './Components/Account/Account.jsx'
 import Withdrawal from './Components/WithdrawalPage/Withdrawal.jsx';
 import Recharge from './Components/Recharge/Recharge.jsx';
-// import WithdrawUstd from './Components/WidthdrawalUSDT/WithdrawalUsdt.jsx'
-// import SliderToggle from './Components/SliderToggle/SliderToggle.jsx';
+
 
 
 const router = createBrowserRouter([
