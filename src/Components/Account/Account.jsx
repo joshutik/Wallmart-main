@@ -223,6 +223,8 @@ const Account = () => {
 
   const [invite_code, setInvite_code] = useState(0);
   const [balance, setBalance] = useState(0);
+  const [unsettle, setUnsettle] = useState(0);
+
   const [phone, setPhone] = useState(0);
 
   const progress = 33.3333;
@@ -253,9 +255,10 @@ const Account = () => {
         );
 
         const data = response.data;
-
+     
         setInvite_code(user_invitation_code);
         setBalance(data.balance);
+        setUnsettle(data.unsettle); 
         setPhone(data.phone);
         setLevel(data.level);
       } catch (error) {
@@ -482,7 +485,7 @@ const Account = () => {
                       Unsettled
                     </h4>
                     <p className="fw-bold display-1 text-start text-center ">
-                      $40
+                      ${unsettle}
                     </p>
                   </div>
                   <div className="col-lg-4 col-md-6 col-sm-12 text-light">

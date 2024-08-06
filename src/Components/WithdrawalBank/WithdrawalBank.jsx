@@ -103,7 +103,7 @@ const WithdrawalBank = () => {
             <div className="col-auto">
               <div className="form-group my-3">
                 <label className="fw-bold fs-4 my-2" htmlFor="availableBalance">
-                  Available for withdrawal
+                  Available for withdrawalsss
                 </label>
                 <input
                   type="number"

@@ -18,10 +18,9 @@ const Modal1 = ({ show, handleClose, amount, orderCount, balance, orderCounts })
 
   const handlePay = async () => {
    
-    if (orderCounts < 3 && balance >= amount) {
-      alert(balance)
-      alert(orderCounts)
-      alert("Ready to Grab")
+    // if (orderCounts < 3 && balance >= amount) {
+    if (balance >= amount) {
+
        
         const commissionAmount = amount * 0.2; // 20% commission
         const authToken = localStorage.getItem('token'); // Replace with the actual token
@@ -41,7 +40,9 @@ const Modal1 = ({ show, handleClose, amount, orderCount, balance, orderCounts })
             // Update state after successful payment
             // setBalance(balance - amount);
             // setOrderCount(orderCount + 1);
+            window.location.reload()
             setProgress(progress + 33.3333);
+            
             // setCommission(commission + commissionAmount); // Add the commission to the commission state
         } catch (error) {
             console.error("Error during payment:", error);

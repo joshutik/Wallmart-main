@@ -260,17 +260,19 @@ const Withdrawal = () => {
   const [bankName, setBankName] = useState("");
   const [bankAccountNumber, setBankAccountNumber] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
-
+  
+  const djangoHostname = import.meta.env.VITE_DJANGO_HOSTNAME;
   useEffect(() => {
     const fetchBalance = async () => {
       try {
-        const token = localStorage.getItem("token");
-        const response = await axios.get("https://example.com/api/balance", {
+        const token = localStorage.getItem("token"); // Replace with actual token
+        const user = localStorage.getItem("user_id"); // Replace with actual token
+        const response = await axios.get(`${djangoHostname}/api/accounts/users/${user}/`, {
           headers: {
             Authorization: `Token ${token}`,
           },
         });
-        setAvailableBalance(response.data.balance);
+        setAvailableBalance(response.data.unsettle);
       } catch (error) {
         console.error("Error fetching balance:", error);
       }
