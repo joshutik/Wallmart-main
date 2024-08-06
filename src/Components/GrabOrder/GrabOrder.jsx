@@ -190,6 +190,7 @@ const GrabOrder = () => {
 
   const [balance, setBalance] = useState(0);
   const [orderCount, setOrderCount] = useState(0);
+  const [user_level, setUserLevel] = useState("VIP1");
  
   const [progress, setProgress] = useState(0);
   const [commission1, setCommission1] = useState(0);
@@ -199,10 +200,13 @@ const GrabOrder = () => {
 
   // Handler for the "Start grabbing" button click
   const handleGrabClick = () => {
-    if (orderCount < 3) {
+    console.log(user_level)
+    if (user_level === "VIP1" && orderCount < 3) {
+      setShowModal(true); // Show the payment modal
+    }else if (user_level === "VIP3" && orderCount < 12) {
       setShowModal(true); // Show the payment modal
     } else {
-      alert("You have reached the maximum number of orders for today."); // Show a message to the user
+      alert("You have reached the maximum number of orders for todayzzzz."); // Show a message to the user
     }
   };
 
@@ -258,6 +262,7 @@ const GrabOrder = () => {
 
         setCommission1(data.commission1); // Assuming the response contains a commission1 field
         setCommission2(data.commission2); // Assuming the response contains a commission2 field
+        setUserLevel(data.level); // Assuming the response contains a commission2 field
         setBalance(data.balance); // Assuming the response contains a balance field
         
         setOrderCount(data.grabbed_orders_count); // Assuming the response contains an orderCount field
