@@ -172,6 +172,9 @@ import { Link } from "react-router-dom";
 import axios from "axios"; // Assuming you're using axios for API requests
 
 const Withdrawal = () => {
+
+  const djangoHostname = import.meta.env.VITE_DJANGO_HOSTNAME;
+
   const [selectedMethod, setSelectedMethod] = useState("crypto");
   const [amount, setAmount] = useState("");
   const [availableBalance, setAvailableBalance] = useState(0);
@@ -187,12 +190,13 @@ const Withdrawal = () => {
     const fetchBalance = async () => {
       try {
         const token = localStorage.getItem("token"); // Replace with actual token
-        const response = await axios.get("https://example.com/api/balance", {
+        const user = localStorage.getItem("user_id"); // Replace with actual token
+        const response = await axios.get(`${djangoHostname}/api/accounts/users/${user}/`, {
           headers: {
             Authorization: `Token ${token}`,
           },
         });
-        setAvailableBalance(response.data.balance);
+        setAvailableBalance(response.data.unsettle);
       } catch (error) {
         console.error("Error fetching balance:", error);
       }
