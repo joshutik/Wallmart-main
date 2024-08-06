@@ -255,10 +255,10 @@ const Account = () => {
         );
 
         const data = response.data;
-     
+
         setInvite_code(user_invitation_code);
         setBalance(data.balance);
-        setUnsettle(data.unsettle); 
+        setUnsettle(data.unsettle);
         setPhone(data.phone);
         setLevel(data.level);
       } catch (error) {
@@ -360,8 +360,8 @@ const Account = () => {
   }, []);
 
   return (
-    <div className="container-fluid dashboard-container py-5 my-5">
-      <NavigationBar2/>
+    <div className="container-fluid dashboard-container pb-5 mb-5">
+      <NavigationBar2 />
       <div className="row pb-5 mb-5">
         {/* Sidebar */}
         <div
@@ -444,7 +444,11 @@ const Account = () => {
         <button
           className={`sidebar-toggle d-md-none fs-1 ${
             sidebarOpen ? "cancel" : ""
-          } ${isScrolled ? "scrolled border border-dark border-1 rounded-3 text-dark" : "bg-transparent"}`}
+          } ${
+            isScrolled
+              ? "scrolled border border-dark border-1 rounded-3 text-dark"
+              : "bg-transparent"
+          }`}
           onClick={toggleSidebar}
         >
           {sidebarOpen ? "×" : "☰"}
@@ -511,8 +515,8 @@ const Account = () => {
               </div>
             </div>
 
-            <div className="my-5 text-center mb-5">
-              <div className="links">
+            <div className="my-5 text-center mb-5 pb-5">
+              <div className="links mb-4">
                 <div className="row justify-content-center pt-5 px-5 rounded-pill pb-5">
                   <div className="col-lg-4 col-md-6 col-sm-6 mb-3 mb-md-0">
                     <Link
@@ -553,48 +557,53 @@ const Account = () => {
                     <hr />
                     <div className="container">
                       <div className="row gy-3">
-                      <div className="col-lg-12 col-md-6 col-sm-12 d-flex recharge-btn">
-                    <button
-                      className="btn border w-100 fw-bold mx-2"
-                      onClick={() => handleAmountClick(20)}
-                    >
-                      $20
-                    </button>
-                    <button disabled
-                      className="btn border fw-bold w-100 mx-2"
-                      onClick={() => handleAmountClick(40)}
-                    >
-                      $40
-                    </button>
-                  </div>
-                  <div className="col-lg-12 col-md-6 col-sm-12 d-flex recharge-btn">
-                    <button disabled
-                      className="btn border fw-bold w-100 mx-2"
-                      onClick={() => handleAmountClick(70)}
-                    >
-                      $70
-                    </button>
-                    <button disabled
-                      className="btn border fw-bold w-100 mx-2"
-                      onClick={() => handleAmountClick(120)}
-                    >
-                      $120
-                    </button>
-                  </div>
-                  <div className="col-lg-12 col-md-6 col-sm-12 d-flex recharge-btn">
-                    <button disabled
-                      className="btn border fw-bold w-100 mx-2"
-                      onClick={() => handleAmountClick(200)}
-                    >
-                      $200
-                    </button>
-                    <button disabled
-                      className="btn border fw-bold w-100 mx-2"
-                      onClick={() => handleAmountClick(500)}
-                    >
-                      $500
-                    </button>
-                  </div>
+                        <div className="col-lg-12 col-md-6 col-sm-12 d-flex recharge-btn">
+                          <button
+                            className="btn border w-100 fw-bold mx-2"
+                            onClick={() => handleAmountClick(20)}
+                          >
+                            $20
+                          </button>
+                          <button
+                            disabled
+                            className="btn border fw-bold w-100 mx-2"
+                            onClick={() => handleAmountClick(40)}
+                          >
+                            $40
+                          </button>
+                        </div>
+                        <div className="col-lg-12 col-md-6 col-sm-12 d-flex recharge-btn">
+                          <button
+                            disabled
+                            className="btn border fw-bold w-100 mx-2"
+                            onClick={() => handleAmountClick(70)}
+                          >
+                            $70
+                          </button>
+                          <button
+                            disabled
+                            className="btn border fw-bold w-100 mx-2"
+                            onClick={() => handleAmountClick(120)}
+                          >
+                            $120
+                          </button>
+                        </div>
+                        <div className="col-lg-12 col-md-6 col-sm-12 d-flex recharge-btn">
+                          <button
+                            disabled
+                            className="btn border fw-bold w-100 mx-2"
+                            onClick={() => handleAmountClick(200)}
+                          >
+                            $200
+                          </button>
+                          <button
+                            disabled
+                            className="btn border fw-bold w-100 mx-2"
+                            onClick={() => handleAmountClick(500)}
+                          >
+                            $500
+                          </button>
+                        </div>
                         <div className="mt-5">
                           <Link
                             to={"/recharge-account"}
@@ -625,9 +634,9 @@ const Account = () => {
               </div>
             </div>
           )}
-          <NavigationBar/>
         </div>
       </div>
+      <NavigationBar />
     </div>
   );
 };
