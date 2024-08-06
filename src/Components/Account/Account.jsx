@@ -254,7 +254,7 @@ const Account = () => {
         );
 
         const data = response.data;
-
+     
         setInvite_code(user_invitation_code);
         setBalance(data.balance);
         setUnsettle(data.unsettle); 

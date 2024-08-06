@@ -799,7 +799,7 @@ const Registration = () => {
 
       const result = await response.json();
       setSuccess('Registration successful');
-      navigate('/homepage');
+      navigate('/login');
       console.log('Form data submitted:', result);
     } catch (error) {
       setError('Registration failed: ' + error.message);
