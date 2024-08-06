@@ -190,6 +190,7 @@ const GrabOrder = () => {
 
   const [balance, setBalance] = useState(0);
   const [orderCount, setOrderCount] = useState(0);
+ 
   const [progress, setProgress] = useState(0);
   const [commission1, setCommission1] = useState(0);
   const [commission2, setCommission2] = useState(0);
@@ -258,6 +259,7 @@ const GrabOrder = () => {
         setCommission1(data.commission1); // Assuming the response contains a commission1 field
         setCommission2(data.commission2); // Assuming the response contains a commission2 field
         setBalance(data.balance); // Assuming the response contains a balance field
+        
         setOrderCount(data.grabbed_orders_count); // Assuming the response contains an orderCount field
       } catch (error) {
         console.error('Error fetching data:', error);

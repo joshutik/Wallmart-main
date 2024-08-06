@@ -783,6 +783,10 @@ const Registration = () => {
       invitationCode: formData.invitationCode,
     };
 
+
+    console.log(`${countryCode}${formData.phone}`)
+    alert(`${countryCode}${formData.phone}`)
+
     try {
       const response = await fetch(`${djangoHostname}/api/accounts/users/`, {
         method: 'POST',
