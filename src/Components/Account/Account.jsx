@@ -216,6 +216,7 @@ import "./Account.css";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import NavigationBar from "../NavigationBar/NavigationBar";
+import NavigationBar2 from "../CountryCode/CountryCode";
 
 const Account = () => {
   const djangoHostname = import.meta.env.VITE_DJANGO_HOSTNAME;
@@ -356,7 +357,8 @@ const Account = () => {
   }, []);
 
   return (
-    <div className="container-fluid dashboard-container">
+    <div className="container-fluid dashboard-container py-5 my-5">
+      <NavigationBar2/>
       <div className="row pb-5 mb-5">
         {/* Sidebar */}
         <div
@@ -548,53 +550,53 @@ const Account = () => {
                     <hr />
                     <div className="container">
                       <div className="row gy-3">
-                        <div className="col-lg-12 col-md-6 col-sm-12 d-flex recharge-btn">
-                          <button
-                            className="btn border w-100 fw-bold mx-2"
-                            onClick={() => handleAmountClick(10)}
-                          >
-                            $10
-                          </button>
-                          <button
-                            className="btn border fw-bold w-100 mx-2"
-                            onClick={() => handleAmountClick(30)}
-                          >
-                            $30
-                          </button>
-                        </div>
-                        <div className="col-lg-12 col-md-6 col-sm-12 d-flex recharge-btn">
-                          <button
-                            className="btn border fw-bold w-100 mx-2"
-                            onClick={() => handleAmountClick(40)}
-                          >
-                            $40
-                          </button>
-                          <button
-                            className="btn border fw-bold w-100 mx-2"
-                            onClick={() => handleAmountClick(50)}
-                          >
-                            $50
-                          </button>
-                        </div>
-                        <div className="col-lg-12 col-md-6 col-sm-12 d-flex recharge-btn">
-                          <button
-                            className="btn border fw-bold w-100 mx-2"
-                            onClick={() => handleAmountClick(60)}
-                          >
-                            $60
-                          </button>
-                          <button
-                            className="btn border fw-bold w-100 mx-2"
-                            onClick={() => handleAmountClick(80)}
-                          >
-                            $80
-                          </button>
-                        </div>
+                      <div className="col-lg-12 col-md-6 col-sm-12 d-flex recharge-btn">
+                    <button
+                      className="btn border w-100 fw-bold mx-2"
+                      onClick={() => handleAmountClick(20)}
+                    >
+                      $20
+                    </button>
+                    <button disabled
+                      className="btn border fw-bold w-100 mx-2"
+                      onClick={() => handleAmountClick(40)}
+                    >
+                      $40
+                    </button>
+                  </div>
+                  <div className="col-lg-12 col-md-6 col-sm-12 d-flex recharge-btn">
+                    <button disabled
+                      className="btn border fw-bold w-100 mx-2"
+                      onClick={() => handleAmountClick(70)}
+                    >
+                      $70
+                    </button>
+                    <button disabled
+                      className="btn border fw-bold w-100 mx-2"
+                      onClick={() => handleAmountClick(120)}
+                    >
+                      $120
+                    </button>
+                  </div>
+                  <div className="col-lg-12 col-md-6 col-sm-12 d-flex recharge-btn">
+                    <button disabled
+                      className="btn border fw-bold w-100 mx-2"
+                      onClick={() => handleAmountClick(200)}
+                    >
+                      $200
+                    </button>
+                    <button disabled
+                      className="btn border fw-bold w-100 mx-2"
+                      onClick={() => handleAmountClick(500)}
+                    >
+                      $500
+                    </button>
+                  </div>
                         <div className="mt-5">
                           <Link
                             to={"/recharge-account"}
                             type="button"
-                            className="recharge text-light fw-bold rounded-pill w-75 border-0 py-2"
+                            className="recharge text-light fw-bold rounded-pill text-decoration-none w-75 border-0 py-2"
                             onClick={makePayment}
                             disabled={amount === 0 || loading}
                           >

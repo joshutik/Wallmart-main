@@ -183,6 +183,8 @@ import semilogo from '../assets/walmart-semi-logo.png';
 import { Circle } from 'rc-progress';
 import Modal1 from '../Modal/Modal1';
 import axios from 'axios';
+import NavigationBar from '../NavigationBar/NavigationBar';
+import NavigationBar2 from '../CountryCode/CountryCode';
 
 const GrabOrder = () => {
   // State variables
@@ -269,7 +271,8 @@ const GrabOrder = () => {
 
 
   return (
-    <div className="container-fluid">
+    <div className="container-fluid pb-5 mb-5 pt-5">
+      <NavigationBar2/>
       <h1 className="text-center fw-bold my-5">Order</h1>
       <div className="container py-5">
         <div className="row align-items-center min-vh-100">
@@ -347,6 +350,7 @@ const GrabOrder = () => {
         </div>
       </div>
       <Modal1 show={showModal} handleClose={handleClose} handlePay={handlePay} amount={amount} balance = {balance} orderCounts = {orderCount}/>
+      <NavigationBar/>
     </div>
   );
 };
