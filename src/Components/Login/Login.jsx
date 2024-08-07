@@ -181,7 +181,8 @@
 // export default Login;
 
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import axios from 'axios';
 import "./Login.css";
 import img1 from "../assets/tabler_brand-walmart.png";
 import img2 from "../assets/bg.png";
@@ -198,10 +199,44 @@ const Login = () => {
     termsAccepted: false,
   });
 
+
+  const [countryCodes, setCountryCodes] = useState([]);
+  const [countryCode, setCountryCode] = useState('');
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    const fetchCountryCodes = async () => {
+      try {
+        const response = await axios.get('https://restcountries.com/v3.1/all');
+        const countries = response.data.map(country => ({
+          code: `${country.idd.root}${country.idd.suffixes ? country.idd.suffixes[0] : ''}`,
+          country: country.name.common,
+          flag: country.flags.svg,
+        }));
+        // Sort countries alphabetically by their names
+        countries.sort((a, b) => a.country.localeCompare(b.country));
+        setCountryCodes(countries);
+      } catch (error) {
+        console.error('Error fetching country codes:', error);
+      }
+    };
+
+    const fetchUserCountryCode = async () => {
+      try {
+        const response = await axios.get('https://ipapi.co/json/');
+        setCountryCode(response.data.country_calling_code);
+      } catch (error) {
+        console.error('Error fetching user country code:', error);
+      }
+    };
+
+    fetchCountryCodes();
+    fetchUserCountryCode();
+  }, []);
+
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -266,11 +301,33 @@ const Login = () => {
               <p className="text-start">Welcome back! Please login to your account.</p>
             </div>
             <form onSubmit={handleSubmit}>
-              <div>
+              {/* <div>
                 <input
                   type="tel"
                   name="phone"
                   className="form-control py-3 rounded-5 my-4"
+                  placeholder="Enter your number"
+                  value={formData.phone}
+                  onChange={handleChange}
+                />
+              </div> */}
+              <div className="input-group my-4">
+                <select
+                  className="form-select rounded-start-5 py-3"
+                  value={countryCode}
+                  onChange={(e) => setCountryCode(e.target.value)}
+                >
+                  {countryCodes.map((code) => (
+                    <option key={code.country} value={code.code}>
+                      <img src={code.flag} alt={code.country} style={{ width: '20px', marginRight: '10px' }} />
+                      {code.code} ({code.country})
+                    </option>
+                  ))}
+                </select>
+                <input
+                  type="tel"
+                  name="phone"
+                  className="form-control rounded-end-5"
                   placeholder="Enter your number"
                   value={formData.phone}
                   onChange={handleChange}

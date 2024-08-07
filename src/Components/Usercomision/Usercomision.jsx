@@ -12,31 +12,31 @@ const Usercomision = () => {
           <div className="card border-0 mx-3 rounded-5 w-25 py-5 px-2 fw-bold">
             <div className="d-flex justify-content-around align-items-center">
             <img src={slide1} alt="" />
-            <span>231***98465</span>
+            <span>971***59291</span>
             </div>
             <div className="d-flex justify-content-around align-items-center">
               <p className="my-3">Commission</p>
-              <span className="btn rounded-5 comm fw-bold">$12.3</span>
+              <span className="btn rounded-5 comm fw-bold">$10.5</span>
             </div>
           </div>
           <div className="card border-0 mx-3 rounded-5 w-25 py-5 px-2 fw-bold">
             <div className="d-flex justify-content-around align-items-center">
             <img src={slide2} alt="" />
-            <span>231***98465</span>  
+            <span>247***82769</span>  
             </div>
             <div className="d-flex justify-content-around align-items-center">
               <p className="my-3">Commission</p>
-              <span className="btn rounded-5 comm fw-bold">$12.3</span>
+              <span className="btn rounded-5 comm fw-bold">$11.5</span>
             </div>
           </div>
           <div className="card fw-bold border-0 mx-3 rounded-5 w-25 py-5 px-2">
             <div className="d-flex justify-content-around align-items-center">
             <img src={slide3} alt="" />
-            <span>231***98465</span>
+            <span>786***00654</span>
             </div>
             <div className="d-flex justify-content-around align-items-center">
               <p className="my-3">Commission</p>
-              <span className="btn rounded-5 comm fw-bold">$12.3</span>
+              <span className="btn rounded-5 comm fw-bold">$12.5</span>
             </div>
           </div>
           <div className="card fw-bold border-0 mx-3 rounded-5 w-25 py-5 px-2">
@@ -47,13 +47,13 @@ const Usercomision = () => {
             
             <div className="d-flex justify-content-around align-items-center">
               <p className="my-3">Commission</p>
-              <span className="btn rounded-5 comm fw-bold">$12.3</span>
+              <span className="btn rounded-5 comm fw-bold">$11.2</span>
             </div>
           </div>
           <div className="card fw-bold border-0 mx-3 rounded-5 w-25 py-5 px-2">
            <div className="d-flex justify-content-around align-items-center">
            <img src={slide1} alt="" />
-           <span>231***98465</span>
+           <span>099***87643</span>
            </div>
             <div className="d-flex justify-content-around align-items-center">
               <p className="my-3">Commission</p>
@@ -63,11 +63,11 @@ const Usercomision = () => {
           <div className="card fw-bold border-0 mx-3 rounded-5 w-25 py-5 px-2">
            <div className="d-flex justify-content-around align-items-center">
            <img src={slide1} alt="" />
-           <span>231***98465</span>
+           <span>345***98242</span>
            </div>
             <div className="d-flex justify-content-around align-items-center">
               <p className="my-3">Commission</p>
-              <span className="btn rounded-5 comm fw-bold">$12.3</span>
+              <span className="btn rounded-5 comm fw-bold">$12.5</span>
             </div>
           </div>
         </div>

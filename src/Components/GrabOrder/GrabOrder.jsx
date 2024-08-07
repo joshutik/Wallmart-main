@@ -184,7 +184,7 @@ import { Circle } from 'rc-progress';
 import Modal1 from '../Modal/Modal1';
 import axios from 'axios';
 import NavigationBar from '../NavigationBar/NavigationBar';
-import NavigationBar2 from '../CountryCode/CountryCode';
+import NavigationBar2 from '../NavigationBar2/NavigationBar2';
 
 const GrabOrder = () => {
   // State variables
