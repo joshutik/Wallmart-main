@@ -255,11 +255,14 @@ const Login = () => {
     setLoading(true);
 
     const payload = {
-      phone: formData.phone,
+      phone: `${countryCode}${formData.phone}`,
       password: formData.password,
     };
 
     try {
+      console.log("phone")
+      console.log(`${countryCode}${formData.phone}`)
+      console.log("phone")
       const response = await fetch(`${djangoHostname}/api/accounts/login/`, {
         method: "POST",
         headers: {
