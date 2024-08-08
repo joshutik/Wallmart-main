@@ -635,7 +635,7 @@ const Account = () => {
             </div>
           )}
         </div>
-      </div>
+      </div> 
       <NavigationBar />
     </div>
   );
