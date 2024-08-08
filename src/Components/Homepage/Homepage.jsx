@@ -986,9 +986,14 @@ const Homepage = () => {
       <NavigationBar2 />
       <div
         id="carouselExampleDark"
-        className="carousel carousel-dark slide rounded-5 my-5 py-5"
+        className="carousel carousel-dark slide rounded-5 my-5 py-5" data-bs-ride="carousel"
       >
         <div className="carousel-indicators">
+    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" className="active" aria-current="true" aria-label="Slide 1"></button>
+    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+  </div>
+        {/* <div className="carousel-indicators">
           <button
             type="button"
             data-bs-target="#carouselExampleDark"
@@ -996,30 +1001,30 @@ const Homepage = () => {
             className="active bg-light"
             aria-current="true"
             aria-label="Slide 1"
-          ></button>
+          >1</button>
           <button
             className=" bg-light"
             type="button"
             data-bs-target="#carouselExampleDark"
             data-bs-slide-to="1"
             aria-label="Slide 2"
-          ></button>
+          >2</button>
           <button
             className=" bg-light"
             type="button"
             data-bs-target="#carouselExampleDark"
             data-bs-slide-to="2"
             aria-label="Slide 3"
-          ></button>
-        </div>
+          >3</button>
+        </div> */}
         <div className="carousel-inner">
-          <div className="carousel-item active" data-bs-interval="10000">
+          <div className="carousel-item active" data-bs-interval="2000">
             <img src={img1} className="d-block w-100" alt="..." />
           </div>
           <div className="carousel-item" data-bs-interval="2000">
             <img src={img2} className="d-block w-100" alt="..." />
           </div>
-          <div className="carousel-item">
+          <div className="carousel-item" data-bs-interval="2000">
             <img src={img3} className="d-block w-100" alt="..." />
           </div>
         </div>
@@ -1068,13 +1073,13 @@ const Homepage = () => {
                 className="btn W-25 py-3 px-4 bg-transparent rounded-5 action"
               >
                 <img src={img4} className="img-fluid mb-2" alt="" />{" "}
-                <span className="fw-bold text-light">Recharge Now</span>
+                <span className="fw-bold text-light">Top Up</span>
               </Link>
             </div>
             <div className="col-lg-4 col-md-4 col-sm-12">
               <Link
                 to={"/withdraw"}
-                className="btn W-25 py-3 px-4 bg-transparent rounded-5 action"
+                className="btn py-3 px-4 bg-transparent rounded-5 action"
               >
                 <img src={img5} className="img-fluid mb-2" alt="" />{" "}
                 <span className="fw-bold text-light">Quick Withdrawal</span>
