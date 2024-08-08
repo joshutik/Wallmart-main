@@ -81,7 +81,7 @@ const Modal1 = ({ show, handleClose, amount, orderCount, balance, orderCounts })
             onClick={handlePay}
             className="btn rounded-pill border-0 fs-4"
           >
-            Pay Immediately
+            Grab
           </button>
         </div>
       </div>

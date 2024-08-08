@@ -211,12 +211,15 @@
 import { useState, useEffect } from "react";
 import user from "../assets/user.png";
 import { Circle } from "rc-progress";
+import img5 from "../assets/withdrawal.png";
+import img4 from "../assets/recharge.png";
 import diamond from "../assets/diamond-icon.png";
 import "./Account.css";
 import { Link } from "react-router-dom";
 import axios from "axios";
+// import CountryCode from '../CountryCode/CountryCode'
 import NavigationBar from "../NavigationBar/NavigationBar";
-import NavigationBar2 from "../CountryCode/CountryCode";
+import NavigationBar3 from "../NavigationBar3/NavigationBar3";
 
 const Account = () => {
   const djangoHostname = import.meta.env.VITE_DJANGO_HOSTNAME;
@@ -361,12 +364,15 @@ const Account = () => {
 
   return (
     <div className="container-fluid dashboard-container pb-5 mb-5">
-      <NavigationBar2 />
+      <div className="d-none d-md-block pb-5 mb-5">
+         <NavigationBar3 />
+      </div>
+     
       <div className="row pb-5 mb-5">
         {/* Sidebar */}
         <div
           className={`col-lg-3 col-md-4 pl-4 sidebar ${
-            sidebarOpen ? "open" : ""
+            sidebarOpen ? "open" : "" 
           }`}
         >
           <div className="profile-section text-center py-5">
@@ -401,35 +407,35 @@ const Account = () => {
           <hr />
           <nav className="nav flex-column account-section fw-bold py-5">
             <li>
-              <a className="nav-link" href="#">
+              <Link to={''} className="nav-link" href="#">
                 <i className="bi bi-person-workspace fs-3"></i> Account
                 information
-              </a>
+              </Link>
             </li>
             <li>
-              <a className="nav-link" href="#">
+              <Link to={''} className="nav-link" href="#">
                 <i className="bi bi-file-earmark-text fs-3"></i> Order record
-              </a>
+              </Link>
             </li>
             <li>
-              <a className="nav-link" href="#">
+              <Link to={''} className="nav-link" href="#">
                 <i className="bi bi-cash-stack fs-3"></i> Recharge record
-              </a>
+              </Link>
             </li>
             <li>
-              <a className="nav-link" href="#">
+              <Link to={''} className="nav-link" href="#">
                 <i className="bi bi-wallet2 fs-3"></i> Withdrawal record
-              </a>
+              </Link>
             </li>
             <li>
-              <a className="nav-link" href="#">
+              <Link to={''} className="nav-link" href="#">
                 <i className="bi bi-envelope-paper-fill fs-3"></i> Invite friend
-              </a>
+              </Link>
             </li>
             <li>
-              <a className="nav-link" href="#">
+              <Link to={'/login'} className="nav-link" href="#">
                 <i className="bi bi-box-arrow-right fs-3 my-2"></i> Log out
-              </a>
+              </Link>
             </li>
           </nav>
         </div>
@@ -460,7 +466,7 @@ const Account = () => {
             <div className="d-flex justify-content-between ms-5 text-light pb-5">
               <div>
                 <h2 className="fs-1 fw-bold">Hey JAMES,</h2>
-                <p>Welcome back! Ready to grab and get commission.</p>
+                <p>Welcome! Ready to grab and get commission.</p>
               </div>
               {/* <div className="w-50 text-end me-5">
                 <button className="btn btn-outline-light">
@@ -523,7 +529,9 @@ const Account = () => {
                       to="/withdraw"
                       className="fw-bold border border-2 text-light action text-decoration-none px-3 py-2 rounded-pill d-block "
                     >
-                      <i className="bi bi-wallet2 fs-3"></i> Quick Withdrawal
+                      {/* <i className="bi bi-wallet2 fs-3"></i>  */}
+                      <img src={img5} className="img-fluid mb-2" alt="" />{" "}
+                      Quick Withdrawal
                     </Link>
                   </div>
                   <div className="col-lg-4 col-md-6 col-sm-6">
@@ -531,7 +539,9 @@ const Account = () => {
                       onClick={handleTopUpClick}
                       className="fw-bold border action border-2 text-light text-decoration-none px-2 py-2 rounded-pill d-block"
                     >
-                      <i className="bi bi-cash-stack fs-3"></i> Top up now
+                      {/* <i className="bi bi-cash-stack fs-3"></i>  */}
+                      <img src={img4} className="img-fluid mb-3" alt="" />{" "}
+                      Top up now
                     </Link>
                   </div>
                 </div>

@@ -104,7 +104,7 @@
 
 import { Container, Nav, Navbar } from 'react-bootstrap';
 import { Link, useLocation } from 'react-router-dom';
-import { HouseDoor, FileEarmarkText, Person } from 'react-bootstrap-icons';
+import { HouseDoor, Person } from 'react-bootstrap-icons';
 import './NavigationBar.css';
 
 const NavigationBar = () => {
@@ -122,12 +122,12 @@ const NavigationBar = () => {
               <span className="nav-text">Home</span>
             </Link>
           </Nav.Item>
-          <Nav.Item className={`nav-item ${isActive('/record')}`}>
+          {/* <Nav.Item className={`nav-item ${isActive('/record')}`}>
             <Link to="/record" className="d-flex flex-column align-items-center text-decoration-none text-dark">
               <FileEarmarkText className="nav-icon" />
               <span className="nav-text">Record</span>
             </Link>
-          </Nav.Item>
+          </Nav.Item> */}
           <Nav.Item className={`nav-item grab-order ${isActive('/grab-order')}`}>
             <Link to="/grab-order" className="d-flex flex-column align-items-center text-decoration-none">
               <i className="bi bi-bag-plus nav-icon grab-order-icon"></i>

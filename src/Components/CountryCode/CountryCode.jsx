@@ -388,7 +388,7 @@ import styled from 'styled-components';
 
 const CustomDropdown = styled.div`
   position: relative;
-  width: 200px;
+  width: 150px;
   cursor: pointer;
   border:none;
 `;

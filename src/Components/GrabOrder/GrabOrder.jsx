@@ -184,7 +184,7 @@ import { Circle } from 'rc-progress';
 import Modal1 from '../Modal/Modal1';
 import axios from 'axios';
 import NavigationBar from '../NavigationBar/NavigationBar';
-import NavigationBar2 from '../CountryCode/CountryCode';
+import NavigationBar2 from '../NavigationBar2/NavigationBar2';
 
 const GrabOrder = () => {
   // State variables
@@ -193,12 +193,17 @@ const GrabOrder = () => {
   const [balance, setBalance] = useState(0);
   const [orderCount, setOrderCount] = useState(0);
   const [user_level, setUserLevel] = useState("VIP1");
- 
   const [progress, setProgress] = useState(0);
   const [commission1, setCommission1] = useState(0);
   const [commission2, setCommission2] = useState(0);
   const [showModal, setShowModal] = useState(false);
   const amount = 10; // Default amount
+
+
+  // Notification function
+  const notifyTaskCompleted = () => {
+    alert("Task completed! Contact administrator.");
+  };
 
   // Handler for the "Start grabbing" button click
   const handleGrabClick = () => {
@@ -207,9 +212,12 @@ const GrabOrder = () => {
       setShowModal(true); // Show the payment modal
     }else if (user_level === "VIP3" && orderCount < 12) {
       setShowModal(true); // Show the payment modal
-    } else {
-      alert("You have reached the maximum number of orders for todayzzzz."); // Show a message to the user
+     } else {
+      notifyTaskCompleted(); // Notify the user
     }
+   // else {
+    //   alert("You have reached the maximum number of orders for todayzzzz."); // Show a message to the user
+    // }
   };
 
   const handlePay = async () => {

@@ -5,7 +5,6 @@
 // import img3 from '../assets/reg-img.png';
 // import { Link, useNavigate } from 'react-router-dom';
 
-
 // const Registration = () => {
 // const navigate = useNavigate();
 // const djangoHostname = import.meta.env.VITE_DJANGO_HOSTNAME;
@@ -48,7 +47,6 @@
 //     setError('');
 //     setSuccess('');
 //     setLoading(true); // Set loading to true when the form is submitted
-
 
 //     // Prepare data for the backend
 //     const payload = {
@@ -197,7 +195,6 @@
 // };
 
 // export default Registration;
-
 
 // import { useState } from 'react';
 // import "./registration.css";
@@ -430,10 +427,6 @@
 // };
 
 // export default Registration;
-
-
-
-
 
 // import { useState } from 'react';
 // import "./registration.css";
@@ -686,34 +679,35 @@
 
 // export default Registration;
 
-
-import { useState, useEffect } from 'react';
-import axios from 'axios';
+import { useState, useEffect } from "react";
+import axios from "axios";
 import "./registration.css";
 import img1 from "../assets/tabler_brand-walmart.png";
-import img2 from '../assets/bg.png';
-import img3 from '../assets/reg-img.png';
-import { Link, useNavigate } from 'react-router-dom';
+import img2 from "../assets/bg.png";
+import img3 from "../assets/reg-img.png";
+import { Link, useNavigate } from "react-router-dom";
 import "bootstrap-icons/font/bootstrap-icons.css";
-import NavigationBar2 from '../NavigationBar2/NavigationBar2';
+import NavigationBar2 from "../NavigationBar2/NavigationBar2";
 
 const Registration = () => {
   const navigate = useNavigate();
   const djangoHostname = import.meta.env.VITE_DJANGO_HOSTNAME;
 
   const [formData, setFormData] = useState({
-    phone: '',
-    password: '',
-    confirmPassword: '',
-    withdrawalPassword: '',
-    invitationCode: '',
+    firstName: "",
+    lastName: "",
+    phone: "",
+    password: "",
+    confirmPassword: "",
+    withdrawalPassword: "",
+    invitationCode: "",
     termsAccepted: false,
   });
 
   const [countryCodes, setCountryCodes] = useState([]);
-  const [countryCode, setCountryCode] = useState('');
-  const [error, setError] = useState('');
-  const [success, setSuccess] = useState('');
+  const [countryCode, setCountryCode] = useState("");
+  const [error, setError] = useState("");
+  const [success, setSuccess] = useState("");
   const [loading, setLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
@@ -722,9 +716,11 @@ const Registration = () => {
   useEffect(() => {
     const fetchCountryCodes = async () => {
       try {
-        const response = await axios.get('https://restcountries.com/v3.1/all');
-        const countries = response.data.map(country => ({
-          code: `${country.idd.root}${country.idd.suffixes ? country.idd.suffixes[0] : ''}`,
+        const response = await axios.get("https://restcountries.com/v3.1/all");
+        const countries = response.data.map((country) => ({
+          code: `${country.idd.root}${
+            country.idd.suffixes ? country.idd.suffixes[0] : ""
+          }`,
           country: country.name.common,
           flag: country.flags.svg,
         }));
@@ -732,16 +728,16 @@ const Registration = () => {
         countries.sort((a, b) => a.country.localeCompare(b.country));
         setCountryCodes(countries);
       } catch (error) {
-        console.error('Error fetching country codes:', error);
+        console.error("Error fetching country codes:", error);
       }
     };
 
     const fetchUserCountryCode = async () => {
       try {
-        const response = await axios.get('https://ipapi.co/json/');
+        const response = await axios.get("https://ipapi.co/json/");
         setCountryCode(response.data.country_calling_code);
       } catch (error) {
-        console.error('Error fetching user country code:', error);
+        console.error("Error fetching user country code:", error);
       }
     };
 
@@ -753,7 +749,7 @@ const Registration = () => {
     const { name, value, type, checked } = e.target;
     setFormData((prevData) => ({
       ...prevData,
-      [name]: type === 'checkbox' ? checked : value,
+      [name]: type === "checkbox" ? checked : value,
     }));
   };
 
@@ -762,17 +758,17 @@ const Registration = () => {
 
     // Perform validation
     if (formData.password !== formData.confirmPassword) {
-      setError('Passwords do not match');
+      setError("Passwords do not match");
       return;
     }
 
     if (!formData.termsAccepted) {
-      setError('You must accept the terms and conditions');
+      setError("You must accept the terms and conditions");
       return;
     }
 
-    setError('');
-    setSuccess('');
+    setError("");
+    setSuccess("");
     setLoading(true); // Set loading to true when the form is submitted
 
     // Prepare data for the backend
@@ -783,27 +779,26 @@ const Registration = () => {
       invitationCode: formData.invitationCode,
     };
 
-
     try {
       const response = await fetch(`${djangoHostname}/api/accounts/users/`, {
-        method: 'POST',
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify(payload),
       });
 
       if (!response.ok) {
-        throw new Error('Network response was not ok');
+        throw new Error("Network response was not ok");
       }
 
       const result = await response.json();
-      setSuccess('Registration successful');
-      navigate('/login');
-      console.log('Form data submitted:', result);
+      setSuccess("Registration successful");
+      navigate("/login");
+      console.log("Form data submitted:", result);
     } catch (error) {
-      setError('Registration failed: ' + error.message);
-      console.error('Error:', error);
+      setError("Registration failed: " + error.message);
+      console.error("Error:", error);
     } finally {
       setLoading(false); // Set loading to false once the request is completed
     }
@@ -811,7 +806,7 @@ const Registration = () => {
 
   return (
     <div className="container-fluid header">
-      <NavigationBar2/>
+      <NavigationBar2 />
       <section className="container">
         <div className="row justify-content-center align-items-center">
           <div className="col-lg-6 col-md-6 col-sm-12 text-center mt-5">
@@ -821,6 +816,29 @@ const Registration = () => {
             <h2>Create your Account</h2>
             <form onSubmit={handleSubmit}>
               <div className="input-group my-4">
+                <input
+                  type="text"
+                  name="firstName"
+                  id="firstName"
+                  className="form-control rounded-5 py-3"
+                  placeholder="Enter your first name"
+                  value={formData.firstName}
+                  onChange={handleChange}
+                />
+              </div>
+              <div className="input-group my-4">
+                <input
+                  type="text"
+                  name="lastName"
+                  id="lastName"
+                  className="form-control rounded-5 py-3"
+                  placeholder="Enter your last name"
+                  value={formData.lastName}
+                  onChange={handleChange}
+                />
+              </div>
+
+              <div className="input-group my-4">
                 <select
                   className="form-select rounded-start-5 py-3"
                   value={countryCode}
@@ -828,7 +846,11 @@ const Registration = () => {
                 >
                   {countryCodes.map((code) => (
                     <option key={code.country} value={code.code}>
-                      <img src={code.flag} alt={code.country} style={{ width: '20px', marginRight: '10px' }} />
+                      <img
+                        src={code.flag}
+                        alt={code.country}
+                        style={{ width: "20px", marginRight: "10px" }}
+                      />
                       {code.code} ({code.country})
                     </option>
                   ))}
@@ -896,7 +918,9 @@ const Registration = () => {
                 <span
                   className="position-absolute top-50 end-0 translate-middle-y me-3"
                   style={{ cursor: "pointer" }}
-                  onClick={() => setShowWithdrawalPassword(!showWithdrawalPassword)}
+                  onClick={() =>
+                    setShowWithdrawalPassword(!showWithdrawalPassword)
+                  }
                 >
                   {showWithdrawalPassword ? (
                     <i className="bi bi-eye-slash"></i>
@@ -933,7 +957,11 @@ const Registration = () => {
               {error && <div className="text-danger">{error}</div>}
               {success && <div className="text-success">{success}</div>}
               <div className="regs-btn my-4 fw-bold fs-4">
-                <button type="submit" className="w-100 rounded-5 text-light py-2 reg-btn border-0" disabled={loading}>
+                <button
+                  type="submit"
+                  className="w-100 rounded-5 text-light py-2 reg-btn border-0"
+                  disabled={loading}
+                >
                   {loading ? (
                     <div className="spinner-border text-light" role="status">
                       <span className="visually-hidden">Loading...</span>
@@ -946,7 +974,7 @@ const Registration = () => {
               <div>
                 <p>
                   Already have an account?{" "}
-                  <Link to={'/login'} className="sub-login">
+                  <Link to={"/login"} className="sub-login">
                     Login
                   </Link>
                 </p>
@@ -966,7 +994,6 @@ const Registration = () => {
 };
 
 export default Registration;
-
 
 // import PropTypes from 'prop-types';
 // import { useState, useEffect } from 'react';
