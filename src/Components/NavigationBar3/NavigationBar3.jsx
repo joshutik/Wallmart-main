@@ -78,30 +78,56 @@
 // export default NavigationBar2;
 
 
-import Container from "react-bootstrap/Container";
-import CountryCode from '../CountryCode/CountryCode';
-// import Nav from "react-bootstrap/Nav";
-import Navbar from "react-bootstrap/Navbar";
-import logo1 from "../assets/wallmart-logo.png";
+// import Container from "react-bootstrap/Container";
+// import CountryCode from '../CountryCode/CountryCode';
+// // import Nav from "react-bootstrap/Nav";
+// import Navbar from "react-bootstrap/Navbar";
+// import logo1 from "../assets/wallmart-logo.png";
 
-function NavigationBar3() {
-  return (
-    <Navbar expand="lg" className="nave bg-light w-100 fixed-top">
-      <Container>
-        <Navbar.Brand href="#">
-          <img src={logo1} alt="Logo" />
-        </Navbar.Brand>
-        <div className="notification d-flex align-items-center ms-lg-auto">
-          <div className="country">
-            <CountryCode />
-          </div>
-        </div>
-      </Container>
-    </Navbar>
-  );
-}
+// function NavigationBar3() {
+//   return (
+//     <Navbar expand="lg" className="nave bg-light w-100 fixed-top">
+//       <Container>
+//         <Navbar.Brand href="#">
+//           <img src={logo1} alt="Logo" />
+//         </Navbar.Brand>
+//         <div className="notification d-flex align-items-center ms-lg-auto">
+//           <div className="country">
+//             <CountryCode />
+//           </div>
+//         </div>
+//       </Container>
+//     </Navbar>
+//   );
+// }
 
-export default NavigationBar3;
+// export default NavigationBar3;
+
+
+// import Container from "react-bootstrap/Container";
+// import CountryCode from '../CountryCode/CountryCode';
+// import Navbar from "react-bootstrap/Navbar";
+// import logo1 from "../assets/wallmart-logo.png";
+
+// function NavigationBar3() {
+//   return (
+//     <Navbar className="nave bg-light w-100 fixed-top">
+//       <Container>
+//         <Navbar.Brand href="#">
+//           <img src={logo1} alt="Logo" />
+//         </Navbar.Brand>
+//         <div className="notification d-flex align-items-center ms-auto">
+//           <div className="country">
+//             <CountryCode />
+//           </div>
+//         </div>
+//       </Container>
+//     </Navbar>
+//   );
+// }
+
+// export default NavigationBar3;
+
 
 
 
@@ -147,3 +173,66 @@ export default NavigationBar3;
 // }
 
 // export default NavigationBar3;
+
+
+
+
+// import Container from "react-bootstrap/Container";
+// import CountryCode from '../CountryCode/CountryCode';
+// import Navbar from "react-bootstrap/Navbar";
+// // import logo1 from "../assets/wallmart-logo.png";
+
+// function NavigationBar3() {
+//   return (
+//     <Navbar expand="md" className="nave bg-light w-100 fixed-top">
+//       <Container>
+//         <Navbar.Brand href="#">
+//           {/* <img src={logo1} alt="Logo" /> */}
+//         </Navbar.Brand>
+//         <div className="d-flex align-items-center ms-lg-auto">
+//           <CountryCode />
+//           <Navbar.Toggle aria-controls="basic-navbar-nav" />
+//         </div>
+//         <Navbar.Collapse id="basic-navbar-nav">
+//           {/* Your Navbar content goes here */}
+//         </Navbar.Collapse>
+//       </Container>
+//     </Navbar>
+//   );
+// }
+
+// export default NavigationBar3;
+
+import PropTypes from "prop-types";  // Import PropTypes
+import Container from "react-bootstrap/Container";
+import CountryCode from '../CountryCode/CountryCode';
+import Navbar from "react-bootstrap/Navbar";
+import logo1 from "../assets/wallmart-logo.png";
+
+function NavigationBar3({ toggleSidebar }) {  // Accept toggleSidebar as a prop
+  return (
+    <Navbar expand="md" className="nave bg-light w-100 fixed-top d-block">
+      <Container>
+        <Navbar.Brand href="#" className="d-none d-md-block">
+          <img src={logo1} alt="Logo" />
+        </Navbar.Brand>
+        <div className="d-block d-md-none d-flex align-items-center ms-auto text-end">
+          <CountryCode />
+          <Navbar.Toggle aria-controls="basic-navbar-nav" onClick={toggleSidebar} />
+        </div>
+        <div className="d-none d-md-block d-flex align-items-center country">
+          <CountryCode />
+        </div>
+        <Navbar.Collapse id="basic-navbar-nav">
+          {/* Your Navbar content goes here */}
+        </Navbar.Collapse>
+      </Container>
+    </Navbar>
+  );
+}
+
+
+NavigationBar3.propTypes = {
+  toggleSidebar: PropTypes.func.isRequired,
+};
+export default NavigationBar3;

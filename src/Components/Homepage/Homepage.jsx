@@ -1054,7 +1054,7 @@ const Homepage = () => {
         </button>
       </div>
       {/* card */}
-      <div className="container-fluid my-5">
+      <div className="container-fluid my-5 py-4">
         <div className="container quick rounded-5 py-5 px-3">
           <div className="row gy-3 justify-content-center text-center">
             {/* <div className="col-lg-4 col-md-4 col-sm-12">

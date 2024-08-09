@@ -1,8 +1,9 @@
-/* *{
-  padding: 0px !important;
-  margin: 0px !important;
-  box-sizing: border-box;
-} */
+*{
+  margin: 0px;
+box-sizing: border-box;
+
+}
+
 
 .account-section li a:hover {
   background-color: rgba(255, 173, 49, 1) !important;
@@ -181,4 +182,12 @@
     top: 18px;
     left: 250px;
   }
+}
+
+.country {
+  margin-left: 50rem;
+}
+
+.container-fluid, .row, .col-lg-9, .sidebar {
+  overflow-x: hidden;
 }

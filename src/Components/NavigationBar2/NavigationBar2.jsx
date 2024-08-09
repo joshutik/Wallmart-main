@@ -22,9 +22,6 @@
 //             <div className="country">
 //               <CountryCode />
 //             </div>
-//             <Nav.Link href="#">
-//               <i className="bi bi-bell-fill fs-1"></i>{" "}
-//             </Nav.Link>
 
 //           </div>
 //         </Navbar.Collapse>
@@ -83,8 +80,8 @@ function NavigationBar2() {
         <Navbar.Brand href="#">
           <img src={logo1} alt="Logo" />
         </Navbar.Brand>
-        <div className="notification d-flex align-items-center ms-lg-auto">
-          <div className="country">
+        <div className="notification d-flex align-items-center ms-auto">
+          <div className="">
             <CountryCode />
           </div>
         </div>

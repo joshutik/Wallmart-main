@@ -1,212 +1,3 @@
-// import { useState } from "react";
-// import profile from "../assets/profile.png";
-// import { Circle } from "rc-progress";
-// import diamond from "../assets/diamond-icon.png";
-// import "./Account.css";
-// import { Link } from "react-router-dom";
-// // import NavigationBar from "../NavigationBar/NavigationBar";
-
-// const Account = () => {
-//   const progress = 33.3333;
-//   const [showModal, setShowModal] = useState(false);
-//   const [sidebarOpen, setSidebarOpen] = useState(false);
-
-//   const handleTopUpClick = () => {
-//     setShowModal(true);
-//   };
-
-//   const handleCloseModal = () => {
-//     setShowModal(false);
-//   };
-
-//   const toggleSidebar = () => {
-//     setSidebarOpen(!sidebarOpen);
-//   };
-
-//   return (
-//     <div className="container-fluid dashboard-container">
-//       <div className="row pb-5 mb-5">
-//         {/* Sidebar */}
-//         <div className={`col-lg-3 col-md-4 pl-4 sidebar ${sidebarOpen ? 'open' : ''}`}>
-//           <div className="profile-section text-center py-5">
-//             <img src={profile} className="img-fluid" alt="Profile" />
-//             <div className="profile-info px-5">
-//               <p>
-//                 <strong>Number:</strong> 8766-766-5654
-//               </p>
-//               <p>
-//                 <strong>Invitation code:</strong> 00943
-//               </p>
-//             </div>
-//           </div>
-//           <hr />
-//           <nav className="nav flex-column account-section fw-bold py-5">
-//             <li>
-//               <a className="nav-link" href="#">
-//                 <i className="bi bi-person-workspace fs-3"></i> Account
-//                 information
-//               </a>
-//             </li>
-//             <li>
-//               <a className="nav-link" href="#">
-//                 <i className="bi bi-file-earmark-text fs-3"></i> Order record
-//               </a>
-//             </li>
-//             <li>
-//               <a className="nav-link" href="#">
-//                 <i className="bi bi-cash-stack fs-3"></i> Recharge record
-//               </a>
-//             </li>
-//             <li>
-//               <a className="nav-link" href="#">
-//                 <i className="bi bi-wallet2 fs-3"></i> Withdrawal record
-//               </a>
-//             </li>
-//             <li>
-//               <a className="nav-link" href="#">
-//                 <i className="bi bi-envelope-paper-fill fs-3"></i> Invite friend
-//               </a>
-//             </li>
-//             <li>
-//               <a className="nav-link" href="#">
-//                 <i className="bi bi-box-arrow-right fs-3 my-2"></i> Log out
-//               </a>
-//             </li>
-//           </nav>
-//         </div>
-
-//         {/* Sidebar Toggle Button */}
-//         <button
-//           className="sidebar-toggle d-md-none"
-//           onClick={toggleSidebar}
-//         >
-//           ☰
-//         </button>
-
-//         {/* Main Content */}
-//         <div className="col-lg-9 px-0">
-//           <div className="main-content pt-5 pb-5">
-//             <div className="d-flex justify-content-between ms-5 text-light pb-5">
-//               <div>
-//                 <h2 className="fs-1 fw-bold">Hey JAMES,</h2>
-//                 <p>Welcome back! Ready to grab and get commission.</p>
-//               </div>
-//               <div className= text-end me-5">
-//                 <button className="btn btn-outline-light">
-//                   <i className="bi bi-camera"></i> Change cover
-//                 </button>
-//               </div>
-//             </div>
-
-//             <div className="card text-center balance-card rounded-5 w-75 mx-auto">
-//               <div className="container">
-//                 <div className="row justify-content-center align-items-center">
-//                   <div className="col-lg-4 col-md-6 col-sm-12 text-light">
-//                     <div className="text-start py-3">
-//                       <img src={diamond} alt="Diamond" className="img-fluid" />
-//                     </div>
-//                     <h4 className="border border-3 py-2 text-light rounded-pill fs-5">
-//                       Account Balance
-//                     </h4>
-//                     <p className="fw-bold display-3 text-start">$30</p>
-//                   </div>
-//                   <div className="col-lg-1 mt-5 d-sm-none d-lg-block">
-//                     <div className="vr h-100"></div>
-//                   </div>
-//                   <div className="col-lg-3 col-md-6 col-sm-12 text-light">
-//                     <h4 className="border border-3 py-2 text-light rounded-pill mt-5">
-//                       Unsettled
-//                     </h4>
-//                     <p className="fw-bold display-3 text-start">$40</p>
-//                   </div>
-//                   <div className="col-lg-4 col-md-6 col-sm-12 text-light">
-//                     <div className="w-100 mx-auto my-5">
-//                       <div className="rounded-circle position-relative w-100 p-3 bg-light">
-//                         <Circle
-//                           percent={progress}
-//                           strokeWidth={10}
-//                           strokeColor="#FFAD31"
-//                           strokeLinecap="square"
-//                           trailWidth={10}
-//                           trailColor="#EEE"
-//                           gapPosition="bottom"
-//                         />
-//                         <h2 className="vip-count position-absolute top-50 start-0 end-0 translate-middle-y display-5 w-75 mx-4 my-3 fw-bold text-center">
-//                           VIP<br/> <span id="count">1</span>
-//                         </h2>
-//                       </div>
-//                     </div>
-//                   </div>
-//                 </div>
-//               </div>
-//             </div>
-
-//             <div className="my-5 text-center justify-content-center mb-5">
-//               <div className="container card links" >
-//               <div className="row py-3 py-lg-4 px-5 mx-auto rounded-pill pb-5">
-//                 <div className="col-lg-6 col-md-6 col-sm-6 mb-3 mb-md-0">
-//                   <Link
-//                     to="/"
-//                     className="fw-bold border border-2 text-light action text-decoration-none px-3 py-2 rounded-pill d-block"
-//                   >
-//                     <i className="bi bi-wallet2 fs-3"></i> Quick Withdrawal
-//                   </Link>
-//                 </div>
-//                 <div className="col-lg-6 col-md-6 col-sm-6">
-//                   <Link
-//                     onClick={handleTopUpClick}
-//                     className="fw-bold border action border-2 text-light text-decoration-none px-2 py-2 rounded-pill d-block"
-//                   >
-//                     <i className="bi bi-cash-stack fs-3"></i> Top up now
-//                   </Link>
-//                 </div>
-//               </div>
-//             </div>
-//             </div>
-//           </div>
-//           {showModal && (
-//             <div className="modal show d-block" tabIndex="-1" role="dialog">
-//               <div className="modal-dialog" role="document">
-//                 <div className="modal-content">
-//                   <div className="modal-header">
-//                     <h5 className="modal-title">Top Up</h5>
-//                     <button
-//                       type="button"
-//                       className="close"
-//                       onClick={handleCloseModal}
-//                     >
-//                       <span>&times;</span>
-//                     </button>
-//                   </div>
-//                   <div className="modal-body">
-//                     <p>Modal content goes here...</p>
-//                   </div>
-//                   <div className="modal-footer">
-//                     <button
-//                       type="button"
-//                       className="btn btn-secondary"
-//                       onClick={handleCloseModal}
-//                     >
-//                       Close
-//                     </button>
-//                     <button type="button" className="btn btn-primary">
-//                       Save changes
-//                     </button>
-//                   </div>
-//                 </div>
-//               </div>
-//             </div>
-//           )}
-//         </div>
-//       </div>
-//       <div>
-//         {/* <NavigationBar /> */}
-//       </div>
-//     </div>
-//   );
-// };
-
-// export default Account;
 
 import { useState, useEffect } from "react";
 import user from "../assets/user.png";
@@ -295,6 +86,10 @@ const Account = () => {
     setSidebarOpen(!sidebarOpen);
   };
 
+  // const toggleSidebar = () => {
+  //   setSidebarOpen(!sidebarOpen);
+  // };
+
   const handleProfilePicChange = (event) => {
     const file = event.target.files[0];
     if (file) {
@@ -363,9 +158,9 @@ const Account = () => {
   }, []);
 
   return (
-    <div className="container-fluid dashboard-container pb-5 mb-5">
-      <div className="d-none d-md-block pb-5 mb-5">
-         <NavigationBar3 />
+    <div className="container-fluid dashboard-container">
+      <div className=" pb-5 mb-5">
+         <NavigationBar3 toggleSidebar={toggleSidebar}/>
       </div>
      
       <div className="row pb-5 mb-5">
@@ -447,7 +242,7 @@ const Account = () => {
         >
           ☰
         </button> */}
-        <button
+        {/* <button
           className={`sidebar-toggle d-md-none fs-1 ${
             sidebarOpen ? "cancel" : ""
           } ${
@@ -458,7 +253,7 @@ const Account = () => {
           onClick={toggleSidebar}
         >
           {sidebarOpen ? "×" : "☰"}
-        </button>
+        </button> */}
 
         {/* Main Content */}
         <div className="col-lg-9 px-0">
@@ -521,8 +316,8 @@ const Account = () => {
               </div>
             </div>
 
-            <div className="my-5 text-center mb-5 pb-5">
-              <div className="links mb-4">
+            <div className="my-5 text-center mb-5">
+              <div className="links">
                 <div className="row justify-content-center pt-5 px-5 rounded-pill pb-5">
                   <div className="col-lg-4 col-md-6 col-sm-6 mb-3 mb-md-0">
                     <Link
