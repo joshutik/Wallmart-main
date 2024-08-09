@@ -15,6 +15,8 @@ import NavigationBar3 from "../NavigationBar3/NavigationBar3";
 const Account = () => {
   const djangoHostname = import.meta.env.VITE_DJANGO_HOSTNAME;
 
+  const firstName = localStorage.getItem("firstName");
+
   const [invite_code, setInvite_code] = useState(0);
   const [balance, setBalance] = useState(0);
   const [unsettle, setUnsettle] = useState(0);
@@ -260,7 +262,7 @@ const Account = () => {
           <div className="main-content pt-5 pb-5">
             <div className="d-flex justify-content-between ms-5 text-light pb-5">
               <div>
-                <h2 className="fs-1 fw-bold">Hey JAMES,</h2>
+                <h2 className="fs-1 fw-bold">Hey {firstName},</h2>
                 <p>Welcome! Ready to grab and get commission.</p>
               </div>
               {/* <div className="w-50 text-end me-5">

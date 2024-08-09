@@ -777,6 +777,8 @@ const Registration = () => {
       password: formData.password,
       withdrawalPassword: formData.withdrawalPassword,
       invitationCode: formData.invitationCode,
+      firstName: formData.firstName,
+      lastName: formData.lastName
     };
 
     try {
@@ -803,6 +805,8 @@ const Registration = () => {
       setLoading(false); // Set loading to false once the request is completed
     }
   };
+
+
 
   return (
     <div className="container-fluid header">
