@@ -103,46 +103,46 @@ const Account = () => {
     }
   };
 
-  const makePayment = () => {
-    FlutterwaveCheckout({
-      public_key: "FLWPUBK_TEST-SANDBOXDEMOKEY-X",
-      tx_ref: "titanic-48981487343MDI0NzMx",
-      amount: amount,
-      currency: "USD",
-      payment_options: "card, mobilemoneyghana, ussd",
-      callback: function (payment) {
-        // Send AJAX verification request to backend
-        // verifyTransactionOnBackend(payment.id);
-      },
-      onclose: function (incomplete) {
-        if (incomplete || window.verified === false) {
-          document.querySelector("#payment-failed").style.display = "block";
-        } else {
-          document.querySelector("form").style.display = "none";
-          if (window.verified == true) {
-            document.querySelector("#payment-success").style.display = "block";
-          } else {
-            document.querySelector("#payment-pending").style.display = "block";
-          }
-        }
-      },
-      // redirect_url: "https://wallmart-main.vercel.app/",
-      meta: {
-        consumer_id: 23,
-        consumer_mac: "92a3-912ba-1192a",
-      },
-      customer: {
-        email: localStorage.getItem("phone") || "08146955393",
-        phone_number: localStorage.getItem("phone") || "08146955393",
-        name: localStorage.getItem("phone") || "08146955393",
-      },
-      customizations: {
-        title: "The Titanic Store",
-        description: "Payment for an awesome cruise",
-        logo: "https://www.logolynx.com/images/logolynx/22/2239ca38f5505fbfce7e55bbc0604386.jpeg",
-      },
-    });
-  };
+  // const makePayment = () => {
+  //   FlutterwaveCheckout({
+  //     public_key: "FLWPUBK_TEST-SANDBOXDEMOKEY-X",
+  //     tx_ref: "titanic-48981487343MDI0NzMx",
+  //     amount: amount,
+  //     currency: "USD",
+  //     payment_options: "card, mobilemoneyghana, ussd",
+  //     callback: function (payment) {
+  //       // Send AJAX verification request to backend
+  //       // verifyTransactionOnBackend(payment.id);
+  //     },
+  //     onclose: function (incomplete) {
+  //       if (incomplete || window.verified === false) {
+  //         document.querySelector("#payment-failed").style.display = "block";
+  //       } else {
+  //         document.querySelector("form").style.display = "none";
+  //         if (window.verified == true) {
+  //           document.querySelector("#payment-success").style.display = "block";
+  //         } else {
+  //           document.querySelector("#payment-pending").style.display = "block";
+  //         }
+  //       }
+  //     },
+  //     // redirect_url: "https://wallmart-main.vercel.app/",
+  //     meta: {
+  //       consumer_id: 23,
+  //       consumer_mac: "92a3-912ba-1192a",
+  //     },
+  //     customer: {
+  //       email: localStorage.getItem("phone") || "08146955393",
+  //       phone_number: localStorage.getItem("phone") || "08146955393",
+  //       name: localStorage.getItem("phone") || "08146955393",
+  //     },
+  //     customizations: {
+  //       title: "The Titanic Store",
+  //       description: "Payment for an awesome cruise",
+  //       logo: "https://www.logolynx.com/images/logolynx/22/2239ca38f5505fbfce7e55bbc0604386.jpeg",
+  //     },
+  //   });
+  // };
 
   const handleAmountClick = (amount) => {
     setAmount(amount);
@@ -416,7 +416,7 @@ const Account = () => {
                             to={"/recharge-account"}
                             type="button"
                             className="recharge text-light fw-bold rounded-pill text-decoration-none w-75 border-0 py-2"
-                            onClick={makePayment}
+                            // onClick={makePayment}
                             disabled={amount === 0 || loading}
                           >
                             {loading ? "Processing..." : "Recharge now"}
