@@ -282,6 +282,8 @@ const Login = () => {
       localStorage.setItem("token", result.token);
       localStorage.setItem("user_id", result.user_id);
       localStorage.setItem("phone", result.phone);
+      localStorage.setItem("firstName", result.firstName);
+      localStorage.setItem("LastName", result.LastName);
       const userInvitationCode = result.user_invitation_code.code;
       localStorage.setItem("user_invitation_code", userInvitationCode);
     } catch (error) {
