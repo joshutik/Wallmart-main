@@ -401,12 +401,13 @@ const Withdrawal = () => {
                 onChange={(e) => setCryptoWallet(e.target.value)}
                 required
               >
-                <option value="">Choose Wallet</option>
+                <option value="" selected>Choose Wallet</option>
                 <option value="USDT">USDT</option>
                 <option value="BINANCE">BINANCE</option>
                 <option value="TON">TON</option>
                 <option value="BTC">BTC</option>
                 <option value="TRX">TRX</option>
+                <option value="TRX">TRC20</option>
               </select>
             </div>
             <div className="form-group my-3">

@@ -1087,7 +1087,7 @@ const Homepage = () => {
             </div>
             <div className="col-lg-4 col-md-4 col-sm-12">
               <Link
-                to={"/"}
+                to={""}
                 className="btn W-25 py-2 px-4 bg-transparent rounded-5 action"
               >
                 <img src={img6} className="img-fluid mb-2" alt="" />{" "}
@@ -1110,7 +1110,7 @@ const Homepage = () => {
         <Modal.Header closeButton>
           <Modal.Title>Recharge Amount</Modal.Title>
         </Modal.Header>
-        <Modal.Body>
+        <Modal.Body className="mx-auto">
           <Form onSubmit={handleRechargeSubmit}>
             <Form.Group className="mb-3" controlId="formBasicAmount">
               <div className="container">
@@ -1166,7 +1166,7 @@ const Homepage = () => {
                 // onClick={makePayment}
                 disabled={amount !== 20 || loading}
               >
-                {loading ? "Processing..." : "Recharge now"}
+                {loading ? "Processing..." : "Grab"}
               </Link>
             </Form.Group>
           </Form>

@@ -3,6 +3,10 @@ import 'bootstrap-icons/font/bootstrap-icons.css';
 // import './i18next/i18n'; // Import i18n configuration
 // import Account from './Components/Account/Account';
 // import Recharge from './Components/Recharge/Recharge';
+import AdminDashboard from './Components/AdminDashboard/AdminDashboard';
+// import Vip1Details from './Components/Vip1Details/Vip1Details';
+// import Vip2Details from './Components/Vip2Details/Vip2Details';
+// import LastJoined from './Components/LastJoined/LastJoined';
 // import SliderToggle from './Components/SliderToggle/SliderToggle';
 // import Withdrawal from './Components/WidthdrawalUSDT/WithdrawalUsdt';
 // import WithdrawalBank from './Components/WithdrawalBank/WithdrawalBank';
@@ -10,7 +14,7 @@ import 'bootstrap-icons/font/bootstrap-icons.css';
 // import NavigationBar2 from './Components/NavigationBar2/NavigationBar2';
 // import NavigationBar3 from './Components/NavigationBar3/NavigationBar3';
 // import GrabOrder from './Components/GrabOrder/GrabOrder';
- import Login from './Components/Login/Login'
+//  import Login from './Components/Login/Login'
 // import Modal from './Components/Modal/Modal1';
 // import Registration from './Components/Registration/Registration';
 // import Registration from './Components/Registration/Registration'
@@ -30,7 +34,7 @@ function App() {
       {/* <NavigationBar2/> */}
       {/* <NavigationBar3/> */}
       {/* <GrabOrder/> */}
-      <Login/>
+      {/* <Login/> */}
       {/* <Modal/> */}
       {/* <Registration/> */}
       {/* <Account/> */}
@@ -38,6 +42,10 @@ function App() {
       {/* <WithdrawalBank/> */}
       {/* <Withdrawal/> */}
       {/* <Recharge/> */}
+      <AdminDashboard/>
+      {/* <LastJoined/> */}
+      {/* <Vip1Details/> */}
+      {/* <Vip2Details/> */}
     </div>
   )
 }
