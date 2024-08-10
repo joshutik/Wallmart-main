@@ -357,7 +357,7 @@ const Account = () => {
                       <span>&times;</span>
                     </button>
                   </div>
-                  <div className="modal-body">
+                  <div className="modal-body mx-auto">
                     <p>Select recharge amount...</p>
                     <hr />
                     <div className="container">
