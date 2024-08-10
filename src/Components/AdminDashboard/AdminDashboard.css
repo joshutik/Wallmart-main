@@ -1,0 +1,52 @@
+/* .btn[aria-expanded="true"] > .bi {
+    content: attr(aria-expanded-icon);
+  }
+  
+  .btn[aria-expanded="false"] > .bi {
+    content: attr(aria-collapsed-icon);
+  } */
+
+/* @import url('https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.2/font/bootstrap-icons.min.css');
+
+.toggle-icon { */
+    /* font-size: 1rem; */
+    /* Adjust as needed */
+    /* transition: transform 0.3s;
+} */
+
+/* Default state for collapsed buttons (chevron-right) */
+/* .btn:not(.collapsed) .toggle-icon::before {
+    content: "\f078"; */
+    /* Chevron-right */
+/* } */
+
+/* State for expanded buttons (chevron-down) */
+/* .btn.collapsed .toggle-icon::before {
+    content: "\f077"; */
+    /* Chevron-down */
+/* } */
+
+
+
+.active-user {
+    background-color: #FDCACA !important;
+}
+
+.user-bal {
+    background-color: #D1E1FA !important;
+}
+
+.depo {
+    background-color: #D1FAE1;
+}
+
+.take {
+    background-color: #FAF8D1;
+}
+
+.dash{
+    background-image: url(../assets/account-bg.png);
+    background-size: cover;
+    height: 100vh;
+    /* background-attachment: fixed; */
+}
