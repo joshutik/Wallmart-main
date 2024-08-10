@@ -101,6 +101,8 @@ box-sizing: border-box;
     z-index: 1000;
     transition: left 0.3s;
     overflow-y: auto;
+    padding-top: 2rem;
+    padding-bottom: 2rem;
   }
 
   .main-content {

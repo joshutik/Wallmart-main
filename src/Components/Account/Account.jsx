@@ -443,7 +443,9 @@ const Account = () => {
           )}
         </div>
       </div> 
+      <div>
       <NavigationBar />
+      </div>
     </div>
   );
 };
