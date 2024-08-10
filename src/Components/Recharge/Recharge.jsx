@@ -680,6 +680,310 @@
 // };
 
 // export default Recharge;
+
+
+
+
+
+// import { useState } from "react";
+// import PropTypes from "prop-types";
+// import { Link } from "react-router-dom";
+// import SliderToggle2 from "../SliderToggle2/SliderToggle2";
+// import "@fortawesome/fontawesome-free/css/all.min.css";
+// import "./Recharge.css";
+
+// const Recharge = () => {
+//   const [selectedMethod, setSelectedMethod] = useState("wallet");
+//   const [cryptoWallet, setCryptoWallet] = useState("");
+//   const [walletAddress, setWalletAddress] = useState("");
+//   const [amount, setAmount] = useState("");
+//   const [senderName, setSenderName] = useState("");
+//   const [uploadProf, setUploadProf] = useState(null);
+//   const [showQrModal, setShowQrModal] = useState(false); // State for QR modal
+
+//   const handleCopy = (textToCopy) => {
+//     navigator.clipboard.writeText(textToCopy).then(() => {
+//       alert("Copied to clipboard!");
+//     });
+//   };
+
+//   const handleFileChange = (e) => {
+//     setUploadProf(e.target.files[0]);
+//   };
+
+//   const handleFileUpload = async (formData) => {
+//     try {
+//       const response = await fetch("https://your-backend-endpoint/upload", {
+//         method: "POST",
+//         body: formData,
+//       });
+
+//       if (response.ok) {
+//         alert("File uploaded successfully!");
+//       } else {
+//         alert("Failed to upload the file.");
+//       }
+//     } catch (error) {
+//       console.error("Error uploading file:", error);
+//       alert("An error occurred during file upload.");
+//     }
+//   };
+
+//   const handleSubmit = (e) => {
+//     e.preventDefault();
+//     if (selectedMethod === "crypto" && (!cryptoWallet || !walletAddress)) {
+//       alert("Please fill in all fields for crypto recharge");
+//       return;
+//     }
+//     if (selectedMethod === "bank-payment" && (!walletAddress || !amount)) {
+//       alert("Please fill in all fields for bank payment");
+//       return;
+//     }
+
+//     if (selectedMethod === "crypto") {
+//       setShowQrModal(true); // Show QR code modal
+//     } else {
+//       if (uploadProf) {
+//         const formData = new FormData();
+//         formData.append("senderName", senderName);
+//         formData.append("uploadProf", uploadProf);
+
+//         handleFileUpload(formData);
+//       } else {
+//         alert("Please upload a proof of payment file.");
+//       }
+//     }
+//   };
+
+//   return (
+//     <div className="container px-3">
+//       <div className="row my-5">
+//         <div className="col-auto">
+//           <Link to={"/homepage"}>
+//             <i className="bi bi-arrow-left fs-3 text-dark"></i>
+//           </Link>
+//         </div>
+//         <div className="col-auto mx-auto">
+//           <h1>Recharge Account</h1>
+//         </div>
+//       </div>
+//       <SliderToggle2
+//         selectedMethod={selectedMethod}
+//         setSelectedMethod={setSelectedMethod}
+//       />
+//       <form
+//         className="px-2"
+//         onSubmit={handleSubmit}
+//         key={selectedMethod} // Force re-render when method changes
+//       >
+//         {selectedMethod === "wallet" && (
+//           <>
+//             <div className="form-group my-3">
+//               <label className="fw-bold fs-4 my-4" htmlFor="cryptowallet">
+//                 Select Crypto Wallet
+//               </label>
+//               <select
+//                 name="cryptowallet"
+//                 id="cryptowallet"
+//                 className="form-select py-3 rounded-4"
+//                 value={cryptoWallet}
+//                 onChange={(e) => setCryptoWallet(e.target.value)}
+//                 required
+//               >
+//                 <option value="">Choose Wallet</option>
+//                 <option value="USDT">USDT</option>
+//                 <option value="BINANCE">BINANCE</option>
+//                 <option value="TON">TON</option>
+//                 <option value="BTC">BTC</option>
+//                 <option value="TRX">TRX</option>
+//                 <option value="TRC20">TRC20</option>
+//               </select>
+//             </div>
+//             <div className="form-group my-3">
+//               <label className="fw-bold fs-4 my-2" htmlFor="walletaddress">
+//                 Current Selected Wallet
+//               </label>
+//               <input
+//                 type="text"
+//                 className="form-control py-3 rounded-4 w-50 bg-dark text-light"
+//                 value={cryptoWallet} // Display selected crypto wallet
+//                 readOnly
+//               />
+//               <p className="py-4">
+//                 Walmart will generate a scan code and Payment link that can
+//                 enable easy payment and better service to customers. Terms of
+//                 use and Privacy Policy.
+//               </p>
+//             </div>
+//             <div className="my-4 text-center">
+//               <button
+//                 className="rounded-pill py-2 w-75 border-0 draw-btn fw-bold text-light fs-5 my-5"
+//                 type="submit"
+//               >
+//                 Generate Payment
+//               </button>
+//             </div>
+//           </>
+//         )}
+//         {selectedMethod === "bank-payment" && (
+//           <>
+//             <div className="container">
+//               <p>Step 1: Copy account, money</p>
+//             </div>
+//             <div className="container rounded-4 paym-card">
+//               <div className="row justify-content-center">
+//                 <div className="col-lg-5 col-md-6 col-sm-12">
+//                   <div className="text-center py-lg-5 py-4">
+//                     <p>Bank Name</p>
+//                     <p>Palm Pay</p>
+//                     <div className="w-75 me-lg-auto mx-auto">
+//                       <hr className="horizontal border-3 text-white " />
+//                     </div>
+
+//                     <p>Account</p>
+//                     <p>
+//                       165008977890{" "}
+//                       <button
+//                         className="btn btn-copy w-25 text-light"
+//                         type="button"
+//                         onClick={() => handleCopy("165008977890")}
+//                       >
+//                         Copy
+//                       </button>
+//                     </p>
+//                   </div>
+//                 </div>
+//                 {/* <div className="col-lg-1">
+//                   <div className="d-flex vtical">
+//                     <div className="vr"></div>
+//                   </div>
+//                 </div> */}
+//                 <div className="d-none w-75 me-lg-auto mx-auto d-none d-sm-block d-md-none">
+//                       <hr className="horizontal border-3 text-white " />
+//                     </div>
+//                 <div className="col-lg-5 col-md-6 col-sm-12">
+//                   <div className="text-center py-lg-5 py-4">
+//                     <p>Recipient</p>
+//                     <p>John Louis Vaqeuz </p>
+//                     <div className="w-75 me-lg-auto mx-auto">
+//                       <hr className="horizontal border-3 text-white " />
+//                     </div>
+//                     <p>Account</p>
+//                     <p>
+//                       $30.00{" "}
+//                       <button
+//                         className="btn btn-copy w-25 text-light"
+//                         type="button"
+//                         onClick={() => handleCopy("$30.00")}
+//                       >
+//                         Copy
+//                       </button>
+//                     </p>
+//                   </div>
+//                 </div>
+//               </div>
+//             </div>
+//             <div className="container my-5">
+//               <form>
+//                 <div className="form-group my-5">
+//                   <label htmlFor="senderName">
+//                     Step 2: Input the sender name
+//                   </label>
+//                   <input
+//                     type="text"
+//                     name="senderName"
+//                     id="senderName"
+//                     value={senderName}
+//                     onChange={(e) => setSenderName(e.target.value)}
+//                     className="form-control py-3 rounded-4"
+//                     placeholder="Enter sender name"
+//                     required
+//                   />
+//                 </div>
+//                 <div className="form-group">
+//                   <label htmlFor="uploadProf">
+//                     Step 3: Upload proof of payment
+//                   </label>
+//                   <input
+//                     type="file"
+//                     name="uploadProf"
+//                     id="uploadProf"
+//                     onChange={handleFileChange}
+//                     className="form-control py-3 file-input px-4 rounded-4"
+//                     required
+//                   />
+//                 </div>
+//               </form>
+//             </div>
+//             <div className="my-4 text-center mb-4">
+//               <button
+//                 className="rounded-pill py-2 w-75 border-0 draw-btn fw-bold text-light fs-5 my-5"
+//                 type="submit"
+//               >
+//                 Submit
+//               </button>
+//             </div>
+//           </>
+//         )}
+//       </form>
+
+//       {/* QR Code Modal */}
+//       {showQrModal && (
+//         <div className="modal show d-block" tabIndex="-1" role="dialog">
+//           <div className="modal-dialog" role="document">
+//             <div className="modal-content">
+//               <div className="modal-header">
+//                 <h5 className="modal-title">QR Code for Payment</h5>
+//                 <button
+//                   type="button"
+//                   className="btn-close"
+//                   onClick={() => setShowQrModal(false)}
+//                 ></button>
+//               </div>
+//               <div className="modal-body">
+//                 <p>
+//                   Scan the QR code or copy the payment link to complete the
+//                   recharge:
+//                 </p>
+//                 <div className="text-center">
+//                   {/* Placeholder for QR code */}
+//                   <img
+//                     src="path-to-qr-code"
+//                     alt="QR Code"
+//                     className="img-fluid"
+//                   />
+//                   <p>Or copy the link below:</p>
+//                   <input
+//                     type="text"
+//                     className="form-control"
+//                     value="https://example.com/payment-link"
+//                     readOnly
+//                   />
+//                 </div>
+//               </div>
+//               <div className="modal-footer">
+//                 <button
+//                   type="button"
+//                   className="btn btn-secondary"
+//                   onClick={() => setShowQrModal(false)}
+//                 >
+//                   Close
+//                 </button>
+//               </div>
+//             </div>
+//           </div>
+//         </div>
+//       )}
+//     </div>
+//   );
+// };
+
+// Recharge.propTypes = {
+//   selectedMethod: PropTypes.string.isRequired,
+// };
+
+// export default Recharge;
+
 import { useState } from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
@@ -695,6 +999,7 @@ const Recharge = () => {
   const [senderName, setSenderName] = useState("");
   const [uploadProf, setUploadProf] = useState(null);
   const [showQrModal, setShowQrModal] = useState(false); // State for QR modal
+  const [qrCodeUrl, setQrCodeUrl] = useState(""); // State to store QR code UR
 
   const handleCopy = (textToCopy) => {
     navigator.clipboard.writeText(textToCopy).then(() => {
@@ -726,29 +1031,35 @@ const Recharge = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (selectedMethod === "crypto" && (!cryptoWallet || !walletAddress)) {
-      alert("Please fill in all fields for crypto recharge");
-      return;
-    }
-    if (selectedMethod === "bank-payment" && (!walletAddress || !amount)) {
-      alert("Please fill in all fields for bank payment");
-      return;
-    }
 
-    if (selectedMethod === "crypto") {
-      setShowQrModal(true); // Show QR code modal
-    } else {
-      if (uploadProf) {
-        const formData = new FormData();
-        formData.append("senderName", senderName);
-        formData.append("uploadProf", uploadProf);
-
-        handleFileUpload(formData);
-      } else {
-        alert("Please upload a proof of payment file.");
+    // Crypto payment validation
+    if (selectedMethod === "wallet") {
+      if (!cryptoWallet || !walletAddress) {
+        // alert("Please fill in all fields for crypto recharge");
+        // return;
       }
+      setShowQrModal(true); // Show QR code modal for crypto payment
+      return;
+    }
+
+    // Bank payment validation
+    if (selectedMethod === "bank-payment") {
+      if (!senderName || !uploadProf) {
+        alert("Please fill in all fields and upload a proof of payment file.");
+        return;
+      }
+
+      // Upload the file if bank payment is selected
+      const formData = new FormData();
+      formData.append("senderName", senderName);
+      formData.append("uploadProf", uploadProf);
+
+      handleFileUpload(formData);
     }
   };
+
+
+  
 
   return (
     <div className="container px-3">
@@ -848,14 +1159,9 @@ const Recharge = () => {
                     </p>
                   </div>
                 </div>
-                {/* <div className="col-lg-1">
-                  <div className="d-flex vtical">
-                    <div className="vr"></div>
-                  </div>
-                </div> */}
                 <div className="d-none w-75 me-lg-auto mx-auto d-none d-sm-block d-md-none">
-                      <hr className="horizontal border-3 text-white " />
-                    </div>
+                  <hr className="horizontal border-3 text-white " />
+                </div>
                 <div className="col-lg-5 col-md-6 col-sm-12">
                   <div className="text-center py-lg-5 py-4">
                     <p>Recipient</p>
@@ -926,7 +1232,7 @@ const Recharge = () => {
       {showQrModal && (
         <div className="modal show d-block" tabIndex="-1" role="dialog">
           <div className="modal-dialog" role="document">
-            <div className="modal-content">
+            <div className="modal-content w-100">
               <div className="modal-header">
                 <h5 className="modal-title">QR Code for Payment</h5>
                 <button

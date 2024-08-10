@@ -917,29 +917,48 @@ import NavigationBar2 from "../NavigationBar2/NavigationBar2";
 import NavigationBar from "../NavigationBar/NavigationBar";
 import Usercomision from "../Usercomision/Usercomision";
 import Partners from "../Partners/Partners";
-import { Modal, Form } from "react-bootstrap";
+// import { Modal, Form } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
 const Homepage = () => {
-  const [showRechargeModal, setShowRechargeModal] = useState(false);
+  // const [showRechargeModal, setShowRechargeModal] = useState(false);
   const [amount, setAmount] = useState("");
   const [loading, setLoading] = useState(false);
 
-  const handleShowRechargeModal = () => setShowRechargeModal(true);
-  const handleCloseRechargeModal = () => setShowRechargeModal(false);
+  // const handleShowRechargeModal = () => setShowRechargeModal(true);
+  // const handleCloseRechargeModal = () => setShowRechargeModal(false);
+  const [showModal, setShowModal] = useState(false);
+  // const [amount, setAmount] = useState(0);
 
-  const handleAmountClick = (selectedAmount) => {
-    if (selectedAmount === 20) {
-      setAmount(selectedAmount);
-    }
+
+
+  const handleTopUpClick = () => {
+    setShowModal(true);
   };
 
-  const handleRechargeSubmit = (e) => {
-    e.preventDefault();
-    console.log("Recharge Amount:", amount);
-    setAmount(""); // Clear the input field after submission
-    handleCloseRechargeModal();
+  const handleCloseModal = () => {
+    setShowModal(false);
   };
+
+  const handleAmountClick = (amount) => {
+    setAmount(amount);
+  };
+
+  
+
+  // const handleAmountClick = (selectedAmount) => {
+  //   if (selectedAmount === 20) {
+  //     setAmount(selectedAmount);
+  //   }
+  // };
+
+
+  // const handleRechargeSubmit = (e) => {
+  //   e.preventDefault();
+  //   console.log("Recharge Amount:", amount);
+  //   setAmount(""); // Clear the input field after submission
+  //   handleCloseRechargeModal();
+  // };
 
   // const makePayment = () => {
   //   FlutterwaveCheckout({
@@ -1068,7 +1087,7 @@ const Homepage = () => {
             </div> */}
             <div className="col-lg-4 col-md-4 col-sm-12">
               <Link
-              onClick={handleShowRechargeModal}
+              onClick={handleTopUpClick}
               
                 className="btn W-25 py-3 px-4 bg-transparent rounded-5 action"
               >
@@ -1106,7 +1125,7 @@ const Homepage = () => {
       </div>
 
       {/* Recharge Modal */}
-      <Modal show={showRechargeModal} onHide={handleCloseRechargeModal}>
+      {/* <Modal show={showRechargeModal} onHide={handleCloseRechargeModal}>
         <Modal.Header closeButton>
           <Modal.Title>Recharge Amount</Modal.Title>
         </Modal.Header>
@@ -1171,7 +1190,103 @@ const Homepage = () => {
             </Form.Group>
           </Form>
         </Modal.Body>
-      </Modal>
+      </Modal> */}
+       {showModal && (
+            <div className="modal show  d-block" tabIndex="-3" role="dialog">
+              <div className="modal-dialog" role="document">
+                <div className="modal-content top-up">
+                  <div className="modal-header">
+                    <h5 className="modal-title ms-auto">Top Up Account</h5>
+                    <button
+                      type="button"
+                      className="close border-0 ms-auto fs-1 bg-transparent"
+                      onClick={handleCloseModal}
+                    >
+                      <span>&times;</span>
+                    </button>
+                  </div>
+                  <div className="modal-body mx-auto">
+                    <p>Select recharge amount...</p>
+                    <hr />
+                    <div className="container">
+                      <div className="row gy-3">
+                        <div className="col-lg-12 col-md-6 col-sm-12 d-flex recharge-btn">
+                          <button
+                            className="btn border w-100 fw-bold mx-2"
+                            onClick={() => handleAmountClick(20)}
+                          >
+                            $20
+                          </button>
+                          <button
+                            disabled
+                            className="btn border fw-bold w-100 mx-2"
+                            onClick={() => handleAmountClick(40)}
+                          >
+                            $40
+                          </button>
+                        </div>
+                        <div className="col-lg-12 col-md-6 col-sm-12 d-flex recharge-btn">
+                          <button
+                            disabled
+                            className="btn border fw-bold w-100 mx-2"
+                            onClick={() => handleAmountClick(70)}
+                          >
+                            $70
+                          </button>
+                          <button
+                            disabled
+                            className="btn border fw-bold w-100 mx-2"
+                            onClick={() => handleAmountClick(120)}
+                          >
+                            $120
+                          </button>
+                        </div>
+                        <div className="col-lg-12 col-md-6 col-sm-12 d-flex recharge-btn">
+                          <button
+                            disabled
+                            className="btn border fw-bold w-100 mx-2"
+                            onClick={() => handleAmountClick(200)}
+                          >
+                            $200
+                          </button>
+                          <button
+                            disabled
+                            className="btn border fw-bold w-100 mx-2"
+                            onClick={() => handleAmountClick(500)}
+                          >
+                            $500
+                          </button>
+                        </div>
+                        <div className="mt-5">
+                          <Link
+                            to={"/recharge-account"}
+                            type="button"
+                            className="recharge text-light fw-bold rounded-pill text-decoration-none w-75 border-0 py-2"
+                            // onClick={makePayment}
+                            disabled={amount === 0 || loading}
+                          >
+                            {loading ? "Processing..." : "Recharge now"}
+                          </Link>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="modal-footer mx-auto">
+                    <button
+                      type="button"
+                      className="btn bg-transparent fw-bold fs-3"
+                      onClick={handleCloseModal}
+                    >
+                      <span>&times;</span>
+                    </button>
+                    {/* <button type="button" className="btn btn-primary">
+                      Save changes
+                    </button> */}
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
     </div>
   );
 };

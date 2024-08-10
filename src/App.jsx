@@ -1,9 +1,9 @@
 import './App.css'
 import 'bootstrap-icons/font/bootstrap-icons.css';
 // import './i18next/i18n'; // Import i18n configuration
-// import Account from './Components/Account/Account';
+import Account from './Components/Account/Account';
 // import Recharge from './Components/Recharge/Recharge';
-import AdminDashboard from './Components/AdminDashboard/AdminDashboard';
+// import AdminDashboard from './Components/AdminDashboard/AdminDashboard';
 // import Vip1Details from './Components/Vip1Details/Vip1Details';
 // import Vip2Details from './Components/Vip2Details/Vip2Details';
 // import LastJoined from './Components/LastJoined/LastJoined';
@@ -37,12 +37,12 @@ function App() {
       {/* <Login/> */}
       {/* <Modal/> */}
       {/* <Registration/> */}
-      {/* <Account/> */}
+      <Account/>
       {/* <Withdrawal/> */}
       {/* <WithdrawalBank/> */}
       {/* <Withdrawal/> */}
       {/* <Recharge/> */}
-      <AdminDashboard/>
+      {/* <AdminDashboard/> */}
       {/* <LastJoined/> */}
       {/* <Vip1Details/> */}
       {/* <Vip2Details/> */}

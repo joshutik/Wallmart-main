@@ -293,7 +293,7 @@ const GrabOrder = () => {
         <div className="row align-items-center min-vh-100">
           <div className="col-lg-6 col-md-12 col-sm-12 mt-5">
             <div className="card parent-card rounded-5 p-4 border-0">
-              <div className=" child-card w-75 py-3 px-5 border-0 mx-auto text-light rounded-5">
+              <div className="child-card w-75 py-3 px-5 border-0 mx-auto text-light rounded-5">
                 <div className="icon pb-3">
                   <img src={diamond} alt="diamond-icon" />
                 </div>
