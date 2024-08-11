@@ -1,11 +1,14 @@
 import './App.css'
 import 'bootstrap-icons/font/bootstrap-icons.css';
 // import './i18next/i18n'; // Import i18n configuration
-import Account from './Components/Account/Account';
+// import Account from './Components/Account/Account';
 // import Recharge from './Components/Recharge/Recharge';
-// import AdminDashboard from './Components/AdminDashboard/AdminDashboard';
+import AdminDashboard from './Components/AdminDashboard/AdminDashboard';
 // import Vip1Details from './Components/Vip1Details/Vip1Details';
 // import Vip2Details from './Components/Vip2Details/Vip2Details';
+// import Vip3Details from './Components/Vip3Details/Vip3Details';
+// import RechargeDash from './Components/RechargeDash/RechargeDash';
+// import WithdrawDash from './Components/WithdrawDash/WithdrawDash';
 // import LastJoined from './Components/LastJoined/LastJoined';
 // import SliderToggle from './Components/SliderToggle/SliderToggle';
 // import Withdrawal from './Components/WidthdrawalUSDT/WithdrawalUsdt';
@@ -37,15 +40,19 @@ function App() {
       {/* <Login/> */}
       {/* <Modal/> */}
       {/* <Registration/> */}
-      <Account/>
+      {/* <Account/> */}
       {/* <Withdrawal/> */}
       {/* <WithdrawalBank/> */}
       {/* <Withdrawal/> */}
       {/* <Recharge/> */}
-      {/* <AdminDashboard/> */}
+      <AdminDashboard/>
       {/* <LastJoined/> */}
       {/* <Vip1Details/> */}
       {/* <Vip2Details/> */}
+      {/* <Vip3Details/> */}
+      {/* <RechargeDash/> */}
+      {/* <WithdrawDash/> */}
+
     </div>
   )
 }

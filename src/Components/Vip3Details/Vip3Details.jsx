@@ -94,6 +94,7 @@
 
 import { useState, useEffect } from "react";
 import "./Vip3Details.css";
+import { Link } from "react-router-dom";
 
 const Vip3Details = () => {
   const [vip3Users, setVip3Users] = useState([]);
@@ -157,8 +158,16 @@ const Vip3Details = () => {
   }
 
   return (
-    <div className="container-fluid">
-      <div className="container bg-light rounded my-5">
+    <div className="container-fluid py-4">
+        <div className="my-3">
+        <h3 className="text-light">
+          <Link to={"/"} className="text-light">
+            <i className="bi bi-chevron-left"></i>
+          </Link>
+           ADMIN DASHBOARD
+        </h3>
+      </div>
+      <div className="container bg-light rounded my-3">
         <div className="row">
           <div className="table-responsive">
             <table className="table caption-top text-center">

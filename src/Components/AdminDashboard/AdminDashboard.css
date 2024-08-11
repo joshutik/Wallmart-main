@@ -50,3 +50,17 @@
     height: 100vh;
     /* background-attachment: fixed; */
 }
+
+.list-li li:hover {
+    background-color: rgba(255, 173, 49, 1) !important;
+    border-radius: 4px;
+}
+
+/* .list-li li:hover {
+    background-color: rgba(255, 173, 49, 1) !important;
+    border-radius: 4px;
+} */
+
+li a {
+    display: inline-block !important;
+}

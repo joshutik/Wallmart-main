@@ -96,7 +96,7 @@ const DashInfoCard = () => {
   return (
     <div>
       <div className="container">
-        <h3 className="text-light">ADMIN DASHBOARD</h3>
+        <h3 className="text-light my-4">ADMIN DASHBOARD</h3>
         <div className="row gy-3">
           <div className="col-lg-3 col-md-6 col-sm-12 h-50">
             <div className="rounded-3 px-3 py-4 active-user">

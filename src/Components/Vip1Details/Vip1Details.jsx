@@ -78,10 +78,9 @@
 
 // export default Vip1Details;
 
-
-
 import { useEffect, useState } from "react";
 import "./Vip1Details.css";
+import { Link } from "react-router-dom";
 
 const Vip1Details = () => {
   const [vipUsers, setVipUsers] = useState([]);
@@ -106,9 +105,12 @@ const Vip1Details = () => {
   // Handle Promotion
   const handlePromote = async (userId) => {
     try {
-      const response = await fetch(`https://api.example.com/promote/${userId}`, {
-        method: "POST",
-      });
+      const response = await fetch(
+        `https://api.example.com/promote/${userId}`,
+        {
+          method: "POST",
+        }
+      );
       if (response.ok) {
         // Handle successful promotion, e.g., update the UI or notify the user
         alert("User promoted successfully!");
@@ -146,11 +148,21 @@ const Vip1Details = () => {
 
   return (
     <div className="container-fluid">
-      <div className="container bg-light rounded my-5">
+      <div className="my-3">
+        <h3 className="text-light">
+          <Link to={"/"} className="text-light">
+            <i className="bi bi-chevron-left"></i>
+          </Link>
+           ADMIN DASHBOARD
+        </h3>
+      </div>
+      <div className="container bg-light rounded ">
         <div className="row">
           <div className="table-responsive">
             <table className="table caption-top text-center">
-              <caption className="text-center fs-2 fw-bold text-dark py-3">VIP 1 Users</caption>
+              <caption className="text-center fs-2 fw-bold text-dark py-3">
+                VIP 1 Users
+              </caption>
               <thead>
                 <tr>
                   <th scope="col">#No.</th>
@@ -193,20 +205,20 @@ const Vip1Details = () => {
         </div>
         <nav>
           <ul className="pagination justify-content-center">
-            {Array.from({ length: Math.ceil(vipUsers.length / usersPerPage) }).map(
-              (_, index) => (
-                <li key={index} className="page-item">
-                  <button
-                    onClick={() => paginate(index + 1)}
-                    className={`page-link ${
-                      currentPage === index + 1 ? "active" : ""
-                    }`}
-                  >
-                    {index + 1}
-                  </button>
-                </li>
-              )
-            )}
+            {Array.from({
+              length: Math.ceil(vipUsers.length / usersPerPage),
+            }).map((_, index) => (
+              <li key={index} className="page-item">
+                <button
+                  onClick={() => paginate(index + 1)}
+                  className={`page-link ${
+                    currentPage === index + 1 ? "active" : ""
+                  }`}
+                >
+                  {index + 1}
+                </button>
+              </li>
+            ))}
           </ul>
         </nav>
       </div>
@@ -216,7 +228,8 @@ const Vip1Details = () => {
 
 export default Vip1Details;
 
-{/* <td>
+{
+  /* <td>
   <button
     className="btn btn-primary"
     onClick={() => handlePromote(user.id)}
@@ -229,4 +242,5 @@ export default Vip1Details;
   >
     <i className="bi bi-trash3"></i>
   </button>
-</td> */}
+</td> */
+}
