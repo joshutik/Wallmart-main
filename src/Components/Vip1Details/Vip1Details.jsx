@@ -83,17 +83,20 @@ import "./Vip1Details.css";
 import { Link } from "react-router-dom";
 
 const Vip1Details = () => {
+  const djangoHostname = import.meta.env.VITE_DJANGO_HOSTNAME;
   const [vipUsers, setVipUsers] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [usersPerPage] = useState(10);
+  const [deleting, setDeleting] = useState(null); // State to track loading status
+  const [promoting, setPromoting] = useState(null); // State to track loading status
 
   // Fetch VIP 1 users from the backend
   useEffect(() => {
     const fetchVipUsers = async () => {
       try {
-        const response = await fetch("https://api.example.com/vip1-users"); // Replace with your API endpoint
+        const response = await fetch(`${djangoHostname}/api/accounts/users/by-level/VIP1/`); // Replace with your API endpoint
         const data = await response.json();
-        setVipUsers(data.users); // Assuming the API returns an object with a 'users' key
+        setVipUsers(data); // Assuming the API returns an object with a 'users' key
       } catch (error) {
         console.error("Error fetching VIP users:", error);
       }
@@ -104,45 +107,78 @@ const Vip1Details = () => {
 
   // Handle Promotion
   const handlePromote = async (userId) => {
+    const isConfirmed = window.confirm("Are you sure you want to promote this user?");
+    if (!isConfirmed) {
+      return; // If the user cancels, exit the function
+    }
+    setPromoting(userId); // Set loading state to the user ID
     try {
-      const response = await fetch(
-        `https://api.example.com/promote/${userId}`,
+      const response = await fetch(`${djangoHostname}/api/accounts/users/${userId}/`,
         {
-          method: "POST",
+          method: "PATCH",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            balance: "0.0",
+            unsettle: "0.0",
+            commission1: "0.0",
+            commission2: "0.0",
+            grabbed_orders_count: 0,
+            level: "VIP2",
+          }),
         }
       );
+  
       if (response.ok) {
-        // Handle successful promotion, e.g., update the UI or notify the user
-        alert("User promoted successfully!");
+        setVipUsers(vipUsers.filter((user) => user.id !== userId)); // Update the state to remove the deleted user
+        // alert("User promoted successfully!");
+        // Optionally, update the UI to reflect the changes
       } else {
         alert("Failed to promote user.");
       }
     } catch (error) {
       console.error("Error promoting user:", error);
     }
+    finally {
+      setPromoting(null); // Reset loading state
+    }
   };
+  
 
   // Handle Deletion
   const handleDelete = async (userId) => {
+    const isConfirmed = window.confirm("Are you sure you want to delete this user?");
+    if (!isConfirmed) {
+      return; // If the user cancels, exit the function
+    }
+  
+    setDeleting(userId); // Set loading state to the user ID
+  
     try {
-      const response = await fetch(`https://api.example.com/delete/${userId}`, {
+      const response = await fetch(`${djangoHostname}/api/accounts/users/${userId}`, {
         method: "DELETE",
       });
       if (response.ok) {
         setVipUsers(vipUsers.filter((user) => user.id !== userId)); // Update the state to remove the deleted user
-        alert("User deleted successfully!");
+        // alert("User deleted successfully!");
       } else {
         alert("Failed to delete user.");
       }
     } catch (error) {
       console.error("Error deleting user:", error);
+    } finally {
+      setDeleting(null); // Reset loading state
     }
   };
+
 
   // Pagination logic
   const indexOfLastUser = currentPage * usersPerPage;
   const indexOfFirstUser = indexOfLastUser - usersPerPage;
-  const currentUsers = vipUsers.slice(indexOfFirstUser, indexOfLastUser);
+  const currentUsers = vipUsers;
+  // const currentUsers = vipUsers.slice(indexOfFirstUser, indexOfLastUser);
+
 
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
@@ -177,24 +213,41 @@ const Vip1Details = () => {
                 {currentUsers.map((user, index) => (
                   <tr key={user.id}>
                     <th scope="row">{indexOfFirstUser + index + 1}</th>
-                    <td>{user.name}</td>
-                    <td>{user.idNumber}</td>
+                    <td>{user.firstName}</td>
+                    <td>{user.invitationCode_display.code}</td>
                     <td>${user.balance}</td>
-                    <td>({user.numberOfGrabs})</td>
+                    <td>({user.grabbed_orders_count})</td>
                     <td>
-                      <span
+                    <span
                         className="timy text-light px-2 py-1 rounded"
                         onClick={() => handlePromote(user.id)}
                         style={{ cursor: "pointer" }}
                       >
-                        Promote
+                        {promoting === user.id ? (
+                          <span
+                            className="spinner-border spinner-border-sm text-light"
+                            role="status"
+                            aria-hidden="true"
+                          ></span>
+                        ) : (
+                          "Promote"
+                        )}
                       </span>
-                      <span
+
+                     <span
                         className="bg-danger text-light px-2 mx-1 py-1 rounded"
                         onClick={() => handleDelete(user.id)}
                         style={{ cursor: "pointer" }}
                       >
-                        <i className="bi bi-trash3"></i>
+                        {deleting === user.id ? (
+                          <span
+                            className="spinner-border spinner-border-sm text-light"
+                            role="status"
+                            aria-hidden="true"
+                          ></span>
+                        ) : (
+                          <i className="bi bi-trash3"></i>
+                        )}
                       </span>
                     </td>
                   </tr>

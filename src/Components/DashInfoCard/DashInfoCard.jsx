@@ -55,8 +55,6 @@
 
 // export default DashInfoCard
 
-
-
 import { useEffect, useState } from "react";
 import "./DashInfoCard.css";
 import active from "../assets/active.png";
@@ -66,6 +64,7 @@ import withd from "../assets/with.png";
 
 const DashInfoCard = () => {
   // State to store fetched data
+  const djangoHostname = import.meta.env.VITE_DJANGO_HOSTNAME;
   const [dashboardData, setDashboardData] = useState({
     activeUsers: 0,
     userBalance: 0,
@@ -77,13 +76,17 @@ const DashInfoCard = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch("https://api.example.com/dashboard"); // Replace with your API endpoint
+        const response = await fetch(`${djangoHostname}/api/accounts/users/`); // Replace with your API endpoint
         const data = await response.json();
+
+        // Calculate the total number of users
+        const totalUsers = data.length;
+
         setDashboardData({
-          activeUsers: data.activeUsers,
-          userBalance: data.userBalance,
-          deposit: data.deposit,
-          withdrawals: data.withdrawals,
+          activeUsers: totalUsers, // Update activeUsers with total number of users
+          userBalance: data.reduce((sum, user) => sum + parseFloat(user.balance), 0),
+          deposit: data.reduce((sum, user) => sum + parseFloat(user.commission1), 0), // Assuming deposit data is from commission1
+          withdrawals: data.reduce((sum, user) => sum + parseFloat(user.commission2), 0), // Assuming withdrawals data is from commission2
         });
       } catch (error) {
         console.error("Error fetching dashboard data:", error);
@@ -91,7 +94,7 @@ const DashInfoCard = () => {
     };
 
     fetchData();
-  }, []);
+  }, [djangoHostname]);
 
   return (
     <div>

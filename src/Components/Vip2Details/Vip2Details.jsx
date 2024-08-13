@@ -95,11 +95,16 @@ const Vip2Details = () => {
   const [vip2Users, setVip2Users] = useState([]);
   const [loading, setLoading] = useState(true);
 
+  const djangoHostname = import.meta.env.VITE_DJANGO_HOSTNAME;
+  const [promoting, setPromoting] = useState(null);
+  const [demoting, setDemoting] = useState(null);
+  const [deleting, setDeleting] = useState(null);
+
   useEffect(() => {
     // Fetch VIP 2 data from the backend
     const fetchVip2Users = async () => {
       try {
-        const response = await fetch("YOUR_BACKEND_API_ENDPOINT/vip2");
+        const response = await fetch(`${djangoHostname}/api/accounts/users/by-level/VIP2/`);
         const data = await response.json();
         setVip2Users(data);
       } catch (error) {
@@ -113,44 +118,110 @@ const Vip2Details = () => {
   }, []);
 
   const promoteToVip3 = async (userId) => {
+    const isConfirmed = window.confirm("Are you sure you want to promote this user to VIP3 ?");
+    if (!isConfirmed) {
+      return; // If the user cancels, exit the function
+    }
+    setPromoting(userId); // Set loading state to the user ID
     try {
-      await fetch(`YOUR_BACKEND_API_ENDPOINT/promote/${userId}`, {
-        method: "POST",
-      });
-      // Optionally update UI after promoting
-      setVip2Users(vip2Users.filter((user) => user.id !== userId));
+      const response = await fetch(`${djangoHostname}/api/accounts/users/${userId}/`,
+        {
+          method: "PATCH",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            balance: "0.0",
+            unsettle: "0.0",
+            commission1: "0.0",
+            commission2: "0.0",
+            grabbed_orders_count: 0,
+            level: "VIP3",
+          }),
+        }
+      );
+  
+      if (response.ok) {
+        setVip2Users(vip2Users.filter((user) => user.id !== userId)); // Update the state to remove the deleted user
+        // alert("User promoted successfully!");
+        // Optionally, update the UI to reflect the changes
+      } else {
+        alert("Failed to promote user.");
+      }
     } catch (error) {
       console.error("Error promoting user:", error);
+    }
+    finally {
+      setPromoting(null); // Reset loading state
     }
   };
 
   const demoteToVip1 = async (userId) => {
+    setDemoting(userId);
+    const isConfirmed = window.confirm("Are you sure you want to demote this user to VIP1 ?");
+    if (!isConfirmed) {
+      return; // If the user cancels, exit the function
+    }
+   
     try {
-      await fetch(`YOUR_BACKEND_API_ENDPOINT/demote/${userId}`, {
-        method: "POST",
-      });
-      // Optionally update UI after demoting
-      setVip2Users(vip2Users.filter((user) => user.id !== userId));
+      const response = await fetch(`${djangoHostname}/api/accounts/users/${userId}/`,
+        {
+          method: "PATCH",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            balance: "0.0",
+            unsettle: "0.0",
+            commission1: "0.0",
+            commission2: "0.0",
+            grabbed_orders_count: 0,
+            level: "VIP1",
+          }),
+        }
+      );
+  
+      if (response.ok) {
+        setVip2Users(vip2Users.filter((user) => user.id !== userId)); // Update the state to remove the deleted user
+        // alert("User promoted successfully!");
+        // Optionally, update the UI to reflect the changes
+      } else {
+        alert("Failed to promote user.");
+      }
     } catch (error) {
-      console.error("Error demoting user:", error);
+      console.error("Error promoting user:", error);
+    }
+    finally {
+      setDemoting(null);
     }
   };
 
+    // Handle Deletion
   const deleteUser = async (userId) => {
+
+    const isConfirmed = window.confirm("Are you sure you want to delete this user?");
+    if (!isConfirmed) {
+      return; // If the user cancels, exit the function
+    }
+  
+    setDeleting(userId); // Set loading state to the user ID
+  
     try {
-      await fetch(`YOUR_BACKEND_API_ENDPOINT/delete/${userId}`, {
+      const response = await fetch(`${djangoHostname}/api/accounts/users/${userId}`, {
         method: "DELETE",
       });
-      // Optionally update UI after deletion
-      setVip2Users(vip2Users.filter((user) => user.id !== userId));
+      if (response.ok) {
+        setVip2Users(vip2Users.filter((user) => user.id !== userId)); // Update the state to remove the deleted user
+        // alert("User deleted successfully!");
+      } else {
+        alert("Failed to delete user.");
+      }
     } catch (error) {
       console.error("Error deleting user:", error);
+    } finally {
+      setDeleting(null); // Reset loading state
     }
   };
-
-  if (loading) {
-    return <div>Loading...</div>;
-  }
 
   return (
     <div className="container-fluid">
@@ -183,29 +254,59 @@ const Vip2Details = () => {
                 {vip2Users.map((user, index) => (
                   <tr key={user.id}>
                     <th scope="row">{index + 1}</th>
-                    <td>{user.name}</td>
-                    <td>{user.idNumber}</td>
+                    <td>{user.firstName}</td>
+                    <td>{user.invitationCode_display.code}</td>
                     <td>${user.balance}</td>
-                    <td>({user.grabs})</td>
+                    <td>({user.grabbed_orders_count})</td>
                     <td className="d-flex justify-content-center">
-                      <button
+                    <button
                         className="btn btn-success text-light px-2 py-1 rounded mx-1"
                         onClick={() => promoteToVip3(user.id)}
+                        disabled={promoting === user.id} // Disable button during loading
                       >
-                        Promote
+                        {promoting === user.id ? (
+                          <span
+                            className="spinner-border spinner-border-sm text-light"
+                            role="status"
+                            aria-hidden="true"
+                          ></span>
+                        ) : (
+                          "Promote"
+                        )}
                       </button>
+
                       <button
                         className="btn btn-warning text-light px-2 py-1 rounded mx-1"
                         onClick={() => demoteToVip1(user.id)}
+                        disabled={demoting === user.id} // Disable button during loading
                       >
-                        Demote
+                        {demoting === user.id ? (
+                          <span
+                            className="spinner-border spinner-border-sm text-light"
+                            role="status"
+                            aria-hidden="true"
+                          ></span>
+                        ) : (
+                          "Demote"
+                        )}
                       </button>
+
                       <button
                         className="btn btn-danger text-light px-2 py-1 rounded mx-1"
                         onClick={() => deleteUser(user.id)}
+                        disabled={deleting === user.id} // Disable button during loading
                       >
-                        <i className="bi bi-trash3"></i>
+                        {deleting === user.id ? (
+                          <span
+                            className="spinner-border spinner-border-sm text-light"
+                            role="status"
+                            aria-hidden="true"
+                          ></span>
+                        ) : (
+                          <i className="bi bi-trash3"></i>
+                        )}
                       </button>
+
                     </td>
                   </tr>
                 ))}
