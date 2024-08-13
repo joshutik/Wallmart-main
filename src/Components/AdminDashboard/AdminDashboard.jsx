@@ -391,9 +391,6 @@
 
 // export default AdminDashboard;
 
-
-
-
 // import { useState } from "react";
 // import "./AdminDashboard.css";
 // import vip1 from "../assets/vip1.png";
@@ -515,7 +512,7 @@
 //                           VIP 3
 //                         </a>
 //                       </li>
-                      
+
 //                     </ul>
 //                   </div>
 //                 </li>
@@ -610,7 +607,7 @@
 //                   </button>
 
 //                 </li> */}
-                
+
 //              <li className="mb-1">
 //                      <button
 //                    className="btn btn-toggle d-inline-flex align-items-center rounded border-0 fs-5 collapsed"
@@ -670,11 +667,6 @@
 // };
 
 // export default AdminDashboard;
-
-
-
-
-
 
 // import { useState } from "react";
 // import "./AdminDashboard.css";
@@ -896,20 +888,20 @@
 
 // export default AdminDashboard;
 
-
-
-
 import { useState } from "react";
 import "./AdminDashboard.css";
+import logout from '../assets/logout.png'
 import vip1 from "../assets/vip1.png";
 import vip2 from "../assets/vip2.png";
 import vip3 from "../assets/vip3.png";
 import topup from "../assets/topup.png";
+import walletdark from '../assets/walletdark.png'
+import invitationdark from '../assets/invitationdark.png'
+import bankdetailsdak from '../assets/bankdetailsdak.png'
 import withdraw from "../assets/withdraw.png";
 import DashInfoCard from "../DashInfoCard/DashInfoCard";
 import LastJoined from "../LastJoined/LastJoined";
 import DashNav from "../DashNav/DashNav";
-import recharge from "../assets/recharge.png";
 import Vip1Details from "../Vip1Details/Vip1Details";
 import Vip2Details from "../Vip2Details/Vip2Details";
 import Vip3Details from "../Vip3Details/Vip3Details";
@@ -918,11 +910,12 @@ import WithdrawDash from "../WithdrawDash/WithdrawDash";
 import InvitationModal from "../InvitationModal/InvitationModal";
 import BankDetailsModal from "../BankDetailsModal/BankDetailsModal";
 import WalletDetailsModal from "../WalletDetailsModal/WalletDetailsModal";
+import { Link } from "react-router-dom";
 
 const AdminDashboard = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [currentView, setCurrentView] = useState("dashboard");
-  
+
   // Modal state
   const [showInvitationModal, setShowInvitationModal] = useState(false);
   const [showBankDetailsModal, setShowBankDetailsModal] = useState(false);
@@ -975,7 +968,7 @@ const AdminDashboard = () => {
           }`}
         >
           <div className="col-lg-2 col-md-3 col-sm-12">
-            <div className="flex-shrink-0 p-3" style={{ width: "280px" }}>
+            <div className="flex-shrink-0 p-3" style={{ width: "400px" }}>
               <a
                 href="#"
                 className="d-flex align-items-center pb-3 mb-3 link-body-emphasis text-decoration-none border-bottom"
@@ -1038,7 +1031,7 @@ const AdminDashboard = () => {
                     aria-expanded="false"
                   >
                     <i className="bi bi-bar-chart-line me-2"></i> Finance
-                    <i className="bi ms-auto toggle-icon"></i>
+                    <i className="bi bi-chevron-right ms-auto toggle-icon"></i>
                   </button>
                   <div className="collapse" id="finance-collapse">
                     <ul className="btn-toggle-nav list-unstyled fw-normal list-li pb-1">
@@ -1074,7 +1067,7 @@ const AdminDashboard = () => {
                     aria-expanded="false"
                   >
                     <i className="bi bi-gear me-2"></i> Settings
-                    <i className="bi ms-auto toggle-icon"></i>
+                    <i className="bi bi-chevron-right ms-auto toggle-icon"></i>
                   </button>
                   <div className="collapse" id="settings-collapse">
                     <ul className="btn-toggle-nav list-unstyled fw-normal pb-1 list-li">
@@ -1084,7 +1077,7 @@ const AdminDashboard = () => {
                           className="link-body-emphasis d-inline-flex align-items-center text-decoration-none rounded"
                           onClick={() => setShowInvitationModal(true)}
                         >
-                          <img src={topup} alt="Invitation Link" />
+                          <img src={invitationdark} alt="Invitation Link" className="me-1" />
                           Invitation Link
                         </a>
                       </li>
@@ -1094,7 +1087,7 @@ const AdminDashboard = () => {
                           className="link-body-emphasis d-inline-flex align-items-center text-decoration-none rounded"
                           onClick={() => setShowBankDetailsModal(true)}
                         >
-                          <img src={withdraw} alt="Bank Details" />
+                          <img src={bankdetailsdak} alt="Bank Details" className="me-1" />
                           Bank Details
                         </a>
                       </li>
@@ -1104,7 +1097,7 @@ const AdminDashboard = () => {
                           className="link-body-emphasis d-inline-flex align-items-center text-decoration-none rounded"
                           onClick={() => setShowWalletDetailsModal(true)}
                         >
-                          <img src={recharge} alt="Wallet Details" />
+                          <img src={walletdark} alt="Wallet Details" className="me-1" />
                           Wallet Details
                         </a>
                       </li>
@@ -1112,15 +1105,19 @@ const AdminDashboard = () => {
                   </div>
                 </li>
               </ul>
+              <hr />
+              <div>
+                <Link to={"/login"} className="text-decoration-none text-dark">
+                <img src={logout} alt="logout" />
+                Log out</Link>
+              </div>
             </div>
           </div>
         </div>
 
         {/* Main content */}
         <div className="col-lg-9 col-md-9 col-sm-12 dash">
-          <div className="container-fluid">
-            {renderContent()}
-          </div>
+          <div className="container-fluid">{renderContent()}</div>
         </div>
       </div>
 

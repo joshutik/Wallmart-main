@@ -108,14 +108,15 @@ import "./Modal1.css";
 import axios from 'axios';
 import { FaTimes } from "react-icons/fa";
 
+
 const Modal1 = ({ show, handleClose, amount, orderCount, balance, orderCounts }) => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   
   // Array of image URLs
   const images = [
-    "path/to/image1.png",
-    "path/to/image2.png",
-    "path/to/image3.png",
+    "../assets/logage.png",
+    "../assets/headphone.png",
+    "../assets/smartwatch.png",
     // Add more images as needed
   ];
 
@@ -160,6 +161,10 @@ const Modal1 = ({ show, handleClose, amount, orderCount, balance, orderCounts })
         <button onClick={handleClose} className="modal-close-btn">
           <FaTimes />
         </button>
+        {/* Display the current image */}
+        <div className="image-container">
+          <img src={images[currentImageIndex]} alt="Random Display" className="img-fluid" />
+        </div>
         <div className="time text-end d-flex justify-content-evenly">
           <p>Date: {formattedDate}</p>
           <p>Time: {formattedTime}</p>
@@ -179,10 +184,7 @@ const Modal1 = ({ show, handleClose, amount, orderCount, balance, orderCounts })
           </div>
         </div>
         
-        {/* Display the current image */}
-        <div className="image-container">
-          <img src={images[currentImageIndex]} alt="Random Display" className="img-fluid" />
-        </div>
+        
 
         <div className="modal-buttons">
           <button
