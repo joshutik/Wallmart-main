@@ -69,32 +69,34 @@ import { useEffect, useState } from "react";
 import "./LastJoined.css";
 
 const LastJoined = () => {
-  // State to store fetched user data and pagination info
+  const djangoHostname = import.meta.env.VITE_DJANGO_HOSTNAME;
   const [users, setUsers] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [usersPerPage] = useState(10); // Number of users to display per page
 
-  // Fetch data from the backend
   useEffect(() => {
     const fetchUsers = async () => {
       try {
-        const response = await fetch("https://api.example.com/users"); // Replace with your API endpoint
+        const response = await fetch(`${djangoHostname}/api/accounts/users/`); // Replace with your API endpoint
         const data = await response.json();
-        setUsers(data.users); // Assuming the API returns an object with a 'users' key
+
+        // Check the structure of the response
+            // Assuming `data` is the array of user objects
+        const sortedUsers = data.sort((a, b) => new Date(b.date_joined) - new Date(a.date_joined));
+
+        setUsers(sortedUsers); // Set sorted users to state
       } catch (error) {
         console.error("Error fetching users:", error);
       }
     };
 
     fetchUsers();
-  }, []);
+  }, [djangoHostname]); // Added dependency to re-fetch data if djangoHostname changes
 
-  // Get current users based on pagination
   const indexOfLastUser = currentPage * usersPerPage;
   const indexOfFirstUser = indexOfLastUser - usersPerPage;
   const currentUsers = users.slice(indexOfFirstUser, indexOfLastUser);
 
-  // Change page
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
   return (
@@ -115,41 +117,47 @@ const LastJoined = () => {
               </tr>
             </thead>
             <tbody>
-              {currentUsers.map((user, index) => (
-                <tr key={user.id}>
-                  <th scope="row">{indexOfFirstUser + index + 1}</th>
-                  <td>{user.name}</td>
-                  <td>{user.idNumber}</td>
-                  <td>${user.balance}</td>
-                  <td>
-                    <span className="timy text-light px-2 py-1 rounded">
-                      {user.joinTime}
-                    </span>
-                  </td>
+              {currentUsers.length > 0 ? (
+                currentUsers.map((user, index) => (
+                  <tr key={user.id}>
+                    <th scope="row">{indexOfFirstUser + index + 1}</th>
+                    <td>{user.firstName} {user.lastName}</td>
+                    <td>{user.id}</td>
+                    <td>${user.balance}</td>
+                    <td>
+                      <span className="timy text-light px-2 py-1 rounded">
+                        {new Date(user.date_joined).toLocaleString()}
+                      </span>
+                    </td>
+                  </tr>
+                ))
+              ) : (
+                <tr>
+                  <td colSpan="5" className="text-center">No users found</td>
                 </tr>
-              ))}
+              )}
             </tbody>
           </table>
         </div>
       </div>
-      <nav>
-        <ul className="pagination justify-content-center">
-          {Array.from({ length: Math.ceil(users.length / usersPerPage) }).map(
-            (_, index) => (
-              <li key={index} className="page-item">
-                <button
-                  onClick={() => paginate(index + 1)}
-                  className={`page-link ${
-                    currentPage === index + 1 ? "active" : ""
-                  }`}
-                >
-                  {index + 1}
-                </button>
-              </li>
-            )
-          )}
-        </ul>
-      </nav>
+      {users.length > 0 && (
+        <nav>
+          <ul className="pagination justify-content-center">
+            {Array.from({ length: Math.ceil(users.length / usersPerPage) }).map(
+              (_, index) => (
+                <li key={index} className="page-item">
+                  <button
+                    onClick={() => paginate(index + 1)}
+                    className={`page-link ${currentPage === index + 1 ? "active" : ""}`}
+                  >
+                    {index + 1}
+                  </button>
+                </li>
+              )
+            )}
+          </ul>
+        </nav>
+      )}
     </div>
   );
 };
