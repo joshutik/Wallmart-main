@@ -122,7 +122,7 @@ const LastJoined = () => {
                   <tr key={user.id}>
                     <th scope="row">{indexOfFirstUser + index + 1}</th>
                     <td>{user.firstName} {user.lastName}</td>
-                    <td>{user.id}</td>
+                    <td>{user.invitationCode_display.code}</td>
                     <td>${user.balance}</td>
                     <td>
                       <span className="timy text-light px-2 py-1 rounded">
