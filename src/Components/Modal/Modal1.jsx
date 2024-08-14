@@ -4,27 +4,16 @@ import "./Modal1.css";
 import axios from 'axios';
 import { FaTimes } from "react-icons/fa";
 
-<<<<<<< HEAD
-
-const Modal1 = ({ show, handleClose, amount, orderCount, balance, orderCounts }) => {
-=======
 const Modal1 = ({ show, handleClose, amount, balance }) => {
->>>>>>> e20bad73758e224f664303f36059594aab3502ed
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false); // State to track successful payment
 
   const images = [
-<<<<<<< HEAD
     "../assets/logage.png",
     "../assets/headphone.png",
     "../assets/smartwatch.png",
     // Add more images as needed
-=======
-    "path/to/image1.png",
-    "path/to/image2.png",
-    "path/to/image3.png",
->>>>>>> e20bad73758e224f664303f36059594aab3502ed
   ];
 
   if (!show) return null;
@@ -95,15 +84,10 @@ const Modal1 = ({ show, handleClose, amount, balance }) => {
             <h4 className="fw-bold commi text-end">${commissionAmount.toFixed(2)}</h4>
           </div>
         </div>
-<<<<<<< HEAD
-        
-        
-=======
 
         <div className="image-container">
           <img src={images[currentImageIndex]} alt="Random Display" className="img-fluid" />
         </div>
->>>>>>> e20bad73758e224f664303f36059594aab3502ed
 
         <div className="modal-buttons">
           <button
