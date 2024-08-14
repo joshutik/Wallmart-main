@@ -13,6 +13,9 @@ import GrabOrder from './Components/GrabOrder/GrabOrder.jsx'
 import Account from './Components/Account/Account.jsx'
 import Withdrawal from './Components/WithdrawalPage/Withdrawal.jsx';
 import Recharge from './Components/Recharge/Recharge.jsx';
+import AdminDashboard from './Components/AdminDashboard/AdminDashboard.jsx';
+import AdminLogin from './Components/AdminLogin/AdminLogin.jsx';
+import AdminReg from './Components/AdminReg/AdminReg.jsx';
 
 
 
@@ -48,6 +51,18 @@ const router = createBrowserRouter([
   {
     path: "/recharge-account",
     element: <Recharge/>,
+  },
+  {
+    path: "/admin-dashboard",
+    element: <AdminDashboard/>,
+  },
+  {
+    path: "/admin-login",
+    element: <AdminLogin/>,
+  },
+  {
+    path: "/admin-regiration",
+    element: <AdminReg/>,
   },
  
 ]);
