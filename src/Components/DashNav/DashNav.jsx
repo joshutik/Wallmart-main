@@ -5,6 +5,7 @@ import Container from "react-bootstrap/Container";
 import Navbar from "react-bootstrap/Navbar";
 import logo1 from "../assets/wallmart-logo.png";
 import Search from "../Search/Search";
+import ProfileNavbar from "../ProfileNavbar/ProfileNavbar";
 
 function DashNav({ toggleSidebar }) {  // Accept toggleSidebar as a prop
   return (
@@ -15,12 +16,16 @@ function DashNav({ toggleSidebar }) {  // Accept toggleSidebar as a prop
         </Navbar.Brand>
         <div className="d-block d-md-none d-flex align-items-center ms-auto text-end">
           <Search/>
+          <ProfileNavbar/>
           <Navbar.Toggle aria-controls="basic-navbar-nav" onClick={toggleSidebar} />
         </div>
-        <div className="d-none d-md-block d-flex align-items-center country">
+        <div className="d-none d-md-block d-flex align-items-center">
           <Search/>
         </div>
         <Navbar.Collapse id="basic-navbar-nav">
+        <div className="d-none d-md-block d-flex align-items-center ">
+        <ProfileNavbar/>
+        </div>
           {/* Your Navbar content goes here */}
         </Navbar.Collapse>
       </Container>
