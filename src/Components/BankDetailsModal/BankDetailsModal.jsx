@@ -259,6 +259,7 @@ const BankDetailsModal = ({ show, handleClose }) => {
           bankName: data.bank_name,
           accountNumber: data.account_number,
           recipientName: data.recipient_name,
+          ruth: data.ruth,
         });
 
         setFlashVariant("success");
