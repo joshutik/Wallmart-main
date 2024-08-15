@@ -6,20 +6,21 @@ import deposite from "../assets/deposit.png";
 import withd from "../assets/with.png";
 
 const DashInfoCard = () => {
-  // State to store fetched data
   const djangoHostname = import.meta.env.VITE_DJANGO_HOSTNAME;
   const [dashboardData, setDashboardData] = useState({
     activeUsers: 0,
     userBalance: 0,
     deposit: 0,
     withdrawals: 0,
-    totalAmountTopUp: 0, // New state for total amount_top_up
+    totalAmountTopUp: 0, 
+    totalAmountWithdraw: 0 // New state for total withdrawals amount
   });
 
-  // Fetch data from the backend
   useEffect(() => {
     const fetchData = async () => {
       try {
+        const token = localStorage.getItem("token");
+
         // Fetch account users data
         const usersResponse = await fetch(`${djangoHostname}/api/accounts/users/`);
         const usersData = await usersResponse.json();
@@ -27,6 +28,14 @@ const DashInfoCard = () => {
         // Fetch recharge data
         const rechargeResponse = await fetch(`${djangoHostname}/api/recharge/recharges/`);
         const rechargeData = await rechargeResponse.json();
+
+        // Fetch withdrawal data
+        const withdrawalResponse = await fetch(`${djangoHostname}/api/withdrws/withdraw/`, {
+          headers: {
+            Authorization: `Token ${token}`,
+          },
+        });
+        const withdrawData = await withdrawalResponse.json();
 
         // Calculate the total number of users
         const totalUsers = usersData.length;
@@ -37,12 +46,19 @@ const DashInfoCard = () => {
           0
         );
 
+        // Calculate the total withdrawal amount
+        const totalAmountWithdraw = withdrawData.reduce(
+          (sum, withdraw) => sum + parseFloat(withdraw.amount),
+          0
+        );
+
         setDashboardData({
-          activeUsers: totalUsers, // Update activeUsers with total number of users
+          activeUsers: totalUsers,
           userBalance: usersData.reduce((sum, user) => sum + parseFloat(user.balance), 0),
-          deposit: usersData.reduce((sum, user) => sum + parseFloat(user.commission1), 0), // Assuming deposit data is from commission1
-          withdrawals: usersData.reduce((sum, user) => sum + parseFloat(user.commission2), 0), // Assuming withdrawals data is from commission2
-          totalAmountTopUp: totalAmountTopUp, // Update with the total top-up amount
+          deposit: usersData.reduce((sum, user) => sum + parseFloat(user.commission1), 0), 
+          withdrawals: usersData.reduce((sum, user) => sum + parseFloat(user.commission2), 0),
+          totalAmountTopUp: totalAmountTopUp,
+          totalAmountWithdraw: totalAmountWithdraw // Update with total withdrawal amount
         });
       } catch (error) {
         console.error("Error fetching dashboard data:", error);
@@ -51,7 +67,6 @@ const DashInfoCard = () => {
 
     fetchData();
   }, [djangoHostname]);
-
 
   return (
     <div>
@@ -81,7 +96,7 @@ const DashInfoCard = () => {
               <div>
                 <img src={deposite} alt="Deposit" className="img-fluid" />
               </div>
-              <h5 className="fw-bold mt-3">${dashboardData.totalAmountTopUp}</h5>
+              <h5 className="fw-bold mt-3">${dashboardData.deposit}</h5>
               <span>Deposit</span>
             </div>
           </div>
@@ -90,7 +105,7 @@ const DashInfoCard = () => {
               <div>
                 <img src={withd} alt="Withdrawals" className="img-fluid" />
               </div>
-              <h5 className="fw-bold mt-3">${dashboardData.withdrawals}</h5>
+              <h5 className="fw-bold mt-3">${dashboardData.totalAmountWithdraw}</h5>
               <span>Withdrawals</span>
             </div>
           </div>

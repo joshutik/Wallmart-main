@@ -16,7 +16,9 @@ const Withdrawal = () => {
   const [bankName, setBankName] = useState("");
   const [bankAccountNumber, setBankAccountNumber] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
-  const [loading, setLoading] = useState(false); // New loading state
+  const [loading, setLoading] = useState(false);
+  const [flashMessage, setFlashMessage] = useState(""); // New flash message state
+  const [flashMessageType, setFlashMessageType] = useState(""); // New flash message type (success/error)
 
   const djangoHostname = import.meta.env.VITE_DJANGO_HOSTNAME;
   const user = localStorage.getItem("user_id");
@@ -46,7 +48,8 @@ const Withdrawal = () => {
       selectedMethod === "crypto" &&
       (!amount || !cryptoWallet || !walletAddress || !withdrawalPassword)
     ) {
-      alert("Please fill in all fields for crypto withdrawal");
+      setFlashMessage("Please fill in all fields for crypto withdrawal");
+      setFlashMessageType("error");
       return;
     }
 
@@ -55,7 +58,8 @@ const Withdrawal = () => {
       selectedMethod === "bank" &&
       (!amount || !bankName || !bankAccountNumber || !phoneNumber || !withdrawalPassword)
     ) {
-      alert("Please fill in all fields for bank withdrawal");
+      setFlashMessage("Please fill in all fields for bank withdrawal");
+      setFlashMessageType("error");
       return;
     }
 
@@ -88,12 +92,19 @@ const Withdrawal = () => {
         },
       });
 
-      alert("Withdrawal successful");
+      setFlashMessage("Withdrawal successful");
+      setFlashMessageType("success");
     } catch (error) {
       console.error("Error processing withdrawal:", error);
-      alert("Error processing withdrawal");
+      setFlashMessage("Error processing withdrawal");
+      setFlashMessageType("error");
     } finally {
       setLoading(false); // Stop loading
+
+      // Clear flash message after 5 seconds
+      setTimeout(() => {
+        setFlashMessage("");
+      }, 5000);
     }
   };
 
@@ -110,6 +121,9 @@ const Withdrawal = () => {
         </div>
       </div>
       <SliderToggle selectedMethod={selectedMethod} setSelectedMethod={setSelectedMethod} />
+      
+    
+      
       <form
         className="px-2"
         onSubmit={handleSubmit}
@@ -224,7 +238,7 @@ const Withdrawal = () => {
             </div>
           </>
         )}
-        <div className="form-group my-3">
+              <div className="form-group my-3">
           <label className="fw-bold fs-4 my-2" htmlFor="withdrawalPassword">
             Enter Withdrawal Password
           </label>
@@ -236,6 +250,13 @@ const Withdrawal = () => {
             required
           />
         </div>
+
+        {flashMessage && ( // Flash message display
+          <div className={`alert ${flashMessageType === 'success' ? 'alert-success' : 'alert-danger'} mt-3`} role="alert">
+            {flashMessage}
+          </div>
+        )}
+
         <div className="my-4 text-center">
           <button
             className="btn rounded-pill py-2 w-75 border-0 draw-btn fw-bold text-light fs-5"
@@ -243,9 +264,9 @@ const Withdrawal = () => {
             disabled={loading} // Disable button while loading
           >
             {loading ? (
-              <i className="fas fa-spinner fa-spin"></i> // Spinner icon
+              <span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
             ) : (
-              "Withdraw Now"
+              'Withdraw'
             )}
           </button>
         </div>
@@ -255,7 +276,8 @@ const Withdrawal = () => {
 };
 
 Withdrawal.propTypes = {
-  selectedMethod: PropTypes.string.isRequired,
+  selectedMethod: PropTypes.string,
+  setSelectedMethod: PropTypes.func,
 };
 
-export default Withdrawal; 
+export default Withdrawal;
