@@ -25,6 +25,8 @@ import AdminDashboard from './Components/AdminDashboard/AdminDashboard';
 // import Usercomision from './Components/Usercomision/Usercomision';
 // import Partners from './Components/Partners/Partners';
 // import NavigationBar from './Components/NavigationBar/NavigationBar';
+// import AdminReg from './Components/AdminReg/AdminReg'
+// import AdminLogin from './Components/AdminLogin/AdminLogin';
 
 function App() {
  
@@ -52,6 +54,8 @@ function App() {
       {/* <Vip3Details/> */}
       {/* <RechargeDash/> */}
       {/* <WithdrawDash/> */}
+      {/* <AdminReg/> */}
+      {/* <AdminLogin/> */}
 
     </div>
   )

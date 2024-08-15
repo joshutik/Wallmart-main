@@ -51,7 +51,7 @@
     /* background-attachment: fixed; */
 }
 
-.list-li li:hover {
+.list-li li:hover a{
     background-color: rgba(255, 173, 49, 1) !important;
     border-radius: 4px;
     color: white !important;
@@ -62,6 +62,37 @@
     border-radius: 4px;
 } */
 
- a {
-    display: inline-block !important;
-}
+/* Link display */
+.btn-toggle-nav .link-body-emphasis {
+    display: inline-block;
+    width: 100%;
+    padding: 10px 0;
+  }
+  
+  /* Chevron rotation */
+  .toggle-icon {
+    transition: transform 0.3s ease;
+    color: rgba(255, 173, 49, 1);
+  }
+  
+  .bi-chevron-down {
+    transform: rotate(4deg);
+  }
+  
+  /* Icon hover effect */
+  /* .link-body-emphasis img {
+    transition: filter 0.3s ease;
+  } */
+  
+  /* .link-body-emphasis:hover img {
+    filter: brightness(0) invert(1); /* Converts the image to white 
+  } */
+  .link-body-emphasis:hover .wall {
+    filter: brightness(0) invert(1); /* Converts the image to white */
+  }
+  .link-body-emphasis:hover .invy {
+    filter: brightness(0) invert(1); /* Converts the image to white */
+  }
+  .link-body-emphasis:hover .bnk{
+    filter: brightness(0) invert(1); /* Converts the image to white */
+  }
