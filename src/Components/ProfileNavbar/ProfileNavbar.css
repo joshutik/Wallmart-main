@@ -15,3 +15,17 @@
     font-size: 16px;
     font-weight: 500;
   }
+
+@media screen and (max-width:430px) {
+    .profile-navbar {
+        display: flex;
+        align-items: center;
+        padding: 0.5rem;
+      }
+
+      .profile-email {
+        font-size: 10px;
+        font-weight: 500;
+      }
+      
+}

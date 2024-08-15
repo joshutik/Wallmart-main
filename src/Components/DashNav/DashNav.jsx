@@ -19,11 +19,11 @@ function DashNav({ toggleSidebar }) {  // Accept toggleSidebar as a prop
           <ProfileNavbar/>
           <Navbar.Toggle aria-controls="basic-navbar-nav" onClick={toggleSidebar} />
         </div>
-        <div className="d-none d-md-block d-flex align-items-center">
+        <div className="d-none d-md-block d-flex align-items-center flex-start">
           <Search/>
         </div>
         <Navbar.Collapse id="basic-navbar-nav">
-        <div className="d-none d-md-block d-flex align-items-center ">
+        <div className="d-none d-md-block ms-auto ">
         <ProfileNavbar/>
         </div>
           {/* Your Navbar content goes here */}
