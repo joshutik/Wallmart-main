@@ -309,8 +309,7 @@ const BankDetailsModal = ({ show, handleClose }) => {
               <div className="w-75 me-lg-auto mx-auto">
                 <hr className="horizontal border-3 text-white" />
               </div>
-              <p>Amount</p>
-              <p>{bankDetails.amount}</p>
+           
             </div>
           </div>
         </div>
