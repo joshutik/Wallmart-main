@@ -127,7 +127,7 @@ const Recharge = () => {
         setFlashType("error");
         return;
       }
-      const isConfirmed = window.confirm("Are you sure you want to promote this user?");
+      const isConfirmed = window.confirm("Are you sure you want to upload this receipt?");
       if (!isConfirmed) {
         return; // If the user cancels, exit the function
       }
