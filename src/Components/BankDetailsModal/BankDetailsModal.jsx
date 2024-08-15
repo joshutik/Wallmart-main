@@ -188,6 +188,7 @@ const BankDetailsModal = ({ show, handleClose }) => {
   const [newBankName, setNewBankName] = useState("");
   const [newAccountNumber, setNewAccountNumber] = useState("");
   const [newRecipientName, setNewRecipientName] = useState("");
+  const [ruthName, setRuthName] = useState("");
 
   // State for loading and flash message
   const [loading, setLoading] = useState(false);
@@ -212,11 +213,12 @@ const BankDetailsModal = ({ show, handleClose }) => {
               bankName: data.bank_name,
               accountNumber: data.account_number,
               recipientName: data.recipient_name,
-              amount: data.amount || "$30.00", // Use default if not provided
+              ruth: data.ruth 
             });
             setNewBankName(data.bank_name);
             setNewAccountNumber(data.account_number);
             setNewRecipientName(data.recipient_name);
+            setRuthName(data.ruth);
           } else {
             setFlashVariant("danger");
             setFlashMessage("Failed to fetch bank details.");
