@@ -946,60 +946,6 @@ const Homepage = () => {
 
   
 
-  // const handleAmountClick = (selectedAmount) => {
-  //   if (selectedAmount === 20) {
-  //     setAmount(selectedAmount);
-  //   }
-  // };
-
-
-  // const handleRechargeSubmit = (e) => {
-  //   e.preventDefault();
-  //   console.log("Recharge Amount:", amount);
-  //   setAmount(""); // Clear the input field after submission
-  //   handleCloseRechargeModal();
-  // };
-
-  // const makePayment = () => {
-  //   FlutterwaveCheckout({
-  //     public_key: "FLWPUBK_TEST-SANDBOXDEMOKEY-X",
-  //     tx_ref: "titanic-48981487343MDI0NzMx",
-  //     amount: amount,
-  //     currency: "USD",
-  //     payment_options: "card, mobilemoneyghana, ussd",
-  //     callback: function (payment) {
-  //       // Send AJAX verification request to backend
-  //       // verifyTransactionOnBackend(payment.id);
-  //     },
-  //     onclose: function (incomplete) {
-  //       if (incomplete || window.verified === false) {
-  //         document.querySelector("#payment-failed").style.display = "block";
-  //       } else {
-  //         document.querySelector("form").style.display = "none";
-  //         if (window.verified == true) {
-  //           document.querySelector("#payment-success").style.display = "block";
-  //         } else {
-  //           document.querySelector("#payment-pending").style.display = "block";
-  //         }
-  //       }
-  //     },
-  //     meta: {
-  //       consumer_id: 23,
-  //       consumer_mac: "92a3-912ba-1192a",
-  //     },
-  //     customer: {
-  //       email: localStorage.getItem("phone") || "08146955393",
-  //       phone_number: localStorage.getItem("phone") || "08146955393",
-  //       name: localStorage.getItem("phone") || "08146955393",
-  //     },
-  //     customizations: {
-  //       title: "The Titanic Store",
-  //       description: "Payment for an awesome cruise",
-  //       logo: "https://www.logolynx.com/images/logolynx/22/2239ca38f5505fbfce7e55bbc0604386.jpeg",
-  //     },
-  //   });
-  // };
-
   return (
     <div className="container pb-5">
       <NavigationBar2 />
@@ -1012,30 +958,7 @@ const Homepage = () => {
     <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
     <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
   </div>
-        {/* <div className="carousel-indicators">
-          <button
-            type="button"
-            data-bs-target="#carouselExampleDark"
-            data-bs-slide-to="0"
-            className="active bg-light"
-            aria-current="true"
-            aria-label="Slide 1"
-          >1</button>
-          <button
-            className=" bg-light"
-            type="button"
-            data-bs-target="#carouselExampleDark"
-            data-bs-slide-to="1"
-            aria-label="Slide 2"
-          >2</button>
-          <button
-            className=" bg-light"
-            type="button"
-            data-bs-target="#carouselExampleDark"
-            data-bs-slide-to="2"
-            aria-label="Slide 3"
-          >3</button>
-        </div> */}
+
         <div className="carousel-inner">
           <div className="carousel-item active" data-bs-interval="2000">
             <img src={img1} className="d-block w-100" alt="..." />
@@ -1076,15 +999,7 @@ const Homepage = () => {
       <div className="container-fluid my-5 py-4">
         <div className="container quick rounded-5 py-5 px-3">
           <div className="row gy-3 justify-content-center text-center">
-            {/* <div className="col-lg-4 col-md-4 col-sm-12">
-              <Button
-                onClick={handleShowRechargeModal}
-                className=" py-2 px-4 bg-transparent rounded-5 border-3 action"
-              >
-                <img src={img4} className="img-fluid mb-3" alt="" />{" "}
-                <span className="fw-bold text-light">Recharge Now</span>
-              </Button>
-            </div> */}
+          
             <div className="col-lg-4 col-md-4 col-sm-12">
               <Link
               onClick={handleTopUpClick}
@@ -1124,73 +1039,7 @@ const Homepage = () => {
         <NavigationBar />
       </div>
 
-      {/* Recharge Modal */}
-      {/* <Modal show={showRechargeModal} onHide={handleCloseRechargeModal}>
-        <Modal.Header closeButton>
-          <Modal.Title>Recharge Amount</Modal.Title>
-        </Modal.Header>
-        <Modal.Body className="mx-auto">
-          <Form onSubmit={handleRechargeSubmit}>
-            <Form.Group className="mb-3" controlId="formBasicAmount">
-              <div className="container">
-                <div className="row gy-3">
-                  <div className="col-lg-12 col-md-6 col-sm-12 d-flex recharge-btn">
-                    <button
-                      className="btn border w-100 fw-bold mx-2"
-                      onClick={() => handleAmountClick(20)}
-                    >
-                      $20
-                    </button>
-                    <button disabled
-                      className="btn border fw-bold w-100 mx-2"
-                      onClick={() => handleAmountClick(40)}
-                    >
-                      $40
-                    </button>
-                  </div>
-                  <div className="col-lg-12 col-md-6 col-sm-12 d-flex recharge-btn">
-                    <button disabled
-                      className="btn border fw-bold w-100 mx-2"
-                      onClick={() => handleAmountClick(70)}
-                    >
-                      $70
-                    </button>
-                    <button disabled
-                      className="btn border fw-bold w-100 mx-2"
-                      onClick={() => handleAmountClick(120)}
-                    >
-                      $120
-                    </button>
-                  </div>
-                  <div className="col-lg-12 col-md-6 col-sm-12 d-flex recharge-btn">
-                    <button disabled
-                      className="btn border fw-bold w-100 mx-2"
-                      onClick={() => handleAmountClick(200)}
-                    >
-                      $200
-                    </button>
-                    <button disabled
-                      className="btn border fw-bold w-100 mx-2"
-                      onClick={() => handleAmountClick(500)}
-                    >
-                      $500
-                    </button>
-                  </div>
-                </div>
-              </div>
-              <Link
-                to={"/recharge-account"}
-                type="button"
-                className="recharge text-light fw-bold my-4 rounded-pill text-decoration-none w-75 border-0 py-2"
-                // onClick={makePayment}
-                disabled={amount !== 20 || loading}
-              >
-                {loading ? "Processing..." : "Grab"}
-              </Link>
-            </Form.Group>
-          </Form>
-        </Modal.Body>
-      </Modal> */}
+     
        {showModal && (
             <div className="modal show  d-block" tabIndex="-3" role="dialog">
               <div className="modal-dialog" role="document">
@@ -1259,7 +1108,7 @@ const Homepage = () => {
                         </div>
                         <div className="mt-5">
                           <Link
-                            to={"/recharge-account"}
+                            to={`/recharge-account?amount=${amount}`} 
                             type="button"
                             className="recharge text-light fw-bold rounded-pill text-decoration-none w-75 border-0 py-2"
                             // onClick={makePayment}

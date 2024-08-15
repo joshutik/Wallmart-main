@@ -990,16 +990,19 @@ import { Link } from "react-router-dom";
 import SliderToggle2 from "../SliderToggle2/SliderToggle2";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import "./Recharge.css";
+import { useParams } from "react-router-dom";
 
 const Recharge = () => {
+  const djangoHostname = import.meta.env.VITE_DJANGO_HOSTNAME;
+
+  const { amount } = useParams(); // Capture the 'amount' from the URL
   const [selectedMethod, setSelectedMethod] = useState("wallet");
   const [cryptoWallet, setCryptoWallet] = useState("");
   const [walletAddress, setWalletAddress] = useState("");
-  const [amount, setAmount] = useState("");
   const [senderName, setSenderName] = useState("");
   const [uploadProf, setUploadProf] = useState(null);
   const [showQrModal, setShowQrModal] = useState(false); // State for QR modal
-  const [qrCodeUrl, setQrCodeUrl] = useState(""); // State to store QR code UR
+  const [qrCodeUrl, setQrCodeUrl] = useState(""); // State to store QR code URL
 
   const handleCopy = (textToCopy) => {
     navigator.clipboard.writeText(textToCopy).then(() => {
@@ -1007,13 +1010,14 @@ const Recharge = () => {
     });
   };
 
+  const userID = localStorage.getItem("user_id") 
   const handleFileChange = (e) => {
     setUploadProf(e.target.files[0]);
   };
 
   const handleFileUpload = async (formData) => {
     try {
-      const response = await fetch("https://your-backend-endpoint/upload", {
+      const response = await fetch(`${djangoHostname}/api/recharge/recharges/`, {
         method: "POST",
         body: formData,
       });
@@ -1051,16 +1055,17 @@ const Recharge = () => {
 
       // Upload the file if bank payment is selected
       const formData = new FormData();
-      formData.append("senderName", senderName);
+      formData.append("user", userID);
+      formData.append("payment_name", "Top Up");
+      formData.append("recharge_method", "bank_transfer");
+      formData.append("amount_top_up", amount); // Use captured amount from URL
       formData.append("uploadProf", uploadProf);
 
       handleFileUpload(formData);
     }
   };
 
-
   
-
   return (
     <div className="container px-3">
       <div className="row my-5">
