@@ -166,18 +166,22 @@
 
 // export default BankDetailsModal;
 
-import { useState } from "react";
+
+
+import { useState, useEffect } from "react";
 import PropTypes from "prop-types";
-import { Modal, Button } from "react-bootstrap";
+import { Modal, Button, Alert } from "react-bootstrap";
 import "./BankDetailsModal.css";
 
 const BankDetailsModal = ({ show, handleClose }) => {
-  // Initial bank details
+  const djangoHostname = import.meta.env.VITE_DJANGO_HOSTNAME;
+
+  // State for bank details and form fields
   const [bankDetails, setBankDetails] = useState({
-    bankName: "Palm Pay",
-    accountNumber: "165008977890",
-    recipientName: "John Louis Vaqeuz",
-    amount: "$30.00",
+    bankName: "",
+    accountNumber: "",
+    recipientName: "",
+    amount: "$30.00", // Default value, may not be fetched from API
   });
 
   // State for input fields
@@ -185,14 +189,91 @@ const BankDetailsModal = ({ show, handleClose }) => {
   const [newAccountNumber, setNewAccountNumber] = useState("");
   const [newRecipientName, setNewRecipientName] = useState("");
 
-  // Function to handle form submission
-  const handleSubmit = () => {
-    setBankDetails({
-      ...bankDetails,
-      bankName: newBankName || bankDetails.bankName,
-      accountNumber: newAccountNumber || bankDetails.accountNumber,
-      recipientName: newRecipientName || bankDetails.recipientName,
-    });
+  // State for loading and flash message
+  const [loading, setLoading] = useState(false);
+  const [flashMessage, setFlashMessage] = useState("");
+  const [flashVariant, setFlashVariant] = useState("");
+
+  // Fetch bank details when the modal is opened
+  useEffect(() => {
+    if (show) {
+      const fetchBankDetails = async () => {
+        try {
+          const response = await fetch(`${djangoHostname}/api/payments/bank-details/1/`, {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+            },
+          });
+
+          if (response.ok) {
+            const data = await response.json();
+            setBankDetails({
+              bankName: data.bank_name,
+              accountNumber: data.account_number,
+              recipientName: data.recipient_name,
+              amount: data.amount || "$30.00", // Use default if not provided
+            });
+            setNewBankName(data.bank_name);
+            setNewAccountNumber(data.account_number);
+            setNewRecipientName(data.recipient_name);
+          } else {
+            setFlashVariant("danger");
+            setFlashMessage("Failed to fetch bank details.");
+          }
+        } catch (error) {
+          console.error("Error:", error);
+          setFlashVariant("danger");
+          setFlashMessage("An error occurred while fetching bank details.");
+        }
+      };
+
+      fetchBankDetails();
+    }
+  }, [show]);
+
+  // Function to handle form submission and send PATCH request
+  const handleSubmit = async () => {
+    setLoading(true);
+    setFlashMessage(""); // Clear any previous messages
+
+    const updatedBankDetails = {
+      bank_name: newBankName || bankDetails.bankName,
+      account_number: newAccountNumber || bankDetails.accountNumber,
+      recipient_name: newRecipientName || bankDetails.recipientName,
+    };
+
+    try {
+      const response = await fetch(`${djangoHostname}/api/payments/bank-details/1/`, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(updatedBankDetails),
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        setBankDetails({
+          ...bankDetails,
+          bankName: data.bank_name,
+          accountNumber: data.account_number,
+          recipientName: data.recipient_name,
+        });
+
+        setFlashVariant("success");
+        setFlashMessage("Bank details updated successfully!");
+      } else {
+        setFlashVariant("danger");
+        setFlashMessage("Failed to update bank details.");
+      }
+    } catch (error) {
+      console.error("Error:", error);
+      setFlashVariant("danger");
+      setFlashMessage("An error occurred while updating bank details.");
+    }
+
+    setLoading(false);
 
     // Clear the input fields
     setNewBankName("");
@@ -233,6 +314,14 @@ const BankDetailsModal = ({ show, handleClose }) => {
             </div>
           </div>
         </div>
+
+        {/* Flash message */}
+        {flashMessage && (
+          <Alert variant={flashVariant} onClose={() => setFlashMessage("")} dismissible>
+            {flashMessage}
+          </Alert>
+        )}
+
         <div className="text-start my-4">
           <label htmlFor="newBankName" className="text-start">
             New Bank Name
@@ -279,8 +368,9 @@ const BankDetailsModal = ({ show, handleClose }) => {
           <button
             className="btn change text-light"
             onClick={handleSubmit}
+            disabled={loading} // Disable button while loading
           >
-            Submit
+            {loading ? "Updating..." : "Submit"}
           </button>
         </div>
       </Modal.Body>
@@ -299,3 +389,4 @@ BankDetailsModal.propTypes = {
 };
 
 export default BankDetailsModal;
+
