@@ -68,6 +68,10 @@ const DashInfoCard = () => {
     fetchData();
   }, [djangoHostname]);
 
+  console.log("totalAmountTopUp")
+  console.log(dashboardData.totalAmountTopUp)
+  console.log("totalAmountTopUp")
+
   return (
     <div>
       <div className="container">
@@ -96,7 +100,7 @@ const DashInfoCard = () => {
               <div>
                 <img src={deposite} alt="Deposit" className="img-fluid" />
               </div>
-              <h5 className="fw-bold mt-3">${dashboardData.deposit}</h5>
+              <h5 className="fw-bold mt-3">${dashboardData.totalAmountTopUp}</h5>
               <span>Deposit</span>
             </div>
           </div>
