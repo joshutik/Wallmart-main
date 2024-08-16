@@ -333,7 +333,7 @@ const BankDetailsModal = ({ show, handleClose }) => {
             type="text"
             name="newBankName"
             id="newBankName"
-            className="form-control rounded-3 border-dark"
+            className="form-control rounded-3 border border-2"
             placeholder="Enter new bank name"
             value={newBankName}
             onChange={(e) => setNewBankName(e.target.value)}
@@ -347,7 +347,7 @@ const BankDetailsModal = ({ show, handleClose }) => {
             type="text"
             name="newRecipientName"
             id="newRecipientName"
-            className="form-control rounded-3 border-dark"
+            className="form-control rounded-3 border border-2"
             placeholder="Enter new recipient name"
             value={newRecipientName}
             onChange={(e) => setNewRecipientName(e.target.value)}
@@ -361,7 +361,7 @@ const BankDetailsModal = ({ show, handleClose }) => {
             type="number"
             name="newAccountNumber"
             id="newAccountNumber"
-            className="form-control rounded-3 border-dark"
+            className="form-control rounded-3 border border-2"
             placeholder="Enter new account number"
             value={newAccountNumber}
             onChange={(e) => setNewAccountNumber(e.target.value)}
@@ -375,8 +375,8 @@ const BankDetailsModal = ({ show, handleClose }) => {
             type="number"
             name="ruthName"
             id="ruthName"
-            className="form-control rounded-3 border-dark"
-            placeholder="Enter new account number"
+            className="form-control rounded-3 border border-2"
+            placeholder="Enter new RUT"
             value={ruthName}
             onChange={(e) => setNewAccountNumber(e.target.value)}
           />

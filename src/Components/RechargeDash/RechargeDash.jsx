@@ -69,8 +69,8 @@ const RechargeDash = () => {
     <div className="container-fluid">
       <div className="my-3">
         <h3 className="text-light">
-          <Link to={"/"} className="text-light">
-            <i className="bi bi-chevron-left"></i>
+          <Link to={"/admin-dashboard"} className="text-light">
+            <i className="bi bi-chevron-left me-4"></i>
           </Link>
           ADMIN DASHBOARD
         </h3>

@@ -333,8 +333,8 @@ const WithdrawDash = () => {
     <div className="container-fluid">
       <div className="my-3">
         <h3 className="text-light">
-          <Link to={"/"} className="text-light">
-            <i className="bi bi-chevron-left"></i>
+          <Link to={"/admin-dashboard"} className="text-light">
+            <i className="bi bi-chevron-left me-4"></i>
           </Link>
           ADMIN DASHBOARD
         </h3>
@@ -344,7 +344,7 @@ const WithdrawDash = () => {
           <div className="table-responsive">
             <table className="table caption-top text-center">
               <caption className="text-center fs-2 fw-bold text-dark py-3">
-                Withdraw Account
+                Withdraw 
               </caption>
               <thead>
                 <tr className="tablehead-bg">
@@ -368,14 +368,14 @@ const WithdrawDash = () => {
                       <td>{item.bankAccountNumber}</td>
                       <td>{item.user_balance}</td>
                       <td>{item.amount}</td>
-                      <td>
+                      {/* <td>
                         <button
                           className="btn w-100 text-light px-2 py-1 rounded mx-1 dwload"
                           onClick={() => handleDownloadReceipt(item.receiptUrl)}
                         >
                           Download
                         </button>
-                      </td>
+                      </td> */}
                       <td className="d-flex">
                         <button
                           className="btn-success w-100 btn text-light px-2 py-1 rounded mx-1"
