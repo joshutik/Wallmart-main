@@ -99,7 +99,7 @@ const RechargeDash = () => {
                   rechargeData.map((item) => (
                     <tr key={item.payment_id}>
                       <td>{item.recharge_method}</td>
-                      <td>{item.user}</td>
+                      <td>{item.user_firstName}</td>
                       <td>{item.payment_name}</td>
                       <td>{item.payment_id}</td>
                       <td>{item.user_balance}</td>

@@ -161,46 +161,41 @@ const Vip3Details = () => {
     }
   };
 
-  const demoteToVip1 = async (userId) => {
-    setDemoting(userId);
-    const isConfirmed = window.confirm("Are you sure you want to demote this user to VIP1 ?");
+  const demoteToVip2 = async (userId) => {
+    const isConfirmed = window.confirm("Are you sure you want to demote this user to VIP1?");
     if (!isConfirmed) {
       return; // If the user cancels, exit the function
     }
-   
+  
+    setDemoting(userId); // Set loading state only after confirmation
+  
     try {
-      const response = await fetch(`${djangoHostname}/api/accounts/users/${userId}/`,
-        {
-          method: "PATCH",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            balance: "0.0",
-            unsettle: "0.0",
-            commission1: "0.0",
-            commission2: "0.0",
-            grabbed_orders_count: 0,
-            level: "VIP1",
-          }),
-        }
-      );
+      const response = await fetch(`${djangoHostname}/api/accounts/users/${userId}/`, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          balance: "0.0",
+          unsettle: "0.0",
+          commission1: "0.0",
+          commission2: "0.0",
+          grabbed_orders_count: 0,
+          level: "VIP1",
+        }),
+      });
   
       if (response.ok) {
-        setVip2Users(vip2Users.filter((user) => user.id !== userId)); // Update the state to remove the deleted user
-        // alert("User promoted successfully!");
-        // Optionally, update the UI to reflect the changes
+        setVip2Users(vip2Users.filter((user) => user.id !== userId)); // Update the state to remove the demoted user
       } else {
-        alert("Failed to promote user.");
+        alert("Failed to demote user.");
       }
     } catch (error) {
-      console.error("Error promoting user:", error);
-    }
-    finally {
-      setDemoting(null);
+      console.error("Error demoting user:", error);
+    } finally {
+      setDemoting(null); // Reset loading state
     }
   };
-
     // Handle Deletion
   const deleteUser = async (userId) => {
 
@@ -282,7 +277,7 @@ const Vip3Details = () => {
 
                       <button
                         className="btn btn-warning text-light px-2 py-1 rounded mx-1"
-                        onClick={() => demoteToVip1(user.id)}
+                        onClick={() => demoteToVip2(user.id)}
                         disabled={demoting === user.id} // Disable button during loading
                       >
                         {demoting === user.id ? (

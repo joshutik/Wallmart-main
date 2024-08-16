@@ -68,9 +68,6 @@ const DashInfoCard = () => {
     fetchData();
   }, [djangoHostname]);
 
-  console.log("totalAmountTopUp")
-  console.log(dashboardData.totalAmountTopUp)
-  console.log("totalAmountTopUp")
 
   return (
     <div>
