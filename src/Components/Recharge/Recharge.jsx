@@ -22,7 +22,7 @@ const Recharge = () => {
   const [bankDetails, setBankDetails] = useState({
     bankName: "",
     account: "",
-    recipient: ""
+    recipient: "",
   });
 
   // Flash message state
@@ -39,14 +39,16 @@ const Recharge = () => {
   useEffect(() => {
     const fetchBankDetails = async () => {
       try {
-        const response = await fetch(`${djangoHostname}/api/payments/bank-details/1/`);
+        const response = await fetch(
+          `${djangoHostname}/api/payments/bank-details/1/`
+        );
         if (response.ok) {
           const data = await response.json();
           setBankDetails({
             bankName: data.bank_name,
             account: data.account_number,
             recipient: data.recipient_name,
-            amount: formatAmount(amountFromQuery) || formatAmount(data.amount)
+            amount: formatAmount(amountFromQuery) || formatAmount(data.amount),
           });
         } else {
           console.error("Failed to fetch bank details.");
@@ -85,10 +87,13 @@ const Recharge = () => {
   const handleFileUpload = async (formData) => {
     setLoading(true); // Set loading to true
     try {
-      const response = await fetch(`${djangoHostname}/api/recharge/recharges/`, {
-        method: "POST",
-        body: formData,
-      });
+      const response = await fetch(
+        `${djangoHostname}/api/recharge/recharges/`,
+        {
+          method: "POST",
+          body: formData,
+        }
+      );
 
       if (response.ok) {
         const responseData = await response.json();
@@ -127,11 +132,12 @@ const Recharge = () => {
         setFlashType("error");
         return;
       }
-      const isConfirmed = window.confirm("Are you sure you want to upload this receipt?");
+      const isConfirmed = window.confirm(
+        "Are you sure you want to upload this receipt?"
+      );
       if (!isConfirmed) {
         return; // If the user cancels, exit the function
       }
-
 
       const formData = new FormData();
       formData.append("user", userID);
@@ -143,8 +149,8 @@ const Recharge = () => {
       handleFileUpload(formData);
     }
   };
-  
-    return (
+
+  return (
     <div className="container px-3">
       <div className="row my-5">
         <div className="col-auto">
@@ -160,11 +166,7 @@ const Recharge = () => {
         selectedMethod={selectedMethod}
         setSelectedMethod={setSelectedMethod}
       />
-      <form
-        className="px-2"
-        onSubmit={handleSubmit}
-        key={selectedMethod}
-      >
+      <form className="px-2" onSubmit={handleSubmit} key={selectedMethod}>
         {selectedMethod === "wallet" && (
           <>
             <div className=" my-3">
@@ -204,6 +206,19 @@ const Recharge = () => {
                 use and Privacy Policy.
               </p>
             </div>
+
+            <div className="">
+              <label htmlFor="UploadReciept">Unpload prof of payment</label>
+              <input
+                type="file"
+                name="uploadProf"
+                id="uploadProf"
+                onChange={handleFileChange}
+                className="form-control border border-3 rounded-3 ps-5 file-input"
+                required
+              />
+            </div>
+
             <div className="my-4 text-center">
               <button
                 className="rounded-pill py-2 w-75 border-0 draw-btn fw-bold text-light fs-5 my-5"
@@ -221,7 +236,7 @@ const Recharge = () => {
             </div>
             <div className="container rounded-4 paym-card">
               <div className="row justify-content-center">
-                <div className="col-lg-5 col-md-6 col-sm-12">
+                <div className="col-lg-3 col-md-6 col-sm-12">
                   <div className="text-center py-lg-5 py-4">
                     <p>Bank Name</p>
                     <p>{bankDetails.bankName}</p>
@@ -245,7 +260,7 @@ const Recharge = () => {
                 <div className="d-none w-75 me-lg-auto mx-auto d-none d-sm-block d-md-none">
                   <hr className="horizontal border-3 text-white " />
                 </div>
-                <div className="col-lg-5 col-md-6 col-sm-12">
+                <div className="col-lg-3 col-md-6 col-sm-12">
                   <div className="text-center py-lg-5 py-4">
                     <p>Recipient</p>
                     <p>{bankDetails.recipient}</p>
@@ -269,7 +284,7 @@ const Recharge = () => {
             </div>
             <div className="container my-5">
               <form>
-                <div className="form-group my-5">
+                <div className="my-5">
                   <label htmlFor="senderName">
                     Step 2: Input the sender name
                   </label>
@@ -279,12 +294,12 @@ const Recharge = () => {
                     id="senderName"
                     value={senderName}
                     onChange={(e) => setSenderName(e.target.value)}
-                    className="form-control py-3 rounded-4"
+                    className="form-control py-3 rounded-3 border border-3"
                     placeholder="Enter sender name"
                     required
                   />
                 </div>
-                <div className="form-group">
+                <div className="">
                   <label htmlFor="uploadProf">
                     Step 3: Upload proof of payment
                   </label>
@@ -293,13 +308,15 @@ const Recharge = () => {
                     name="uploadProf"
                     id="uploadProf"
                     onChange={handleFileChange}
-                    className="form-control"
+                    className="form-control border border-3 rounded-3 ps-5 file-input"
                     required
                   />
                 </div>
                 {flashMessage && (
                   <div
-                    className={`alert alert-${flashType === "success" ? "success" : "danger"} alert-dismissible fade show`}
+                    className={`alert alert-${
+                      flashType === "success" ? "success" : "danger"
+                    } alert-dismissible fade show`}
                     role="alert"
                   >
                     {flashMessage}
@@ -320,7 +337,10 @@ const Recharge = () => {
                 disabled={loading} // Disable the button while loading
               >
                 {loading && (
-                  <div className="spinner-border text-light position-absolute top-50 start-50 translate-middle" role="status">
+                  <div
+                    className="spinner-border text-light position-absolute top-50 start-50 translate-middle"
+                    role="status"
+                  >
                     <span className="visually-hidden">Loading...</span>
                   </div>
                 )}
@@ -336,7 +356,7 @@ const Recharge = () => {
 
 Recharge.propTypes = {
   selectedMethod: PropTypes.string.isRequired,
-  setSelectedMethod: PropTypes.func.isRequired
+  setSelectedMethod: PropTypes.func.isRequired,
 };
 
 export default Recharge;

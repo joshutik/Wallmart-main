@@ -130,13 +130,13 @@ const Withdrawal = () => {
         key={selectedMethod} // Force re-render when method changes
       >
         <div className="row">
-          <div className="col-auto">
-            <div className="form-group my-3">
+          <div className="col-lg-6 col-md-6 col-sm-12">
+            <div className="my-3">
               <label className="fw-bold fs-4 my-2" htmlFor="withdrawal">
                 Enter Amount
               </label>
               <input
-                className="form-control py-3"
+                className="form-control py-3 border rounded-3 border-3"
                 type="number"
                 value={amount}
                 onChange={(e) => setAmount(e.target.value)}
@@ -146,14 +146,14 @@ const Withdrawal = () => {
               />
             </div>
           </div>
-          <div className="col-auto">
-            <div className="form-group my-3">
+          <div className="col-lg-6 col-md-6 col-sm-12">
+            <div className="my-3">
               <label className="fw-bold fs-4 my-2" htmlFor="availableBalance">
                 Available for withdrawal
               </label>
               <input
                 type="number"
-                className="form-control py-3 bg-secondary border-dark border-5 avia-bal"
+                className="form-control py-3 bg-secondary rounded-3 border border-0 avia-bal"
                 value={availableBalance}
                 readOnly
               />
@@ -162,7 +162,7 @@ const Withdrawal = () => {
         </div>
         {selectedMethod === "crypto" && (
           <>
-            <div className="form-group my-3">
+            <div className="my-3">
               <label className="fw-bold fs-4 my-2" htmlFor="cryptowallet">
                 Select Crypto wallet
               </label>
@@ -183,13 +183,13 @@ const Withdrawal = () => {
                 <option value="TRX">TRC20</option>
               </select>
             </div>
-            <div className="form-group my-3">
+            <div className="my-3">
               <label className="fw-bold fs-4 my-2" htmlFor="walletaddress">
                 Recipient Wallet Address
               </label>
               <input
                 type="text"
-                className="form-control py-3"
+                className="form-control py-3 rounded-3 border border-3"
                 value={walletAddress}
                 onChange={(e) => setWalletAddress(e.target.value)}
                 required
@@ -199,38 +199,38 @@ const Withdrawal = () => {
         )}
         {selectedMethod === "bank" && (
           <>
-            <div className="form-group my-3">
+            <div className="my-3">
               <label className="fw-bold fs-4 my-2" htmlFor="bankname">
                 Bank Name
               </label>
               <input
                 type="text"
                 name="bankname"
-                className="form-control py-3"
+                className="form-control py-3 border border-3 rounded-3"
                 value={bankName}
                 onChange={(e) => setBankName(e.target.value)}
                 required
               />
             </div>
-            <div className="form-group my-3">
+            <div className="my-3">
               <label className="fw-bold fs-4 my-2" htmlFor="accountNumber">
                 Bank Account Number
               </label>
               <input
                 type="number"
-                className="form-control py-3"
+                className="form-control py-3 border border-3 rounded-3"
                 value={bankAccountNumber}
                 onChange={(e) => setBankAccountNumber(e.target.value)}
                 required
               />
             </div>
-            <div className="form-group my-3">
+            <div className="my-3">
               <label className="fw-bold fs-4 my-2" htmlFor="phonenumber">
                 Phone Number
               </label>
               <input
                 type="tel"
-                className="form-control py-3"
+                className="form-control py-3 rounded-3 border border-3"
                 value={phoneNumber}
                 onChange={(e) => setPhoneNumber(e.target.value)}
                 required
@@ -238,13 +238,13 @@ const Withdrawal = () => {
             </div>
           </>
         )}
-              <div className="form-group my-3">
+              <div className="my-3">
           <label className="fw-bold fs-4 my-2" htmlFor="withdrawalPassword">
             Enter Withdrawal Password
           </label>
           <input
             type="password"
-            className="form-control py-3"
+            className="form-control py-3 rounded-3 border border-3"
             value={withdrawalPassword}
             onChange={(e) => setWithdrawalPassword(e.target.value)}
             required
