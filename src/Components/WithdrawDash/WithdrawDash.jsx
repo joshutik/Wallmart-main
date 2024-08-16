@@ -258,6 +258,8 @@ import "./WithdrawDash.css";
 import { Link } from "react-router-dom";
 
 const WithdrawDash = () => {
+
+  const djangoHostname = import.meta.env.VITE_DJANGO_HOSTNAME;
   const [withdrawData, setWithdrawData] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
@@ -267,16 +269,23 @@ const WithdrawDash = () => {
   }, [currentPage]);
 
   const fetchWithdrawData = async (page) => {
-    try {
-      const response = await axios.get(`/api/withdraw?page=${page}`);
-      const { data, totalEntries, totalPages } = response.data;
+  try {
+    const token = localStorage.getItem("token");
+        const response = await axios.get(`${djangoHostname}/api/withdrws/withdraw/`, {
+          headers: {
+            Authorization: `Token ${token}`,
+          },
+        });
+    const { data, totalEntries, totalPages } = response.data;
 
-      setWithdrawData(Array.isArray(data) ? data : []);
-      setTotalPages(totalEntries > 10 ? totalPages : 1);
-    } catch (error) {
-      console.error("Error fetching withdraw data", error);
-    }
-  };
+    // setRechargeData(Array.isArray(data) ? data : []);
+    setWithdrawData(response.data);
+    
+    setTotalPages(totalPages > 0 ? totalPages : 1);
+  } catch (error) {
+    console.error("Error fetching withdraw data", error);
+  }
+};
 
   const handleDownloadReceipt = (receiptUrl) => {
     window.open(receiptUrl, "_blank");
@@ -300,14 +309,25 @@ const WithdrawDash = () => {
     }
   };
 
-  const handleDeleteUser = async (userId) => {
-    try {
-      await axios.delete(`/api/withdraw/${userId}`);
-      fetchWithdrawData(currentPage);
-    } catch (error) {
-      console.error("Error deleting user", error);
+  const handleDeleteUser = async (withdrawalID) => {
+
+    const isConfirmed = window.confirm("Are you sure you want to delete this withdrawal data?");
+    if (!isConfirmed) {
+      return; // If the user cancels, exit the function
     }
-  };
+ 
+  try {
+    const token = localStorage.getItem("token");
+    await axios.delete(`${djangoHostname}/api/withdrws/withdraw/${withdrawalID}`, {
+      headers: {
+        Authorization: `Token ${token}`,
+      },
+    });
+    fetchWithdrawData(currentPage);
+  } catch (error) {
+    console.error("Error deleting user", error);
+  }
+};
 
   return (
     <div className="container-fluid">
@@ -342,12 +362,12 @@ const WithdrawDash = () => {
                 {Array.isArray(withdrawData) && withdrawData.length > 0 ? (
                   withdrawData.map((item) => (
                     <tr key={item.id}>
-                      <th scope="row">{item.method}</th>
-                      <td>{item.name}</td>
-                      <td>{item.paymentName}</td>
-                      <td>{item.paymentNo}</td>
-                      <td>{item.balance}</td>
-                      <td>{item.amountWithdrawn}</td>
+                      <th scope="row">{item.selectedMethod}</th>
+                      <td>{item.bankName}</td>
+                      <td>{item.user_firstName}</td>
+                      <td>{item.bankAccountNumber}</td>
+                      <td>{item.user_balance}</td>
+                      <td>{item.amount}</td>
                       <td>
                         <button
                           className="btn w-100 text-light px-2 py-1 rounded mx-1 dwload"

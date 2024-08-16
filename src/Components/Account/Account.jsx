@@ -372,7 +372,7 @@ const Account = () => {
                         </div>
                         <div className="mt-5">
                           <Link
-                            to={"/recharge-account"}
+                             to={`/recharge-account?amount=${amount}`} 
                             type="button"
                             className="recharge text-light fw-bold rounded-pill text-decoration-none w-75 border-0 py-2"
                             // onClick={makePayment}
