@@ -1084,7 +1084,7 @@ const Recharge = () => {
       >
         {selectedMethod === "wallet" && (
           <>
-            <div className="form-group my-3">
+            <div className=" my-3">
               <label className="fw-bold fs-4 my-4" htmlFor="cryptowallet">
                 Select Crypto Wallet
               </label>
@@ -1105,7 +1105,7 @@ const Recharge = () => {
                 <option value="TRC20">TRC20</option>
               </select>
             </div>
-            <div className="form-group my-3">
+            <div className="my-3">
               <label className="fw-bold fs-4 my-2" htmlFor="walletaddress">
                 Current Selected Wallet
               </label>

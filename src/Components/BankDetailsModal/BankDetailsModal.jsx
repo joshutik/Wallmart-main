@@ -177,13 +177,14 @@ const BankDetailsModal = ({ show, handleClose }) => {
     bankName: "Palm Pay",
     accountNumber: "165008977890",
     recipientName: "John Louis Vaqeuz",
-    amount: "$30.00",
+    RUT: "19469406-7",
   });
 
   // State for input fields
   const [newBankName, setNewBankName] = useState("");
   const [newAccountNumber, setNewAccountNumber] = useState("");
   const [newRecipientName, setNewRecipientName] = useState("");
+  const [newRut, setNewRut] = useState("");
 
   // Function to handle form submission
   const handleSubmit = () => {
@@ -228,8 +229,8 @@ const BankDetailsModal = ({ show, handleClose }) => {
               <div className="w-75 me-lg-auto mx-auto">
                 <hr className="horizontal border-3 text-white" />
               </div>
-              <p>Amount</p>
-              <p>{bankDetails.amount}</p>
+              <p>RUT</p>
+              <p>{bankDetails.RUT}</p>
             </div>
           </div>
         </div>
@@ -241,7 +242,7 @@ const BankDetailsModal = ({ show, handleClose }) => {
             type="text"
             name="newBankName"
             id="newBankName"
-            className="form-control rounded-3"
+            className="form-control rounded-3 border-dark"
             placeholder="Enter new bank name"
             value={newBankName}
             onChange={(e) => setNewBankName(e.target.value)}
@@ -255,10 +256,24 @@ const BankDetailsModal = ({ show, handleClose }) => {
             type="text"
             name="newRecipientName"
             id="newRecipientName"
-            className="form-control rounded-3"
+            className="form-control rounded-3 border-dark"
             placeholder="Enter new recipient name"
             value={newRecipientName}
             onChange={(e) => setNewRecipientName(e.target.value)}
+          />
+        </div>
+        <div className="text-start my-4">
+          <label htmlFor="rut" className="text-start">
+            RUT
+          </label>
+          <input
+            type="number"
+            name="rut"
+            id="rut"
+            className="form-control rounded-3 border-dark"
+            placeholder="Enter new account number"
+            value={newRut}
+            onChange={(e) => setNewRut(e.target.value)}
           />
         </div>
         <div className="text-start my-4">
@@ -269,7 +284,7 @@ const BankDetailsModal = ({ show, handleClose }) => {
             type="number"
             name="newAccountNumber"
             id="newAccountNumber"
-            className="form-control rounded-3"
+            className="form-control rounded-3 border-dark"
             placeholder="Enter new account number"
             value={newAccountNumber}
             onChange={(e) => setNewAccountNumber(e.target.value)}

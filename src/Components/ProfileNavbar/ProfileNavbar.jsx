@@ -29,7 +29,7 @@ const ProfileNavbar = () => {
     // Replace the below code with actual user data fetching logic
     const loggedInUser = {
       email: 'Admin786@gmail.com',
-      photoUrl: 'https://via.placeholder.com/40', // Replace with actual photo URL
+      photoUrl: '../assets/user.png', // Replace with actual photo URL
     };
 
     setUser(loggedInUser);

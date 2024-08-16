@@ -174,13 +174,13 @@ const WalletDetailsModal = ({ show, handleClose }) => {
               value={newCryptoWalletAddress}
               onChange={(e) => setNewCryptoWalletAddress(e.target.value)}
             />
-            <button 
-              className="btn btn-outline-secondary"
+            <span 
+              className=""
               onClick={() => handleCopy(newCryptoWalletAddress)}
               title="Copy Address"
             >
-              <i className="bi bi-clipboard"></i>
-            </button>
+              <i className="bi bi-copy fs-4"></i>
+            </span>
           </div>
         </div>
         <div className="my-4">

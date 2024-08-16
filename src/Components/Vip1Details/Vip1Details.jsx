@@ -217,38 +217,38 @@ const Vip1Details = () => {
                     <td>{user.invitationCode_display.code}</td>
                     <td>${user.balance}</td>
                     <td>({user.grabbed_orders_count})</td>
-                    <td>
-                    <span
-                        className="timy text-light px-2 py-1 rounded"
+                    <td className="d-flex justify-content-center px-3">
+                    <button
+                        className="timy text-light border-0 px-2 py-1 rounded"
                         onClick={() => handlePromote(user.id)}
                         style={{ cursor: "pointer" }}
                       >
                         {promoting === user.id ? (
-                          <span
+                          <button
                             className="spinner-border spinner-border-sm text-light"
                             role="status"
                             aria-hidden="true"
-                          ></span>
+                          ></button>
                         ) : (
                           "Promote"
                         )}
-                      </span>
+                      </button>
 
-                     <span
-                        className="bg-danger text-light px-2 mx-1 py-1 rounded"
+                     <button
+                        className="bg-danger border-0 text-light px-2 mx-1 py-1 rounded"
                         onClick={() => handleDelete(user.id)}
                         style={{ cursor: "pointer" }}
                       >
                         {deleting === user.id ? (
-                          <span
+                          <button
                             className="spinner-border spinner-border-sm text-light"
                             role="status"
                             aria-hidden="true"
-                          ></span>
+                          ></button>
                         ) : (
                           <i className="bi bi-trash3"></i>
                         )}
-                      </span>
+                      </button>
                     </td>
                   </tr>
                 ))}
