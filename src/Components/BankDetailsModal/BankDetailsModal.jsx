@@ -367,6 +367,20 @@ const BankDetailsModal = ({ show, handleClose }) => {
             onChange={(e) => setNewAccountNumber(e.target.value)}
           />
         </div>
+        <div className="text-start my-4">
+          <label htmlFor="ruthName" className="text-start">
+           RUT
+          </label>
+          <input
+            type="number"
+            name="ruthName"
+            id="ruthName"
+            className="form-control rounded-3 border-dark"
+            placeholder="Enter new account number"
+            value={ruthName}
+            onChange={(e) => setNewAccountNumber(e.target.value)}
+          />
+        </div>
         <div className="my-4">
           <button
             className="btn change text-light"
