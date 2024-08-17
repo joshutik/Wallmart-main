@@ -190,7 +190,7 @@ const Withdrawal = () => {
                 <option value="TON">TON</option>
                 <option value="BTC">BTC</option>
                 <option value="TRX">TRX</option>
-                <option value="TRX">TRC20</option>
+                <option value="TRC20">TRC20</option>
               </select>
             </div>
             <div className="my-3">
