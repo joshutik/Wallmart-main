@@ -75,7 +75,7 @@ const Modal1 = ({ show, handleClose, amount, balance }) => {
           <p>Time: {formattedTime}</p>
         </div>
         <div className="image-container">
-          <img src={images[currentImageIndex]} alt="Grab items" className="img-fluid w-25" />
+          <img src={images[currentImageIndex]} alt="Grab items" className="img-fluid w-50" />
         </div>
         <div className="d-flex justify-content-between px-4">
           <p className="pro-amount fw-bold fs-3">${amount}</p>
