@@ -169,7 +169,7 @@ const Withdrawal = () => {
               <select
                 name="cryptowallet"
                 id="cryptowallet"
-                className="form-select py-3"
+                className="form-select py-3 border border-3"
                 value={cryptoWallet}
                 onChange={(e) => setCryptoWallet(e.target.value)}
                 required

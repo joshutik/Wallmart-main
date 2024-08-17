@@ -146,7 +146,3 @@
 .toggle-button:not(:last-child) {
   border-right: none;
 }
-
-.toggle-button:hover {
-  background-color: #e0e0e0;
-}

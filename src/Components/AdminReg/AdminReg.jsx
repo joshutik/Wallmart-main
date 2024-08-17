@@ -139,7 +139,7 @@ const AdminReg = () => {
                   type="email"
                   name="email"
                   id="email"
-                  className="form-control rounded-5 py-3"
+                  className="form-control rounded-5 py-3 border border-2"
                   placeholder="Enter your email"
                   value={formData.email}
                   onChange={handleChange}
@@ -148,7 +148,7 @@ const AdminReg = () => {
 
               <div className="input-group my-4">
                 <select
-                  className="form-select rounded-start-5 py-3"
+                  className="form-select rounded-start-5 py-3 border border-2"
                   value={countryCode}
                   onChange={(e) => setCountryCode(e.target.value)}
                 >
@@ -166,7 +166,7 @@ const AdminReg = () => {
                 <input
                   type="tel"
                   name="phone"
-                  className="form-control rounded-end-5"
+                  className="form-control rounded-end-5 border border-2"
                   placeholder="Enter your number"
                   value={formData.phone}
                   onChange={handleChange}
@@ -176,7 +176,7 @@ const AdminReg = () => {
                 <input
                   type={showPassword ? "text" : "password"}
                   name="password"
-                  className="form-control py-3 rounded-5"
+                  className="form-control py-3 rounded-5 border border-2"
                   placeholder="Enter password"
                   value={formData.password}
                   onChange={handleChange}
@@ -197,7 +197,7 @@ const AdminReg = () => {
                 <input
                   type={showConfirmPassword ? "text" : "password"}
                   name="confirmPassword"
-                  className="form-control py-3 rounded-5"
+                  className="form-control py-3 rounded-5 border border-2"
                   placeholder="Confirm password"
                   value={formData.confirmPassword}
                   onChange={handleChange}

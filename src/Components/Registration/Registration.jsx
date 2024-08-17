@@ -824,7 +824,7 @@ const Registration = () => {
                   type="text"
                   name="firstName"
                   id="firstName"
-                  className="form-control rounded-5 py-3"
+                  className="form-control rounded-5 py-3 border border-3"
                   placeholder="Enter your first name"
                   value={formData.firstName}
                   onChange={handleChange}
@@ -835,7 +835,7 @@ const Registration = () => {
                   type="text"
                   name="lastName"
                   id="lastName"
-                  className="form-control rounded-5 py-3"
+                  className="form-control rounded-5 py-3 border border-3"
                   placeholder="Enter your last name"
                   value={formData.lastName}
                   onChange={handleChange}
@@ -844,7 +844,7 @@ const Registration = () => {
 
               <div className="input-group my-4">
                 <select
-                  className="form-select rounded-start-5 py-3"
+                  className="form-select rounded-start-5 py-3 border border-3"
                   value={countryCode}
                   onChange={(e) => setCountryCode(e.target.value)}
                 >
@@ -862,7 +862,7 @@ const Registration = () => {
                 <input
                   type="tel"
                   name="phone"
-                  className="form-control rounded-end-5"
+                  className="form-control rounded-end-5 border border-3"
                   placeholder="Enter your number"
                   value={formData.phone}
                   onChange={handleChange}
@@ -872,7 +872,7 @@ const Registration = () => {
                 <input
                   type={showPassword ? "text" : "password"}
                   name="password"
-                  className="form-control py-3 rounded-5"
+                  className="form-control py-3 rounded-5 border border-3"
                   placeholder="Enter password"
                   value={formData.password}
                   onChange={handleChange}
@@ -893,7 +893,7 @@ const Registration = () => {
                 <input
                   type={showConfirmPassword ? "text" : "password"}
                   name="confirmPassword"
-                  className="form-control py-3 rounded-5"
+                  className="form-control py-3 rounded-5 border border-3"
                   placeholder="Confirm password"
                   value={formData.confirmPassword}
                   onChange={handleChange}
@@ -914,7 +914,7 @@ const Registration = () => {
                 <input
                   type={showWithdrawalPassword ? "text" : "password"}
                   name="withdrawalPassword"
-                  className="form-control py-3 rounded-5"
+                  className="form-control py-3 rounded-5 border border-3"
                   placeholder="Set withdrawal password"
                   value={formData.withdrawalPassword}
                   onChange={handleChange}
@@ -937,7 +937,7 @@ const Registration = () => {
                 <input
                   type="text"
                   name="invitationCode"
-                  className="form-control py-3 rounded-5 my-4"
+                  className="form-control py-3 rounded-5 my-4 border border-3"
                   placeholder="Enter invitation code"
                   value={formData.invitationCode}
                   onChange={handleChange}

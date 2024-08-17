@@ -320,7 +320,7 @@ const Login = () => {
               </div> */}
               <div className="input-group my-4">
                 <select
-                  className="form-select rounded-start-5 py-3"
+                  className="form-select rounded-start-5 py-3 border border-2"
                   value={countryCode}
                   onChange={(e) => setCountryCode(e.target.value)}
                 >
@@ -334,7 +334,7 @@ const Login = () => {
                 <input
                   type="tel"
                   name="phone"
-                  className="form-control rounded-end-5"
+                  className="form-control rounded-end-5 border border-2"
                   placeholder="Enter your number"
                   value={formData.phone}
                   onChange={handleChange}
@@ -344,7 +344,7 @@ const Login = () => {
                 <input
                   type={showPassword ? "text" : "password"}
                   name="password"
-                  className="form-control py-3 rounded-5"
+                  className="form-control py-3 rounded-5 border border-2"
                   placeholder="Enter password"
                   value={formData.password}
                   onChange={handleChange}

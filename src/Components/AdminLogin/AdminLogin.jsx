@@ -330,7 +330,7 @@ const AdminLogin = () => {
               <img src={img1} alt="icon" />
             </div>
             <div className="py-3">
-              <h2 className="text-start">Login</h2>
+              <h2 className="text-start">Login As Admin</h2>
               <p className="text-start">
                 Welcome! Please login to your account.
               </p>
@@ -338,7 +338,7 @@ const AdminLogin = () => {
             <form onSubmit={handleSubmit}>
               <div className="form-group">
                 <input
-                  className="form-control py-3 rounded-5"
+                  className="form-control py-3 rounded-5 border border-2"
                   type="email"
                   name="email"
                   id="email"
@@ -352,7 +352,7 @@ const AdminLogin = () => {
                 <input
                   type={showPassword ? "text" : "password"}
                   name="password"
-                  className="form-control py-3 rounded-5"
+                  className="form-control py-3 rounded-5 border border-2"
                   placeholder="Enter password"
                   value={formData.password}
                   onChange={handleChange}

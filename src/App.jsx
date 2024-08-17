@@ -17,7 +17,7 @@ import AdminDashboard from './Components/AdminDashboard/AdminDashboard';
 // import NavigationBar2 from './Components/NavigationBar2/NavigationBar2';
 // import NavigationBar3 from './Components/NavigationBar3/NavigationBar3';
 // import GrabOrder from './Components/GrabOrder/GrabOrder';
-//  import Login from './Components/Login/Login'
+ import Login from './Components/Login/Login'
 // import Modal from './Components/Modal/Modal1';
 // import Registration from './Components/Registration/Registration';
 // import Registration from './Components/Registration/Registration'
@@ -39,7 +39,7 @@ function App() {
       {/* <NavigationBar2/> */}
       {/* <NavigationBar3/> */}
       {/* <GrabOrder/> */}
-      {/* <Login/> */}
+      <Login/>
       {/* <Modal/> */}
       {/* <Registration/> */}
       {/* <Account/> */}
