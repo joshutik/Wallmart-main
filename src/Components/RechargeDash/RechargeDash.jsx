@@ -17,11 +17,16 @@ const RechargeDash = () => {
   const fetchRechargeData = async (page) => {
     try {
       const response = await axios.get(`${djangoHostname}/api/recharge/recharges/`);
-      const { data, totalPages } = response.data;
+      console.log("API response:", response.data); // Log entire response data
 
-      setRechargeData(data);
-      setTotalPages(totalPages > 0 ? totalPages : 1);
-
+      if (Array.isArray(response.data)) {
+        setRechargeData(response.data);
+        // Assuming you get totalPages from elsewhere or set it to a default value
+        setTotalPages(1); // Set this appropriately based on your pagination logic
+      } else {
+        console.error("Unexpected data format:", response.data);
+        setRechargeData([]);
+      }
     } catch (error) {
       console.error("Error fetching recharge data", error);
     }
@@ -35,7 +40,7 @@ const RechargeDash = () => {
     setLoadingId(userId); // Set loading state for the clicked button
     try {
       const token = localStorage.getItem("token");
-  
+
       // Fetch the current user data to get the current balance
       const userResponse = await axios.get(`${djangoHostname}/api/accounts/users/${userId}/`, {
         headers: {
@@ -46,7 +51,7 @@ const RechargeDash = () => {
 
       // Calculate the new balance
       const newBalance = (parseFloat(currentBalance) + parseFloat(amount_top_up)).toFixed(1);
-  
+
       await fetch(`${djangoHostname}/api/accounts/users/${userId}/`,
         {
           method: "PATCH",
@@ -66,7 +71,7 @@ const RechargeDash = () => {
       setLoadingId(null); // Reset loading state after the request is finished
     }
   };
-  
+
   const handleDemoteUser = async (userId) => {
     try {
       await axios.post(`${djangoHostname}/api/recharge/${userId}/demote`);
@@ -119,9 +124,9 @@ const RechargeDash = () => {
                 </tr>
               </thead>
               <tbody>
-                {rechargeData.length > 0 ? (
+                {Array.isArray(rechargeData) && rechargeData.length > 0 ? (
                   rechargeData.map((item) => (
-                    <tr key={item.payment_id}>
+                    <tr key={item.id}>
                       <td>{item.recharge_method}</td>
                       <td>{item.user_firstName}</td>
                       <td>{item.payment_name}</td>
