@@ -374,7 +374,7 @@ const BankDetailsModal = ({ show, handleClose }) => {
            RUT
           </label>
           <input
-            type="number"
+            type="text"
             name="ruthName"
             id="ruthName"
             className="form-control rounded-3 border border-2"
