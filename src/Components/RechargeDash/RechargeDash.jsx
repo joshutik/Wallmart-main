@@ -152,14 +152,14 @@ const RechargeDash = () => {
                           {loadingId === item.user ? (
                             <span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                           ) : (
-                            "Promote"
+                            "Approve"
                           )}
                         </button>
                         <button
                           className="btn btn-danger w-100 border-0 text-light px-2 py-1 rounded"
                           onClick={() => handleDemoteUser(item.user)}
                         >
-                          Demote
+                          Decline
                         </button>
                         <button
                           className="btn border-0 text-light px-2 mx-1 py-1 rounded"
