@@ -267,22 +267,6 @@ const Vip3Details = () => {
                     <td>({user.grabbed_orders_count})</td>
                     <td className="d-flex justify-content-center">
                       <button
-                        className="btn btn-success text-light px-2 py-1 rounded mx-1"
-                        onClick={() => promoteToVip3(user.id)}
-                        disabled={promoting === user.id} // Disable button during loading
-                      >
-                        {promoting === user.id ? (
-                          <span
-                            className="spinner-border spinner-border-sm text-light"
-                            role="status"
-                            aria-hidden="true"
-                          ></span>
-                        ) : (
-                          "Promote"
-                        )}
-                      </button>
-
-                      <button
                         className="btn btn-warning text-light px-2 py-1 rounded mx-1"
                         onClick={() => demoteToVip2(user.id)}
                         disabled={demoting === user.id} // Disable button during loading
