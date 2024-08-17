@@ -824,7 +824,7 @@ const Recharge = () => {
     const fetchBankDetails = async () => {
       try {
         const response = await fetch(
-          `http://127.0.0.1:9090/api/payments/bank-details/`
+          `${djangoHostname}/api/payments/bank-details/`
         );
        
         if (response.ok) {

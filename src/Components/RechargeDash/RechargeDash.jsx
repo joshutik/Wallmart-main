@@ -4,11 +4,11 @@ import "./RechargeDash.css";
 import { Link } from "react-router-dom";
 
 const RechargeDash = () => {
-
   const djangoHostname = import.meta.env.VITE_DJANGO_HOSTNAME;
   const [rechargeData, setRechargeData] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
+  const [loadingId, setLoadingId] = useState(null); // State to track which button is loading
 
   useEffect(() => {
     fetchRechargeData(currentPage);
@@ -17,12 +17,15 @@ const RechargeDash = () => {
   const fetchRechargeData = async (page) => {
     try {
       const response = await axios.get(`${djangoHostname}/api/recharge/recharges/`);
-      const { data, totalEntries, totalPages } = response.data;
+      const { data, totalPages } = response.data;
 
-      // setRechargeData(Array.isArray(data) ? data : []);
+      console.log("data")
+      console.log(response.data)
+      console.log("data")
+
       setRechargeData(response.data);
-      
       setTotalPages(totalPages > 0 ? totalPages : 1);
+
     } catch (error) {
       console.error("Error fetching recharge data", error);
     }
@@ -32,15 +35,34 @@ const RechargeDash = () => {
     window.open(receiptUrl, "_blank");
   };
 
-  const handlePromoteUser = async (userId) => {
+  const handlePromoteUser = async (userId, amount_top_up) => {
+    setLoadingId(userId); // Set loading state for the clicked button
     try {
-      await axios.post(`${djangoHostname}/api/recharge/${userId}/promote`);
+      const token = localStorage.getItem("token");
+  
+      // Ensure amount_top_up is formatted to one decimal place
+      const formattedAmountTopUp = parseFloat(amount_top_up).toFixed(1);
+  
+      await fetch(`${djangoHostname}/api/accounts/users/${userId}/`,
+        {
+          method: "PATCH",
+          headers: {
+            Authorization: `Token ${token}`,
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            balance: formattedAmountTopUp,       
+          }),
+        }
+      );
       fetchRechargeData(currentPage);
     } catch (error) {
       console.error("Error promoting user", error);
+    } finally {
+      setLoadingId(null); // Reset loading state after the request is finished
     }
   };
-
+  
   const handleDemoteUser = async (userId) => {
     try {
       await axios.post(`${djangoHostname}/api/recharge/${userId}/demote`);
@@ -51,11 +73,9 @@ const RechargeDash = () => {
   };
 
   const handleDeleteUser = async (userId) => {
-
- 
     const isConfirmed = window.confirm("Are you sure you want to delete this recharge data?");
     if (!isConfirmed) {
-      return; // If the user cancels, exit the function
+      return;
     }
     try {
       await axios.delete(`${djangoHostname}/api/recharge/recharges/${userId}`);
@@ -117,9 +137,14 @@ const RechargeDash = () => {
                       <td className="d-flex">
                         <button
                           className="btn-success w-100 btn text-light px-2 py-1 rounded mx-1"
-                          onClick={() => handlePromoteUser(item.user)}
+                          onClick={() => handlePromoteUser(item.user, item.amount_top_up)}
+                          disabled={loadingId === item.user} // Disable button while loading for this specific user
                         >
-                          Promote
+                          {loadingId === item.user ? (
+                            <span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                          ) : (
+                            "Promote"
+                          )}
                         </button>
                         <button
                           className="btn btn-danger w-100 border-0 text-light px-2 py-1 rounded"

@@ -96,9 +96,7 @@ const Withdrawal = () => {
         }),
       };
 
-      console.log("requestData")
-      console.log(requestData)
-      console.log("requestData")
+
       await axios.post(`${djangoHostname}/api/withdrws/withdraw/`, requestData, {
         headers: {
           Authorization: `Token ${token}`,
