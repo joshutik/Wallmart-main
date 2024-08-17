@@ -1,172 +1,3 @@
-// // BankDetailsModal.js
-// // import React from 'react';
-// import "./BankDetailsModal.css";
-// import PropTypes from "prop-types";
-// import { Modal, Button } from "react-bootstrap";
-
-// const BankDetailsModal = ({ show, handleClose }) => {
-//   return (
-//     <Modal show={show} onHide={handleClose}>
-//       <Modal.Header closeButton>
-//         <Modal.Title>Bank Details</Modal.Title>
-//       </Modal.Header>
-//       <Modal.Body>
-//         <div className="container rounded-4 paym-card">
-//           <div className="row justify-content-center">
-//             <div className="col-lg-5 col-md-6 col-sm-12">
-//               <div className="text-center py-lg-5 py-4">
-//                 <p>Bank Name</p>
-//                 <p>Palm Pay</p>
-//                 <div className="w-75 me-lg-auto mx-auto">
-//                   <hr className="horizontal border-3 text-white " />
-//                 </div>
-
-//                 <p>Account</p>
-//                 <p>
-//                   165008977890{" "}
-//                   {/* <button
-//                     className="btn btn-copy w-25 text-light"
-//                     type="button"
-//                     onClick={() => handleCopy("165008977890")}
-//                   >
-//                     Copy
-//                   </button> */}
-//                 </p>
-//               </div>
-//             </div>
-//             <div className="d-none w-75 me-lg-auto mx-auto d-none d-sm-block d-md-none">
-//               <hr className="horizontal border-3 text-white " />
-//             </div>
-//             <div className="col-lg-5 col-md-6 col-sm-12">
-//               <div className="text-center py-lg-5 py-4">
-//                 <p>Recipient</p>
-//                 <p>John Louis Vaqeuz </p>
-//                 <div className="w-75 me-lg-auto mx-auto">
-//                   <hr className="horizontal border-3 text-white " />
-//                 </div>
-//                 <p>Account</p>
-//                 <p>
-//                   $30.00{" "}
-//                 </p>
-//               </div>
-//             </div>
-//           </div>
-//         </div>
-//       </Modal.Body>
-//       <Modal.Footer>
-//         <Button variant="secondary" onClick={handleClose}>
-//           Close
-//         </Button>
-//       </Modal.Footer>
-//     </Modal>
-//   );
-// };
-
-// BankDetailsModal.propTypes = {
-//   show: PropTypes.bool.isRequired,
-//   handleClose: PropTypes.func.isRequired,
-// };
-
-// export default BankDetailsModal;
-
-// import PropTypes from "prop-types";
-// import { Modal, Button } from "react-bootstrap";
-// import "./BankDetailsModal.css"; // Assuming you add the CSS in a separate file
-
-// const BankDetailsModal = ({ show, handleClose }) => {
-//   return (
-//     <Modal
-//       show={show}
-//       onHide={handleClose}
-//       dialogClassName="modal-dialog w-100"
-//     >
-//       <Modal.Header closeButton>
-//         <Modal.Title>Current Bank Details</Modal.Title>
-//       </Modal.Header>
-//       <Modal.Body>
-//         <div className="row justify-content-center paym-card">
-//           <div className="col-lg-5 col-md-6 col-sm-12">
-//             <div className="text-center py-lg-5 py-4">
-//               <p>Bank Name</p>
-//               <p>Palm Pay</p>
-//               <div className="w-75 me-lg-auto mx-auto">
-//                 <hr className="horizontal border-3 text-white" />
-//               </div>
-
-//               <p>Account</p>
-//               <p>165008977890 </p>
-//             </div>
-//           </div>
-//           <div className="d-none w-75 me-lg-auto mx-auto d-none d-sm-block d-md-none">
-//             <hr className="horizontal border-3 text-white" />
-//           </div>
-//           <div className="col-lg-5 col-md-6 col-sm-12">
-//             <div className="text-center py-lg-5 py-4">
-//               <p>Recipient</p>
-//               <p>John Louis Vaqeuz </p>
-//               <div className="w-75 me-lg-auto mx-auto">
-//                 <hr className="horizontal border-3 text-white" />
-//               </div>
-//               <p>Account</p>
-//               <p>$30.00 </p>
-//             </div>
-//           </div>
-//         </div>
-//         <div className="text-start my-4">
-//           <label htmlFor="newBankName" className="text-start">
-//             New bank Name
-//           </label>
-//           <input
-//             type="text"
-//             name="newBankName"
-//             id="newBankName"
-//             className="form-control rounded-3" placeholder="enter new bank name"
-//           />
-//         </div>
-//         <div className="text-start my-4">
-//           <label htmlFor="newRecipientName" className="text-start">
-//             New Recipient Name
-//           </label>
-//           <input
-//             type="text"
-//             name="newRecipientName"
-//             id="newRecipientName"
-//             className="form-control rounded-3" placeholder="enter new Recipient Name"
-//           />
-//         </div>
-//         <div className="text-start my-4">
-//           <label htmlFor="newAccountNumber" className="text-start">
-//             New Account Number
-//           </label>
-//           <input
-//             type="number"
-//             name="newAccountNumber"
-//             id="newAccountNumber"
-//             className="form-control rounded-3" placeholder="enter new Account Number"
-//           />
-//         </div>
-
-//         <div className="my-4">
-//           <button className=" btn change text-light">Submit</button>
-//         </div>
-//       </Modal.Body>
-//       <Modal.Footer>
-//         <Button variant="secondary" onClick={handleClose}>
-//           Close
-//         </Button>
-//       </Modal.Footer>
-//     </Modal>
-//   );
-// };
-
-// BankDetailsModal.propTypes = {
-//   show: PropTypes.bool.isRequired,
-//   handleClose: PropTypes.func.isRequired,
-// };
-
-// export default BankDetailsModal;
-
-
 
 import { useState, useEffect } from "react";
 import PropTypes from "prop-types";
@@ -182,14 +13,13 @@ const BankDetailsModal = ({ show, handleClose }) => {
     accountNumber: "",
     recipientName: "",
     ruth: "", // Default value, may not be fetched from API
-    amount: "$30.00", // Default value, may not be fetched from API
   });
 
   // State for input fields
   const [newBankName, setNewBankName] = useState("");
   const [newAccountNumber, setNewAccountNumber] = useState("");
   const [newRecipientName, setNewRecipientName] = useState("");
-  const [ruthName, setRuthName] = useState("");
+  const [newRuth, setRuth] = useState("");
 
   // State for loading and flash message
   const [loading, setLoading] = useState(false);
@@ -219,7 +49,7 @@ const BankDetailsModal = ({ show, handleClose }) => {
             setNewBankName(data.bank_name);
             setNewAccountNumber(data.account_number);
             setNewRecipientName(data.recipient_name);
-            setRuthName(data.ruth);
+            setRuth(data.ruth);
           } else {
             setFlashVariant("danger");
             setFlashMessage("Failed to fetch bank details.");
@@ -237,7 +67,6 @@ const BankDetailsModal = ({ show, handleClose }) => {
 
   // Function to handle form submission and send PATCH request
   const handleSubmit = async () => {
-    alert("Here")
     setLoading(true);
     setFlashMessage(""); // Clear any previous messages
 
@@ -245,6 +74,7 @@ const BankDetailsModal = ({ show, handleClose }) => {
       bank_name: newBankName || bankDetails.bankName,
       account_number: newAccountNumber || bankDetails.accountNumber,
       recipient_name: newRecipientName || bankDetails.recipientName,
+      ruth: newRuth || bankDetails.ruth
     };
 
     try {
@@ -258,6 +88,7 @@ const BankDetailsModal = ({ show, handleClose }) => {
 
       if (response.ok) {
         const data = await response.json();
+
         setBankDetails({
           ...bankDetails,
           bankName: data.bank_name,
@@ -284,6 +115,7 @@ const BankDetailsModal = ({ show, handleClose }) => {
     setNewBankName("");
     setNewAccountNumber("");
     setNewRecipientName("");
+    setRuth("");
   };
 
   return (
@@ -375,12 +207,12 @@ const BankDetailsModal = ({ show, handleClose }) => {
           </label>
           <input
             type="text"
-            name="ruthName"
-            id="ruthName"
+            name="newRuth"
+            id="newRuth"
             className="form-control rounded-3 border border-2"
             placeholder="Enter new RUT"
-            value={ruthName}
-            onChange={(e) => setRuthName(e.target.value)}
+            value={newRuth}
+            onChange={(e) => setRuth(e.target.value)}
           />
         </div>
         <div className="my-4">
