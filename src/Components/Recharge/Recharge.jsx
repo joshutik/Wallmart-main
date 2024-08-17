@@ -803,7 +803,7 @@ const Recharge = () => {
     bankName: "",
     account: "",
     recipient: "",
-    ruth: "19469406-7",
+    ruth: "",
   });
 
   // Flash message state
@@ -824,14 +824,17 @@ const Recharge = () => {
     const fetchBankDetails = async () => {
       try {
         const response = await fetch(
-          `${djangoHostname}/api/payments/bank-details/1/`
+          `http://127.0.0.1:9090/api/payments/bank-details/`
         );
+       
         if (response.ok) {
           const data = await response.json();
+          const dataValue = data[0];
           setBankDetails({
-            bankName: data.bank_name,
-            account: data.account_number,
-            recipient: data.recipient_name,
+            bankName: dataValue.bank_name,
+            account: dataValue.account_number,
+            recipient: dataValue.recipient_name,
+            ruth: dataValue.ruth,
             amount: formatAmount(amountFromQuery) || formatAmount(data.amount),
           });
         } else {
@@ -954,6 +957,7 @@ const Recharge = () => {
       handleFileUpload(formData);
     }
   };
+
 
   return (
     <div className="container px-3">
@@ -1118,10 +1122,23 @@ const Recharge = () => {
               <button
                 className="rounded-pill py-2 w-75 border-0 draw-btn fw-bold text-light fs-5 my-5"
                 type="submit"
+                disabled={loading} // Disable the button while loading
               >
-                Upload Receipt
+                {loading ? (
+                  <>
+                    <span
+                      className="spinner-border spinner-border-sm me-2"
+                      role="status"
+                      aria-hidden="true"
+                    ></span>
+                    Uploading...
+                  </>
+                ) : (
+                  "Upload Receipt"
+                )}
               </button>
-            </div>
+</div>
+
           </>
         )}
       </form>

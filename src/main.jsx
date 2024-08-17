@@ -18,7 +18,6 @@ import AdminLogin from './Components/AdminLogin/AdminLogin.jsx';
 import AdminReg from './Components/AdminReg/AdminReg.jsx';
 
 
-
 const router = createBrowserRouter([
   {
     path: "/",

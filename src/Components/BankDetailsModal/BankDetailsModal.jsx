@@ -181,6 +181,7 @@ const BankDetailsModal = ({ show, handleClose }) => {
     bankName: "",
     accountNumber: "",
     recipientName: "",
+    ruth: "", // Default value, may not be fetched from API
     amount: "$30.00", // Default value, may not be fetched from API
   });
 
@@ -236,6 +237,7 @@ const BankDetailsModal = ({ show, handleClose }) => {
 
   // Function to handle form submission and send PATCH request
   const handleSubmit = async () => {
+    alert("Here")
     setLoading(true);
     setFlashMessage(""); // Clear any previous messages
 
@@ -378,7 +380,7 @@ const BankDetailsModal = ({ show, handleClose }) => {
             className="form-control rounded-3 border border-2"
             placeholder="Enter new RUT"
             value={ruthName}
-            onChange={(e) => setNewAccountNumber(e.target.value)}
+            onChange={(e) => setRuthName(e.target.value)}
           />
         </div>
         <div className="my-4">

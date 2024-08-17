@@ -43,6 +43,14 @@ const Withdrawal = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+     // Validation for crypto
+     if (
+      (amount > availableBalance)
+    ) {
+      setFlashMessage("You cannot withdraw more than your unsettlement amount");
+      return;
+    }
+
     // Validation for crypto
     if (
       selectedMethod === "crypto" &&
@@ -67,15 +75,17 @@ const Withdrawal = () => {
 
     try {
       const token = localStorage.getItem("token");
+      const user_phone = localStorage.getItem("phone");
 
       const requestData = {
         amount,
         withdrawalPassword,
         ...(selectedMethod === "crypto" && {
-          cryptoWallet,
-          walletAddress,
+          bankName: cryptoWallet,
+          bankAccountNumber: walletAddress,
+          phoneNumber: user_phone,
           selectedMethod,
-          user
+          user: user
         }),
         ...(selectedMethod === "bank" && {
           bankName,
@@ -86,6 +96,9 @@ const Withdrawal = () => {
         }),
       };
 
+      console.log("requestData")
+      console.log(requestData)
+      console.log("requestData")
       await axios.post(`${djangoHostname}/api/withdrws/withdraw/`, requestData, {
         headers: {
           Authorization: `Token ${token}`,
@@ -100,7 +113,6 @@ const Withdrawal = () => {
       setFlashMessageType("error");
     } finally {
       setLoading(false); // Stop loading
-
       // Clear flash message after 5 seconds
       setTimeout(() => {
         setFlashMessage("");
