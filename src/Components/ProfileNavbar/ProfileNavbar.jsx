@@ -55,6 +55,40 @@
 
 
 
+// import { useState, useEffect } from 'react';
+// import './ProfileNavbar.css';
+
+// const ProfileNavbar = () => {
+//   const [user, setUser] = useState(null);
+
+//   useEffect(() => {
+//     // Simulate fetching the user's information from your authentication system
+//     setTimeout(() => {
+//       const loggedInUser = {
+//         email: 'Admin786@gmail.com',
+//         photoUrl: '/src/Components/assets/user.png', // Replace with actual photo URL
+//       };
+//       setUser(loggedInUser);
+//     }, 1000); // Simulate a delay for fetching user data
+//   }, []);
+
+//   return (
+//     <div className="profile-navbar">
+//       <img
+//         src={user ? user.photoUrl : '/src/Components/assets/user.png'} // Default avatar path
+//         alt="Profile"
+//         className="profile-img"
+//       />
+//       <span className="profile-email">{user ? user.email : ''}</span>
+//     </div>
+//   );
+// };
+
+// export default ProfileNavbar;
+
+
+
+
 import { useState, useEffect } from 'react';
 import './ProfileNavbar.css';
 
@@ -66,7 +100,7 @@ const ProfileNavbar = () => {
     setTimeout(() => {
       const loggedInUser = {
         email: 'Admin786@gmail.com',
-        photoUrl: '/src/Components/assets/user.png', // Replace with actual photo URL
+        photoUrl: '/src/Components/assets/user.png', // Replace with the actual photo URL
       };
       setUser(loggedInUser);
     }, 1000); // Simulate a delay for fetching user data
@@ -75,7 +109,7 @@ const ProfileNavbar = () => {
   return (
     <div className="profile-navbar">
       <img
-        src={user ? user.photoUrl : '/src/Components/assets/user.png'} // Default avatar path
+        src={user && user.photoUrl ? user.photoUrl : '/src/Components/assets/user.png'} // Default avatar path
         alt="Profile"
         className="profile-img"
       />
