@@ -267,7 +267,7 @@ const Vip3Details = () => {
                     <td>({user.grabbed_orders_count})</td>
                     <td className="d-flex justify-content-center">
                       <button
-                        className="btn btn-warning text-light px-2 py-1 rounded mx-1"
+                        className="btn btn-warning text-light text-center w-100 px-2 py-1 rounded mx-1"
                         onClick={() => demoteToVip2(user.id)}
                         disabled={demoting === user.id} // Disable button during loading
                       >

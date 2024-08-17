@@ -3,18 +3,25 @@ import PropTypes from "prop-types";
 import "./Modal1.css";
 import axios from 'axios';
 import { FaTimes } from "react-icons/fa";
+import logage from '/src/Components/assets/logage.png';
+import headphone from '/src/Components/assets/headphone.png';
+import smartwatch from '/src/Components/assets/smartwatch.png';
 
 const Modal1 = ({ show, handleClose, amount, balance }) => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false); // State to track successful payment
 
-  const images = [
-    "/src/Components/assets/logage.png",
-    "/src/Components/assets/headphone.png",
-    "/src/Components/assets/smartwatch.png",
-    // Add more images as needed
-  ];
+  // const images = [
+  //   "/src/Components/assets/logage.png",
+  //   "/src/Components/assets/headphone.png",
+  //   "/src/Components/assets/smartwatch.png",
+  //   // Add more images as needed
+  // ];
+
+  const images = [logage, headphone, smartwatch];
+
+  
 
   if (!show) return null;
 
