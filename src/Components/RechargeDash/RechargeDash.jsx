@@ -4,11 +4,11 @@ import "./RechargeDash.css";
 import { Link } from "react-router-dom";
 
 const RechargeDash = () => {
-
   const djangoHostname = import.meta.env.VITE_DJANGO_HOSTNAME;
   const [rechargeData, setRechargeData] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
+  const [loadingId, setLoadingId] = useState(null); // State to track which button is loading
 
   useEffect(() => {
     fetchRechargeData(currentPage);
@@ -17,12 +17,16 @@ const RechargeDash = () => {
   const fetchRechargeData = async (page) => {
     try {
       const response = await axios.get(`${djangoHostname}/api/recharge/recharges/`);
-      const { data, totalEntries, totalPages } = response.data;
+      console.log("API response:", response.data); // Log entire response data
 
-      // setRechargeData(Array.isArray(data) ? data : []);
-      setRechargeData(response.data);
-      
-      setTotalPages(totalPages > 0 ? totalPages : 1);
+      if (Array.isArray(response.data)) {
+        setRechargeData(response.data);
+        // Assuming you get totalPages from elsewhere or set it to a default value
+        setTotalPages(1); // Set this appropriately based on your pagination logic
+      } else {
+        console.error("Unexpected data format:", response.data);
+        setRechargeData([]);
+      }
     } catch (error) {
       console.error("Error fetching recharge data", error);
     }
@@ -32,12 +36,39 @@ const RechargeDash = () => {
     window.open(receiptUrl, "_blank");
   };
 
-  const handlePromoteUser = async (userId) => {
+  const handlePromoteUser = async (userId, amount_top_up) => {
+    setLoadingId(userId); // Set loading state for the clicked button
     try {
-      await axios.post(`${djangoHostname}/api/recharge/${userId}/promote`);
+      const token = localStorage.getItem("token");
+
+      // Fetch the current user data to get the current balance
+      const userResponse = await axios.get(`${djangoHostname}/api/accounts/users/${userId}/`, {
+        headers: {
+          Authorization: `Token ${token}`,
+        },
+      });
+      const currentBalance = userResponse.data.balance;
+
+      // Calculate the new balance
+      const newBalance = (parseFloat(currentBalance) + parseFloat(amount_top_up)).toFixed(1);
+
+      await fetch(`${djangoHostname}/api/accounts/users/${userId}/`,
+        {
+          method: "PATCH",
+          headers: {
+            Authorization: `Token ${token}`,
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            balance: newBalance,
+          }),
+        }
+      );
       fetchRechargeData(currentPage);
     } catch (error) {
       console.error("Error promoting user", error);
+    } finally {
+      setLoadingId(null); // Reset loading state after the request is finished
     }
   };
 
@@ -51,11 +82,9 @@ const RechargeDash = () => {
   };
 
   const handleDeleteUser = async (userId) => {
-
- 
     const isConfirmed = window.confirm("Are you sure you want to delete this recharge data?");
     if (!isConfirmed) {
-      return; // If the user cancels, exit the function
+      return;
     }
     try {
       await axios.delete(`${djangoHostname}/api/recharge/recharges/${userId}`);
@@ -95,9 +124,9 @@ const RechargeDash = () => {
                 </tr>
               </thead>
               <tbody>
-                {rechargeData.length > 0 ? (
+                {Array.isArray(rechargeData) && rechargeData.length > 0 ? (
                   rechargeData.map((item) => (
-                    <tr key={item.payment_id}>
+                    <tr key={item.id}>
                       <td>{item.recharge_method}</td>
                       <td>{item.user_firstName}</td>
                       <td>{item.payment_name}</td>
@@ -117,15 +146,20 @@ const RechargeDash = () => {
                       <td className="d-flex">
                         <button
                           className="btn-success w-100 btn text-light px-2 py-1 rounded mx-1"
-                          onClick={() => handlePromoteUser(item.user)}
+                          onClick={() => handlePromoteUser(item.user, item.amount_top_up)}
+                          disabled={loadingId === item.user} // Disable button while loading for this specific user
                         >
-                          Promote
+                          {loadingId === item.user ? (
+                            <span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                          ) : (
+                            "Approve"
+                          )}
                         </button>
                         <button
                           className="btn btn-danger w-100 border-0 text-light px-2 py-1 rounded"
                           onClick={() => handleDemoteUser(item.user)}
                         >
-                          Demote
+                          Decline
                         </button>
                         <button
                           className="btn border-0 text-light px-2 mx-1 py-1 rounded"
