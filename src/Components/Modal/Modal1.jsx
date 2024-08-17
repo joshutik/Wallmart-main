@@ -10,9 +10,9 @@ const Modal1 = ({ show, handleClose, amount, balance }) => {
   const [isSuccess, setIsSuccess] = useState(false); // State to track successful payment
 
   const images = [
-    "../assets/logage.png",
-    "../assets/headphone.png",
-    "../assets/smartwatch.png",
+    "/src/Components/assets/logage.png",
+    "/src/Components/assets/headphone.png",
+    "/src/Components/assets/smartwatch.png",
     // Add more images as needed
   ];
 
@@ -57,18 +57,18 @@ const Modal1 = ({ show, handleClose, amount, balance }) => {
   const isButtonDisabled = isLoading || isSuccess;
 
   return (
-    <div className="modal-overlay">
-      <div className="modal-content">
+    <div className="modal-overlay ">
+      <div className="modal-content py-5">
         <button onClick={handleClose} className="modal-close-btn">
           <FaTimes />
         </button>
         {/* Display the current image */}
-        <div className="image-container">
-          <img src={images[currentImageIndex]} alt="Random Display" className="img-fluid" />
-        </div>
         <div className="time text-end d-flex justify-content-evenly">
           <p>Date: {formattedDate}</p>
           <p>Time: {formattedTime}</p>
+        </div>
+        <div className="image-container">
+          <img src={images[currentImageIndex]} alt="Grab items" className="img-fluid w-25" />
         </div>
         <div className="d-flex justify-content-between px-4">
           <p className="pro-amount fw-bold fs-3">${amount}</p>
@@ -85,11 +85,7 @@ const Modal1 = ({ show, handleClose, amount, balance }) => {
           </div>
         </div>
 
-        <div className="image-container">
-          <img src={images[currentImageIndex]} alt="Random Display" className="img-fluid" />
-        </div>
-
-        <div className="modal-buttons">
+        <div className="modal-buttons pb-sm-5">
           <button
             onClick={handlePay}
             className="btn rounded-pill border-0 fs-4"
