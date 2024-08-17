@@ -19,11 +19,7 @@ const RechargeDash = () => {
       const response = await axios.get(`${djangoHostname}/api/recharge/recharges/`);
       const { data, totalPages } = response.data;
 
-      console.log("data")
-      console.log(response.data)
-      console.log("data")
-
-      setRechargeData(response.data);
+      setRechargeData(data);
       setTotalPages(totalPages > 0 ? totalPages : 1);
 
     } catch (error) {
@@ -40,8 +36,16 @@ const RechargeDash = () => {
     try {
       const token = localStorage.getItem("token");
   
-      // Ensure amount_top_up is formatted to one decimal place
-      const formattedAmountTopUp = parseFloat(amount_top_up).toFixed(1);
+      // Fetch the current user data to get the current balance
+      const userResponse = await axios.get(`${djangoHostname}/api/accounts/users/${userId}/`, {
+        headers: {
+          Authorization: `Token ${token}`,
+        },
+      });
+      const currentBalance = userResponse.data.balance;
+
+      // Calculate the new balance
+      const newBalance = (parseFloat(currentBalance) + parseFloat(amount_top_up)).toFixed(1);
   
       await fetch(`${djangoHostname}/api/accounts/users/${userId}/`,
         {
@@ -51,7 +55,7 @@ const RechargeDash = () => {
             "Content-Type": "application/json",
           },
           body: JSON.stringify({
-            balance: formattedAmountTopUp,       
+            balance: newBalance,
           }),
         }
       );
