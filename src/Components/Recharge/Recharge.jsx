@@ -13,6 +13,7 @@ const Recharge = () => {
   const queryParams = new URLSearchParams(location.search);
   const amountFromQuery = queryParams.get("amount");
 
+  const [qrCodeValue, setQrCodeValue] = useState(""); // QR Code value
   const [selectedMethod, setSelectedMethod] = useState("wallet");
   const [cryptoWallet, setCryptoWallet] = useState("");
   const [walletAddress, setWalletAddress] = useState("");
@@ -43,6 +44,8 @@ const Recharge = () => {
   const formatAmount = (amount) => {
     return parseFloat(amount).toFixed(2);
   };
+
+
 
   useEffect(() => {
     const fetchWalletData = async () => {
@@ -110,7 +113,8 @@ const Recharge = () => {
     if (cryptoWallet) {
       const wallet = walletData.find((w) => w.wallet_type === cryptoWallet);
       if (wallet) {
-        setWalletAddress(wallet.wallet_address);
+         // Generate QR code value with both walletAddress and cryptoWallet
+      setQrCodeValue(`${wallet.wallet_address} - ${cryptoWallet}`);
       } else {
         setWalletAddress("");
       }
@@ -259,6 +263,21 @@ const Recharge = () => {
     }
   };
 
+  useEffect(() => {
+    if (cryptoWallet) {
+      const wallet = walletData.find((w) => w.wallet_type === cryptoWallet);
+      if (wallet) {
+        setWalletAddress(wallet.wallet_address);
+        // Generate QR code value here
+         // Generate QR code value with both walletAddress and cryptoWallet
+         setQrCodeValue(`${cryptoWallet}\n\n${wallet.wallet_address}`);
+      } else {
+        setWalletAddress("");
+        setQrCodeValue(""); // Clear QR code value if wallet not found
+      }
+    }
+  }, [cryptoWallet, walletData]);
+
   return (
     <div className="container px-3">
       <div className="row my-5">
@@ -309,7 +328,7 @@ const Recharge = () => {
                 type="text"
                 id="wallet-address"
                 className="form-control py-3 rounded-4 w-50 bg-dark text-light"
-                value={cryptoWallet}
+                value={walletAddress || "Fetching Address"}
                 readOnly
               />
               <p className="py-4">
@@ -490,8 +509,9 @@ const Recharge = () => {
                 <h5 className="modal-title">SCAN QR CODE</h5>
               </div>
               <div className="bg-secondary rounded-3 py-4 text-light">
-                {/* <img src={qrCodeUrl} alt="QR Code" /> */}
-                <QRCode value={qrCodeUrl} />
+                {/* <img src={qrCodeValue}alt="QR Code" /> */}
+                 <QRCode value={qrCodeValue} />
+
                 <p>Scan the QR code or copy the link to make payment:</p>
               </div>
               <div className="modal-body text-start text-light">
