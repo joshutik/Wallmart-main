@@ -4,6 +4,7 @@ import 'bootstrap-icons/font/bootstrap-icons.css';
 // import Account from './Components/Account/Account';
 // import Recharge from './Components/Recharge/Recharge';
 import AdminDashboard from './Components/AdminDashboard/AdminDashboard';
+// import Test from './Components/Test/Test';
 // import Vip1Details from './Components/Vip1Details/Vip1Details';
 // import Vip2Details from './Components/Vip2Details/Vip2Details';
 // import Vip3Details from './Components/Vip3Details/Vip3Details';

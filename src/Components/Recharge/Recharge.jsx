@@ -1,5 +1,3 @@
-
-
 import { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import { Link, useLocation } from "react-router-dom";
@@ -48,7 +46,7 @@ const Recharge = () => {
         const response = await fetch(
           `${djangoHostname}/api/payments/bank-details/`
         );
-       
+
         if (response.ok) {
           const data = await response.json();
           const dataValue = data[0];
@@ -105,13 +103,13 @@ const Recharge = () => {
           body: formData,
         }
       );
-  
+
       if (response.ok) {
         const responseData = await response.json();
         console.log("Server Response:", responseData); // Debugging response
         setFlashMessage("File uploaded successfully!");
         setFlashType("success");
-  
+
         // Clear the input fields after successful upload
         setCryptoWallet("");
         setSenderName("");
@@ -135,7 +133,6 @@ const Recharge = () => {
       setLoading(false); // Set loading to false
     }
   };
-  
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -193,7 +190,6 @@ const Recharge = () => {
       handleFileUpload(formData);
     }
   };
-
 
   return (
     <div className="container px-3">
@@ -373,20 +369,18 @@ const Recharge = () => {
                   "Upload Receipt"
                 )}
               </button>
-</div>
-
+            </div>
           </>
         )}
       </form>
       {showQrModal && (
         <div className="modal show" tabIndex="-1" role="dialog">
-          <div className="modal-dialog" role="document">
+          <div className="modal-dialog bg-secondary" role="document">
             <div className="modal-content">
-              <div className="modal-header">
-                <h5 className="modal-title">QR Code</h5>
+              <div className="text-end">
                 <button
                   type="button"
-                  className="close"
+                  className="close btn fs-1 w-25"
                   data-dismiss="modal"
                   aria-label="Close"
                   onClick={() => setShowQrModal(false)}
@@ -394,15 +388,58 @@ const Recharge = () => {
                   <span aria-hidden="true">&times;</span>
                 </button>
               </div>
-              <div className="modal-body text-center">
-                <p>Scan the QR code or copy the link to make payment:</p>
+
+              <div className="container-fluid my-3">
+                <div className="row gy-2">
+                  <div className="col-lg-2">
+                    <span className="rounded-3 py-2 mx-2 w-25 text-center bg-secondary border border-0 bg-dark text-light">
+                      USDT
+                    </span>
+                  </div>
+
+                  <span className="rounded-3 py-2 mx-2 w-25 text-center bg-secondary border border-0 bg-dark text-light">
+                    BINANCE
+                  </span>
+                  <span className="rounded-3 py-2 mx-2 w-25 text-center bg-secondary border border-0 bg-dark text-light">
+                    TON
+                  </span>
+                  <span className="rounded-3 py-2 mx-2 w-25 text-center bg-secondary border border-0 bg-dark text-light">
+                    BTC
+                  </span>
+                  <span className="rounded-3 py-2 mx-2 w-25 text-center bg-secondary border border-0 bg-dark text-light">
+                    TRX
+                  </span>
+                  <span className="rounded-3 py-2 mx-2 w-25 text-center bg-secondary border border-0 bg-dark text-light">
+                    TRC20
+                  </span>
+                </div>
+              </div>
+              <div className="text-start my-3">
+                <span className="rounded-3 px-5 py-2  text-center border border-0 bg-dark text-light">
+                  {cryptoWallet}
+                </span>
+              </div>
+              <div className="modal-header">
+                <h5 className="modal-title text-center">SCAN QR CODE</h5>
+              </div>
+              <div className="bg-secondary rounded-3 py-4 text-light">
                 <img src={qrCodeUrl} alt="QR Code" />
-                <button
-                  className="btn btn-primary mt-3"
-                  onClick={() => handleCopy(qrCodeUrl)}
-                >
-                  Copy Link
-                </button>
+                <p>Scan the QR code or copy the link to make payment:</p>
+              </div>
+              <div className="modal-body text-start text-light">
+                <p>Deposit Address</p>
+                <div className="container bg-secondary py-4 rounded-3 copy-qr-text align-items-center">
+                  <div className="row">
+                    <div className="col-auto"></div>
+                  </div>
+                  <span className="mt-3">{qrCodeUrl}</span>
+                  <button
+                    className="btn copy-qr text-light w-25 rounded-3 border border-0 mt-3"
+                    onClick={() => handleCopy(qrCodeUrl)}
+                  >
+                    Copy Link
+                  </button>
+                </div>
               </div>
             </div>
           </div>
