@@ -100,7 +100,7 @@ const Withdrawal = () => {
       console.log(requestData)
       console.log("requestData")
 
-      
+
       await axios.post(`${djangoHostname}/api/withdrws/withdraw/`, requestData, {
         headers: {
           Authorization: `Token ${token}`,
@@ -114,6 +114,10 @@ const Withdrawal = () => {
       setFlashMessage("Error processing withdrawal");
       setFlashMessageType("error");
     } finally {
+      setWithdrawalPassword("")
+      setWalletAddress("")
+      setAmount("")
+      setAvailableBalance("")
       setLoading(false); // Stop loading
       // Clear flash message after 5 seconds
       setTimeout(() => {
