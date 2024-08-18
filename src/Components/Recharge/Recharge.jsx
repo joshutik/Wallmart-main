@@ -4,6 +4,7 @@ import { Link, useLocation } from "react-router-dom";
 import SliderToggle2 from "../SliderToggle2/SliderToggle2";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import "./Recharge.css";
+import QRCode from "qrcode.react";
 
 const Recharge = () => {
   const userID = localStorage.getItem("user_id");
@@ -465,7 +466,8 @@ const Recharge = () => {
                 <h5 className="modal-title text-center">SCAN QR CODE</h5>
               </div>
               <div className="bg-secondary rounded-3 py-4 text-light">
-                <img src={qrCodeUrl} alt="QR Code" />
+                {/* <img src={qrCodeUrl} alt="QR Code" /> */}
+                <QRCode value={qrCodeUrl} />
                 <p>Scan the QR code or copy the link to make payment:</p>
               </div>
               <div className="modal-body text-start text-light">
