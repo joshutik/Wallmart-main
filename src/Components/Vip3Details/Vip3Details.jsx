@@ -161,7 +161,7 @@ const Vip3Details = () => {
 
   const demoteToVip2 = async (userId) => {
     const isConfirmed = window.confirm(
-      "Are you sure you want to demote this user to VIP1?"
+      "Are you sure you want to demote this user to VIP2?"
     );
     if (!isConfirmed) {
       return; // If the user cancels, exit the function
@@ -183,7 +183,7 @@ const Vip3Details = () => {
             commission1: "0.0",
             commission2: "0.0",
             grabbed_orders_count: 0,
-            level: "VIP1",
+            level: "VIP2",
           }),
         }
       );

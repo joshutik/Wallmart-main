@@ -28,8 +28,10 @@ const Account = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [profilePic, setProfilePic] = useState(user);
   const [amount, setAmount] = useState(0);
+  const [orderCount, setOrderCount] = useState(0);
   const [loading, setLoading] = useState(false);
   const [level, setLevel] = useState("VIP1");
+  
   const [isScrolled, setIsScrolled] = useState(false);
 
   useEffect(() => {
@@ -57,6 +59,7 @@ const Account = () => {
         setUnsettle(data.unsettle);
         setPhone(data.phone);
         setLevel(data.level);
+        setOrderCount(data.grabbed_orders_count);
       } catch (error) {
         console.error("Error fetching data:", error);
       }
@@ -327,27 +330,30 @@ const Account = () => {
                           <button
                             className="btn border w-100 fw-bold mx-2"
                             onClick={() => handleAmountClick(20)}
+                            disabled={!(level === "VIP1" || orderCount > 0)}
                           >
                             $20
+
                           </button>
                           <button
-                            disabled
+                            disabled={level !== "VIP2" }
                             className="btn border fw-bold w-100 mx-2"
                             onClick={() => handleAmountClick(40)}
+                            
                           >
                             $40
                           </button>
                         </div>
                         <div className="col-lg-12 col-md-6 col-sm-12 d-flex recharge-btn">
                           <button
-                            disabled
+                             disabled={level !== "VIP3" }
                             className="btn border fw-bold w-100 mx-2"
                             onClick={() => handleAmountClick(70)}
                           >
                             $70
                           </button>
                           <button
-                            disabled
+                            disabled={!(level === "VIP3" && orderCount > 0)}
                             className="btn border fw-bold w-100 mx-2"
                             onClick={() => handleAmountClick(120)}
                           >
@@ -356,14 +362,14 @@ const Account = () => {
                         </div>
                         <div className="col-lg-12 col-md-6 col-sm-12 d-flex recharge-btn">
                           <button
-                            disabled
+                             disabled={!(level === "VIP3" && orderCount > 1)}
                             className="btn border fw-bold w-100 mx-2"
                             onClick={() => handleAmountClick(200)}
                           >
                             $200
                           </button>
                           <button
-                            disabled
+                             disabled={!(level === "VIP3" && orderCount > 2)}
                             className="btn border fw-bold w-100 mx-2"
                             onClick={() => handleAmountClick(500)}
                           >
