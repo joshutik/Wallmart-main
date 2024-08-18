@@ -1,5 +1,3 @@
-
-
 import { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import { Link, useLocation } from "react-router-dom";
@@ -38,9 +36,33 @@ const Recharge = () => {
   // Wallet lock state
   const [isWalletLocked, setIsWalletLocked] = useState(false);
 
+  // State to store wallet data
+  const [walletData, setWalletData] = useState([]);
+
   const formatAmount = (amount) => {
     return parseFloat(amount).toFixed(2);
   };
+
+  useEffect(() => {
+    const fetchWalletData = async () => {
+      try {
+        const response = await fetch(
+          `${djangoHostname}/api/payments/crypto-wallets/`
+        );
+
+        if (response.ok) {
+          const data = await response.json();
+          setWalletData(data);
+        } else {
+          console.error("Failed to fetch wallet data.");
+        }
+      } catch (error) {
+        console.error("Error fetching wallet data:", error);
+      }
+    };
+
+    fetchWalletData();
+  }, [djangoHostname]);
 
   useEffect(() => {
     const fetchBankDetails = async () => {
@@ -83,6 +105,17 @@ const Recharge = () => {
     }
   }, [flashMessage]);
 
+  useEffect(() => {
+    if (cryptoWallet) {
+      const wallet = walletData.find((w) => w.wallet_type === cryptoWallet);
+      if (wallet) {
+        setWalletAddress(wallet.wallet_address);
+      } else {
+        setWalletAddress("");
+      }
+    }
+  }, [cryptoWallet, walletData]);
+
   const handleCopy = (textToCopy) => {
     navigator.clipboard.writeText(textToCopy).then(() => {
       setFlashMessage("Copied to clipboard!");
@@ -108,7 +141,6 @@ const Recharge = () => {
   
       if (response.ok) {
         const responseData = await response.json();
-        console.log("Server Response:", responseData); // Debugging response
         setFlashMessage("File uploaded successfully!");
         setFlashType("success");
   
@@ -123,6 +155,10 @@ const Recharge = () => {
           recipient: "",
           ruth: "",
         });
+         // Delay the reload for 3 seconds
+      setTimeout(() => {
+        window.location.reload();
+      }, 3000); // 3 seconds delay
       } else {
         setFlashMessage("Failed to upload the file.");
         setFlashType("error");
@@ -135,7 +171,6 @@ const Recharge = () => {
       setLoading(false); // Set loading to false
     }
   };
-  
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -195,6 +230,7 @@ const Recharge = () => {
   };
 
 
+
   return (
     <div className="container px-3">
       <div className="row my-5">
@@ -219,13 +255,13 @@ const Recharge = () => {
                 Select Crypto Wallet
               </label>
               <select
-                name="cryptowallet"
-                id="cryptowallet"
-                className="form-select py-3 rounded-4"
-                value={cryptoWallet}
-                onChange={(e) => setCryptoWallet(e.target.value)}
-                disabled={isWalletLocked} // Disable if wallet is locked
-                required
+                  name="cryptowallet"
+                  id="cryptowallet"
+                  className="form-select py-3 rounded-4"
+                  value={cryptoWallet}
+                  onChange={(e) => setCryptoWallet(e.target.value)}
+                  disabled={isWalletLocked} // Disable if wallet is locked
+                  required
               >
                 <option value="">Choose Wallet</option>
                 <option value="USDT">USDT</option>
@@ -243,9 +279,11 @@ const Recharge = () => {
               </label>
               <input
                 type="text"
+                id="wallet-address"
                 className="form-control py-3 rounded-4 w-50 bg-dark text-light"
-                value={cryptoWallet}
+                value={walletAddress || "Fetching address..."}
                 readOnly
+
               />
               <p className="py-4">
                 Walmart will generate a scan code and Payment link that can
