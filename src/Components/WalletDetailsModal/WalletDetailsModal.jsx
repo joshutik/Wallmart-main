@@ -4,9 +4,10 @@ import { Modal, Button, Alert } from "react-bootstrap";
 import "./WalletDetailsModal.css";
 
 const WalletDetailsModal = ({ show, handleClose }) => {
-  const [cryptoWallet, setCryptoWallet] = useState("");
-  const [currentCryptoWalletAddress, setCurrentCryptoWalletAddress] =
-    useState("");
+  const [wallets, setWallets] = useState([]); // Initialize as an empty array
+  const [selectedWalletId, setSelectedWalletId] = useState(null); // Track selected wallet ID
+  const [cryptoWallet, setCryptoWallet] = useState(""); // Selected wallet type
+  const [currentCryptoWalletAddress, setCurrentCryptoWalletAddress] = useState("");
   const [newCryptoWalletAddress, setNewCryptoWalletAddress] = useState("");
   const [loading, setLoading] = useState(false);
   const [flashMessage, setFlashMessage] = useState("");
@@ -16,36 +17,41 @@ const WalletDetailsModal = ({ show, handleClose }) => {
 
   useEffect(() => {
     if (show) {
-      const fetchWalletDetails = async () => {
+      const fetchWallets = async () => {
         try {
-          const response = await fetch(
-            `${djangoHostname}/api/payments/crypto-wallets/1/`,
-            {
-              method: "GET",
-              headers: {
-                "Content-Type": "application/json",
-              },
-            }
-          );
+          const response = await fetch(`${djangoHostname}/api/payments/crypto-wallets/`, {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+            },
+          });
 
           if (response.ok) {
             const data = await response.json();
-            setCurrentCryptoWalletAddress(data.wallet_address);
-            setCryptoWallet(data.wallet_type);
+            // Assuming the response data structure is correct
+            setWallets(data || []); // Ensure wallets is always an array
           } else {
             setFlashVariant("danger");
-            setFlashMessage("Failed to fetch wallet details.");
+            setFlashMessage("Failed to fetch wallet types.");
           }
         } catch (error) {
           console.error("Error:", error);
           setFlashVariant("danger");
-          setFlashMessage("An error occurred while fetching wallet details.");
+          setFlashMessage("An error occurred while fetching wallet types.");
         }
       };
 
-      fetchWalletDetails();
+      fetchWallets();
     }
   }, [show, djangoHostname]);
+
+  useEffect(() => {
+    // Update currentCryptoWalletAddress when selectedWalletId changes
+    const selectedWallet = wallets.find(wallet => wallet.id === selectedWalletId);
+    if (selectedWallet) {
+      setCurrentCryptoWalletAddress(selectedWallet.wallet_address);
+    }
+  }, [selectedWalletId, wallets]);
 
   const handleSubmit = async () => {
     if (!newCryptoWalletAddress) {
@@ -58,24 +64,22 @@ const WalletDetailsModal = ({ show, handleClose }) => {
     setFlashMessage(""); // Clear previous messages
 
     try {
-      const response = await fetch(
-        `${djangoHostname}/api/payments/crypto-wallets/1/`,
-        {
-          method: "PATCH",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ wallet_address: newCryptoWalletAddress }),
-        }
-      );
+      const response = await fetch(`${djangoHostname}/api/payments/crypto-wallets/${selectedWalletId}/`, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ wallet_address: newCryptoWalletAddress }),
+      });
 
       if (response.ok) {
         setCurrentCryptoWalletAddress(newCryptoWalletAddress);
         setFlashVariant("success");
         setFlashMessage("Wallet address updated successfully!");
       } else {
+        const errorData = await response.json();
         setFlashVariant("danger");
-        setFlashMessage("Failed to update wallet address.");
+        setFlashMessage(`Failed to update wallet address: ${errorData.detail || "Unknown error"}`);
       }
     } catch (error) {
       console.error("Error:", error);
@@ -84,7 +88,7 @@ const WalletDetailsModal = ({ show, handleClose }) => {
     }
 
     setLoading(false);
-    //handleClose(); // Close the modal after submission
+    setNewCryptoWalletAddress("")
   };
 
   const handleCopy = (textToCopy) => {
@@ -96,6 +100,15 @@ const WalletDetailsModal = ({ show, handleClose }) => {
       .catch((err) => {
         console.error("Failed to copy text: ", err);
       });
+  };
+
+  const handleWalletChange = (e) => {
+    const selectedWalletType = e.target.value;
+    setCryptoWallet(selectedWalletType);
+    const selectedWallet = wallets.find(wallet => wallet.wallet_type === selectedWalletType);
+    if (selectedWallet) {
+      setSelectedWalletId(selectedWallet.id);
+    }
   };
 
   return (
@@ -124,16 +137,13 @@ const WalletDetailsModal = ({ show, handleClose }) => {
             id="cryptowallet"
             className="form-select py-3 rounded-4"
             value={cryptoWallet}
-            onChange={(e) => setCryptoWallet(e.target.value)}
+            onChange={handleWalletChange}
             required
           >
             <option value="">Choose Wallet</option>
-            <option value="USDT">USDT</option>
-            <option value="BINANCE">BINANCE</option>
-            <option value="TON">TON</option>
-            <option value="BTC">BTC</option>
-            <option value="TRX">TRX</option>
-            <option value="TRC20">TRC20</option>
+            {wallets.map(wallet => (
+              <option key={wallet.id} value={wallet.wallet_type}>{wallet.wallet_type}</option>
+            ))}
           </select>
         </div>
         <div className="my-3 text-start">
@@ -159,7 +169,7 @@ const WalletDetailsModal = ({ show, handleClose }) => {
               onChange={(e) => setNewCryptoWalletAddress(e.target.value)}
             />
             <span
-              className=""
+              className="input-group-text"
               onClick={() => handleCopy(newCryptoWalletAddress)}
               title="Copy Address"
             >
