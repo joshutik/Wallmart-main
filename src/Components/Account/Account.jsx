@@ -330,7 +330,7 @@ const Account = () => {
                           <button
                             className="btn border w-100 fw-bold mx-2"
                             onClick={() => handleAmountClick(20)}
-                            disabled={!(level === "VIP1" || orderCount > 0)}
+                            disabled={!(level === "VIP1" || balance == 40)}
                           >
                             $20
 
