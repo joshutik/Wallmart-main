@@ -281,7 +281,7 @@ const Recharge = () => {
                 type="text"
                 id="wallet-address"
                 className="form-control py-3 rounded-4 w-50 bg-dark text-light"
-                value={walletAddress || "Fetching Address"}
+                value={cryptoWallet}
                 readOnly
 
               />
