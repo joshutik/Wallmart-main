@@ -156,10 +156,10 @@ const Recharge = () => {
           recipient: "",
           ruth: "",
         });
-         // Delay the reload for 3 seconds
-      setTimeout(() => {
-        window.location.reload();
-      }, 3000); // 3 seconds delay
+        // Delay the reload for 3 seconds
+        setTimeout(() => {
+          window.location.reload();
+        }, 3000); // 3 seconds delay
       } else {
         setFlashMessage("Failed to upload the file.");
         setFlashType("error");
@@ -183,9 +183,38 @@ const Recharge = () => {
         return;
       }
 
+      // if (!isWalletLocked) {
+      //   setShowQrModal(true);
+      //   setQrCodeUrl("https://example.com/qrcode.png"); // This is a placeholder. Replace it with the actual URL.
+      //   setIsWalletLocked(true);
+      //   return;
+      // }
+
       if (!isWalletLocked) {
+        // Generate QR code URL based on selected wallet using switch case
+        switch (cryptoWallet) {
+          case "USDT":
+            setQrCodeUrl(`https://example.com/usdt-qrcode.png`);
+            break;
+          case "BINANCE":
+            setQrCodeUrl(`https://example.com/binance-qrcode.png`);
+            break;
+          case "TON":
+            setQrCodeUrl(`https://example.com/ton-qrcode.png`);
+            break;
+          case "BTC":
+            setQrCodeUrl(`https://example.com/btc-qrcode.png`);
+            break;
+          case "TRX":
+            setQrCodeUrl(`https://example.com/trx-qrcode.png`);
+            break;
+          case "TRC20":
+            setQrCodeUrl(`https://example.com/trc20-qrcode.png`);
+            break;
+          default:
+            setQrCodeUrl("");
+        }
         setShowQrModal(true);
-        setQrCodeUrl("https://example.com/qrcode.png"); // This is a placeholder. Replace it with the actual URL.
         setIsWalletLocked(true);
         return;
       }
@@ -230,8 +259,6 @@ const Recharge = () => {
     }
   };
 
-
-
   return (
     <div className="container px-3">
       <div className="row my-5">
@@ -256,13 +283,13 @@ const Recharge = () => {
                 Select Crypto Wallet
               </label>
               <select
-                  name="cryptowallet"
-                  id="cryptowallet"
-                  className="form-select py-3 rounded-4"
-                  value={cryptoWallet}
-                  onChange={(e) => setCryptoWallet(e.target.value)}
-                  disabled={isWalletLocked} // Disable if wallet is locked
-                  required
+                name="cryptowallet"
+                id="cryptowallet"
+                className="form-select py-3 rounded-4"
+                value={cryptoWallet}
+                onChange={(e) => setCryptoWallet(e.target.value)}
+                disabled={isWalletLocked} // Disable if wallet is locked
+                required
               >
                 <option value="">Choose Wallet</option>
                 <option value="USDT">USDT</option>
@@ -284,7 +311,6 @@ const Recharge = () => {
                 className="form-control py-3 rounded-4 w-50 bg-dark text-light"
                 value={cryptoWallet}
                 readOnly
-
               />
               <p className="py-4">
                 Walmart will generate a scan code and Payment link that can
@@ -418,7 +444,7 @@ const Recharge = () => {
       </form>
       {showQrModal && (
         <div className="modal show" tabIndex="-1" role="dialog">
-          <div className="modal-dialog bg-secondary" role="document">
+          <div className="modal-dialog" role="document">
             <div className="modal-content">
               <div className="text-end">
                 <button
@@ -432,27 +458,25 @@ const Recharge = () => {
                 </button>
               </div>
 
-              <div className="container-fluid my-3">
-                <div className="row gy-2">
-                  <div className="col-lg-2">
-                    <span className="rounded-3 py-2 mx-2 w-25 text-center bg-secondary border border-0 bg-dark text-light">
-                      USDT
-                    </span>
-                  </div>
+              <div className="container my-3">
+                <div className="d-flex flex-wrap">
+                  <span className="rounded-3 py-2 mx-2 px-2 text-center bg-secondary border border-0">
+                    USDT
+                  </span>
 
-                  <span className="rounded-3 py-2 mx-2 w-25 text-center bg-secondary border border-0 bg-dark text-light">
+                  <span className="rounded-3 py-2 mx-2 px-2 text-center bg-secondary border border-0">
                     BINANCE
                   </span>
-                  <span className="rounded-3 py-2 mx-2 w-25 text-center bg-secondary border border-0 bg-dark text-light">
+                  <span className="rounded-3 py-2 mx-2 px-2 text-center bg-secondary border border-0">
                     TON
                   </span>
-                  <span className="rounded-3 py-2 mx-2 w-25 text-center bg-secondary border border-0 bg-dark text-light">
+                  <span className="rounded-3 py-2 mx-2 px-2 text-center bg-secondary border border-0">
                     BTC
                   </span>
-                  <span className="rounded-3 py-2 mx-2 w-25 text-center bg-secondary border border-0 bg-dark text-light">
+                  <span className="rounded-3 py-2 mx-2 px-2 text-center bg-secondary border border-0">
                     TRX
                   </span>
-                  <span className="rounded-3 py-2 mx-2 w-25 text-center bg-secondary border border-0 bg-dark text-light">
+                  <span className="rounded-3 py-2 mx-2 px-2 text-center bg-secondary border border-0">
                     TRC20
                   </span>
                 </div>
@@ -463,7 +487,7 @@ const Recharge = () => {
                 </span>
               </div>
               <div className="modal-header">
-                <h5 className="modal-title text-center">SCAN QR CODE</h5>
+                <h5 className="modal-title">SCAN QR CODE</h5>
               </div>
               <div className="bg-secondary rounded-3 py-4 text-light">
                 {/* <img src={qrCodeUrl} alt="QR Code" /> */}
@@ -473,16 +497,19 @@ const Recharge = () => {
               <div className="modal-body text-start text-light">
                 <p>Deposit Address</p>
                 <div className="container bg-secondary py-4 rounded-3 copy-qr-text align-items-center">
-                  <div className="row">
-                    <div className="col-auto"></div>
+                  <div className="row justify-content-center align-items-center">
+                    <div className="col-lg-6 col-md-6 col-sm-12">
+                      <span className="">{qrCodeUrl}</span>
+                    </div>
+                    <div className="col-lg-6 col-md-6 col-sm-12 text-center">
+                      <button
+                        className="btn copy-qr text-light  rounded-3 border border-0 mt-3"
+                        onClick={() => handleCopy(qrCodeUrl)}
+                      >
+                        Copy Link
+                      </button>
+                    </div>
                   </div>
-                  <span className="mt-3">{qrCodeUrl}</span>
-                  <button
-                    className="btn copy-qr text-light w-25 rounded-3 border border-0 mt-3"
-                    onClick={() => handleCopy(qrCodeUrl)}
-                  >
-                    Copy Link
-                  </button>
                 </div>
               </div>
             </div>
