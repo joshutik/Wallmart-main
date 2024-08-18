@@ -4,6 +4,7 @@ import { Link, useLocation } from "react-router-dom";
 import SliderToggle2 from "../SliderToggle2/SliderToggle2";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import "./Recharge.css";
+import QRCode from "qrcode.react";
 
 const Recharge = () => {
   const userID = localStorage.getItem("user_id");
@@ -12,6 +13,7 @@ const Recharge = () => {
   const queryParams = new URLSearchParams(location.search);
   const amountFromQuery = queryParams.get("amount");
 
+  const [qrCodeValue, setQrCodeValue] = useState(""); // QR Code value
   const [selectedMethod, setSelectedMethod] = useState("wallet");
   const [cryptoWallet, setCryptoWallet] = useState("");
   const [walletAddress, setWalletAddress] = useState("");
@@ -42,6 +44,8 @@ const Recharge = () => {
   const formatAmount = (amount) => {
     return parseFloat(amount).toFixed(2);
   };
+
+
 
   useEffect(() => {
     const fetchWalletData = async () => {
@@ -109,7 +113,8 @@ const Recharge = () => {
     if (cryptoWallet) {
       const wallet = walletData.find((w) => w.wallet_type === cryptoWallet);
       if (wallet) {
-        setWalletAddress(wallet.wallet_address);
+         // Generate QR code value with both walletAddress and cryptoWallet
+      setQrCodeValue(`${wallet.wallet_address} - ${cryptoWallet}`);
       } else {
         setWalletAddress("");
       }
@@ -229,7 +234,19 @@ const Recharge = () => {
     }
   };
 
-
+  useEffect(() => {
+    if (cryptoWallet) {
+      const wallet = walletData.find((w) => w.wallet_type === cryptoWallet);
+      if (wallet) {
+        setWalletAddress(wallet.wallet_address);
+        // Generate QR code value here
+        setQrCodeValue(wallet.wallet_address);
+      } else {
+        setWalletAddress("");
+        setQrCodeValue(""); // Clear QR code value if wallet not found
+      }
+    }
+  }, [cryptoWallet, walletData]);
 
   return (
     <div className="container px-3">
@@ -465,7 +482,9 @@ const Recharge = () => {
                 <h5 className="modal-title text-center">SCAN QR CODE</h5>
               </div>
               <div className="bg-secondary rounded-3 py-4 text-light">
-                <img src={qrCodeUrl} alt="QR Code" />
+                {/* <img src={qrCodeValue}alt="QR Code" /> */}
+                 <QRCode value={qrCodeValue} />
+
                 <p>Scan the QR code or copy the link to make payment:</p>
               </div>
               <div className="modal-body text-start text-light">
