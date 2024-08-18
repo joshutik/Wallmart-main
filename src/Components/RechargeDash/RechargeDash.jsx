@@ -17,7 +17,7 @@ const RechargeDash = () => {
   const fetchRechargeData = async (page) => {
     try {
       const response = await axios.get(`${djangoHostname}/api/recharge/recharges/`);
-      console.log("API response:", response.data); // Log entire response data
+      //console.log("API response:", response.data); // Log entire response data
 
       if (Array.isArray(response.data)) {
         setRechargeData(response.data);
@@ -32,9 +32,35 @@ const RechargeDash = () => {
     }
   };
 
-  const handleDownloadReceipt = (receiptUrl) => {
-    window.open(receiptUrl, "_blank");
+  // const handleDownloadReceipt = (receiptUrl) => {
+  //   window.open(receiptUrl, "_blank");
+  // };
+
+  const handleDownloadReceipt = async (receiptUrl, name) => {
+    try {
+      const response = await axios.get(receiptUrl, {
+        responseType: 'blob', // Ensure the response is treated as a Blob
+      });
+  
+      const blob = new Blob([response.data], { type: response.data.type });
+      const link = document.createElement('a');
+      const url = window.URL.createObjectURL(blob);
+  
+      link.href = url;
+      link.setAttribute('download', name); // Specify the file name
+      document.body.appendChild(link);
+      link.click();
+  
+      // Clean up the URL object and link
+      link.parentNode.removeChild(link);
+      window.URL.revokeObjectURL(url);
+    } catch (error) {
+      console.error('Error downloading receipt:', error);
+    }
   };
+  
+  
+  
 
   const handlePromoteUser = async (userId, amount_top_up) => {
     setLoadingId(userId); // Set loading state for the clicked button
@@ -137,7 +163,7 @@ const RechargeDash = () => {
                         {item.receipt_image && (
                           <button
                             className="btn w-100 text-light px-2 py-1 rounded mx-1 dwload"
-                            onClick={() => handleDownloadReceipt(item.receipt_image)}
+                            onClick={() => handleDownloadReceipt(item.receipt_image, `${item.user_firstName}  $${item.amount_top_up} Receipt` )}
                           >
                             Download
                           </button>
