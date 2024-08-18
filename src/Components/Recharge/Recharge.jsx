@@ -240,7 +240,8 @@ const Recharge = () => {
       if (wallet) {
         setWalletAddress(wallet.wallet_address);
         // Generate QR code value here
-        setQrCodeValue(wallet.wallet_address);
+         // Generate QR code value with both walletAddress and cryptoWallet
+         setQrCodeValue(`${cryptoWallet}\n\n${wallet.wallet_address}`);
       } else {
         setWalletAddress("");
         setQrCodeValue(""); // Clear QR code value if wallet not found
