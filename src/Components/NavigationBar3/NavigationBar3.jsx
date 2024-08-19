@@ -205,7 +205,6 @@
 
 import PropTypes from "prop-types";  // Import PropTypes
 import Container from "react-bootstrap/Container";
-import CountryCode from '../CountryCode/CountryCode';
 import Navbar from "react-bootstrap/Navbar";
 import logo1 from "../assets/wallmart-logo.png";
 import LanguageSwitcher from "../LanguageSwitcher/LanguageSwitcher";
@@ -218,7 +217,7 @@ function NavigationBar3({ toggleSidebar }) {  // Accept toggleSidebar as a prop
           <img src={logo1} alt="Logo" />
         </Navbar.Brand>
         <div className="d-block d-md-none d-flex align-items-center ms-auto text-end">
-          <CountryCode />
+        <LanguageSwitcher/>
           <Navbar.Toggle aria-controls="basic-navbar-nav" onClick={toggleSidebar} />
         </div>
         <div className="d-none d-md-block d-flex align-items-center country">
