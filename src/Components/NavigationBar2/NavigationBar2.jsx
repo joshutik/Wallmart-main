@@ -68,10 +68,10 @@
 // export default NavigationBar2;
 
 import Container from "react-bootstrap/Container";
-import CountryCode from '../CountryCode/CountryCode';
 // import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import logo1 from "../assets/wallmart-logo.png";
+import LanguageSwitcher from "../LanguageSwitcher/LanguageSwitcher";
 
 function NavigationBar2() {
   return (
@@ -82,7 +82,8 @@ function NavigationBar2() {
         </Navbar.Brand>
         <div className="notification d-flex align-items-center ms-auto">
           <div className="">
-            <CountryCode />
+            {/* <CountryCode /> */}
+            <LanguageSwitcher/>
           </div>
         </div>
       </Container>

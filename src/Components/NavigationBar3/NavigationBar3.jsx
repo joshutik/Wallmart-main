@@ -208,6 +208,7 @@ import Container from "react-bootstrap/Container";
 import CountryCode from '../CountryCode/CountryCode';
 import Navbar from "react-bootstrap/Navbar";
 import logo1 from "../assets/wallmart-logo.png";
+import LanguageSwitcher from "../LanguageSwitcher/LanguageSwitcher";
 
 function NavigationBar3({ toggleSidebar }) {  // Accept toggleSidebar as a prop
   return (
@@ -221,7 +222,7 @@ function NavigationBar3({ toggleSidebar }) {  // Accept toggleSidebar as a prop
           <Navbar.Toggle aria-controls="basic-navbar-nav" onClick={toggleSidebar} />
         </div>
         <div className="d-none d-md-block d-flex align-items-center country">
-          <CountryCode />
+          <LanguageSwitcher/>
         </div>
         <Navbar.Collapse id="basic-navbar-nav">
           {/* Your Navbar content goes here */}
