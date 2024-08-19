@@ -170,8 +170,7 @@ const Homepage = () => {
         <NavigationBar />
       </div>
 
-     
-       {showModal && (
+      {showModal && (
             <div className="modal show  d-block" tabIndex="-3" role="dialog">
               <div className="modal-dialog" role="document">
                 <div className="modal-content top-up">
@@ -210,16 +209,17 @@ const Homepage = () => {
                         </button>
                       </div>
                     )}
+                  
                         <div className="col-lg-12 col-md-6 col-sm-12 d-flex recharge-btn">
                           <button
-                             disabled={level !== "VIP3"  && orderCount == 0}
+                            disabled={!(level === "VIP3" && orderCount < 1)}
                             className="btn border fw-bold w-100 mx-2"
                             onClick={() => handleAmountClick(70)}
                           >
                             $70
                           </button>
                           <button
-                            disabled={!(level === "VIP3" && orderCount > 0)}
+                            disabled={!(level === "VIP3" && orderCount < 2)}
                             className="btn border fw-bold w-100 mx-2"
                             onClick={() => handleAmountClick(120)}
                           >
@@ -228,33 +228,36 @@ const Homepage = () => {
                         </div>
                         <div className="col-lg-12 col-md-6 col-sm-12 d-flex recharge-btn">
                           <button
-                             disabled={!(level === "VIP3" && orderCount > 1)}
+                             disabled={!(level === "VIP3" && orderCount < 3)}
                             className="btn border fw-bold w-100 mx-2"
                             onClick={() => handleAmountClick(200)}
                           >
                             $200
                           </button>
                           <button
-                             disabled={!(level === "VIP3" && orderCount > 2)}
+                            disabled={!(level === "VIP3"  && orderCount < 4)}
                             className="btn border fw-bold w-100 mx-2"
                             onClick={() => handleAmountClick(500)}
                           >
                             $500
                           </button>
                         </div>
+
+                        {level === "VIP3" && (
+                          <>
                         <div className="col-lg-12 col-md-6 col-sm-12 d-flex recharge-btn">
                           <button
-                             disabled={!(level === "VIP3" && orderCount > 1)}
+                            disabled={!(level === "VIP3"  && orderCount < 5)}
                             className="btn border fw-bold w-100 mx-2"
-                            onClick={() => handleAmountClick(200)}
+                            onClick={() => handleAmountClick(900)}
                           >
                             $900
                           </button>
                           
                           <button
-                             disabled={!(level === "VIP3" && orderCount > 2)}
+                            disabled={!(level === "VIP3"  && orderCount < 6)}
                             className="btn border fw-bold w-100 mx-2"
-                            onClick={() => handleAmountClick(500)}
+                            onClick={() => handleAmountClick(1200)}
                           >
                             $1200
                           </button>
@@ -262,32 +265,31 @@ const Homepage = () => {
                         </div>
                         <div className="col-lg-12 col-md-6 col-sm-12 d-flex recharge-btn">
                           <button
-                             disabled={!(level === "VIP3" && orderCount > 1)}
+                            disabled={!(level === "VIP3"  && orderCount < 7)}
                             className="btn border fw-bold w-100 mx-2"
-                            onClick={() => handleAmountClick(200)}
+                            onClick={() => handleAmountClick(1500)}
                           >
                             $1500
                           </button>
                           <button
-                             disabled={!(level === "VIP3" && orderCount > 2)}
+                            disabled={!(level === "VIP3"  && orderCount < 8)}
                             className="btn border fw-bold w-100 mx-2"
-                            onClick={() => handleAmountClick(500)}
+                            onClick={() => handleAmountClick(2200)}
                           >
                             $2200
                           </button>
                         </div>
-                        {level === "VIP3" && (
-                          <>
+                        
                             <div className="col-lg-12 col-md-6 col-sm-12 d-flex recharge-btn">
                               <button
-                                disabled={!(level === "VIP3" && orderCount > 1)}
+                                disabled={!(level === "VIP3"  && orderCount < 9)}
                                 className="btn border fw-bold w-100 mx-2"
-                                onClick={() => handleAmountClick(200)}
+                                onClick={() => handleAmountClick(3000)}
                               >
                                 $3000
                               </button>
                               <button
-                                disabled={!(level === "VIP3" && orderCount > 2)}
+                               disabled={!(level === "VIP3"  && orderCount < 10)}
                                 className="btn border fw-bold w-100 mx-2"
                                 onClick={() => handleAmountClick(500)}
                               >
@@ -297,22 +299,23 @@ const Homepage = () => {
 
                             <div className="col-lg-12 col-md-6 col-sm-12 d-flex recharge-btn">
                               <button
-                                disabled={!(level === "VIP3" && orderCount > 1)}
+                                disabled={!(level === "VIP3"  && orderCount < 11)}
                                 className="btn border fw-bold w-100 mx-2"
-                                onClick={() => handleAmountClick(200)}
+                                onClick={() => handleAmountClick(3950)}
                               >
                                 $3950
                               </button>
                               <button
-                                disabled={!(level === "VIP3" && orderCount > 2)}
+                                disabled={!(level === "VIP3"  && orderCount < 12)}
                                 className="btn border fw-bold w-100 mx-2"
-                                onClick={() => handleAmountClick(500)}
+                                onClick={() => handleAmountClick(4200)}
                               >
                                 $4200
                               </button>
                             </div>
                           </>
                         )}
+
 
                         <div className="mt-5">
                           {amount === 0 || loading ? (

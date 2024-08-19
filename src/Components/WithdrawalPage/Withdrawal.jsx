@@ -33,6 +33,9 @@ const Withdrawal = () => {
           },
         });
         setAvailableBalance(response.data.unsettle);
+        setAmount(response.data.unsettle); // Prepopulate the amount with availableBalance
+
+        
       } catch (error) {
         console.error("Error fetching balance:", error);
       }
@@ -42,37 +45,37 @@ const Withdrawal = () => {
 
     
   
-  const handleUserUnsettle = async (userId, amount_withdrawn) => {
-    try {
-      const token = localStorage.getItem("token");
+  // const handleUserUnsettle = async (userId, amount_withdrawn) => {
+  //   try {
+  //     const token = localStorage.getItem("token");
 
-      // Fetch the current user data to get the current balance
-      const userResponse = await axios.get(`${djangoHostname}/api/accounts/users/${userId}/`, {
-        headers: {
-          Authorization: `Token ${token}`,
-        },
-      });
-      const currentBalance = userResponse.data.unsettle;
+  //     // Fetch the current user data to get the current balance
+  //     const userResponse = await axios.get(`${djangoHostname}/api/accounts/users/${userId}/`, {
+  //       headers: {
+  //         Authorization: `Token ${token}`,
+  //       },
+  //     });
+  //     const currentBalance = userResponse.data.unsettle;
 
-      // Calculate the new balance
-      const newBalance = (parseFloat(currentBalance) - parseFloat(amount_withdrawn)).toFixed(1);
+  //     // Calculate the new balance
+  //     const newBalance = (parseFloat(currentBalance) - parseFloat(amount_withdrawn)).toFixed(1);
 
-      await fetch(`${djangoHostname}/api/accounts/users/${userId}/`,
-        {
-          method: "PATCH",
-          headers: {
-            Authorization: `Token ${token}`,
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            unsettle: newBalance,
-          }),
-        }
-      );
-    } catch (error) {
-      console.error("Error promoting user", error);
-    }
-  };
+  //     await fetch(`${djangoHostname}/api/accounts/users/${userId}/`,
+  //       {
+  //         method: "PATCH",
+  //         headers: {
+  //           Authorization: `Token ${token}`,
+  //           "Content-Type": "application/json",
+  //         },
+  //         body: JSON.stringify({
+  //           unsettle: newBalance,
+  //         }),
+  //       }
+  //     );
+  //   } catch (error) {
+  //     console.error("Error promoting user", error);
+  //   }
+  // };
 
 
   const handleSubmit = async (e) => {
@@ -140,7 +143,7 @@ const Withdrawal = () => {
       setFlashMessage("Request sent successfully.  Awaiting approval");
       setFlashMessageType("success");
 
-      handleUserUnsettle(user, availableBalance)
+      // handleUserUnsettle(user, availableBalance)
       
     } catch (error) {
       console.error("Error processing withdrawal:", error);
@@ -191,6 +194,7 @@ const Withdrawal = () => {
                 className="form-control py-3 border rounded-3 border-3"
                 type="number"
                 value={amount}
+                // value={{availableBalance}}
                 onChange={(e) => setAmount(e.target.value)}
                 min="0"
                 step="0.01"
@@ -207,7 +211,7 @@ const Withdrawal = () => {
                 type="number"
                 className="form-control py-3 bg-secondary rounded-3 border border-0 avia-bal"
                 value={availableBalance}
-                readOnly
+                // readOnly
               />
             </div>
           </div>

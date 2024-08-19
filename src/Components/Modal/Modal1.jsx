@@ -39,14 +39,26 @@ const Modal1 = ({ show, handleClose, user_level, amount, balance, orderCounts })
     if(user_level === "VIP2" && orderCounts == 1){
     return  20
     }
+    if(user_level === "VIP3" && orderCounts == 0){
+    return  70
+    }
+    if(user_level === "VIP3" && orderCounts == 1){
+    return  120
+    }
   }
 
   function commission_order(){
-    if(user_level === "VIP1"){
-    return  2
+    if(user_level === "VIP2" && orderCounts == 0){
+    return  12
     }
-    if(user_level === "VIP2"){
-    return  9
+    if(user_level === "VIP2" && orderCounts == 1){
+    return  6
+    }
+    if(user_level === "VIP3" && orderCounts == 0){
+    return  49
+    }
+    if(user_level === "VIP3" && orderCounts == 1){
+    return  84
     }
   }
 
