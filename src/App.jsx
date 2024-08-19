@@ -1,9 +1,10 @@
 import './App.css'
 import 'bootstrap-icons/font/bootstrap-icons.css';
+// import { useTranslation } from "react-i18next";
 // import './i18next/i18n'; // Import i18n configuration
 // import Account from './Components/Account/Account';
 // import Recharge from './Components/Recharge/Recharge';
-import AdminDashboard from './Components/AdminDashboard/AdminDashboard';
+// import AdminDashboard from './Components/AdminDashboard/AdminDashboard';
 // import Test from './Components/Test/Test';
 // import Vip1Details from './Components/Vip1Details/Vip1Details';
 // import Vip2Details from './Components/Vip2Details/Vip2Details';
@@ -22,7 +23,7 @@ import AdminDashboard from './Components/AdminDashboard/AdminDashboard';
 // import Modal from './Components/Modal/Modal1';
 // import Registration from './Components/Registration/Registration';
 // import Registration from './Components/Registration/Registration'
-// import Homepage from './Components/Homepage/Homepage';
+import Homepage from './Components/Homepage/Homepage';
 // import Usercomision from './Components/Usercomision/Usercomision';
 // import Partners from './Components/Partners/Partners';
 // import NavigationBar from './Components/NavigationBar/NavigationBar';
@@ -30,10 +31,10 @@ import AdminDashboard from './Components/AdminDashboard/AdminDashboard';
 // import AdminLogin from './Components/AdminLogin/AdminLogin';
 
 function App() {
- 
+//  const { t } = useTranslation()
   return (
     <div>
-      {/* <Homepage/> */}
+      <Homepage/>
       {/* <Usercomision/> */}
       {/* <Partners/> */}
       {/* <NavigationBar/> */}
@@ -48,7 +49,7 @@ function App() {
       {/* <WithdrawalBank/> */}
       {/* <Withdrawal/> */}
       {/* <Recharge/> */}
-      <AdminDashboard/>
+      {/* <AdminDashboard/> */}
       {/* <LastJoined/> */}
       {/* <Vip1Details/> */}
       {/* <Vip2Details/> */}

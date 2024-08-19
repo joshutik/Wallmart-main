@@ -33,7 +33,7 @@ const Recharge = () => {
   // Flash message state
   const [flashMessage, setFlashMessage] = useState(null);
   const [flashType, setFlashType] = useState(""); // "success" or "error"
-
+ 
   // Loader state
   const [loading, setLoading] = useState(false);
 
@@ -169,10 +169,10 @@ const Recharge = () => {
           recipient: "",
           ruth: "",
         });
-         // Delay the reload for 3 seconds
-      setTimeout(() => {
-        window.location.reload();
-      }, 3000); // 3 seconds delay
+        // Delay the reload for 3 seconds
+        setTimeout(() => {
+          window.location.reload();
+        }, 3000); // 3 seconds delay
       } else {
         setFlashMessage("Failed to upload the file.");
         setFlashType("error");
@@ -196,9 +196,38 @@ const Recharge = () => {
         return;
       }
 
+      // if (!isWalletLocked) {
+      //   setShowQrModal(true);
+      //   setQrCodeUrl("https://example.com/qrcode.png"); // This is a placeholder. Replace it with the actual URL.
+      //   setIsWalletLocked(true);
+      //   return;
+      // }
+
       if (!isWalletLocked) {
+        // Generate QR code URL based on selected wallet using switch case
+        switch (cryptoWallet) {
+          case "USDT":
+            setQrCodeUrl(`https://example.com/usdt-qrcode.png`);
+            break;
+          case "BINANCE":
+            setQrCodeUrl(`https://example.com/binance-qrcode.png`);
+            break;
+          case "TON":
+            setQrCodeUrl(`https://example.com/ton-qrcode.png`);
+            break;
+          case "BTC":
+            setQrCodeUrl(`https://example.com/btc-qrcode.png`);
+            break;
+          case "TRX":
+            setQrCodeUrl(`https://example.com/trx-qrcode.png`);
+            break;
+          case "TRC20":
+            setQrCodeUrl(`https://example.com/trc20-qrcode.png`);
+            break;
+          default:
+            setQrCodeUrl("");
+        }
         setShowQrModal(true);
-        setQrCodeUrl("https://example.com/qrcode.png"); // This is a placeholder. Replace it with the actual URL.
         setIsWalletLocked(true);
         return;
       }
@@ -288,13 +317,13 @@ const Recharge = () => {
                 Select Crypto Wallet
               </label>
               <select
-                  name="cryptowallet"
-                  id="cryptowallet"
-                  className="form-select py-3 rounded-4"
-                  value={cryptoWallet}
-                  onChange={(e) => setCryptoWallet(e.target.value)}
-                  disabled={isWalletLocked} // Disable if wallet is locked
-                  required
+                name="cryptowallet"
+                id="cryptowallet"
+                className="form-select py-3 rounded-4"
+                value={cryptoWallet}
+                onChange={(e) => setCryptoWallet(e.target.value)}
+                disabled={isWalletLocked} // Disable if wallet is locked
+                required
               >
                 <option value="">Choose Wallet</option>
                 <option value="USDT">USDT</option>
@@ -316,7 +345,6 @@ const Recharge = () => {
                 className="form-control py-3 rounded-4 w-50 bg-dark text-light"
                 value={walletAddress || "Fetching Address"}
                 readOnly
-
               />
               <p className="py-4">
                 Walmart will generate a scan code and Payment link that can
@@ -458,7 +486,7 @@ const Recharge = () => {
       </form>
       {showQrModal && (
         <div className="modal show" tabIndex="-1" role="dialog">
-          <div className="modal-dialog bg-secondary" role="document">
+          <div className="modal-dialog" role="document">
             <div className="modal-content">
               <div className="text-end">
                 <button
@@ -471,39 +499,13 @@ const Recharge = () => {
                   <span aria-hidden="true">&times;</span>
                 </button>
               </div>
-
-              <div className="container-fluid my-3">
-                <div className="row gy-2">
-                  <div className="col-lg-2">
-                    <span className="rounded-3 py-2 mx-2 w-25 text-center bg-secondary border border-0 bg-dark text-light">
-                      USDT
-                    </span>
-                  </div>
-
-                  <span className="rounded-3 py-2 mx-2 w-25 text-center bg-secondary border border-0 bg-dark text-light">
-                    BINANCE
-                  </span>
-                  <span className="rounded-3 py-2 mx-2 w-25 text-center bg-secondary border border-0 bg-dark text-light">
-                    TON
-                  </span>
-                  <span className="rounded-3 py-2 mx-2 w-25 text-center bg-secondary border border-0 bg-dark text-light">
-                    BTC
-                  </span>
-                  <span className="rounded-3 py-2 mx-2 w-25 text-center bg-secondary border border-0 bg-dark text-light">
-                    TRX
-                  </span>
-                  <span className="rounded-3 py-2 mx-2 w-25 text-center bg-secondary border border-0 bg-dark text-light">
-                    TRC20
-                  </span>
-                </div>
-              </div>
               <div className="text-start my-3">
                 <span className="rounded-3 px-5 py-2  text-center border border-0 bg-dark text-light">
                   {cryptoWallet}
                 </span>
               </div>
               <div className="modal-header">
-                <h5 className="modal-title text-center">SCAN QR CODE</h5>
+                <h5 className="modal-title">SCAN QR CODE</h5>
               </div>
               <div className="bg-secondary rounded-3 py-4 text-light">
                 {/* <img src={qrCodeValue}alt="QR Code" /> */}

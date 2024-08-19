@@ -11,8 +11,12 @@ import ModalTaskCompleted from '../ModalTaskCompleted/ModalTaskCompleted'; // Im
 import axios from 'axios';
 import NavigationBar from '../NavigationBar/NavigationBar';
 import NavigationBar2 from '../NavigationBar2/NavigationBar2';
+import { useTranslation } from 'react-i18next';
+
 
 const GrabOrder = () => {
+  const { t } = useTranslation()
+
   // State variables
   const djangoHostname = import.meta.env.VITE_DJANGO_HOSTNAME;
 
@@ -109,7 +113,7 @@ const GrabOrder = () => {
   return (
     <div className="container-fluid pb-5 mb-5 pt-5">
       <NavigationBar2/>
-      <h1 className="text-center fw-bold my-5">Order</h1>
+      <h1 className="text-center fw-bold my-5">{t('order')}</h1>
       <div className="container py-5">
         <div className="row align-items-center min-vh-100">
           <div className="col-lg-6 col-md-12 col-sm-12 mt-5">
@@ -119,7 +123,7 @@ const GrabOrder = () => {
                   <img src={diamond} alt="diamond-icon" />
                 </div>
                 <p className="text-light h4">
-                  Current Balance <i className="bi bi-chevron-right"></i>
+                  {t('current_balance')} <i className="bi bi-chevron-right"></i>
                 </p>
                 <div>
                   <p className="current-balance fw-bold fs-2">
@@ -135,7 +139,7 @@ const GrabOrder = () => {
                 <div>
                   <img src={data} alt="data-icon" className="img-fluid" />
                 </div>
-                <p>Yesterday Commission</p>
+                <p>{t('yesterday_commision')}</p>
               </div>
               <div className="px-4">
                 <p className="commission fw-bold fs-1">${commission1}</p>
@@ -157,7 +161,7 @@ const GrabOrder = () => {
                       gapPosition="bottom"
                     />
                     <h2 className="order-count position-absolute top-50 start-0 end-0 translate-middle-y display-4 w-75 mx-4 my-3 fw-bold text-center">
-                      Order <span id="count">{orderCount}</span>
+                    {t('order')} <span id="count">{orderCount}</span>
                     </h2>
                   </div>
                 </div>
@@ -166,7 +170,7 @@ const GrabOrder = () => {
                   <div>
                     <img src={data} alt="data-icon" className="img-fluid" />
                   </div>
-                  <p>Today Commission</p>
+                  <p>{t('today_commision')}</p>
                 </div>
                 <div className="px-4">
                   <p className="commission fw-bold fs-1">${commission2}</p>
@@ -181,7 +185,7 @@ const GrabOrder = () => {
             onClick={handleGrabClick}
             // disabled={balance < amount}
           >
-            Start grabbing
+            {t('start_grab')}
           </button>
         </div>
       </div>

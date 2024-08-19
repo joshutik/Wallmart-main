@@ -688,9 +688,15 @@ import img3 from "../assets/reg-img.png";
 import { Link, useNavigate } from "react-router-dom";
 import "bootstrap-icons/font/bootstrap-icons.css";
 import NavigationBar2 from "../NavigationBar2/NavigationBar2";
+import { useTranslation } from 'react-i18next';
+
 
 const Registration = () => {
   const navigate = useNavigate();
+
+  const { t } = useTranslation()
+
+
   const djangoHostname = import.meta.env.VITE_DJANGO_HOSTNAME;
 
   const [formData, setFormData] = useState({
@@ -817,7 +823,7 @@ const Registration = () => {
             <div>
               <img src={img1} alt="icon" />
             </div>
-            <h2>Create your Account</h2>
+            <h2>{t('create_account')}</h2>
             <form onSubmit={handleSubmit}>
               <div className="input-group my-4">
                 <input
@@ -825,7 +831,7 @@ const Registration = () => {
                   name="firstName"
                   id="firstName"
                   className="form-control rounded-5 py-3 border border-3"
-                  placeholder="Enter your first name"
+                  placeholder={t('first_name')}
                   value={formData.firstName}
                   onChange={handleChange}
                 />
@@ -836,7 +842,7 @@ const Registration = () => {
                   name="lastName"
                   id="lastName"
                   className="form-control rounded-5 py-3 border border-3"
-                  placeholder="Enter your last name"
+                  placeholder={t('last_name')}
                   value={formData.lastName}
                   onChange={handleChange}
                 />
@@ -863,7 +869,7 @@ const Registration = () => {
                   type="tel"
                   name="phone"
                   className="form-control rounded-end-5 border border-3"
-                  placeholder="Enter your number"
+                  placeholder={t('number')}
                   value={formData.phone}
                   onChange={handleChange}
                 />
@@ -873,7 +879,7 @@ const Registration = () => {
                   type={showPassword ? "text" : "password"}
                   name="password"
                   className="form-control py-3 rounded-5 border border-3"
-                  placeholder="Enter password"
+                  placeholder={t('password')}
                   value={formData.password}
                   onChange={handleChange}
                 />
@@ -894,7 +900,7 @@ const Registration = () => {
                   type={showConfirmPassword ? "text" : "password"}
                   name="confirmPassword"
                   className="form-control py-3 rounded-5 border border-3"
-                  placeholder="Confirm password"
+                  placeholder={t('confirm_password')}
                   value={formData.confirmPassword}
                   onChange={handleChange}
                 />
@@ -915,7 +921,7 @@ const Registration = () => {
                   type={showWithdrawalPassword ? "text" : "password"}
                   name="withdrawalPassword"
                   className="form-control py-3 rounded-5 border border-3"
-                  placeholder="Set withdrawal password"
+                  placeholder={t('withdrawal_password')}
                   value={formData.withdrawalPassword}
                   onChange={handleChange}
                 />
@@ -938,7 +944,7 @@ const Registration = () => {
                   type="text"
                   name="invitationCode"
                   className="form-control py-3 rounded-5 my-4 border border-3"
-                  placeholder="Enter invitation code"
+                  placeholder={t('invitation_code')}
                   value={formData.invitationCode}
                   onChange={handleChange}
                 />
@@ -952,9 +958,9 @@ const Registration = () => {
                   onChange={handleChange}
                 />{" "}
                 <span>
-                  By logging in you agree to our{" "}
+                {t('message')}{" "}
                   <a href="#" className="terms">
-                    Terms of use & Privacy Policy
+                  {t('terms')}
                   </a>
                 </span>
               </div>
@@ -971,15 +977,15 @@ const Registration = () => {
                       <span className="visually-hidden">Loading...</span>
                     </div>
                   ) : (
-                    "Register"
+                    t('register')
                   )}
                 </button>
               </div>
               <div>
                 <p>
-                  Already have an account?{" "}
+                {t('question_two')}{" "}
                   <Link to={"/login"} className="sub-login">
-                    Login
+                  {t('login')}
                   </Link>
                 </p>
               </div>

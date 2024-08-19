@@ -7,7 +7,7 @@ import logage from '/src/Components/assets/logage.png';
 import headphone from '/src/Components/assets/headphone.png';
 import smartwatch from '/src/Components/assets/smartwatch.png';
 
-const Modal1 = ({ show, handleClose, user_level, amount, balance, orderCounts }) => {
+const Modal1 = ({ show, handleClose, user, amount, balance }) => {
 
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
@@ -15,7 +15,7 @@ const Modal1 = ({ show, handleClose, user_level, amount, balance, orderCounts })
   const [flashMessage, setFlashMessage] = useState(""); // State for flash message
   const [showFlashMessage, setShowFlashMessage] = useState(false); // State to control flash message visibility
 
-  const [level, setUserLevel] = useState(""); // State for user level
+  const [userLevel, setUserLevel] = useState(""); // State for user level
   const [orderCount, setOrderCount] = useState(""); // State for order count
 
   const images = [logage, headphone, smartwatch];
@@ -87,10 +87,12 @@ const Modal1 = ({ show, handleClose, user_level, amount, balance, orderCounts })
           }
         });
 
+      
+        console.log("response.data")
+        console.log(response.data.level)
+        console.log("response.data")
 
       const userLevel = response.data.level; // State for user level
-
-      setUserLevel(response.data.level);
       const orderCount = response.data.grabbed_orders_count; // State for order count
 
 
@@ -197,10 +199,10 @@ const Modal1 = ({ show, handleClose, user_level, amount, balance, orderCounts })
               </p>
           </div>
           <div>
-            <h4 className="fw-bold commi">Commission </h4>
-            <h4 className="fw-bold commi text-end"> ${commission_order()} </h4>
+            <h4 className="fw-bold commi">Commission</h4>
+            <h4 className="fw-bold commi text-end">${commissionAmount.toFixed(2)}</h4>
           </div>
-        </div> 
+        </div>
 
         {/* Flash message */}
         {showFlashMessage && (

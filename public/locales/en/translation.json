@@ -1,0 +1,49 @@
+
+{
+    "login": "Login",
+    "description": "Welcome back! Please login to your account",
+    "forgot": "Forgot password?",
+    "number": "Enter your number",
+    "password": "Enter your password",
+    "remember": "Remember me",
+    "question": "Don't have an account?",
+    "sign_up": "Sign up",
+    "create_account": "Create your Account",
+    "message": "By logging in you agree to our",
+    "terms": "Terms of use & Privacy Policy",
+    "register": "Register",
+    "question_two": "Already have an account?",
+    "first_name": "enter first name",
+    "last_name": "enter last name",
+    "confirm_password": "confirm password",
+    "withdrawal_password": "set withdrawal password",
+    "invitation_code": "enter invitation code",
+    "topup": "Top Up",
+    "quick_withdrawal": "Quick Withdrawal",
+    "invite": "invite friend",
+    "commission": "commission",
+    "recharge_now": "Recharge now",
+    "top_up_account": "Top Up Account",
+    "select_recharge_amount": "Select Recharge Amount",
+    "order": "Order",
+    "yesterday_commision": "Yeterday Commission",
+    "today_commision": "Today Commission",
+    "start_grab": "Start grabing",
+    "current_balance": "Current Balance",
+    "Number": "Number",
+    "account_info": "Acount Information",
+    "order_records": "Order Records",
+    "recharge_records": "Recharge Records",
+    "withdraw_record": "Withdrawal record"
+    
+    
+
+
+
+
+
+  }
+
+
+
+ 

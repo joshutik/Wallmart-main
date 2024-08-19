@@ -11,8 +11,13 @@ import Usercomision from "../Usercomision/Usercomision";
 import Partners from "../Partners/Partners";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import { useTranslation } from 'react-i18next';
 
 const Homepage = () => {
+  const pageText = document.body.innerText;
+  console.log(pageText);
+
+  const { t } = useTranslation()
   const djangoHostname = import.meta.env.VITE_DJANGO_HOSTNAME;
   const [amount, setAmount] = useState(0);
   const [loading, setLoading] = useState(false);
@@ -138,7 +143,7 @@ const Homepage = () => {
                 className="btn W-25 py-3 px-4 bg-transparent rounded-5 action"
               >
                 <img src={img4} className="img-fluid mb-2" alt="" />{" "}
-                <span className="fw-bold text-light">Top Up</span>
+                <span className="fw-bold text-light">{t('topup')}</span>
               </Link>
             </div>
             <div className="col-lg-4 col-md-4 col-sm-12">
@@ -147,7 +152,7 @@ const Homepage = () => {
                 className="btn py-3 px-4 bg-transparent rounded-5 action"
               >
                 <img src={img5} className="img-fluid mb-2" alt="" />{" "}
-                <span className="fw-bold text-light">Quick Withdrawal</span>
+                <span className="fw-bold text-light">{t('quick_withrawal')}</span>
               </Link>
             </div>
             <div className="col-lg-4 col-md-4 col-sm-12">
@@ -156,7 +161,7 @@ const Homepage = () => {
                 className="btn W-25 py-2 px-4 bg-transparent rounded-5 action"
               >
                 <img src={img6} className="img-fluid mb-2" alt="" />{" "}
-                <span className="fw-bold text-light">Invite Friend</span>
+                <span className="fw-bold text-light">{t('invite')}</span>
               </Link>
             </div>
           </div>
