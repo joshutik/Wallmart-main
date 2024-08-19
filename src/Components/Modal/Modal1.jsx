@@ -7,21 +7,18 @@ import logage from '/src/Components/assets/logage.png';
 import headphone from '/src/Components/assets/headphone.png';
 import smartwatch from '/src/Components/assets/smartwatch.png';
 
-const Modal1 = ({ show, handleClose, amount, balance }) => {
+const Modal1 = ({ show, handleClose, user, amount, balance }) => {
+
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
-  const [isSuccess, setIsSuccess] = useState(false); // State to track successful payment
+  const [isSuccess, setIsSuccess] = useState(false);
+  const [flashMessage, setFlashMessage] = useState(""); // State for flash message
+  const [showFlashMessage, setShowFlashMessage] = useState(false); // State to control flash message visibility
 
-  // const images = [
-  //   "/src/Components/assets/logage.png",
-  //   "/src/Components/assets/headphone.png",
-  //   "/src/Components/assets/smartwatch.png",
-  //   // Add more images as needed
-  // ];
+  const [userLevel, setUserLevel] = useState(""); // State for user level
+  const [orderCount, setOrderCount] = useState(""); // State for order count
 
   const images = [logage, headphone, smartwatch];
-
-  
 
   if (!show) return null;
 
@@ -33,38 +30,79 @@ const Modal1 = ({ show, handleClose, amount, balance }) => {
 
   const handlePay = async () => {
     if (balance >= amount) {
-        setIsLoading(true);
-        const authToken = localStorage.getItem('token'); 
+      setIsLoading(true);
+      const authToken = localStorage.getItem('token'); 
+      const user = localStorage.getItem('user_id');
 
-        try {
-            await axios.post(`${djangoHostname}/api/orders/order-grabbings/`, {
-                order: 1,
-                amount: amount,
-                commission: commissionAmount
-            }, {
-                headers: {
-                    'Authorization': `Token ${authToken}`
-                }
-            });
+      try {
+        // Post request
+        await axios.post(`${djangoHostname}/api/orders/order-grabbings/`, {
+          order: 1,
+          amount: amount,
+          commission: commissionAmount
+        }, {
+          headers: {
+            'Authorization': `Token ${authToken}`
+          }
+        });
 
-            setIsSuccess(true); // Set success state when request is successful
-            window.location.reload(); // Refresh the page
+        // Fetch user details
+        const response = await axios.get(`${djangoHostname}/api/accounts/users/${user}/`, {
+          headers: {
+            'Authorization': `Token ${authToken}`
+          }
+        });
 
-            setCurrentImageIndex((prevIndex) => (prevIndex + 1) % images.length);
+      
+        console.log("response.data")
+        console.log(response.data.level)
+        console.log("response.data")
 
-        } catch (error) {
-            console.error("Error during payment:", error);
-        } finally {
-            setIsLoading(false);
+      const userLevel = response.data.level; // State for user level
+      const orderCount = response.data.grabbed_orders_count; // State for order count
+
+
+        setIsSuccess(true); // Set success state
+
+   
+
+        // Set flash message based on user level and order count
+        if (userLevel === "VIP1" && orderCount === 1) {
+          setFlashMessage("Order completed. Grab two more");
+        } 
+        if (userLevel === "VIP1" && orderCount === 2) {
+          setFlashMessage("Order completed. Grab one more");
         }
+        if (userLevel === "VIP1" && orderCount === 3) {
+          setFlashMessage("3 Orders completely Grabbed.");
+        }
+        if (userLevel === "VIP2" && orderCount === 1) {
+          setFlashMessage("Order completed. Grab one more");
+        }
+        if (userLevel === "VIP2" && orderCount === 2) {
+          setFlashMessage("2 Orders completely Grabbed.");
+        }
+
+        setShowFlashMessage(true); // Show flash message
+
+      } catch (error) {
+        console.error("Error during payment:", error);
+      } finally {
+        setIsLoading(false);
+      }
     }
   };
 
-  // Disable button if the payment was successful and the page is not yet reloaded
+  // Handle flash message confirmation
+  const handleFlashMessageConfirm = () => {
+    setShowFlashMessage(false);
+    window.location.reload(); // Reload the page after confirmation
+  };
+
   const isButtonDisabled = isLoading || isSuccess;
 
   return (
-    <div className="modal-overlay ">
+    <div className="modal-overlay">
       <div className="modal-content py-5">
         <button onClick={handleClose} className="modal-close-btn">
           <FaTimes />
@@ -92,15 +130,25 @@ const Modal1 = ({ show, handleClose, amount, balance }) => {
           </div>
         </div>
 
+        {/* Flash message */}
+        {showFlashMessage && (
+          <div className="flash-message">
+            <p>{flashMessage}</p>
+            <button onClick={handleFlashMessageConfirm} className="btn btn-primary">OK</button>
+          </div>
+        )}
+
         <div className="modal-buttons pb-sm-5">
           <button
             onClick={handlePay}
             className="btn rounded-pill border-0 fs-4"
-            disabled={isButtonDisabled} // Disable button based on loading or success state
+            disabled={isButtonDisabled}
           >
             {isLoading ? <span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> : "Grab"}
           </button>
         </div>
+        
+       
       </div>
     </div>
   );
@@ -109,7 +157,9 @@ const Modal1 = ({ show, handleClose, amount, balance }) => {
 Modal1.propTypes = {
   show: PropTypes.bool.isRequired,
   handleClose: PropTypes.func.isRequired,
+  user: PropTypes.string.isRequired, // Added this prop type for user ID
   amount: PropTypes.number.isRequired,
+  balance: PropTypes.number.isRequired,
 };
 
 export default Modal1;
