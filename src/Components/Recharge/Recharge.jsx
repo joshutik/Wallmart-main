@@ -209,10 +209,16 @@ const Recharge = () => {
         return;
       }
 
+      const senderName = localStorage.getItem("firstName")
+      const amount = formatAmount(amountFromQuery) || formatAmount(data.amount)
       const formData = new FormData();
+
       formData.append("user", userID);
-      formData.append("recharge_method", cryptoWallet);
+      formData.append("payment_name", senderName);
+      formData.append("recharge_method", "crypto");
       formData.append("receipt_image", uploadProf);
+      formData.append("amount_top_up", amount);
+
 
       handleFileUpload(formData);
       return;
