@@ -367,14 +367,22 @@ const Recharge = () => {
               </div>
             )}
 
-            <div className="my-4 text-center">
-              <button
-                className="rounded-pill py-2 w-75 border-0 draw-btn fw-bold text-light fs-5 my-5"
-                type="submit"
-              >
-                {isWalletLocked ? "Submit Proof" : "Generate Payment"}
-              </button>
-            </div>
+              <div className="my-4 text-center">
+                <button
+                  className="rounded-pill py-2 w-75 border-0 draw-btn fw-bold text-light fs-5 my-5"
+                  type="submit"
+                  disabled={loading} // Disable the button while loading
+                >
+                  {loading ? (
+                    <i className="fas fa-spinner fa-spin"></i> // Spinner icon while loading
+                  ) : isWalletLocked ? (
+                    "Submit Proof"
+                  ) : (
+                    "Generate Payment"
+                  )}
+                </button>
+              </div>
+
           </>
         )}
         {selectedMethod === "bank-payment" && (

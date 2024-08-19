@@ -329,27 +329,29 @@ const Account = () => {
                     <hr />
                     <div className="container">
                       <div className="row gy-3">
+                      {(level === "VIP1" || level === "VIP2") && (
+                      <div className="col-lg-12 col-md-6 col-sm-12 d-flex recharge-btn">
+                        <button
+                          className="btn border w-100 fw-bold mx-2"
+                          onClick={() => handleAmountClick(20)}
+                          // disabled={!(level === "VIP1" || balance == 40)}
+                          disabled={!(level === "VIP1" && orderCount == 0 || (level === "VIP2" && orderCount == 1))  }
+                        >
+                          $20 
+                        </button>
+                        <button
+                          // disabled={level !== "VIP2"}
+                          disabled={!(level === "VIP2" && orderCount == 0) }
+                          className="btn border fw-bold w-100 mx-2"
+                          onClick={() => handleAmountClick(40)}
+                        >
+                          $40
+                        </button>
+                      </div>
+                    )}
                         <div className="col-lg-12 col-md-6 col-sm-12 d-flex recharge-btn">
                           <button
-                            className="btn border w-100 fw-bold mx-2"
-                            onClick={() => handleAmountClick(20)}
-                            disabled={!(level === "VIP1" || balance == 40)}
-                          >
-                            $20
-
-                          </button>
-                          <button
-                            disabled={level !== "VIP2" }
-                            className="btn border fw-bold w-100 mx-2"
-                            onClick={() => handleAmountClick(40)}
-                            
-                          >
-                            $40
-                          </button>
-                        </div>
-                        <div className="col-lg-12 col-md-6 col-sm-12 d-flex recharge-btn">
-                          <button
-                             disabled={level !== "VIP3" }
+                             disabled={level !== "VIP3"  && orderCount == 0}
                             className="btn border fw-bold w-100 mx-2"
                             onClick={() => handleAmountClick(70)}
                           >
@@ -379,6 +381,78 @@ const Account = () => {
                             $500
                           </button>
                         </div>
+                        <div className="col-lg-12 col-md-6 col-sm-12 d-flex recharge-btn">
+                          <button
+                             disabled={!(level === "VIP3" && orderCount > 1)}
+                            className="btn border fw-bold w-100 mx-2"
+                            onClick={() => handleAmountClick(200)}
+                          >
+                            $900
+                          </button>
+                          
+                          <button
+                             disabled={!(level === "VIP3" && orderCount > 2)}
+                            className="btn border fw-bold w-100 mx-2"
+                            onClick={() => handleAmountClick(500)}
+                          >
+                            $1200
+                          </button>
+                        
+                        </div>
+                        <div className="col-lg-12 col-md-6 col-sm-12 d-flex recharge-btn">
+                          <button
+                             disabled={!(level === "VIP3" && orderCount > 1)}
+                            className="btn border fw-bold w-100 mx-2"
+                            onClick={() => handleAmountClick(200)}
+                          >
+                            $1500
+                          </button>
+                          <button
+                             disabled={!(level === "VIP3" && orderCount > 2)}
+                            className="btn border fw-bold w-100 mx-2"
+                            onClick={() => handleAmountClick(500)}
+                          >
+                            $2200
+                          </button>
+                        </div>
+                        {level === "VIP3" && (
+                          <>
+                            <div className="col-lg-12 col-md-6 col-sm-12 d-flex recharge-btn">
+                              <button
+                                disabled={!(level === "VIP3" && orderCount > 1)}
+                                className="btn border fw-bold w-100 mx-2"
+                                onClick={() => handleAmountClick(200)}
+                              >
+                                $3000
+                              </button>
+                              <button
+                                disabled={!(level === "VIP3" && orderCount > 2)}
+                                className="btn border fw-bold w-100 mx-2"
+                                onClick={() => handleAmountClick(500)}
+                              >
+                                $3500
+                              </button>
+                            </div>
+
+                            <div className="col-lg-12 col-md-6 col-sm-12 d-flex recharge-btn">
+                              <button
+                                disabled={!(level === "VIP3" && orderCount > 1)}
+                                className="btn border fw-bold w-100 mx-2"
+                                onClick={() => handleAmountClick(200)}
+                              >
+                                $3950
+                              </button>
+                              <button
+                                disabled={!(level === "VIP3" && orderCount > 2)}
+                                className="btn border fw-bold w-100 mx-2"
+                                onClick={() => handleAmountClick(500)}
+                              >
+                                $4200
+                              </button>
+                            </div>
+                          </>
+                        )}
+
                         <div className="mt-5">
                           {amount === 0 || loading ? (
                             <div className="recharge-disabled text-light fw-bold rounded-pill text-decoration-none w-75 border-0 py-2">
