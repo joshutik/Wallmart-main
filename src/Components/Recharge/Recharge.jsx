@@ -5,8 +5,13 @@ import SliderToggle2 from "../SliderToggle2/SliderToggle2";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import "./Recharge.css";
 import QRCode from "qrcode.react";
+import { useTranslation } from 'react-i18next';
 
 const Recharge = () => {
+
+  const { t } = useTranslation()
+
+
   const userID = localStorage.getItem("user_id");
   const djangoHostname = import.meta.env.VITE_DJANGO_HOSTNAME;
   const location = useLocation();
@@ -302,7 +307,7 @@ const Recharge = () => {
           </Link>
         </div>
         <div className="col-auto mx-auto">
-          <h1>Recharge Account</h1>
+          <h1>{t('recharge_account')}</h1>
         </div>
       </div>
       <SliderToggle2
@@ -314,7 +319,7 @@ const Recharge = () => {
           <>
             <div className="my-3">
               <label className="fw-bold fs-4 my-4" htmlFor="cryptowallet">
-                Select Crypto Wallet
+              {t('select_wallet')}
               </label>
               <select
                 name="cryptowallet"
@@ -337,7 +342,7 @@ const Recharge = () => {
 
             <div className="my-3">
               <label className="fw-bold fs-4 my-2" htmlFor="walletaddress">
-                Current Selected Wallet
+                {t('select_wallet')}
               </label>
               <input
                 type="text"
@@ -347,15 +352,13 @@ const Recharge = () => {
                 readOnly
               />
               <p className="py-4">
-                Walmart will generate a scan code and Payment link that can
-                enable easy payment and better service to customers. Terms of
-                use and Privacy Policy.
+                {t('messages')}
               </p>
             </div>
 
             {isWalletLocked && (
               <div className="my-3">
-                <label htmlFor="uploadProf">Upload proof of payment</label>
+                <label htmlFor="uploadProf">{t('upload_prof')}</label>
                 <input
                   type="file"
                   name="uploadProf"
@@ -388,7 +391,7 @@ const Recharge = () => {
         {selectedMethod === "bank-payment" && (
           <>
             <div className="container">
-              <p>Step 1: Copy account, money</p>
+              <p>{t('step_1')}: {t('copy_account')}</p>
             </div>
             <div className="container rounded-4 paym-card">
               <div className="row justify-content-center">
@@ -435,23 +438,23 @@ const Recharge = () => {
               </div>
             </div>
             <div className="container mt-3">
-              <p>Step 2: Upload receipt</p>
+              <p>{t('step_2')}:{t('upload_reciept')}</p>
             </div>
             <div className="container my-3">
               <label className="fw-bold" htmlFor="username">
-                Enter Name
+                {t('enter_name')}
               </label>
               <input
                 type="text"
                 className="form-control ps-5 py-3 border border-3 rounded-3"
                 value={senderName}
                 onChange={(e) => setSenderName(e.target.value)}
-                placeholder="Name"
+                placeholder={t('name')}
                 required
               />
             </div>
             <div className="container my-3">
-              <label htmlFor="uploadProf">Upload proof of payment</label>
+              <label htmlFor="uploadProf">{t('upload_prof')}</label>
               <input
                 type="file"
                 name="uploadProf"
@@ -477,7 +480,7 @@ const Recharge = () => {
                     Uploading...
                   </>
                 ) : (
-                  "Upload Receipt"
+                  t('upload_prof')
                 )}
               </button>
             </div>

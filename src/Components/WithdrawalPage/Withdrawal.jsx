@@ -260,7 +260,7 @@ const Withdrawal = () => {
           <>
             <div className="my-3">
               <label className="fw-bold fs-4 my-2" htmlFor="bankname">
-                Bank Name
+              {t('bank_name')}
               </label>
               <input
                 type="text"
@@ -273,7 +273,7 @@ const Withdrawal = () => {
             </div>
             <div className="my-3">
               <label className="fw-bold fs-4 my-2" htmlFor="accountNumber">
-                Bank Account Number
+              {t('bank_account')}
               </label>
               <input
                 type="number"
@@ -285,7 +285,7 @@ const Withdrawal = () => {
             </div>
             <div className="my-3">
               <label className="fw-bold fs-4 my-2" htmlFor="phonenumber">
-                Phone Number
+              {t('Phone_number')}
               </label>
               <input
                 type="tel"

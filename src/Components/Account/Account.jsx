@@ -160,10 +160,10 @@ const Account = () => {
             />
             <div className="profile-info px-5">
               <p>
-                <strong>{('Number')}:</strong> {phone}
+                <strong>{t('Number')}:</strong> {phone}
               </p>
               <p>
-                <strong>Invitation code:</strong> {invite_code}
+                <strong>{t('Invitation_code')}:</strong> {invite_code}
               </p>
             </div>
           </div>
@@ -196,7 +196,7 @@ const Account = () => {
             </li> */}
             <li>
               <Link to={'/login'} className="nav-link" href="#">
-                <i className="bi bi-box-arrow-right fs-3 my-2"></i> Log out
+                <i className="bi bi-box-arrow-right fs-3 my-2"></i> {t('logout')}
               </Link>
             </li>
           </nav>
@@ -227,8 +227,8 @@ const Account = () => {
           <div className="main-content pt-5 pb-5">
             <div className="d-flex justify-content-between ms-5 text-light pb-5">
               <div>
-                <h2 className="fs-1 fw-bold">Hey {firstName},</h2>
-                <p>Welcome! Ready to grab and get commission.</p>
+                <h2 className="fs-1 fw-bold">{t('hey')} {firstName},</h2>
+                <p>{t('message_3')}</p>
               </div>
               {/* <div className="w-50 text-end me-5">
                 <button className="btn btn-outline-light">
@@ -245,7 +245,7 @@ const Account = () => {
                       <img src={diamond} alt="Diamond" className="img-fluid" />
                     </div>
                     <h4 className="border border-3 py-2 text-light rounded-pill fs-5">
-                      Account Balance
+                    {t('account_bal')}
                     </h4>
                     <p className="fw-bold text-center display-1">${balance}</p>
                   </div>
@@ -254,7 +254,7 @@ const Account = () => {
                   </div>
                   <div className="col-lg-3 col-md-6 col-sm-12 text-light">
                     <h4 className="border border-3 py-2 text-light rounded-pill mt-5">
-                      Unsettled
+                    {t('unsettled')}
                     </h4>
                     <p className="fw-bold display-1 text-start text-center ">
                       ${unsettle}
@@ -293,7 +293,7 @@ const Account = () => {
                     >
                       {/* <i className="bi bi-wallet2 fs-3"></i>  */}
                       <img src={img5} className="img-fluid mb-2" alt="" />{" "}
-                      Quick Withdrawal
+                      {t('quick_withdrawal')}
                     </Link>
                   </div>
                   <div className="col-lg-4 col-md-6 col-sm-6">
@@ -303,7 +303,7 @@ const Account = () => {
                     >
                       {/* <i className="bi bi-cash-stack fs-3"></i>  */}
                       <img src={img4} className="img-fluid mb-3" alt="" />{" "}
-                      Top up now
+                      {t('topup')}
                     </Link>
                   </div>
                 </div>
