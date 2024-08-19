@@ -14,11 +14,12 @@ import { Link } from "react-router-dom";
 
 const Homepage = () => {
   const djangoHostname = import.meta.env.VITE_DJANGO_HOSTNAME;
-  const [amount, setAmount] = useState("");
+  const [amount, setAmount] = useState(0);
   const [loading, setLoading] = useState(false);
   const [invite_code, setInvite_code] = useState(0);
   const [balance, setBalance] = useState(0);
   const [unsettle, setUnsettle] = useState(0);
+  const [flashMessage, setFlashMessage] = useState(""); // Flash message state
 
   const [phone, setPhone] = useState(0);
   const [profilePic, setProfilePic] = useState("");
@@ -73,9 +74,14 @@ const Homepage = () => {
 
   const handleAmountClick = (amount) => {
     setAmount(amount);
+    setFlashMessage(""); // Clear flash message on amount selection
   };
 
-  
+  const handleRechargeClick = () => {
+    if (amount === 0 || amount === undefined) {
+      setFlashMessage("Please select a recharge amount before proceeding.");
+    }
+  };
 
   return (
     <div className="container pb-5">
@@ -170,7 +176,13 @@ const Homepage = () => {
         <NavigationBar />
       </div>
 
-     
+       {/* Flash message */}
+       {flashMessage && (
+        <div className="alert alert-danger text-center" role="alert">
+          {flashMessage}
+        </div>
+      )}
+
        {showModal && (
             <div className="modal show  d-block" tabIndex="-3" role="dialog">
               <div className="modal-dialog" role="document">
@@ -246,6 +258,7 @@ const Homepage = () => {
                             type="button"
                             className="recharge text-light fw-bold rounded-pill text-decoration-none w-75 border-0 py-2"
                             // onClick={makePayment}
+                            onClick={handleRechargeClick}
                             disabled={amount === 0 || loading}
                           >
                             {loading ? "Processing..." : "Recharge now"}

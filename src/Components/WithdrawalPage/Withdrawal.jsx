@@ -107,7 +107,7 @@ const Withdrawal = () => {
         },
       });
 
-      setFlashMessage("Withdrawal successful");
+      setFlashMessage("Request successfully awaiting approval");
       setFlashMessageType("success");
     } catch (error) {
       console.error("Error processing withdrawal:", error);
