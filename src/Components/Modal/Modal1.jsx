@@ -1,5 +1,3 @@
-<<<<<<< HEAD
-=======
 import { useState } from "react";
 import PropTypes from "prop-types";
 import "./Modal1.css";
@@ -227,4 +225,3 @@ Modal1.propTypes = {
 };
 
 export default Modal1;
->>>>>>> 6a7693666103f78cb4bd63e5a94cce4ae19f3b54
