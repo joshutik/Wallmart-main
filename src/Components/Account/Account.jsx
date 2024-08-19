@@ -332,7 +332,8 @@ const Account = () => {
                           className="btn border w-100 fw-bold mx-2"
                           onClick={() => handleAmountClick(20)}
                           // disabled={!(level === "VIP1" || balance == 40)}
-                          disabled={!((level === "VIP1" && orderCount == 0) || (level === "VIP2" && orderCount == 1))  }
+                          disabled
+                          // {!((level === "VIP1" && orderCount == 0) || (level === "VIP2" && orderCount == 1))  }
                         >
                           $20
                         </button>
@@ -348,7 +349,7 @@ const Account = () => {
                     )}
                         <div className="col-lg-12 col-md-6 col-sm-12 d-flex recharge-btn">
                           <button
-                             disabled={level !== "VIP3"  && orderCount == 0}
+                             disabled={level === "VIP3"  && orderCount == 0}
                             className="btn border fw-bold w-100 mx-2"
                             onClick={() => handleAmountClick(70)}
                           >

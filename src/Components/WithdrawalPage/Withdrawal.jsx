@@ -140,7 +140,7 @@ const Withdrawal = () => {
       setFlashMessage("Request sent successfully.  Awaiting approval");
       setFlashMessageType("success");
 
-      handleUserUnsettle(user, amount)
+      handleUserUnsettle(user, availableBalance)
       
     } catch (error) {
       console.error("Error processing withdrawal:", error);
