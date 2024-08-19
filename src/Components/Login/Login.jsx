@@ -190,8 +190,11 @@ import img3 from "../assets/reg-img.png";
 import { Link, useNavigate } from "react-router-dom";
 import "bootstrap-icons/font/bootstrap-icons.css";
 import NavigationBar2 from "../NavigationBar2/NavigationBar2";
+import { useTranslation } from 'react-i18next';
 
 const Login = () => {
+const { t } = useTranslation()
+
   const navigate = useNavigate();
   const djangoHostname = import.meta.env.VITE_DJANGO_HOSTNAME;
   const [formData, setFormData] = useState({
@@ -200,6 +203,7 @@ const Login = () => {
     termsAccepted: false,
   });
 
+  
 
   const [countryCodes, setCountryCodes] = useState([]);
   const [countryCode, setCountryCode] = useState('');
@@ -304,8 +308,8 @@ const Login = () => {
               <img src={img1} alt="icon" />
             </div>
             <div className="py-3">
-              <h2 className="text-start">Login</h2>
-              <p className="text-start">Welcome back! Please login to your account.</p>
+              <h2 className="text-start">{t('login')}</h2>
+              <p className="text-start">{t('description')}</p>
             </div>
             <form onSubmit={handleSubmit}>
               {/* <div>
@@ -335,7 +339,7 @@ const Login = () => {
                   type="tel"
                   name="phone"
                   className="form-control rounded-end-5 border border-2"
-                  placeholder="Enter your number"
+                  placeholder={t('number')}
                   value={formData.phone}
                   onChange={handleChange}
                 />
@@ -345,7 +349,7 @@ const Login = () => {
                   type={showPassword ? "text" : "password"}
                   name="password"
                   className="form-control py-3 rounded-5 border border-2"
-                  placeholder="Enter password"
+                  placeholder={t('password')}
                   value={formData.password}
                   onChange={handleChange}
                 />
@@ -369,11 +373,11 @@ const Login = () => {
                     checked={formData.termsAccepted}
                     onChange={handleChange}
                   />{" "}
-                  <span>Remember me</span>
+                  <span>{t('remember')}</span>
                 </div>
-                <div>
+                <div className="text-end">
                   <a className="text-end" href="#">
-                    Forgot password?
+                  {t('forgot')}
                   </a>
                 </div>
               </div>
@@ -390,15 +394,15 @@ const Login = () => {
                       <span className="visually-hidden">Loading...</span>
                     </div>
                   ) : (
-                    "Login"
+                    t('login')
                   )}
                 </button>
               </div>
               <div>
                 <p>
-                  Don&apos;t have an account?{" "}
+                  {t('question')}{" "}
                   <Link to={'/registration'} className="sub-login">
-                    Sign up
+                    {t('sign_up')}
                   </Link>
                 </p>
               </div>

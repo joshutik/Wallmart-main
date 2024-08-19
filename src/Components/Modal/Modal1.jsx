@@ -6,8 +6,10 @@ import { FaTimes } from "react-icons/fa";
 import logage from '/src/Components/assets/logage.png';
 import headphone from '/src/Components/assets/headphone.png';
 import smartwatch from '/src/Components/assets/smartwatch.png';
+import { useTranslation } from 'react-i18next';
 
 const Modal1 = ({ show, handleClose, amount, balance }) => {
+  const { t } = useTranslation()
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false); // State to track successful payment
@@ -87,7 +89,7 @@ const Modal1 = ({ show, handleClose, amount, balance }) => {
             <p className="total-amount text-start fs-4 fw-bold mt-0">${amount}</p>
           </div>
           <div>
-            <h4 className="fw-bold commi">Commission</h4>
+            <h4 className="fw-bold commi">{t('commision')}</h4>
             <h4 className="fw-bold commi text-end">${commissionAmount.toFixed(2)}</h4>
           </div>
         </div>

@@ -11,8 +11,12 @@ import axios from "axios";
 // import CountryCode from '../CountryCode/CountryCode'
 import NavigationBar from "../NavigationBar/NavigationBar";
 import NavigationBar3 from "../NavigationBar3/NavigationBar3";
+import { useTranslation } from 'react-i18next';
+
 
 const Account = () => {
+  const { t } = useTranslation()
+
   const djangoHostname = import.meta.env.VITE_DJANGO_HOSTNAME;
 
   const firstName = localStorage.getItem("firstName");
@@ -156,7 +160,7 @@ const Account = () => {
             />
             <div className="profile-info px-5">
               <p>
-                <strong>Number:</strong> {phone}
+                <strong>{('Number')}:</strong> {phone}
               </p>
               <p>
                 <strong>Invitation code:</strong> {invite_code}
@@ -167,13 +171,12 @@ const Account = () => {
           <nav className="nav flex-column account-section fw-bold py-5">
             <li>
               <Link to={''} className="nav-link" href="#">
-                <i className="bi bi-person-workspace fs-3"></i> Account
-                information
+                <i className="bi bi-person-workspace fs-3"></i> {t('account_info')}
               </Link>
             </li>
             <li>
               <Link to={''} className="nav-link" href="#">
-                <i className="bi bi-file-earmark-text fs-3"></i> Order record
+                <i className="bi bi-file-earmark-text fs-3"></i> {t('order_record')}
               </Link>
             </li>
             <li>

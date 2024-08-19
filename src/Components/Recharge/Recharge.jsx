@@ -13,6 +13,9 @@ const Recharge = () => {
   const queryParams = new URLSearchParams(location.search);
   const amountFromQuery = queryParams.get("amount");
 
+  const pageText = document.body.innerText;
+  console.log(pageText);
+
   const [qrCodeValue, setQrCodeValue] = useState(""); // QR Code value
   const [selectedMethod, setSelectedMethod] = useState("wallet");
   const [cryptoWallet, setCryptoWallet] = useState("");
@@ -31,7 +34,7 @@ const Recharge = () => {
   // Flash message state
   const [flashMessage, setFlashMessage] = useState(null);
   const [flashType, setFlashType] = useState(""); // "success" or "error"
-
+ 
   // Loader state
   const [loading, setLoading] = useState(false);
 
@@ -476,30 +479,6 @@ const Recharge = () => {
                   <span aria-hidden="true">&times;</span>
                 </button>
               </div>
-
-              <div className="container my-3">
-                <div className="d-flex flex-wrap">
-                  <span className="rounded-3 py-2 mx-2 px-2 text-center bg-secondary border border-0">
-                    USDT
-                  </span>
-
-                  <span className="rounded-3 py-2 mx-2 px-2 text-center bg-secondary border border-0">
-                    BINANCE
-                  </span>
-                  <span className="rounded-3 py-2 mx-2 px-2 text-center bg-secondary border border-0">
-                    TON
-                  </span>
-                  <span className="rounded-3 py-2 mx-2 px-2 text-center bg-secondary border border-0">
-                    BTC
-                  </span>
-                  <span className="rounded-3 py-2 mx-2 px-2 text-center bg-secondary border border-0">
-                    TRX
-                  </span>
-                  <span className="rounded-3 py-2 mx-2 px-2 text-center bg-secondary border border-0">
-                    TRC20
-                  </span>
-                </div>
-              </div>
               <div className="text-start my-3">
                 <span className="rounded-3 px-5 py-2  text-center border border-0 bg-dark text-light">
                   {cryptoWallet}
@@ -518,13 +497,13 @@ const Recharge = () => {
                 <p>Deposit Address</p>
                 <div className="container bg-secondary py-4 rounded-3 copy-qr-text align-items-center">
                   <div className="row justify-content-center align-items-center">
-                    <div className="col-lg-6 col-md-6 col-sm-12">
-                      <span className="">{qrCodeUrl}</span>
+                    <div className="col-lg-5 col-md-6 col-sm-12">
+                      <span className="">{walletAddress}</span>
                     </div>
                     <div className="col-lg-6 col-md-6 col-sm-12 text-center">
                       <button
                         className="btn copy-qr text-light  rounded-3 border border-0 mt-3"
-                        onClick={() => handleCopy(qrCodeUrl)}
+                        onClick={() => handleCopy(walletAddress)}
                       >
                         Copy Link
                       </button>
