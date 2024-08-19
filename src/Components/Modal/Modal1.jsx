@@ -7,7 +7,7 @@ import logage from '/src/Components/assets/logage.png';
 import headphone from '/src/Components/assets/headphone.png';
 import smartwatch from '/src/Components/assets/smartwatch.png';
 
-const Modal1 = ({ show, handleClose, user, amount, balance }) => {
+const Modal1 = ({ show, handleClose, user_level, amount, balance }) => {
 
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
@@ -87,10 +87,7 @@ const Modal1 = ({ show, handleClose, user, amount, balance }) => {
           }
         });
 
-      
-        console.log("response.data")
-        console.log(response.data.level)
-        console.log("response.data")
+    
 
       const userLevel = response.data.level; // State for user level
       const orderCount = response.data.grabbed_orders_count; // State for order count
