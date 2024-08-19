@@ -19,7 +19,7 @@ const Homepage = () => {
 
   const { t } = useTranslation()
   const djangoHostname = import.meta.env.VITE_DJANGO_HOSTNAME;
-  const [amount, setAmount] = useState("");
+  const [amount, setAmount] = useState(0);
   const [loading, setLoading] = useState(false);
   const [invite_code, setInvite_code] = useState(0);
   const [balance, setBalance] = useState(0);
@@ -246,15 +246,19 @@ const Homepage = () => {
                           </button>
                         </div>
                         <div className="mt-5">
-                          <Link
-                            to={`/recharge-account?amount=${amount}`} 
-                            type="button"
-                            className="recharge text-light fw-bold rounded-pill text-decoration-none w-75 border-0 py-2"
-                            // onClick={makePayment}
-                            disabled={amount === 0 || loading}
-                          >
-                            {loading ? "Processing..." : "Recharge now"}
-                          </Link>
+                          {amount === 0 || loading ? (
+                            <div className="recharge-disabled text-light fw-bold rounded-pill text-decoration-none w-75 border-0 py-2">
+                              {loading ? "Processing..." : "Recharge now"}
+                            </div>
+                          ) : (
+                            <Link
+                              to={`/recharge-account?amount=${amount}`}
+                              type="button"
+                              className="recharge text-light fw-bold rounded-pill text-decoration-none w-75 border-0 py-2"
+                            >
+                              Recharge now
+                            </Link>
+                          )}
                         </div>
                       </div>
                     </div>

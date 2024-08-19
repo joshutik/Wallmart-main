@@ -13,8 +13,7 @@ const Recharge = () => {
   const queryParams = new URLSearchParams(location.search);
   const amountFromQuery = queryParams.get("amount");
 
-  const pageText = document.body.innerText;
-  console.log(pageText);
+  const [isCopied, setIsCopied] = useState(false); // State for tracking if the button has been clicked
 
   const [qrCodeValue, setQrCodeValue] = useState(""); // QR Code value
   const [selectedMethod, setSelectedMethod] = useState("wallet");
@@ -124,11 +123,18 @@ const Recharge = () => {
     }
   }, [cryptoWallet, walletData]);
 
+  
   const handleCopy = (textToCopy) => {
     navigator.clipboard.writeText(textToCopy).then(() => {
+      setIsCopied(true); // Set the state to true when clicked
       setFlashMessage("Copied to clipboard!");
       setFlashType("success");
       setIsWalletLocked(true); // Lock the wallet after copying
+
+      // Reset the copied state after a few seconds
+      setTimeout(() => {
+        setIsCopied(false);
+      }, 1000); // Change color back after 3 seconds
     });
   };
 
@@ -232,10 +238,16 @@ const Recharge = () => {
         return;
       }
 
+      const senderName = localStorage.getItem("firstName")
+      const amount = formatAmount(amountFromQuery) || formatAmount(data.amount)
       const formData = new FormData();
+
       formData.append("user", userID);
-      formData.append("recharge_method", cryptoWallet);
+      formData.append("payment_name", senderName);
+      formData.append("recharge_method", "crypto");
       formData.append("receipt_image", uploadProf);
+      formData.append("amount_top_up", amount);
+
 
       handleFileUpload(formData);
       return;
@@ -496,20 +508,19 @@ const Recharge = () => {
               <div className="modal-body text-start text-light">
                 <p>Deposit Address</p>
                 <div className="container bg-secondary py-4 rounded-3 copy-qr-text align-items-center">
-                  <div className="row justify-content-center align-items-center">
-                    <div className="col-lg-5 col-md-6 col-sm-12">
-                      <span className="">{walletAddress}</span>
-                    </div>
-                    <div className="col-lg-6 col-md-6 col-sm-12 text-center">
-                      <button
-                        className="btn copy-qr text-light  rounded-3 border border-0 mt-3"
-                        onClick={() => handleCopy(walletAddress)}
-                      >
-                        Copy Link
-                      </button>
-                    </div>
+                  <div className="row">
+                    <div className="col-auto"></div>
                   </div>
-                </div>
+                  <span className="mt-3">{walletAddress}</span>
+                  <button
+                    className={`btn copy-qr text-light w-25 rounded-3 border border-0 mt-3 ${
+                      isCopied ? "bg-success" : "bg-primary"
+                    }`}
+                    onClick={() => handleCopy(walletAddress)}
+                  >
+                    {isCopied ? "Copied!" : "Copy Link"}
+                  </button>
+                                  </div>
               </div>
             </div>
           </div>
