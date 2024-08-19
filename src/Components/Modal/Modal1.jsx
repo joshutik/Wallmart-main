@@ -74,14 +74,50 @@ const Modal1 = ({ show, handleClose, user, amount, balance }) => {
           setFlashMessage("Order completed. Grab one more");
         }
         if (userLevel === "VIP1" && orderCount === 3) {
-          setFlashMessage("3 Orders completely Grabbed.");
+          setFlashMessage("3 Orders completely Grabbed. Withdraw");
         }
         if (userLevel === "VIP2" && orderCount === 1) {
-          setFlashMessage("Order completed. Grab one more");
+          setFlashMessage("Top up $20 for the next Order");
         }
         if (userLevel === "VIP2" && orderCount === 2) {
-          setFlashMessage("2 Orders completely Grabbed.");
+          setFlashMessage("Orders completed. Withdraw.");
         }
+        if (userLevel === "VIP3" && orderCount === 1) {
+          setFlashMessage("Top up $120 for the next Order");
+        }
+        if (userLevel === "VIP3" && orderCount === 2) {
+          setFlashMessage("Top up $200 for the next Order");
+        }
+        if (userLevel === "VIP3" && orderCount === 3) {
+          setFlashMessage("Top up $500 for the next Order");
+        }
+        if (userLevel === "VIP3" && orderCount === 4) {
+          setFlashMessage("Top up $900 for the next Order");
+        }
+        if (userLevel === "VIP3" && orderCount === 5) {
+          setFlashMessage("Top up $1200 for the next Order");
+        }
+        if (userLevel === "VIP3" && orderCount === 6) {
+          setFlashMessage("Top up $1500 for the next Order");
+        }
+        if (userLevel === "VIP3" && orderCount === 7) {
+          setFlashMessage("Top up $2200 for the next Order");
+        }
+        if (userLevel === "VIP3" && orderCount === 8) {
+          setFlashMessage("Top up $3000 for the next Order");
+        }
+        if (userLevel === "VIP3" && orderCount === 9) {
+          setFlashMessage("Top up $3500 for the next Order");
+        }
+        if (userLevel === "VIP3" && orderCount === 10) {
+          setFlashMessage("Top up $3950 for the next Order");
+        }
+        if (userLevel === "VIP3" && orderCount === 11) {
+          setFlashMessage("Top up $4200 for the next Order");
+        }
+        // if (userLevel === "VIP3" && orderCount === 12) {
+        //   setFlashMessage("Top up $4200 for the next Order");
+        // }
 
         setShowFlashMessage(true); // Show flash message
 
