@@ -113,4 +113,7 @@
 
   .copy-qr {
     background-color: #FFAD31 !important;
+    transition: background-color 0.3s ease-in-out;
   }
+
+  

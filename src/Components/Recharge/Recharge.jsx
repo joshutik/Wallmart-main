@@ -13,6 +13,8 @@ const Recharge = () => {
   const queryParams = new URLSearchParams(location.search);
   const amountFromQuery = queryParams.get("amount");
 
+  const [isCopied, setIsCopied] = useState(false); // State for tracking if the button has been clicked
+
   const [qrCodeValue, setQrCodeValue] = useState(""); // QR Code value
   const [selectedMethod, setSelectedMethod] = useState("wallet");
   const [cryptoWallet, setCryptoWallet] = useState("");
@@ -121,11 +123,18 @@ const Recharge = () => {
     }
   }, [cryptoWallet, walletData]);
 
+  
   const handleCopy = (textToCopy) => {
     navigator.clipboard.writeText(textToCopy).then(() => {
+      setIsCopied(true); // Set the state to true when clicked
       setFlashMessage("Copied to clipboard!");
       setFlashType("success");
       setIsWalletLocked(true); // Lock the wallet after copying
+
+      // Reset the copied state after a few seconds
+      setTimeout(() => {
+        setIsCopied(false);
+      }, 1000); // Change color back after 3 seconds
     });
   };
 
@@ -494,14 +503,16 @@ const Recharge = () => {
                   <div className="row">
                     <div className="col-auto"></div>
                   </div>
-                  <span className="mt-3">{qrCodeUrl}</span>
+                  <span className="mt-3">{walletAddress}</span>
                   <button
-                    className="btn copy-qr text-light w-25 rounded-3 border border-0 mt-3"
-                    onClick={() => handleCopy(qrCodeUrl)}
+                    className={`btn copy-qr text-light w-25 rounded-3 border border-0 mt-3 ${
+                      isCopied ? "bg-success" : "bg-primary"
+                    }`}
+                    onClick={() => handleCopy(walletAddress)}
                   >
-                    Copy Link
+                    {isCopied ? "Copied!" : "Copy Link"}
                   </button>
-                </div>
+                                  </div>
               </div>
             </div>
           </div>
