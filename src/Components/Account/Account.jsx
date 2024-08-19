@@ -377,15 +377,19 @@ const Account = () => {
                           </button>
                         </div>
                         <div className="mt-5">
-                          <Link
-                             to={`/recharge-account?amount=${amount}`} 
-                            type="button"
-                            className="recharge text-light fw-bold rounded-pill text-decoration-none w-75 border-0 py-2"
-                            // onClick={makePayment}
-                            disabled={amount === 0 || loading}
-                          >
-                            {loading ? "Processing..." : "Recharge now"}
-                          </Link>
+                          {amount === 0 || loading ? (
+                            <div className="recharge-disabled text-light fw-bold rounded-pill text-decoration-none w-75 border-0 py-2">
+                              {loading ? "Processing..." : "Recharge now"}
+                            </div>
+                          ) : (
+                            <Link
+                              to={`/recharge-account?amount=${amount}`}
+                              type="button"
+                              className="recharge text-light fw-bold rounded-pill text-decoration-none w-75 border-0 py-2"
+                            >
+                              Recharge now
+                            </Link>
+                          )}
                         </div>
                       </div>
                     </div>
