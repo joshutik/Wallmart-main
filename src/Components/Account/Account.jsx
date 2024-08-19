@@ -169,7 +169,7 @@ const Account = () => {
           </div>
           <hr />
           <nav className="nav flex-column account-section fw-bold py-5">
-            <li>
+            {/* <li>
               <Link to={''} className="nav-link" href="#">
                 <i className="bi bi-person-workspace fs-3"></i> {t('account_info')}
               </Link>
@@ -193,7 +193,7 @@ const Account = () => {
               <Link to={''} className="nav-link" href="#">
                 <i className="bi bi-envelope-paper-fill fs-3"></i> Invite friend
               </Link>
-            </li>
+            </li> */}
             <li>
               <Link to={'/login'} className="nav-link" href="#">
                 <i className="bi bi-box-arrow-right fs-3 my-2"></i> Log out
