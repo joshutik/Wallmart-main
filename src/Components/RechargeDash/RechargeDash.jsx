@@ -9,6 +9,7 @@ const RechargeDash = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
   const [loadingId, setLoadingId] = useState(null); // State to track which button is loading
+  const [isApprovecd, setIsApproved] = useState(null); // State to track which button is loading
 
   useEffect(() => {
     fetchRechargeData(currentPage);
@@ -21,6 +22,8 @@ const RechargeDash = () => {
 
       if (Array.isArray(response.data)) {
         setRechargeData(response.data);
+
+
         // Assuming you get totalPages from elsewhere or set it to a default value
         setTotalPages(1); // Set this appropriately based on your pagination logic
       } else {
@@ -31,10 +34,6 @@ const RechargeDash = () => {
       console.error("Error fetching recharge data", error);
     }
   };
-
-  // const handleDownloadReceipt = (receiptUrl) => {
-  //   window.open(receiptUrl, "_blank");
-  // };
 
   const handleDownloadReceipt = async (receiptUrl, name) => {
     try {
@@ -62,7 +61,7 @@ const RechargeDash = () => {
   
   
 
-  const handlePromoteUser = async (userId, amount_top_up) => {
+  const handlePromoteUser = async (userId, amount_top_up, itemId) => {
     setLoadingId(userId); // Set loading state for the clicked button
     try {
       const token = localStorage.getItem("token");
@@ -90,6 +89,20 @@ const RechargeDash = () => {
           }),
         }
       );
+      
+   
+      await fetch(`${djangoHostname}/api/recharge/recharges/${itemId}/`,
+        {
+          method: "PATCH",
+          headers: {
+            Authorization: `Token ${token}`,
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            is_approved: true,
+          }),
+        }
+      );
       fetchRechargeData(currentPage);
     } catch (error) {
       console.error("Error promoting user", error);
@@ -107,7 +120,7 @@ const RechargeDash = () => {
     }
   };
 
-  const handleDeleteUser = async (userId) => {
+  const handleDeleteRecharge = async (userId) => {
     const isConfirmed = window.confirm("Are you sure you want to delete this recharge data?");
     if (!isConfirmed) {
       return;
@@ -170,12 +183,14 @@ const RechargeDash = () => {
                         )}
                       </td>
                       <td className="d-flex">
-                        <button
-                          className="btn-success w-100 btn text-light px-2 py-1 rounded mx-1"
-                          onClick={() => handlePromoteUser(item.user, item.amount_top_up)}
-                          disabled={loadingId === item.user} // Disable button while loading for this specific user
+                      <button
+                          className={`w-100 btn text-light px-2 py-1 rounded mx-1 ${
+                            item.is_approved ? "btn-secondary" : "btn-success"
+                          }`}
+                          onClick={() => handlePromoteUser(item.user, item.amount_top_up, item.id)}
+                          disabled={loadingId === item.user || item.is_approved} // Disable button if approved or loading
                         >
-                          {loadingId === item.user ? (
+                          {item.is_approved ? "Approved" : loadingId === item.user ? (
                             <span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                           ) : (
                             "Approve"
@@ -189,7 +204,7 @@ const RechargeDash = () => {
                         </button>
                         <button
                           className="btn border-0 text-light px-2 mx-1 py-1 rounded"
-                          onClick={() => handleDeleteUser(item.id)}
+                          onClick={() => handleDeleteRecharge(item.id)}
                         >
                           <i className="bi bi-trash3 text-dark"></i>
                         </button>
