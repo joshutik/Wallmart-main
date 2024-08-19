@@ -152,7 +152,7 @@ const Homepage = () => {
                 className="btn py-3 px-4 bg-transparent rounded-5 action"
               >
                 <img src={img5} className="img-fluid mb-2" alt="" />{" "}
-                <span className="fw-bold text-light">{t('quick_withrawal')}</span>
+                <span className="fw-bold text-light">{t('quick_withdrawal')}</span>
               </Link>
             </div>
             <div className="col-lg-4 col-md-4 col-sm-12">

@@ -1,12 +1,15 @@
 import { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from "react-router-dom";
+import { useTranslation } from 'react-i18next';
 import axios from "axios";
 import SliderToggle from "../SliderToggle/SliderToggle";
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import './Withdrawal.css';
 
 const Withdrawal = () => {
+
+  const { t } = useTranslation()
   const [selectedMethod, setSelectedMethod] = useState("crypto");
   const [amount, setAmount] = useState("");
   const [availableBalance, setAvailableBalance] = useState(0);
@@ -169,7 +172,7 @@ const Withdrawal = () => {
           </Link>
         </div>
         <div className="col-auto mx-auto">
-          <h1>Withdrawal</h1>
+          <h1>{t('withdrawal')}</h1>
         </div>
       </div>
       <SliderToggle selectedMethod={selectedMethod} setSelectedMethod={setSelectedMethod} />
@@ -185,7 +188,7 @@ const Withdrawal = () => {
           <div className="col-lg-6 col-md-6 col-sm-12">
             <div className="my-3">
               <label className="fw-bold fs-4 my-2" htmlFor="withdrawal">
-                Enter Amount
+              {t('enter_amount')}
               </label>
               <input
                 className="form-control py-3 border rounded-3 border-3"
@@ -201,7 +204,7 @@ const Withdrawal = () => {
           <div className="col-lg-6 col-md-6 col-sm-12">
             <div className="my-3">
               <label className="fw-bold fs-4 my-2" htmlFor="availableBalance">
-                Available for withdrawal
+              {t('avialable_withdrawal')}
               </label>
               <input
                 type="number"
@@ -216,7 +219,7 @@ const Withdrawal = () => {
           <>
             <div className="my-3">
               <label className="fw-bold fs-4 my-2" htmlFor="cryptowallet">
-                Select Crypto wallet
+              {t('select_wallet')}
               </label>
               <select
                 name="cryptowallet"
@@ -226,7 +229,7 @@ const Withdrawal = () => {
                 onChange={(e) => setCryptoWallet(e.target.value)}
                 required
               >
-                <option value="" selected>Choose Wallet</option>
+                <option value="choose wallet" selected>{t('choose_wallet')}</option>
                 <option value="USDT">USDT</option>
                 <option value="BINANCE">BINANCE</option>
                 <option value="TON">TON</option>
@@ -237,7 +240,7 @@ const Withdrawal = () => {
             </div>
             <div className="my-3">
               <label className="fw-bold fs-4 my-2" htmlFor="walletaddress">
-                Recipient Wallet Address
+              {t('recipient_wallet')}
               </label>
               <input
                 type="text"
@@ -292,7 +295,7 @@ const Withdrawal = () => {
         )}
               <div className="my-3">
           <label className="fw-bold fs-4 my-2" htmlFor="withdrawalPassword">
-            Enter Withdrawal Password
+          {t('enter_withdrawal_password')}
           </label>
           <input
             type="password"
@@ -318,7 +321,7 @@ const Withdrawal = () => {
             {loading ? (
               <span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
             ) : (
-              'Withdraw'
+              t('withdraw')
             )}
           </button>
         </div>

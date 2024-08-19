@@ -33,5 +33,22 @@
     "account_info": "Información de la cuenta",
     "order_records": "Registros de pedidos",
     "recharge_records": "Registros de recarga",
-    "withdraw_record": "registro de retiro"
+    "withdraw_record": "registro de retiro",
+    "withdrawal": "Retiro",
+    "enter_amount": "Ingrese el monto",
+    "avialable_withdrawal": "Disponible para retiro",
+    "select_wallet": "Seleccione billetera criptográfica",
+    "recipient_wallet": "Dirección de la billetera del destinatario",
+    "enter_withdrawal_password": "Ingrese la contraseña de retiro",
+    "withdraw": "Retirar",
+    "Choose_wallet": "Elige Monedero",          
+    "home": "Hogar",          
+    "grab": "Orden de agarre",          
+    "profile": "Perfil",
+    "wallet_payment": "Pago de billetera",
+    "bank": "Banco",
+    "bank_name": "Nombre del banco",
+    "bank_account": "Cuenta bancaria",
+    "Phone_number": "Número de teléfono"      
+
   }

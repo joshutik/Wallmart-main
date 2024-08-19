@@ -34,7 +34,23 @@
     "account_info": "Acount Information",
     "order_records": "Order Records",
     "recharge_records": "Recharge Records",
-    "withdraw_record": "Withdrawal record"
+    "withdraw_record": "Withdrawal record",
+    "withdrawal": "Withdrawal",
+    "enter_amount": "Enter Amount",
+    "avialable_withdrawal": "Avialable for Withdrawal",
+    "select_wallet": "Select Crypto Wallet",
+    "recipient_wallet": "Recipient Wallet Address",
+    "enter_withdrawal_password": "Enter Withdrawal Password",
+    "withdraw": "Withdraw",
+    "choose_wallet": "Choose Wallet",
+    "home": "Home",          
+    "grab": "Grab Order",          
+    "profile": "Profile",
+    "wallet_payment": "Wallet Payment",
+    "bank": "Bank",
+    "bank_name": "Bank Name",
+    "bank_account": "Bank Account",
+    "Phone_number": "Phone Number"
     
     
 
