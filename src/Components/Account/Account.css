@@ -193,3 +193,10 @@ box-sizing: border-box;
 .container-fluid, .row, .col-lg-9, .sidebar {
   overflow-x: hidden;
 }
+
+.profile-pic {
+  width: 150px; /* Set a fixed width */
+  height: 150px; /* Set a fixed height */
+  object-fit: cover; /* Ensures the image covers the area without distortion */
+  border-radius: 50%; /* Makes the image a perfect circle */
+}

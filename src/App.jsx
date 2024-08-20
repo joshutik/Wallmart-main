@@ -23,7 +23,7 @@ import Login from './Components/Login/Login'
 // import Modal from './Components/Modal/Modal1';
 // import Registration from './Components/Registration/Registration';
 // import Registration from './Components/Registration/Registration'
-import Homepage from './Components/Homepage/Homepage';
+// import Homepage from './Components/Homepage/Homepage';
 // import LanguageSwitcher from './Components/LanguageSwitcher/LanguageSwitcher';
 // import Usercomision from './Components/Usercomision/Usercomision';
 // import Partners from './Components/Partners/Partners';

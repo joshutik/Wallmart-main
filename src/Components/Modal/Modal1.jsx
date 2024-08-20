@@ -7,20 +7,26 @@ import { FaTimes } from "react-icons/fa";
 import logage from '/src/Components/assets/logage.png';
 import headphone from '/src/Components/assets/headphone.png';
 import smartwatch from '/src/Components/assets/smartwatch.png';
+import sneakers from '../assets/sneakers.jpg'
+import hoodie from '../assets/hoodie.jpg'
+import vacuum from '../assets/vacuum.png'
+import vacumCleaner from '../assets/vacumCleaner.png'
+import greeenpod from '../assets/greenpod.png'
+
 import { useTranslation } from 'react-i18next';
 
 
 const Modal1 = ({ show, handleClose, user_level, amount, balance, orderCounts}) => {
 
   const { t } = useTranslation();
+  const images = [greeenpod, logage, headphone, smartwatch, sneakers, hoodie, vacumCleaner, vacuum];
 
-  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [currentImage, setCurrentImage] = useState(images[0]);
   const [isLoading, setIsLoading] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
   const [flashMessage, setFlashMessage] = useState(""); // State for flash message
   const [showFlashMessage, setShowFlashMessage] = useState(false); // State to control flash message visibility
 
-  const images = [logage, headphone, smartwatch];
 
   if (!show) return null;
 
@@ -64,14 +70,20 @@ const Modal1 = ({ show, handleClose, user_level, amount, balance, orderCounts}) 
   }
 
   const handlePay = async () => {
+
+    // Change the image randomly
+    const randomIndex = Math.floor(Math.random() * images.length);
+    setCurrentImage(images[randomIndex]);
+
+
     if (balance >= amount) {
+
       setIsLoading(true);
+
+
       const authToken = localStorage.getItem('token'); 
       const user = localStorage.getItem('user_id');
-
-      // Change the image randomly
-      const randomIndex = Math.floor(Math.random() * images.length);
-      setCurrentImageIndex(randomIndex);
+      
 
       try {
         // Post request
@@ -177,7 +189,7 @@ const Modal1 = ({ show, handleClose, user_level, amount, balance, orderCounts}) 
           <p>{t('time')}: {formattedTime}</p>
         </div>
         <div className="image-container">
-          <img src={images[currentImageIndex]} alt="Grab items" className="img-fluid w-50" />
+          <img src={currentImage} alt="Grab items" className="img-fluid" style={{width: '200px', height:'200px', objectFit:'cover'}} />
         </div>
         <div className="d-flex justify-content-between px-4">
           <p className="pro-amount fw-bold fs-3">${amount}</p>
