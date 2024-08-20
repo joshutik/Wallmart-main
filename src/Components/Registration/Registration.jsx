@@ -681,8 +681,8 @@
 
 import { useState, useEffect } from "react";
 import axios from "axios";
-import "./registration.css";
-import img1 from "../assets/tabler_brand-walmart.png";
+import "./Registration.css";
+import img1 from "../assets/walmart.png";
 import img2 from "../assets/bg.png";
 import img3 from "../assets/reg-img.png";
 import { Link, useNavigate } from "react-router-dom";

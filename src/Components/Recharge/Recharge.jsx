@@ -410,20 +410,20 @@ const Recharge = () => {
               <div className="row justify-content-center">
                 <div className="col-lg-4 col-md-6 col-sm-12">
                   <div className="text-center py-lg-5 py-4">
-                    <p>Bank Name</p>
+                    <p>{t('bank_name')}</p>
                     <p className="fw-bold">{bankDetails.bankName}</p>
                     <div className="w-75 me-lg-auto mx-auto">
                       <hr className="horizontal border-3 text-white " />
                     </div>
                     <div className="text-center">
-                      <p>Account Number</p>
+                      <p>{t('bank_account')}</p>
                       <p className="fw-bold">{bankDetails.account}</p>
                     </div>
                   </div>
                 </div>
                 <div className="col-lg-4 col-md-6 col-sm-12 align-self-center">
                   <div className="text-center">
-                    <p>Amount</p>
+                    <p>{t('amount')}</p>
                     <p className="fw-bold">${formatAmount(amountFromQuery)}</p>
                     {/* <div className="w-75 me-lg-auto mx-auto">
                       <hr className="horizontal vr border-3 text-white " />
@@ -433,14 +433,14 @@ const Recharge = () => {
 
                 <div className="col-lg-4 col-md-6 col-sm-12">
                   <div className="text-center py-lg-5 px-2">
-                    <p>Recipient Name</p>
+                    <p>{t('recipient_name')}</p>
                     <p className="fw-bold">{bankDetails.recipient}</p>
                     <div className="w-100 me-lg-auto mx-auto">
                       <hr className="horizontal border-3 text-white " />
                     </div>
 
                     <div className="text-center">
-                      <p>RUT</p>
+                      <p>{t('rut')}</p>
                       <p className="fw-bold">{bankDetails.ruth}</p>
                       {/* <div className="w-75 me-lg-auto mx-auto">
                       <hr className="horizontal border-3 text-white " />

@@ -69,7 +69,10 @@
     "time": "Tiempo",
     "total_order_amount": "Monto total del pedido",
     "commision": "Comisión",
-    "grab_2": "agarrar"
+    "grab_2": "agarrar",
+    "recipient_name": "Nombre de la destinataria",
+    "amount": "Cantidad",
+    "rut": "RODERA"
 
 
 

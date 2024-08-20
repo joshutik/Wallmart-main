@@ -9,13 +9,17 @@ import headphone from '/src/Components/assets/headphone.png';
 import smartwatch from '/src/Components/assets/smartwatch.png';
 import sneakers from '../assets/sneakers.jpg'
 import hoodie from '../assets/hoodie.jpg'
+import vacuum from '../assets/vacuum.png'
+import vacumCleaner from '../assets/vacumCleaner.png'
+import greeenpod from '../assets/greenpod.png'
+
 import { useTranslation } from 'react-i18next';
 
 
 const Modal1 = ({ show, handleClose, user_level, amount, balance, orderCounts}) => {
 
   const { t } = useTranslation();
-  const images = [logage, headphone, smartwatch, sneakers, hoodie];
+  const images = [greeenpod, logage, headphone, smartwatch, sneakers, hoodie, vacumCleaner, vacuum];
 
   const [currentImage, setCurrentImage] = useState(images[0]);
   const [isLoading, setIsLoading] = useState(false);
@@ -185,7 +189,7 @@ const Modal1 = ({ show, handleClose, user_level, amount, balance, orderCounts}) 
           <p>{t('time')}: {formattedTime}</p>
         </div>
         <div className="image-container">
-          <img src={currentImage} alt="Grab items" className="img-fluid" style={{width: '100px', height:'100px', objectFit:'cover'}} />
+          <img src={currentImage} alt="Grab items" className="img-fluid" style={{width: '200px', height:'200px', objectFit:'cover'}} />
         </div>
         <div className="d-flex justify-content-between px-4">
           <p className="pro-amount fw-bold fs-3">${amount}</p>
@@ -215,7 +219,7 @@ const Modal1 = ({ show, handleClose, user_level, amount, balance, orderCounts}) 
           <button
             onClick={handlePay}
             className="btn rounded-pill border-0 fs-4"
-            // disabled={isLoading || (balance < 20 && orderCounts < 1) || isSuccess}
+            disabled={isLoading || (balance < 20 && orderCounts < 1) || isSuccess}
           >
             {isLoading ? <span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> : t('grab_2')}
           </button>

@@ -70,7 +70,10 @@
     "time": "Time",
     "total_order_amount": "Total Other Amount",
     "commision": "Commission",
-    "grab_2": "grab"
+    "grab_2": "grab",
+    "recipient_name": "Recipient Name",
+    "amount": "Amount",
+    "rut": "RUT"
 
 
 

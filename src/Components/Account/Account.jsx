@@ -154,25 +154,25 @@ const Account = () => {
           }`}
         >
           <div className="profile-section text-center py-5">
-            <label
-              htmlFor="profile-pic-upload"
-              className="profile-pic-label position-relative"
-            >
-              <img
-                src={profilePic}
-                className="img-fluid h-25 w-50 profile-pic rounded-circle"
-                alt="Profile"
-              />
-              <i className="bi bi-camera fs-3 text-light position-absolute start-50 end-0 bottom-100 top-0 me-5"></i>
-            </label>
+          <label
+  htmlFor="profile-pic-upload"
+  className="profile-pic-label position-relative"
+>
+  <img
+    src={profilePic}
+    className="img-fluid profile-pic"
+    alt="Profile"
+  />
+  <i className="bi bi-camera fs-3 text-light position-absolute start-50 end-0 bottom-100 top-0 me-5"></i>
+</label>
 
-            <input
-              type="file"
-              id="profile-pic-upload"
-              accept="image/*"
-              style={{ display: "none" }}
-              onChange={handleProfilePicChange}
-            />
+<input
+  type="file"
+  id="profile-pic-upload"
+  accept="image/*"
+  style={{ display: "none" }}
+  onChange={handleProfilePicChange}
+/>
             <div className="profile-info px-5">
               <p>
                 <strong>{t('Number')}:</strong> {phone}
