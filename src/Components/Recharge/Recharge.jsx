@@ -6,10 +6,9 @@ import SliderToggle2 from "../SliderToggle2/SliderToggle2";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import "./Recharge.css";
 import QRCode from "qrcode.react";
-import { useTranslation } from 'react-i18next';
+import { useTranslation } from "react-i18next";
 
 const Recharge = () => {
-  
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -17,13 +16,12 @@ const Recharge = () => {
     const token = localStorage.getItem("token");
     const user_type = localStorage.getItem("user_type");
 
-    if (((user_type !== "client") && token)) {
+    if (user_type !== "client" && token) {
       navigate("/login"); // Redirect to login page
     }
   }, [navigate]);
 
-  const { t } = useTranslation()
-
+  const { t } = useTranslation();
 
   const userID = localStorage.getItem("user_id");
   const djangoHostname = import.meta.env.VITE_DJANGO_HOSTNAME;
@@ -51,7 +49,7 @@ const Recharge = () => {
   // Flash message state
   const [flashMessage, setFlashMessage] = useState(null);
   const [flashType, setFlashType] = useState(""); // "success" or "error"
- 
+
   // Loader state
   const [loading, setLoading] = useState(false);
 
@@ -64,8 +62,6 @@ const Recharge = () => {
   const formatAmount = (amount) => {
     return parseFloat(amount).toFixed(2);
   };
-
-
 
   useEffect(() => {
     const fetchWalletData = async () => {
@@ -133,15 +129,14 @@ const Recharge = () => {
     if (cryptoWallet) {
       const wallet = walletData.find((w) => w.wallet_type === cryptoWallet);
       if (wallet) {
-         // Generate QR code value with both walletAddress and cryptoWallet
-      setQrCodeValue(`${wallet.wallet_address} - ${cryptoWallet}`);
+        // Generate QR code value with both walletAddress and cryptoWallet
+        setQrCodeValue(`${wallet.wallet_address} - ${cryptoWallet}`);
       } else {
         setWalletAddress("");
       }
     }
   }, [cryptoWallet, walletData]);
 
-  
   const handleCopy = (textToCopy) => {
     navigator.clipboard.writeText(textToCopy).then(() => {
       setIsCopied(true); // Set the state to true when clicked
@@ -256,8 +251,8 @@ const Recharge = () => {
         return;
       }
 
-      const senderName = localStorage.getItem("firstName")
-      const amount = formatAmount(amountFromQuery) || formatAmount(data.amount)
+      const senderName = localStorage.getItem("firstName");
+      const amount = formatAmount(amountFromQuery) || formatAmount(data.amount);
       const formData = new FormData();
 
       formData.append("user", userID);
@@ -265,7 +260,6 @@ const Recharge = () => {
       formData.append("recharge_method", "crypto");
       formData.append("receipt_image", uploadProf);
       formData.append("amount_top_up", amount);
-
 
       handleFileUpload(formData);
       return;
@@ -302,8 +296,8 @@ const Recharge = () => {
       if (wallet) {
         setWalletAddress(wallet.wallet_address);
         // Generate QR code value here
-         // Generate QR code value with both walletAddress and cryptoWallet
-         setQrCodeValue(`${cryptoWallet}\n\n${wallet.wallet_address}`);
+        // Generate QR code value with both walletAddress and cryptoWallet
+        setQrCodeValue(`${cryptoWallet}\n\n${wallet.wallet_address}`);
       } else {
         setWalletAddress("");
         setQrCodeValue(""); // Clear QR code value if wallet not found
@@ -320,7 +314,7 @@ const Recharge = () => {
           </Link>
         </div>
         <div className="col-auto mx-auto">
-          <h1>{t('recharge_account')}</h1>
+          <h1>{t("recharge_account")}</h1>
         </div>
       </div>
       <SliderToggle2
@@ -332,7 +326,7 @@ const Recharge = () => {
           <>
             <div className="my-3">
               <label className="fw-bold fs-4 my-4" htmlFor="cryptowallet">
-              {t('select_wallet')}
+                {t("select_wallet")}
               </label>
               <select
                 name="cryptowallet"
@@ -355,7 +349,7 @@ const Recharge = () => {
 
             <div className="my-3">
               <label className="fw-bold fs-4 my-2" htmlFor="walletaddress">
-                {t('select_wallet')}
+                {t("select_wallet")}
               </label>
               <input
                 type="text"
@@ -364,14 +358,12 @@ const Recharge = () => {
                 value={walletAddress || "Fetching Address"}
                 readOnly
               />
-              <p className="py-4">
-                {t('messages')}
-              </p>
+              <p className="py-4">{t("messages")}</p>
             </div>
 
             {isWalletLocked && (
               <div className="my-3">
-                <label htmlFor="uploadProf">{t('upload_prof')}</label>
+                <label htmlFor="uploadProf">{t("upload_prof")}</label>
                 <input
                   type="file"
                   name="uploadProf"
@@ -383,47 +375,48 @@ const Recharge = () => {
               </div>
             )}
 
-              <div className="my-4 text-center">
-                <button
-                  className="rounded-pill py-2 w-75 border-0 draw-btn fw-bold text-light fs-5 my-5"
-                  type="submit"
-                  disabled={loading} // Disable the button while loading
-                >
-                  {loading ? (
-                    <i className="fas fa-spinner fa-spin"></i> // Spinner icon while loading
-                  ) : isWalletLocked ? (
-                    "Submit Proof"
-                  ) : (
-                    "Generate Payment"
-                  )}
-                </button>
-              </div>
-
+            <div className="my-4 text-center">
+              <button
+                className="rounded-pill py-2 w-75 border-0 draw-btn fw-bold text-light fs-5 my-5"
+                type="submit"
+                disabled={loading} // Disable the button while loading
+              >
+                {loading ? (
+                  <i className="fas fa-spinner fa-spin"></i> // Spinner icon while loading
+                ) : isWalletLocked ? (
+                  "Submit Proof"
+                ) : (
+                  "Generate Payment"
+                )}
+              </button>
+            </div>
           </>
         )}
         {selectedMethod === "bank-payment" && (
           <>
             <div className="container">
-              <p>{t('step_1')}: {t('copy_account')}</p>
+              <p>
+                {t("step_1")}: {t("copy_account")}
+              </p>
             </div>
             <div className="container rounded-4 paym-card">
               <div className="row justify-content-center">
                 <div className="col-lg-4 col-md-6 col-sm-12">
                   <div className="text-center py-lg-5 py-4">
-                    <p>{t('bank_name')}</p>
+                    <p>{t("bank_name")}</p>
                     <p className="fw-bold">{bankDetails.bankName}</p>
                     <div className="w-75 me-lg-auto mx-auto">
                       <hr className="horizontal border-3 text-white " />
                     </div>
                     <div className="text-center">
-                      <p>{t('bank_account')}</p>
+                      <p>{t("bank_account")}</p>
                       <p className="fw-bold">{bankDetails.account}</p>
                     </div>
                   </div>
                 </div>
                 <div className="col-lg-4 col-md-6 col-sm-12 align-self-center">
                   <div className="text-center">
-                    <p>{t('amount')}</p>
+                    <p>{t("amount")}</p>
                     <p className="fw-bold">${formatAmount(amountFromQuery)}</p>
                     {/* <div className="w-75 me-lg-auto mx-auto">
                       <hr className="horizontal vr border-3 text-white " />
@@ -433,14 +426,14 @@ const Recharge = () => {
 
                 <div className="col-lg-4 col-md-6 col-sm-12">
                   <div className="text-center py-lg-5 px-2">
-                    <p>{t('recipient_name')}</p>
+                    <p>{t("recipient_name")}</p>
                     <p className="fw-bold">{bankDetails.recipient}</p>
                     <div className="w-100 me-lg-auto mx-auto">
                       <hr className="horizontal border-3 text-white " />
                     </div>
 
                     <div className="text-center">
-                      <p>{t('rut')}</p>
+                      <p>{t("rut")}</p>
                       <p className="fw-bold">{bankDetails.ruth}</p>
                       {/* <div className="w-75 me-lg-auto mx-auto">
                       <hr className="horizontal border-3 text-white " />
@@ -451,23 +444,25 @@ const Recharge = () => {
               </div>
             </div>
             <div className="container mt-3">
-              <p>{t('step_2')}:{t('upload_reciept')}</p>
+              <p>
+                {t("step_2")}:{t("upload_reciept")}
+              </p>
             </div>
             <div className="container my-3">
               <label className="fw-bold" htmlFor="username">
-                {t('enter_name')}
+                {t("enter_name")}
               </label>
               <input
                 type="text"
                 className="form-control ps-5 py-3 border border-3 rounded-3"
                 value={senderName}
                 onChange={(e) => setSenderName(e.target.value)}
-                placeholder={t('name')}
+                placeholder={t("name")}
                 required
               />
             </div>
             <div className="container my-3">
-              <label htmlFor="uploadProf">{t('upload_prof')}</label>
+              <label htmlFor="uploadProf">{t("upload_prof")}</label>
               <input
                 type="file"
                 name="uploadProf"
@@ -493,7 +488,7 @@ const Recharge = () => {
                     Uploading...
                   </>
                 ) : (
-                  t('upload_prof')
+                  t("upload_prof")
                 )}
               </button>
             </div>
@@ -521,30 +516,35 @@ const Recharge = () => {
                 </span>
               </div>
               <div className="modal-header">
-                <h5 className="modal-title">SCAN QR CODE</h5>
+                <h5 className="modal-title">{t("scan")}</h5>
               </div>
               <div className="bg-secondary rounded-3 py-4 text-light">
                 {/* <img src={qrCodeValue}alt="QR Code" /> */}
-                 <QRCode value={qrCodeValue} />
+                <QRCode value={qrCodeValue} />
 
-                <p>Scan the QR code or copy the link to make payment:</p>
+                <p>{t("messages_2")}:</p>
               </div>
               <div className="modal-body text-start text-light">
-                <p>Deposit Address</p>
+                <p>{t("deposite_address")}</p>
                 <div className="container bg-secondary py-4 rounded-3 copy-qr-text align-items-center">
-                  <div className="row">
-                    <div className="col-auto"></div>
+                  <div className="row justify-content-center">
+                    <div className="col-lg-12 col-md-6 col-sm-12">
+                      <p>
+                        <span className="mt-3 text-break">{walletAddress}</span>
+                      </p>
+                    </div>
+                    <div className="col-lg-8 col-md-6 col-sm-12 text-center">
+                      <button
+                        className={`btn copy-qr text-light rounded-3 border border-0 mt-3 ${
+                          isCopied ? "bg-success" : "bg-primary"
+                        }`}
+                        onClick={() => handleCopy(walletAddress)}
+                      >
+                        {isCopied ? "Copied!" : t("copy_link")}
+                      </button>
+                    </div>
                   </div>
-                  <span className="mt-3">{walletAddress}</span>
-                  <button
-                    className={`btn copy-qr text-light w-25 rounded-3 border border-0 mt-3 ${
-                      isCopied ? "bg-success" : "bg-primary"
-                    }`}
-                    onClick={() => handleCopy(walletAddress)}
-                  >
-                    {isCopied ? "Copied!" : "Copy Link"}
-                  </button>
-                                  </div>
+                </div>
               </div>
             </div>
           </div>

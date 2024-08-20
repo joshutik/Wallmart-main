@@ -73,7 +73,11 @@
     "grab_2": "grab",
     "recipient_name": "Recipient Name",
     "amount": "Amount",
-    "rut": "RUT"
+    "rut": "RUT",
+    "scan": "SCAN QR CODE",
+    "messages_2": "Scan the QR code or copy the link to make payment",
+    "deposite_address": "Deposit Address",
+    "copy_link": "Copy Link"
 
 
 
