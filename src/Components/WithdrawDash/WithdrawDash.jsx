@@ -13,7 +13,8 @@ const WithdrawDash = () => {
     const token = localStorage.getItem("token");
     const user_type = localStorage.getItem("user_type");
 
-    if (!user_type !== "admin" && token) {
+
+    if (!(user_type === "admin" && token)) {
       navigate("/login"); // Redirect to login page
     }
   }, [navigate]);
