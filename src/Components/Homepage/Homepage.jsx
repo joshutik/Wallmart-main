@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
 import "./Homepage.css";
 import img2 from "../assets/slider.png";
 import img3 from "../assets/slider3.png";
@@ -15,33 +14,33 @@ import { Link } from "react-router-dom";
 import { useTranslation } from 'react-i18next';
 
 const Homepage = () => {
-  const navigate = useNavigate(); // Initialize useNavigate
-  const { t } = useTranslation();
+  const pageText = document.body.innerText;
+  console.log(pageText);
+
+  const { t } = useTranslation()
   const djangoHostname = import.meta.env.VITE_DJANGO_HOSTNAME;
   const [amount, setAmount] = useState(0);
   const [loading, setLoading] = useState(false);
   const [invite_code, setInvite_code] = useState(0);
   const [balance, setBalance] = useState(0);
   const [unsettle, setUnsettle] = useState(0);
+
   const [phone, setPhone] = useState(0);
   const [profilePic, setProfilePic] = useState("");
   const [orderCount, setOrderCount] = useState(0);
   const [level, setLevel] = useState("VIP1");
+  
+
   const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
-    const checkAuth = () => {
-      const token = localStorage.getItem("token");
-      if (!token) {
-        navigate("/login"); // Redirect to login if not authenticated
-      }
-    };
-
     const fetchData = async () => {
       try {
         const token = localStorage.getItem("token");
         const user = localStorage.getItem("user_id");
-        const user_invitation_code = localStorage.getItem("user_invitation_code");
+        const user_invitation_code = localStorage.getItem(
+          "user_invitation_code"
+        );
 
         const response = await axios.get(
           `${djangoHostname}/api/accounts/users/${user}/`,
@@ -65,9 +64,9 @@ const Homepage = () => {
       }
     };
 
-    checkAuth(); // Check authentication status
-    fetchData(); // Fetch user data
-  }, [djangoHostname, navigate]);
+    fetchData();
+  }, [djangoHostname]);
+
 
   const handleTopUpClick = () => {
     setShowModal(true);
@@ -81,6 +80,8 @@ const Homepage = () => {
     setAmount(amount);
   };
 
+  
+
   return (
     <div className="container pb-5">
       <NavigationBar2 />
@@ -89,10 +90,10 @@ const Homepage = () => {
         className="carousel carousel-dark slide rounded-5 my-5 py-5" data-bs-ride="carousel"
       >
         <div className="carousel-indicators">
-          <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" className="active" aria-current="true" aria-label="Slide 1"></button>
-          <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
-          <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
-        </div>
+    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" className="active" aria-current="true" aria-label="Slide 1"></button>
+    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+  </div>
 
         <div className="carousel-inner">
           <div className="carousel-item active" data-bs-interval="2000">
@@ -134,9 +135,11 @@ const Homepage = () => {
       <div className="container-fluid my-5 py-4">
         <div className="container quick rounded-5 py-5 px-3">
           <div className="row gy-3 justify-content-center text-center">
+          
             <div className="col-lg-4 col-md-4 col-sm-12">
               <Link
-                onClick={handleTopUpClick}
+              onClick={handleTopUpClick}
+              
                 className="btn W-25 py-3 px-4 bg-transparent rounded-5 action"
               >
                 <img src={img4} className="img-fluid mb-2" alt="" />{" "}
@@ -173,35 +176,37 @@ const Homepage = () => {
       </div>
 
       {showModal && (
-        <div className="modal show d-block" tabIndex="-3" role="dialog">
-          <div className="modal-dialog" role="document">
-            <div className="modal-content top-up">
-              <div className="modal-header">
-                <h5 className="modal-title ms-auto">Top Up Account</h5>
-                <button
-                  type="button"
-                  className="close border-0 ms-auto fs-1 bg-transparent"
-                  onClick={handleCloseModal}
-                >
-                  <span>&times;</span>
-                </button>
-              </div>
-              <div className="modal-body mx-auto">
-                <p>Select recharge amount...</p>
-                <hr />
-                <div className="container">
-                  <div className="row gy-3">
-                    {(level === "VIP1" || level === "VIP2") && (
+            <div className="modal show  d-block" tabIndex="-3" role="dialog">
+              <div className="modal-dialog" role="document">
+                <div className="modal-content top-up">
+                  <div className="modal-header">
+                    <h5 className="modal-title ms-auto">Top Up Account</h5>
+                    <button
+                      type="button"
+                      className="close border-0 ms-auto fs-1 bg-transparent"
+                      onClick={handleCloseModal}
+                    >
+                      <span>&times;</span>
+                    </button>
+                  </div>
+                  <div className="modal-body mx-auto">
+                    <p>Select recharge amount...</p>
+                    <hr />
+                    <div className="container">
+                      <div className="row gy-3">
+                      {(level === "VIP1" || level === "VIP2") && (
                       <div className="col-lg-12 col-md-6 col-sm-12 d-flex recharge-btn">
                         <button
                           className="btn border w-100 fw-bold mx-2"
                           onClick={() => handleAmountClick(20)}
-                          disabled={!(level === "VIP1" && orderCount === 0 || (level === "VIP2" && orderCount === 1))}
+                          // disabled={!(level === "VIP1" || balance == 40)}
+                          disabled={!(level === "VIP1" && orderCount == 0 || (level === "VIP2" && orderCount == 1))  }
                         >
-                          $20
+                          $20 
                         </button>
                         <button
-                          disabled={!(level === "VIP2" && orderCount === 0)}
+                          // disabled={level !== "VIP2"}
+                          disabled={!(level === "VIP2" && orderCount == 0) }
                           className="btn border fw-bold w-100 mx-2"
                           onClick={() => handleAmountClick(40)}
                         >
@@ -209,45 +214,148 @@ const Homepage = () => {
                         </button>
                       </div>
                     )}
-                    <div className="col-lg-12 col-md-6 col-sm-12 d-flex recharge-btn">
-                      <button
-                        disabled={!(level === "VIP3" && orderCount < 1)}
-                        className="btn border fw-bold w-100 mx-2"
-                        onClick={() => handleAmountClick(100)}
-                      >
-                        $100
-                      </button>
-                      <button
-                        disabled={!(level === "VIP3" && orderCount < 2)}
-                        className="btn border fw-bold w-100 mx-2"
-                        onClick={() => handleAmountClick(150)}
-                      >
-                        $150
-                      </button>
+                  
+                        <div className="col-lg-12 col-md-6 col-sm-12 d-flex recharge-btn">
+                          <button
+                            disabled={!(level === "VIP3" && orderCount < 1)}
+                            className="btn border fw-bold w-100 mx-2"
+                            onClick={() => handleAmountClick(70)}
+                          >
+                            $70
+                          </button>
+                          <button
+                            disabled={!(level === "VIP3" && orderCount < 2)}
+                            className="btn border fw-bold w-100 mx-2"
+                            onClick={() => handleAmountClick(120)}
+                          >
+                            $120
+                          </button>
+                        </div>
+                        <div className="col-lg-12 col-md-6 col-sm-12 d-flex recharge-btn">
+                          <button
+                             disabled={!(level === "VIP3" && orderCount < 3)}
+                            className="btn border fw-bold w-100 mx-2"
+                            onClick={() => handleAmountClick(200)}
+                          >
+                            $200
+                          </button>
+                          <button
+                            disabled={!(level === "VIP3"  && orderCount < 4)}
+                            className="btn border fw-bold w-100 mx-2"
+                            onClick={() => handleAmountClick(500)}
+                          >
+                            $500
+                          </button>
+                        </div>
+
+                        {level === "VIP3" && (
+                          <>
+                        <div className="col-lg-12 col-md-6 col-sm-12 d-flex recharge-btn">
+                          <button
+                            disabled={!(level === "VIP3"  && orderCount < 5)}
+                            className="btn border fw-bold w-100 mx-2"
+                            onClick={() => handleAmountClick(900)}
+                          >
+                            $900
+                          </button>
+                          
+                          <button
+                            disabled={!(level === "VIP3"  && orderCount < 6)}
+                            className="btn border fw-bold w-100 mx-2"
+                            onClick={() => handleAmountClick(1200)}
+                          >
+                            $1200
+                          </button>
+                        
+                        </div>
+                        <div className="col-lg-12 col-md-6 col-sm-12 d-flex recharge-btn">
+                          <button
+                            disabled={!(level === "VIP3"  && orderCount < 7)}
+                            className="btn border fw-bold w-100 mx-2"
+                            onClick={() => handleAmountClick(1500)}
+                          >
+                            $1500
+                          </button>
+                          <button
+                            disabled={!(level === "VIP3"  && orderCount < 8)}
+                            className="btn border fw-bold w-100 mx-2"
+                            onClick={() => handleAmountClick(2200)}
+                          >
+                            $2200
+                          </button>
+                        </div>
+                        
+                            <div className="col-lg-12 col-md-6 col-sm-12 d-flex recharge-btn">
+                              <button
+                                disabled={!(level === "VIP3"  && orderCount < 9)}
+                                className="btn border fw-bold w-100 mx-2"
+                                onClick={() => handleAmountClick(3000)}
+                              >
+                                $3000
+                              </button>
+                              <button
+                               disabled={!(level === "VIP3"  && orderCount < 10)}
+                                className="btn border fw-bold w-100 mx-2"
+                                onClick={() => handleAmountClick(500)}
+                              >
+                                $3500
+                              </button>
+                            </div>
+
+                            <div className="col-lg-12 col-md-6 col-sm-12 d-flex recharge-btn">
+                              <button
+                                disabled={!(level === "VIP3"  && orderCount < 11)}
+                                className="btn border fw-bold w-100 mx-2"
+                                onClick={() => handleAmountClick(3950)}
+                              >
+                                $3950
+                              </button>
+                              <button
+                                disabled={!(level === "VIP3"  && orderCount < 12)}
+                                className="btn border fw-bold w-100 mx-2"
+                                onClick={() => handleAmountClick(4200)}
+                              >
+                                $4200
+                              </button>
+                            </div>
+                          </>
+                        )}
+
+
+                        <div className="mt-5">
+                          {amount === 0 || loading ? (
+                            <div className="recharge-disabled text-light fw-bold rounded-pill text-decoration-none w-75 border-0 py-2">
+                              {loading ? "Processing..." : "Recharge now"}
+                            </div>
+                          ) : (
+                            <Link
+                              to={`/recharge-account?amount=${amount}`}
+                              type="button"
+                              className="recharge text-light fw-bold rounded-pill text-decoration-none w-75 border-0 py-2"
+                            >
+                              Recharge now
+                            </Link>
+                          )}
+                        </div>
+                      </div>
                     </div>
+                  </div>
+                  <div className="modal-footer mx-auto">
+                    <button
+                      type="button"
+                      className="btn bg-transparent fw-bold fs-3"
+                      onClick={handleCloseModal}
+                    >
+                      <span>&times;</span>
+                    </button>
+                    {/* <button type="button" className="btn btn-primary">
+                      Save changes
+                    </button> */}
                   </div>
                 </div>
               </div>
-              <div className="modal-footer">
-                <button
-                  type="button"
-                  className="btn btn-secondary"
-                  onClick={handleCloseModal}
-                >
-                  Close
-                </button>
-                <button
-                  type="button"
-                  className="btn btn-primary"
-                  disabled={!amount}
-                >
-                  Top Up ${amount}
-                </button>
-              </div>
             </div>
-          </div>
-        </div>
-      )}
+          )}
     </div>
   );
 };
