@@ -35,7 +35,7 @@ function App() {
 //  const { t } = useTranslation()
   return (
     <div>
-      <Homepage/>
+      {/* <Homepage/> */}
       {/* <LanguageSwitcher/> */}
       {/* <Usercomision/> */}
       {/* <Partners/> */}
@@ -43,7 +43,7 @@ function App() {
       {/* <NavigationBar2/> */}
       {/* <NavigationBar3/> */}
       {/* <GrabOrder/> */}
-      {/* <Login/> */}
+      <Login/>
       {/* <Modal/> */}
       {/* <Registration/> */}
       {/* <Account/> */}
