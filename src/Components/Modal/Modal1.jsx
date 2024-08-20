@@ -67,6 +67,36 @@ const Modal1 = ({ show, handleClose, user_level, amount, balance, orderCounts}) 
     if(user_level === "VIP3" && orderCounts == 1){
       return  84
     }
+    if(user_level === "VIP3" && orderCounts == 2){
+      return  140
+    }
+    if(user_level === "VIP3" && orderCounts == 3){
+      return  350
+    }
+    if(user_level === "VIP3" && orderCounts == 4){
+      return  648
+    }
+    if(user_level === "VIP3" && orderCounts == 5){
+      return  840
+    }
+    if(user_level === "VIP3" && orderCounts == 6){
+      return  1050
+    }
+    if(user_level === "VIP3" && orderCounts == 7){
+      return  1540
+    }
+    if(user_level === "VIP3" && orderCounts == 8){
+      return  2100
+    }
+    if(user_level === "VIP3" && orderCounts == 9){
+      return  2450
+    }
+    if(user_level === "VIP3" && orderCounts == 10){
+      return  2765
+    }
+    if(user_level === "VIP3" && orderCounts == 11){
+      return  2940
+    }
   }
 
   const handlePay = async () => {
@@ -125,39 +155,40 @@ const Modal1 = ({ show, handleClose, user_level, amount, balance, orderCounts}) 
         if (userLevel === "VIP2" && orderCount === 2) {
           setFlashMessage("Orders completed. Withdraw.");
         }
-        if (userLevel === "VIP3" && orderCount === 1) {
+        if (userLevel === "VIP3" && orderCount === 0) {
           setFlashMessage("Top up $120 for the next Order");
         }
-        if (userLevel === "VIP3" && orderCount === 2) {
+        if (userLevel === "VIP3" && orderCount === 1) {
           setFlashMessage("Top up $200 for the next Order");
         }
-        if (userLevel === "VIP3" && orderCount === 3) {
+        if (userLevel === "VIP3" && orderCount === 2) {
           setFlashMessage("Top up $500 for the next Order");
         }
-        if (userLevel === "VIP3" && orderCount === 4) {
+        if (userLevel === "VIP3" && orderCount === 3) {
           setFlashMessage("Top up $900 for the next Order");
         }
-        if (userLevel === "VIP3" && orderCount === 5) {
+        if (userLevel === "VIP3" && orderCount === 4) {
           setFlashMessage("Top up $1200 for the next Order");
         }
-        if (userLevel === "VIP3" && orderCount === 6) {
+        if (userLevel === "VIP3" && orderCount === 5) {
           setFlashMessage("Top up $1500 for the next Order");
         }
-        if (userLevel === "VIP3" && orderCount === 7) {
+        if (userLevel === "VIP3" && orderCount === 6) {
           setFlashMessage("Top up $2200 for the next Order");
         }
-        if (userLevel === "VIP3" && orderCount === 8) {
+        if (userLevel === "VIP3" && orderCount === 7) {
           setFlashMessage("Top up $3000 for the next Order");
         }
-        if (userLevel === "VIP3" && orderCount === 9) {
+        if (userLevel === "VIP3" && orderCount === 8) {
           setFlashMessage("Top up $3500 for the next Order");
         }
-        if (userLevel === "VIP3" && orderCount === 10) {
+        if (userLevel === "VIP3" && orderCount === 9) {
           setFlashMessage("Top up $3950 for the next Order");
         }
-        if (userLevel === "VIP3" && orderCount === 11) {
-          setFlashMessage("Top up $4200 for the next Order");
+        if (userLevel === "VIP3" && orderCount === 10) {
+          setFlashMessage("Order Completed. Withdraw");
         }
+       
 
         setShowFlashMessage(true); // Show flash message
 
@@ -177,6 +208,13 @@ const Modal1 = ({ show, handleClose, user_level, amount, balance, orderCounts}) 
 
   const isButtonDisabled = isLoading || isSuccess;
 
+
+  // alert(user_level)
+  // alert(orderCounts)
+      
+    // console.log(commission_order())
+    // alert(commission_order())
+
   return (
     <div className="modal-overlay">
       <div className="modal-content py-5">
@@ -192,7 +230,7 @@ const Modal1 = ({ show, handleClose, user_level, amount, balance, orderCounts}) 
           <img src={currentImage} alt="Grab items" className="img-fluid" style={{width: '200px', height:'200px', objectFit:'cover'}} />
         </div>
         <div className="d-flex justify-content-between px-4">
-          <p className="pro-amount fw-bold fs-3">${amount}</p>
+          <p className="pro-amount fw-bold fs-3">${}</p>
           <span className="fw-bold fs-3 mt-0">X2</span>
         </div>
         <div className="d-flex justify-content-between my-0 mx-2">
@@ -202,7 +240,7 @@ const Modal1 = ({ show, handleClose, user_level, amount, balance, orderCounts}) 
           </div>
           <div>
             <h4 className="fw-bold commi">{t('commision')}</h4>
-            <h4 className="fw-bold commi text-end">${commissionAmount.toFixed(2)}</h4>
+            <h4 className="fw-bold commi text-end">${commission_order()}</h4>
           </div>
         </div>
 

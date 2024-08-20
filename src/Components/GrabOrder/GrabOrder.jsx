@@ -206,7 +206,7 @@ const GrabOrder = () => {
           </button>
         </div>
       </div>
-      <Modal1 show={showModal} handleClose={handleClose} user_level={user_level} amount={amount} balance={balance} orderCounts={orderCount}/>
+      <Modal1 show={showModal} handleClose={handleClose} user_level={user_level} amount={amount} balance={Number(balance)} orderCounts={orderCount}/>
       <ModalTaskCompleted show={showTaskCompletedModal} handleClose={handleTaskCompletedClose} />
       <NavigationBar />
     </div>

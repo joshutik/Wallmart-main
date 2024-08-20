@@ -25,6 +25,7 @@ const Withdrawal = () => {
   const { t } = useTranslation()
   const [selectedMethod, setSelectedMethod] = useState("crypto");
   const [amount, setAmount] = useState("");
+  const [orderNumber, setOrderNumber] = useState("");
   const [userlevel, setUserLevel] = useState("");
   const [availableBalance, setAvailableBalance] = useState(0);
   const [cryptoWallet, setCryptoWallet] = useState("");
@@ -52,6 +53,7 @@ const Withdrawal = () => {
         setAvailableBalance(response.data.unsettle);
         setUserLevel(response.data.level);
         setAmount(response.data.unsettle); // Prepopulate the amount with availableBalance
+        setOrderNumber(response.data.grabbed_orders_count); // Prepopulate the amount with availableBalance
 
         
       } catch (error) {
@@ -71,6 +73,13 @@ const Withdrawal = () => {
         (userlevel == "VIP2" && availableBalance < 60)
       ) {
         setFlashMessage("You cannot withdraw, Please top up $20 and grab the second order");
+        return;
+      }
+      // Validation for available Balance in unsettle
+      if (
+        (userlevel == "VIP3" && orderNumber < 11)
+      ) {
+        setFlashMessage("You cannot withdraw, Please top and grab order");
         return;
       }
 

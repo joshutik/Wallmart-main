@@ -691,7 +691,7 @@ const Homepage = () => {
                               <button
                               //  disabled={!(level === "VIP3"  && orderCount < 10)}
                                 className="btn border fw-bold w-100 mx-2"
-                                onClick={() => handleAmountClick(500)}
+                                onClick={() => handleAmountClick(3500)}
                               >
                                 $3500
                               </button>
