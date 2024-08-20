@@ -100,6 +100,7 @@ const { t } = useTranslation()
   
       // Store data in localStorage
       localStorage.setItem("token", result.token);
+      localStorage.setItem("user_type", result.user_type);
       localStorage.setItem("user_id", result.user_id);
       localStorage.setItem("phone", result.phone);
       localStorage.setItem("firstName", result.firstName);

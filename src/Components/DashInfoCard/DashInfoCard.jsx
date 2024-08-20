@@ -1,4 +1,5 @@
-import { useEffect, useState } from "react";
+import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import "./DashInfoCard.css";
 import active from "../assets/active.png";
 import balance from "../assets/userbalance.png";
@@ -6,6 +7,19 @@ import deposite from "../assets/deposit.png";
 import withd from "../assets/with.png";
 
 const DashInfoCard = () => {
+
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    // Simulating a function that checks user authentication and type
+    const token = localStorage.getItem("token");
+    const user_type = localStorage.getItem("user_type");
+
+    if (!user_type !== "admin" && token) {
+      navigate("/login"); // Redirect to login page
+    }
+  }, [navigate]);
+  
   const djangoHostname = import.meta.env.VITE_DJANGO_HOSTNAME;
   const [dashboardData, setDashboardData] = useState({
     activeUsers: 0,

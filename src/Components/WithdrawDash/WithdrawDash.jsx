@@ -1,11 +1,22 @@
-
-
-import { useEffect, useState } from "react";
+import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import "./WithdrawDash.css";
 import { Link } from "react-router-dom";
 
 const WithdrawDash = () => {
+
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    // Simulating a function that checks user authentication and type
+    const token = localStorage.getItem("token");
+    const user_type = localStorage.getItem("user_type");
+
+    if (!user_type !== "admin" && token) {
+      navigate("/login"); // Redirect to login page
+    }
+  }, [navigate]);
 
   const djangoHostname = import.meta.env.VITE_DJANGO_HOSTNAME;
   const [withdrawData, setWithdrawData] = useState([]);
@@ -41,30 +52,39 @@ const WithdrawDash = () => {
 };
 
 
+  
 
-const handleApproveWithdrawal = async (withdrawId, withdraw_top_up, userId) => {
-  setIsLoading(true); // Start loading
-  try {
-    
-    const token = localStorage.getItem("token");
-
-    // Fetch the current user data to get the current balance
-    const userResponse = await axios.get(`${djangoHostname}/api/accounts/users/${userId}/`, {
-      headers: {
-        Authorization: `Token ${token}`,
-      },
-    });
-    const currentBalance = userResponse.data.unsettle;
-
-
-    // Calculate the new balance
-    const newUnsettle = (parseFloat(currentBalance) - parseFloat(withdraw_top_up)).toFixed(1);
-
-    
-    alert(newUnsettle)
-
-    await fetch(`${djangoHostname}/api/withdrws/withdraw/${withdrawId}/`,
-      {
+  const handleApproveWithdrawal = async (withdrawId, withdraw_top_up, userId) => {
+    setIsLoading(true); // Start loading
+    try {
+      const token = localStorage.getItem("token");
+  
+      // Fetch the current user data to get the current balance
+      const userResponse = await axios.get(`${djangoHostname}/api/accounts/users/${userId}/`, {
+        headers: {
+          Authorization: `Token ${token}`,
+        },
+      });
+  
+      const currentBalance = userResponse.data.unsettle;
+  
+      // Calculate the new balance
+      const newUnsettle = (parseFloat(currentBalance) - parseFloat(withdraw_top_up)).toFixed(1);
+  
+      // PATCH request to update user's unsettle balance
+      await fetch(`${djangoHostname}/api/accounts/users/${userId}/`, {
+        method: "PATCH",
+        headers: {
+          Authorization: `Token ${token}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          unsettle: newUnsettle,
+        }),
+      });
+  
+      // After updating unsettle balance, approve the withdrawal
+      await fetch(`${djangoHostname}/api/withdrws/withdraw/${withdrawId}/`, {
         method: "PATCH",
         headers: {
           Authorization: `Token ${token}`,
@@ -72,19 +92,19 @@ const handleApproveWithdrawal = async (withdrawId, withdraw_top_up, userId) => {
         },
         body: JSON.stringify({
           is_approved: true,
-          unsettle: newUnsettle,
         }),
-      }
-    );
-
-    fetchWithdrawData(currentPage); // Refresh data after approval
-  } catch (error) {
-    console.error("Error approving the withdrawal", error);
-  } finally {
-    setIsLoading(false); // Stop loading
-  }
-};
-
+      });
+  
+      // Refresh data after approval
+      fetchWithdrawData(currentPage);
+    } catch (error) {
+      console.error("Error approving the withdrawal", error);
+      alert("Error approving the withdrawal", error);
+    } finally {
+      setIsLoading(false); // Stop loading
+    }
+  };
+  
 
   const handleDeclineUser = async (userId) => {
     try {

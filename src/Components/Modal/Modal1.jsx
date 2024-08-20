@@ -91,8 +91,9 @@ const Modal1 = ({ show, handleClose, user_level, amount, balance }) => {
 
       const userLevel = response.data.level; // State for user level
       const orderCount = response.data.grabbed_orders_count; // State for order count
+      const userBalance = response.data.balance; // State for order count
 
-
+      console.log(userBalance)
         setIsSuccess(true); // Set success state
 
    
@@ -208,17 +209,23 @@ const Modal1 = ({ show, handleClose, user_level, amount, balance }) => {
             <button onClick={handleFlashMessageConfirm} className="btn btn-primary">OK</button>
           </div>
         )}
+        
 
         <div className="modal-buttons pb-sm-5">
           <button
             onClick={handlePay}
             className="btn rounded-pill border-0 fs-4"
-            disabled={isButtonDisabled}
+            disabled={isLoading || balance < 30 || isSuccess}
           >
-            {isLoading ? <span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> : "Grab"}
+            {isLoading ? (
+              <span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+            ) : balance < 30 ? (
+              "Please Top Up to Grab Order"
+            ) : (
+              "Grab"
+            )}
           </button>
-        </div>
-        
+</div>
        
       </div>
     </div>

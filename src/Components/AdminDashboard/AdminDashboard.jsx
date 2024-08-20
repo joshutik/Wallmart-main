@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import "./AdminDashboard.css";
 import logout from '../assets/logout.png';
 import vip1 from "../assets/vip1.png";
@@ -23,6 +24,19 @@ import WalletDetailsModal from "../WalletDetailsModal/WalletDetailsModal";
 import { Link } from "react-router-dom";
 
 const AdminDashboard = () => {
+
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    // Simulating a function that checks user authentication and type
+    const token = localStorage.getItem("token");
+    const user_type = localStorage.getItem("user_type");
+
+    if (!user_type !== "admin" && token) {
+      navigate("/login"); // Redirect to login page
+    }
+  }, [navigate]);
+
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [currentView, setCurrentView] = useState("dashboard");
 
@@ -36,6 +50,8 @@ const AdminDashboard = () => {
     finance: false,
     settings: false,
   });
+
+ 
 
   const toggleSidebar = () => {
     setSidebarOpen(!sidebarOpen);
