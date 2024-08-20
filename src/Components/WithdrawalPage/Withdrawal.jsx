@@ -25,6 +25,7 @@ const Withdrawal = () => {
   const { t } = useTranslation()
   const [selectedMethod, setSelectedMethod] = useState("crypto");
   const [amount, setAmount] = useState("");
+  const [userlevel, setUserLevel] = useState("");
   const [availableBalance, setAvailableBalance] = useState(0);
   const [cryptoWallet, setCryptoWallet] = useState("");
   const [walletAddress, setWalletAddress] = useState("");
@@ -49,6 +50,7 @@ const Withdrawal = () => {
           },
         });
         setAvailableBalance(response.data.unsettle);
+        setUserLevel(response.data.level);
         setAmount(response.data.unsettle); // Prepopulate the amount with availableBalance
 
         
@@ -59,43 +61,18 @@ const Withdrawal = () => {
     fetchBalance();
   }, [djangoHostname]);
 
-    
-  
-  // const handleUserUnsettle = async (userId, amount_withdrawn) => {
-  //   try {
-  //     const token = localStorage.getItem("token");
-
-  //     // Fetch the current user data to get the current balance
-  //     const userResponse = await axios.get(`${djangoHostname}/api/accounts/users/${userId}/`, {
-  //       headers: {
-  //         Authorization: `Token ${token}`,
-  //       },
-  //     });
-  //     const currentBalance = userResponse.data.unsettle;
-
-  //     // Calculate the new balance
-  //     const newBalance = (parseFloat(currentBalance) - parseFloat(amount_withdrawn)).toFixed(1);
-
-  //     await fetch(`${djangoHostname}/api/accounts/users/${userId}/`,
-  //       {
-  //         method: "PATCH",
-  //         headers: {
-  //           Authorization: `Token ${token}`,
-  //           "Content-Type": "application/json",
-  //         },
-  //         body: JSON.stringify({
-  //           unsettle: newBalance,
-  //         }),
-  //       }
-  //     );
-  //   } catch (error) {
-  //     console.error("Error promoting user", error);
-  //   }
-  // };
-
 
   const handleSubmit = async (e) => {
+
     e.preventDefault();
+
+      // Validation for available Balance in unsettle
+      if (
+        (userlevel == "VIP2" && availableBalance < 60)
+      ) {
+        setFlashMessage("You cannot withdraw, Please top up $20 and grab the second order");
+        return;
+      }
 
      // Validation for crypto
      if (
@@ -104,6 +81,7 @@ const Withdrawal = () => {
       setFlashMessage("You cannot withdraw more than your unsettlement amount");
       return;
     }
+ 
 
     // Validation for crypto
     if (
