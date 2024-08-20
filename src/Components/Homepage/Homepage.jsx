@@ -23,9 +23,6 @@ const Homepage = () => {
     const token = localStorage.getItem("token");
     const user_type = localStorage.getItem("user_type");
 
-    console.log(user_type)
-    alert(user_type)
-
     if (((user_type !== "client") && token)) {
       navigate("/login"); // Redirect to login page
     }

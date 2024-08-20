@@ -93,7 +93,6 @@ const Modal1 = ({ show, handleClose, user_level, amount, balance }) => {
       const orderCount = response.data.grabbed_orders_count; // State for order count
       const userBalance = response.data.balance; // State for order count
 
-      console.log(userBalance)
         setIsSuccess(true); // Set success state
 
    
@@ -219,7 +218,7 @@ const Modal1 = ({ show, handleClose, user_level, amount, balance }) => {
           >
             {isLoading ? (
               <span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-            ) : balance < 30 ? (
+            ) : (balance < 20 && orderCount < 1) ? (
               "Top Up to Grab Order"
             ) : (
               "Grab"

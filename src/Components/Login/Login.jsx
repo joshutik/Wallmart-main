@@ -75,7 +75,7 @@ const { t } = useTranslation()
   
     setError("");
     setSuccess("");
-    setLoading(true);
+    setLoading(true); 
   
     const payload = {
       phone: `${countryCode}${formData.phone}`,
