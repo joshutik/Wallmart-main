@@ -139,7 +139,7 @@ const NavigationBar = () => {
             </Link>
           </Nav.Item>
           <Nav.Item className={`nav-item ${isActive('/account')}`}>
-            <Link to="/account" className="d-flex flex-column mt-2 text-dark align-items-center text-decoration-none">
+            <Link to="/account" className="d-flex flex-column text-dark align-items-center text-decoration-none">
               <Person className="nav-icon" />
               <span className="nav-text">{t('profile')}</span>
             </Link>

@@ -64,7 +64,13 @@
     "step_2": "Paso 2",
     "name": "nombre",
     "enter_name": "Introduzca el nombre",
-    "messages": "Walmart generará un código de escaneo y un enlace de pago que puede Permitir un pago fácil y un mejor servicio a los clientes. Términos de Uso y Política de Privacidad."
+    "messages": "Walmart generará un código de escaneo y un enlace de pago que puede Permitir un pago fácil y un mejor servicio a los clientes. Términos de Uso y Política de Privacidad.",
+    "date": "Fecha",
+    "time": "Tiempo",
+    "total_order_amount": "Monto total del pedido",
+    "commision": "Comisión",
+    "grab_2": "agarrar"
+
 
 
   }

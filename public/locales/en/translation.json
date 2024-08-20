@@ -26,7 +26,7 @@
     "top_up_account": "Top Up Account",
     "select_recharge_amount": "Select Recharge Amount",
     "order": "Order",
-    "yesterday_commision": "Yeterday Commission",
+    "yesterday_commision": "Yesterday Commission",
     "today_commision": "Today Commission",
     "start_grab": "Start grabing",
     "current_balance": "Current Balance",
@@ -65,8 +65,15 @@
     "step_2": "Step 2",
     "name": "Name",
     "enter_name": "Enter Name",
-    "messages": "Walmart will generate a scan code and Payment link that can enable easy payment and better service to customers. Terms of use and Privacy Policy."
-    
+    "messages": "Walmart will generate a scan code and Payment link that can enable easy payment and better service to customers. Terms of use and Privacy Policy.",
+    "date": "Date",
+    "time": "Time",
+    "total_order_amount": "Total Other Amount",
+    "commision": "Commission",
+    "grab_2": "grab"
+
+
+
 
 
 
