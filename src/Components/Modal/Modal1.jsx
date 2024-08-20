@@ -220,7 +220,7 @@ const Modal1 = ({ show, handleClose, user_level, amount, balance }) => {
             {isLoading ? (
               <span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
             ) : balance < 30 ? (
-              "Please Top Up to Grab Order"
+              "Top Up to Grab Order"
             ) : (
               "Grab"
             )}

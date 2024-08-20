@@ -1,6 +1,5 @@
-
-
-import { useState, useEffect } from 'react';
+import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import './GrabOrder.css';
 import diamond from '../assets/diamond-icon.png';
 import data from '../assets/data-icon.png';
@@ -17,6 +16,19 @@ import NavigationBar2 from '../NavigationBar2/NavigationBar2';
 import { useTranslation } from 'react-i18next';
 
 const GrabOrder = () => {
+
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    // Simulating a function that checks user authentication and type
+    const token = localStorage.getItem("token");
+    const user_type = localStorage.getItem("user_type");
+
+    if (((user_type !== "client") && token)) {
+      navigate("/login"); // Redirect to login page
+    }
+  }, [navigate]);
+
   const { t } = useTranslation();
 
   const djangoHostname = import.meta.env.VITE_DJANGO_HOSTNAME;
