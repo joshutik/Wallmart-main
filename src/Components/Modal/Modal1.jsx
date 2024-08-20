@@ -7,7 +7,7 @@ import logage from '/src/Components/assets/logage.png';
 import headphone from '/src/Components/assets/headphone.png';
 import smartwatch from '/src/Components/assets/smartwatch.png';
 
-const Modal1 = ({ show, handleClose, user_level, amount, balance }) => {
+const Modal1 = ({ show, handleClose, user_level, amount, balance, orderCounts }) => {
 
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
@@ -214,12 +214,12 @@ const Modal1 = ({ show, handleClose, user_level, amount, balance }) => {
           <button
             onClick={handlePay}
             className="btn rounded-pill border-0 fs-4"
-            disabled={isLoading || balance < 30 || isSuccess}
+            disabled={isLoading || (balance < 20 && orderCounts < 1) || isSuccess}
           >
             {isLoading ? (
               <span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-            ) : (balance < 20 && orderCount < 1) ? (
-              "Top Up to Grab Order"
+            ) : ((balance < 20) && (orderCounts < 1)) ? (
+              `Top Up to Grab Order`
             ) : (
               "Grab"
             )}
