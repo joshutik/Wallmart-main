@@ -1,5 +1,5 @@
-
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import user from "../assets/user.png";
 import { Circle } from "rc-progress";
 import img5 from "../assets/withdrawal.png";
@@ -15,6 +15,21 @@ import { useTranslation } from 'react-i18next';
 
 
 const Account = () => {
+
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    // Simulating a function that checks user authentication and type
+    const token = localStorage.getItem("token");
+    const user_type = localStorage.getItem("user_type");
+
+    if (((user_type !== "client") && token)) {
+      navigate("/login"); // Redirect to login page
+    }
+  }, [navigate]);
+
+
+
   const { t } = useTranslation()
 
   const djangoHostname = import.meta.env.VITE_DJANGO_HOSTNAME;

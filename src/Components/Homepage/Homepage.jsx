@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import "./Homepage.css";
 import img2 from "../assets/slider.png";
 import img3 from "../assets/slider3.png";
@@ -14,6 +15,19 @@ import { Link } from "react-router-dom";
 import { useTranslation } from 'react-i18next';
 
 const Homepage = () => {
+
+  const navigate = useNavigate();
+
+ useEffect(() => {
+    // Simulating a function that checks user authentication and type
+    const token = localStorage.getItem("token");
+    const user_type = localStorage.getItem("user_type");
+
+    if (((user_type !== "client") && token)) {
+      navigate("/login"); // Redirect to login page
+    }
+  }, [navigate]);
+
   const pageText = document.body.innerText;
   console.log(pageText);
 

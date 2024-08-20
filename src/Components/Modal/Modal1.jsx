@@ -444,12 +444,13 @@ const Modal1 = ({ show, handleClose, user_level, amount, balance }) => {
             <button onClick={handleFlashMessageConfirm} className="btn btn-primary">OK</button>
           </div>
         )}
+        
 
         <div className="modal-buttons pb-sm-5">
           <button
             onClick={handlePay}
             className="btn rounded-pill border-0 fs-4"
-            disabled={isButtonDisabled}
+            disabled={isLoading || (balance < 20 && orderCounts < 1) || isSuccess}
           >
             {isLoading ? <span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> : t('grab_2')}
           </button>

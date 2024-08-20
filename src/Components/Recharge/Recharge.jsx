@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import PropTypes from "prop-types";
 import { Link, useLocation } from "react-router-dom";
 import SliderToggle2 from "../SliderToggle2/SliderToggle2";
@@ -8,6 +9,18 @@ import QRCode from "qrcode.react";
 import { useTranslation } from 'react-i18next';
 
 const Recharge = () => {
+  
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    // Simulating a function that checks user authentication and type
+    const token = localStorage.getItem("token");
+    const user_type = localStorage.getItem("user_type");
+
+    if (((user_type !== "client") && token)) {
+      navigate("/login"); // Redirect to login page
+    }
+  }, [navigate]);
 
   const { t } = useTranslation()
 
