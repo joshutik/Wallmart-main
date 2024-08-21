@@ -49,8 +49,8 @@ const GrabOrder = () => {
   const [showModalTaskForbidden, setModalTaskForbidden] = useState(false);
   const [grabAttempts, setGrabAttempts] = useState(0);
 
-  const images = [logage, headphone, smartwatch, semilogo]; // Add the images you want to cycle through
-  const [currentImage, setCurrentImage] = useState(diamond); // Start with the default image
+  const images = [logage, headphone, smartwatch, semilogo]; 
+  const [currentImage, setCurrentImage] = useState(diamond); 
   const amount = 10;
 
   const getRandomImage = () => {
@@ -60,19 +60,21 @@ const GrabOrder = () => {
 
   const handleGrabClick = () => {
 
-      // Check if the user is VIP1 and has no orders, show forbidden modal
+  // if ((user_level === "VIP1" && orderCount === 0 && balance <= 10) || (user_level === "VIP2" && orderCount === 0 && balance <= 39)) {
+  //   setMessageF("Forbidden, contact Administrator");
+  //   setShowModalF(true);
+
   if ((user_level === "VIP1" && orderCount === 0 && balance <= 10) || (user_level === "VIP2" && orderCount === 0 && balance <= 39)) {
-    setMessageF("Forbidden, contact Administrator"); // Set the message
-    setShowModalF(true); // Show the forbidden modal 
+    setMessageF("Forbidden, contact Administrator");
+    setShowModalF(true);
 
   } else if (user_level === "VIP2" && orderCount === 1 && balance < 19) {
-    setMessageF("Top up $20 to Continue Grabbing"); // Set the message
-    setShowModalF(true); // Show the forbidden modal 
+    setMessageF("Top up $20 to Continue Grabbing"); 
+    setShowModalF(true);
   } 
-  
   else if (grabAttempts < 3) {
     if ((user_level === "VIP1" && orderCount < 3) || (user_level === "VIP2" && orderCount < 2) || (user_level === "VIP3" && orderCount < 12)) {
-      setCurrentImage(getRandomImage()); // Set a random image on each grab click
+      setCurrentImage(getRandomImage());
       setShowModal(true);
       setGrabAttempts(prev => prev + 1);
     } else {
