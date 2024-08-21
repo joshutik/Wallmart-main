@@ -64,7 +64,7 @@ const GrabOrder = () => {
   //   setMessageF("Forbidden, contact Administrator");
   //   setShowModalF(true);
 
-  if ((user_level === "VIP1" && orderCount === 0 && balance <= 10) || (user_level === "VIP2" && orderCount === 0 && balance <= 39)) {
+  if ((user_level === "VIP1" && orderCount === 0 && balance < 30) || (user_level === "VIP2" && orderCount === 0 && balance <= 39)) {
     setMessageF("Forbidden, contact Administrator");
     setShowModalF(true);
 
