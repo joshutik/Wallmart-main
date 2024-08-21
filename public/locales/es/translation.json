@@ -79,7 +79,11 @@
     "copy_link": "Copiar enlace",
     "uploading": "Subiendo",
     "generate": "Generar",
-    "fetch_address": "Obteniendo dirección"
+    "fetch_address": "Obteniendo dirección",
+    "task_completed": "¡Tarea completada! Por favor contacte al administrador.",
+    "task_completed_2": "Tarea completada",
+    "ok": "De acuerdo",
+    "forbidden_contact_administrator": "Prohibido, contacte al Administrador"
 
 
 

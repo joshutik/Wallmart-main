@@ -80,7 +80,12 @@
     "copy_link": "Copy Link",
     "uploading": "Uploading",
     "generate": "Generate",
-    "fetch_address": "Fetching Address"
+    "fetch_address": "Fetching Address",
+    "task_completed": "Task completed! Please contact the administrator.",
+    "task_completed_2": "Task completed",
+    "ok": "Ok",
+    "forbidden_contact_administrator": "Forbidden, contact Administrator"
+
 
 
 
