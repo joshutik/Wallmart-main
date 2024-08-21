@@ -135,8 +135,8 @@ const Vip3Details = () => {
             "Content-Type": "application/json",
           },
           body: JSON.stringify({
-            balance: "0.0",
-            unsettle: "0.0",
+            // balance: "0.0",
+            // unsettle: "0.0",
             commission1: "0.0",
             commission2: "0.0",
             grabbed_orders_count: 0,

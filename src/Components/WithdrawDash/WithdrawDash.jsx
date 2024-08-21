@@ -70,7 +70,13 @@ const WithdrawDash = () => {
       const currentBalance = userResponse.data.unsettle;
   
       // Calculate the new balance
-      const newUnsettle = (parseFloat(currentBalance) - parseFloat(withdraw_top_up)).toFixed(1);
+
+      if(parseFloat(currentBalance)  > parseFloat(withdraw_top_up)){
+        const newUnsettle = (parseFloat(currentBalance) - parseFloat(withdraw_top_up)).toFixed(1);
+      }else{
+        alert("Unsettle Account too low")
+      }
+      
   
       // PATCH request to update user's unsettle balance
       await fetch(`${djangoHostname}/api/accounts/users/${userId}/`, {

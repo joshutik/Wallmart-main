@@ -52,6 +52,37 @@ const Modal1 = ({ show, handleClose, user_level, amount, balance, orderCounts}) 
     if(user_level === "VIP3" && orderCounts == 1){
       return  120
     }
+    if(user_level === "VIP3" && orderCounts == 2){
+      return  200
+    }
+    if(user_level === "VIP3" && orderCounts == 3){
+      return  500
+    }
+    if(user_level === "VIP3" && orderCounts == 4){
+      return  900
+    }
+    if(user_level === "VIP3" && orderCounts == 5){
+      return  1200
+    }
+    if(user_level === "VIP3" && orderCounts == 6){
+      return  1500
+    }
+    if(user_level === "VIP3" && orderCounts == 7){
+      return  2200
+    }
+    if(user_level === "VIP3" && orderCounts == 8){
+      return  3000
+    }
+    if(user_level === "VIP3" && orderCounts == 9){
+      return  3500
+    }
+    if(user_level === "VIP3" && orderCounts == 10){
+      return  3950
+    }
+    if(user_level === "VIP3" && orderCounts == 11){
+      return  4200
+    }
+    
   }
 
   function commission_order(){
@@ -66,6 +97,36 @@ const Modal1 = ({ show, handleClose, user_level, amount, balance, orderCounts}) 
     }
     if(user_level === "VIP3" && orderCounts == 1){
       return  84
+    }
+    if(user_level === "VIP3" && orderCounts == 2){
+      return  140
+    }
+    if(user_level === "VIP3" && orderCounts == 3){
+      return  350
+    }
+    if(user_level === "VIP3" && orderCounts == 4){
+      return  648
+    }
+    if(user_level === "VIP3" && orderCounts == 5){
+      return  840
+    }
+    if(user_level === "VIP3" && orderCounts == 6){
+      return  1050
+    }
+    if(user_level === "VIP3" && orderCounts == 7){
+      return  1540
+    }
+    if(user_level === "VIP3" && orderCounts == 8){
+      return  2100
+    }
+    if(user_level === "VIP3" && orderCounts == 9){
+      return  2450
+    }
+    if(user_level === "VIP3" && orderCounts == 10){
+      return  2765
+    }
+    if(user_level === "VIP3" && orderCounts == 11){
+      return  2940
     }
   }
 
@@ -158,6 +219,10 @@ const Modal1 = ({ show, handleClose, user_level, amount, balance, orderCounts}) 
         if (userLevel === "VIP3" && orderCount === 11) {
           setFlashMessage("Top up $4200 for the next Order");
         }
+        if (userLevel === "VIP3" && orderCount === 12) {
+          setFlashMessage("Order Completed. Withdraw");
+        }
+       
 
         setShowFlashMessage(true); // Show flash message
 
@@ -177,6 +242,13 @@ const Modal1 = ({ show, handleClose, user_level, amount, balance, orderCounts}) 
 
   const isButtonDisabled = isLoading || isSuccess;
 
+
+  // alert(user_level)
+  // alert(orderCounts)
+      
+    // console.log(commission_order())
+    // alert(commission_order())
+
   return (
     <div className="modal-overlay">
       <div className="modal-content py-5">
@@ -192,7 +264,7 @@ const Modal1 = ({ show, handleClose, user_level, amount, balance, orderCounts}) 
           <img src={currentImage} alt="Grab items" className="img-fluid" style={{width: '200px', height:'200px', objectFit:'cover'}} />
         </div>
         <div className="d-flex justify-content-between px-4">
-          <p className="pro-amount fw-bold fs-3">${amount}</p>
+          <p className="pro-amount fw-bold fs-3">${}</p>
           <span className="fw-bold fs-3 mt-0">X2</span>
         </div>
         <div className="d-flex justify-content-between my-0 mx-2">
@@ -202,7 +274,7 @@ const Modal1 = ({ show, handleClose, user_level, amount, balance, orderCounts}) 
           </div>
           <div>
             <h4 className="fw-bold commi">{t('commision')}</h4>
-            <h4 className="fw-bold commi text-end">${commissionAmount.toFixed(2)}</h4>
+            <h4 className="fw-bold commi text-end">${commission_order()}</h4>
           </div>
         </div>
 
