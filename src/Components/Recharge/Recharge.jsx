@@ -384,7 +384,8 @@ const Recharge = () => {
                 {loading ? (
                   <i className="fas fa-spinner fa-spin"></i> // Spinner icon while loading
                 ) : isWalletLocked ? (
-                  "Submit Proof"
+                  // "Submit Proof"
+                  t('upload_prof')
                 ) : (
                   t('generate')
                 )}
@@ -488,7 +489,7 @@ const Recharge = () => {
                     {t('recharge_now')}...
                   </>
                 ) : (
-                  t("upload_prof")
+                  t('upload_prof')
                 )}
               </button>
             </div>
