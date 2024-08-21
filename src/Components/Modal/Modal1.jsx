@@ -52,6 +52,37 @@ const Modal1 = ({ show, handleClose, user_level, amount, balance, orderCounts}) 
     if(user_level === "VIP3" && orderCounts == 1){
       return  120
     }
+    if(user_level === "VIP3" && orderCounts == 2){
+      return  200
+    }
+    if(user_level === "VIP3" && orderCounts == 3){
+      return  500
+    }
+    if(user_level === "VIP3" && orderCounts == 4){
+      return  900
+    }
+    if(user_level === "VIP3" && orderCounts == 5){
+      return  1200
+    }
+    if(user_level === "VIP3" && orderCounts == 6){
+      return  1500
+    }
+    if(user_level === "VIP3" && orderCounts == 7){
+      return  2200
+    }
+    if(user_level === "VIP3" && orderCounts == 8){
+      return  3000
+    }
+    if(user_level === "VIP3" && orderCounts == 9){
+      return  3500
+    }
+    if(user_level === "VIP3" && orderCounts == 10){
+      return  3950
+    }
+    if(user_level === "VIP3" && orderCounts == 11){
+      return  4200
+    }
+    
   }
 
   function commission_order(){
@@ -155,37 +186,40 @@ const Modal1 = ({ show, handleClose, user_level, amount, balance, orderCounts}) 
         if (userLevel === "VIP2" && orderCount === 2) {
           setFlashMessage("Orders completed. Withdraw.");
         }
-        if (userLevel === "VIP3" && orderCount === 0) {
+        if (userLevel === "VIP3" && orderCount === 1) {
           setFlashMessage("Top up $120 for the next Order");
         }
-        if (userLevel === "VIP3" && orderCount === 1) {
+        if (userLevel === "VIP3" && orderCount === 2) {
           setFlashMessage("Top up $200 for the next Order");
         }
-        if (userLevel === "VIP3" && orderCount === 2) {
+        if (userLevel === "VIP3" && orderCount === 3) {
           setFlashMessage("Top up $500 for the next Order");
         }
-        if (userLevel === "VIP3" && orderCount === 3) {
+        if (userLevel === "VIP3" && orderCount === 4) {
           setFlashMessage("Top up $900 for the next Order");
         }
-        if (userLevel === "VIP3" && orderCount === 4) {
+        if (userLevel === "VIP3" && orderCount === 5) {
           setFlashMessage("Top up $1200 for the next Order");
         }
-        if (userLevel === "VIP3" && orderCount === 5) {
+        if (userLevel === "VIP3" && orderCount === 6) {
           setFlashMessage("Top up $1500 for the next Order");
         }
-        if (userLevel === "VIP3" && orderCount === 6) {
+        if (userLevel === "VIP3" && orderCount === 7) {
           setFlashMessage("Top up $2200 for the next Order");
         }
-        if (userLevel === "VIP3" && orderCount === 7) {
+        if (userLevel === "VIP3" && orderCount === 8) {
           setFlashMessage("Top up $3000 for the next Order");
         }
-        if (userLevel === "VIP3" && orderCount === 8) {
+        if (userLevel === "VIP3" && orderCount === 9) {
           setFlashMessage("Top up $3500 for the next Order");
         }
-        if (userLevel === "VIP3" && orderCount === 9) {
+        if (userLevel === "VIP3" && orderCount === 10) {
           setFlashMessage("Top up $3950 for the next Order");
         }
-        if (userLevel === "VIP3" && orderCount === 10) {
+        if (userLevel === "VIP3" && orderCount === 11) {
+          setFlashMessage("Top up $4200 for the next Order");
+        }
+        if (userLevel === "VIP3" && orderCount === 12) {
           setFlashMessage("Order Completed. Withdraw");
         }
        
