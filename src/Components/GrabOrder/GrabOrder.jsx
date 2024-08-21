@@ -61,67 +61,40 @@ const GrabOrder = () => {
   const handleGrabClick = () => {
 
       // Check if the user is VIP1 and has no orders, show forbidden modal
-  if (user_level === "VIP1" && orderCount === 0 && balance <= 10) {
+  if ((user_level === "VIP1" && orderCount === 0 && balance <= 10) || (user_level === "VIP2" && orderCount === 0 && balance <= 39)) {
     setMessageF("Forbidden, contact Administrator"); // Set the message
-    setShowModalF(true); // Show the forbidden modal
-    console.log(balance)
-    console.log(orderCount)
-    console.log(user_level)
-    
-  } else {
-    if (grabAttempts < 3) {
-      if ((user_level === "VIP1" && orderCount < 3) || (user_level === "VIP2" && orderCount < 2) || (user_level === "VIP3" && orderCount < 12)) {
-        setCurrentImage(getRandomImage()); // Set a random image on each grab click
-        setShowModal(true);
-        setGrabAttempts(prev => prev + 1);
-      } else {
-        setShowTaskCompletedModal(true);
-      }
+    setShowModalF(true); // Show the forbidden modal 
+
+  } else if (user_level === "VIP2" && orderCount === 1 && balance < 19) {
+    setMessageF("Top up $20 to Continue Grabbing"); // Set the message
+    setShowModalF(true); // Show the forbidden modal 
+  } 
+  
+  else if (grabAttempts < 3) {
+    if ((user_level === "VIP1" && orderCount < 3) || (user_level === "VIP2" && orderCount < 2) || (user_level === "VIP3" && orderCount < 12)) {
+      setCurrentImage(getRandomImage()); // Set a random image on each grab click
+      setShowModal(true);
+      setGrabAttempts(prev => prev + 1);
     } else {
       setShowTaskCompletedModal(true);
     }
-  };
-}
+  } else {
+    setShowTaskCompletedModal(true);
+  }
+};
 
-  const handlePay = async () => {
-    if (orderCount < 3 && balance >= amount) {
-      const commissionAmount = amount * 0.2;
-      const authToken = localStorage.getItem('token');
-
-      try {
-        await axios.post(`${djangoHostname}/api/orders/order-grabbings/`, {
-          order: 1,
-          amount: amount,
-          commission: commissionAmount
-        }, {
-          headers: {
-            'Authorization': `Token ${authToken}`
-          }
-        });
-
-        setBalance(balance - amount);
-        setOrderCount(orderCount + 1);
-        setProgress(progress + 33.3333);
-        setCommission2(commission2 + commissionAmount);
-      } catch (error) {
-        console.error("Error during payment:", error);
-      }
-    }
-    setShowModal(false);
-  };
 
   const handleClose = () => {
     setShowModal(false);
   };
-  const handleCloseF = () => {
-    setShowModalF(false);
-  };
+ 
 
   const handleTaskCompletedClose = () => {
     setShowTaskCompletedModal(false);
   };
   const handleTaskForbiddenClose = () => {
-    setModalTaskForbidden(false);
+    // window.location.reload()
+    setShowModalF(false); // This will hide the modal
   };
 
   useEffect(() => {

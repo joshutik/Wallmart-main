@@ -11,9 +11,9 @@ const ModalTaskForbidden = ({ showF, handleCloseF, messageF }) => {
         {/* <p>{messageF}</p> */}
       </Modal.Body>
       <Modal.Footer>
-        <Button variant="primary" onClick={handleCloseF}>
-          Okay
-        </Button>
+      <Button variant="primary" onClick={handleCloseF}>
+        Okay
+      </Button>
       </Modal.Footer>
     </Modal>
   );
