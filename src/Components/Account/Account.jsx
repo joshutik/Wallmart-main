@@ -330,7 +330,7 @@ const Account = () => {
               <div className="modal-dialog" role="document">
                 <div className="modal-content top-up">
                   <div className="modal-header">
-                    <h5 className="modal-title ms-auto">Top Up Account</h5>
+                    <h5 className="modal-title ms-auto">{t('top_up_account')}</h5>
                     <button
                       type="button"
                       className="close border-0 ms-auto fs-1 bg-transparent"
@@ -340,7 +340,7 @@ const Account = () => {
                     </button>
                   </div>
                   <div className="modal-body mx-auto">
-                    <p>Select recharge amount...</p>
+                    <p>{t('select_recharge_amount')}...</p>
                     <hr />
                     <div className="container">
                       <div className="row gy-3">
@@ -487,7 +487,7 @@ const Account = () => {
                               type="button"
                               className="recharge text-light fw-bold rounded-pill text-decoration-none w-75 border-0 py-2"
                             >
-                              Recharge now
+                              {t('recharge_now')}
                             </Link>
                           )}
                         </div>
