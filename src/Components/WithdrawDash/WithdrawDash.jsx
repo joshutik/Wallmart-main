@@ -71,13 +71,9 @@ const WithdrawDash = () => {
   
       // Calculate the new balance
 
-      if(parseFloat(currentBalance)  > parseFloat(withdraw_top_up)){
+      if((parseFloat(currentBalance)  > parseFloat(withdraw_top_up) || parseFloat(currentBalance)  === parseFloat(withdraw_top_up))){
         const newUnsettle = (parseFloat(currentBalance) - parseFloat(withdraw_top_up)).toFixed(1);
-      }else{
-        alert("Unsettle Account too low")
-      }
-      
-  
+   
       // PATCH request to update user's unsettle balance
       await fetch(`${djangoHostname}/api/accounts/users/${userId}/`, {
         method: "PATCH",
@@ -89,18 +85,25 @@ const WithdrawDash = () => {
           unsettle: newUnsettle,
         }),
       });
+
+            // After updating unsettle balance, approve the withdrawal
+            await fetch(`${djangoHostname}/api/withdrws/withdraw/${withdrawId}/`, {
+              method: "PATCH",
+              headers: {
+                Authorization: `Token ${token}`,
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({
+                is_approved: true,
+              }),
+            });
+      }else{
+        alert("Unsettle Account too low")
+      }
+      
+
   
-      // After updating unsettle balance, approve the withdrawal
-      await fetch(`${djangoHostname}/api/withdrws/withdraw/${withdrawId}/`, {
-        method: "PATCH",
-        headers: {
-          Authorization: `Token ${token}`,
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          is_approved: true,
-        }),
-      });
+
   
       // Refresh data after approval
       fetchWithdrawData(currentPage);
