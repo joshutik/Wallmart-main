@@ -71,6 +71,49 @@ const GrabOrder = () => {
   } else if (user_level === "VIP2" && orderCount === 1 && balance < 19) {
     setMessageF("Top up $20 to Continue Grabbing"); 
     setShowModalF(true);
+
+  } else if (user_level === "VIP3" && orderCount === 0 && balance < 70) {
+    setMessageF("Top up $70 to start Grabbing"); 
+    setShowModalF(true);
+
+  } else if (user_level === "VIP3" && orderCount === 1 && balance < 120) {
+    setMessageF("Top up $120 to start Grabbing"); 
+    setShowModalF(true);
+
+  } else if (user_level === "VIP3" && orderCount === 2 && balance < 200) {
+    setMessageF("Top up $200 to start Grabbing"); 
+    setShowModalF(true);
+
+  } else if (user_level === "VIP3" && orderCount === 3 && balance < 500) {
+    setMessageF("Top up $500 to start Grabbing"); 
+    setShowModalF(true);
+
+  } else if (user_level === "VIP3" && orderCount === 4 && balance < 900) {
+    setMessageF("Top up $900 to start Grabbing"); 
+    setShowModalF(true);
+
+  } else if (user_level === "VIP3" && orderCount === 5 && balance < 1200) {
+    setMessageF("Top up $1200 to start Grabbing"); 
+    setShowModalF(true);
+
+  } else if (user_level === "VIP3" && orderCount === 6 && balance < 1500) {
+    setMessageF("Top up $1500 to start Grabbing"); 
+    setShowModalF(true);
+  } else if (user_level === "VIP3" && orderCount === 7 && balance < 2200) {
+    setMessageF("Top up $2200 to start Grabbing"); 
+    setShowModalF(true);
+  } else if (user_level === "VIP3" && orderCount === 8 && balance < 3000) {
+    setMessageF("Top up $3000 to start Grabbing"); 
+    setShowModalF(true);
+  } else if (user_level === "VIP3" && orderCount === 9 && balance < 3500) {
+    setMessageF("Top up $3500 to start Grabbing"); 
+    setShowModalF(true);
+  } else if (user_level === "VIP3" && orderCount === 10 && balance < 3950) {
+    setMessageF("Top up $3950 to start Grabbing"); 
+    setShowModalF(true);
+  } else if (user_level === "VIP3" && orderCount === 11 && balance < 4200) {
+    setMessageF("Top up $4200 to start Grabbing"); 
+    setShowModalF(true);
   } 
   else if (grabAttempts < 3) {
     if ((user_level === "VIP1" && orderCount < 3) || (user_level === "VIP2" && orderCount < 2) || (user_level === "VIP3" && orderCount < 12)) {
