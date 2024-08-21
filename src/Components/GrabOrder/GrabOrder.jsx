@@ -10,6 +10,7 @@ import smartwatch from '../assets/smartwatch.png';
 import { Circle } from 'rc-progress';
 import Modal1 from '../Modal/Modal1';
 import ModalTaskCompleted from '../ModalTaskCompleted/ModalTaskCompleted';
+import ModalTaskForbidden from '../ModalTaskForbidden/ModalTaskForbidden';
 import axios from 'axios';
 import NavigationBar from '../NavigationBar/NavigationBar';
 import NavigationBar2 from '../NavigationBar2/NavigationBar2';
@@ -39,8 +40,13 @@ const GrabOrder = () => {
   const [progress, setProgress] = useState(0);
   const [commission1, setCommission1] = useState(0);
   const [commission2, setCommission2] = useState(0);
-  const [showModal, setShowModal] = useState(false);
+
+  const [messageF, setMessageF] = useState(false);
+  const [showModalF, setShowModalF] = useState(false);
   const [showTaskCompletedModal, setShowTaskCompletedModal] = useState(false);
+
+  const [showModal, setShowModal] = useState(false);
+  const [showModalTaskForbidden, setModalTaskForbidden] = useState(false);
   const [grabAttempts, setGrabAttempts] = useState(0);
 
   const images = [logage, headphone, smartwatch, semilogo]; // Add the images you want to cycle through
@@ -53,6 +59,16 @@ const GrabOrder = () => {
   };
 
   const handleGrabClick = () => {
+
+      // Check if the user is VIP1 and has no orders, show forbidden modal
+  if (user_level === "VIP1" && orderCount === 0 && balance <= 10) {
+    setMessageF("Forbidden, contact Administrator"); // Set the message
+    setShowModalF(true); // Show the forbidden modal
+    console.log(balance)
+    console.log(orderCount)
+    console.log(user_level)
+    
+  } else {
     if (grabAttempts < 3) {
       if ((user_level === "VIP1" && orderCount < 3) || (user_level === "VIP2" && orderCount < 2) || (user_level === "VIP3" && orderCount < 12)) {
         setCurrentImage(getRandomImage()); // Set a random image on each grab click
@@ -65,6 +81,7 @@ const GrabOrder = () => {
       setShowTaskCompletedModal(true);
     }
   };
+}
 
   const handlePay = async () => {
     if (orderCount < 3 && balance >= amount) {
@@ -96,9 +113,15 @@ const GrabOrder = () => {
   const handleClose = () => {
     setShowModal(false);
   };
+  const handleCloseF = () => {
+    setShowModalF(false);
+  };
 
   const handleTaskCompletedClose = () => {
     setShowTaskCompletedModal(false);
+  };
+  const handleTaskForbiddenClose = () => {
+    setModalTaskForbidden(false);
   };
 
   useEffect(() => {
@@ -208,6 +231,7 @@ const GrabOrder = () => {
       </div>
       <Modal1 show={showModal} handleClose={handleClose} user_level={user_level} amount={amount} balance={Number(balance)} orderCounts={orderCount}/>
       <ModalTaskCompleted show={showTaskCompletedModal} handleClose={handleTaskCompletedClose} />
+      <ModalTaskForbidden showF={showModalF} handleCloseF={handleTaskForbiddenClose} messageF={messageF} />
       <NavigationBar />
     </div>
   );
