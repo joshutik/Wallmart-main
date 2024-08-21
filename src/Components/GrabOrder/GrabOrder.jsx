@@ -10,6 +10,7 @@ import smartwatch from '../assets/smartwatch.png';
 import { Circle } from 'rc-progress';
 import Modal1 from '../Modal/Modal1';
 import ModalTaskCompleted from '../ModalTaskCompleted/ModalTaskCompleted';
+import ModalTaskForbidden from '../ModalTaskForbidden/ModalTaskForbidden';
 import axios from 'axios';
 import NavigationBar from '../NavigationBar/NavigationBar';
 import NavigationBar2 from '../NavigationBar2/NavigationBar2';
@@ -39,12 +40,17 @@ const GrabOrder = () => {
   const [progress, setProgress] = useState(0);
   const [commission1, setCommission1] = useState(0);
   const [commission2, setCommission2] = useState(0);
-  const [showModal, setShowModal] = useState(false);
+
+  const [messageF, setMessageF] = useState(false);
+  const [showModalF, setShowModalF] = useState(false);
   const [showTaskCompletedModal, setShowTaskCompletedModal] = useState(false);
+
+  const [showModal, setShowModal] = useState(false);
+  const [showModalTaskForbidden, setModalTaskForbidden] = useState(false);
   const [grabAttempts, setGrabAttempts] = useState(0);
 
-  const images = [logage, headphone, smartwatch, semilogo]; // Add the images you want to cycle through
-  const [currentImage, setCurrentImage] = useState(diamond); // Start with the default image
+  const images = [logage, headphone, smartwatch, semilogo]; 
+  const [currentImage, setCurrentImage] = useState(diamond); 
   const amount = 10;
 
   const getRandomImage = () => {
@@ -53,52 +59,87 @@ const GrabOrder = () => {
   };
 
   const handleGrabClick = () => {
-    if (grabAttempts < 3) {
-      if ((user_level === "VIP1" && orderCount < 3) || (user_level === "VIP2" && orderCount < 2) || (user_level === "VIP3" && orderCount < 12)) {
-        setCurrentImage(getRandomImage()); // Set a random image on each grab click
-        setShowModal(true);
-        setGrabAttempts(prev => prev + 1);
-      } else {
-        setShowTaskCompletedModal(true);
-      }
+
+  // if ((user_level === "VIP1" && orderCount === 0 && balance <= 10) || (user_level === "VIP2" && orderCount === 0 && balance <= 39)) {
+  //   setMessageF("Forbidden, contact Administrator");
+  //   setShowModalF(true);
+
+  if ((user_level === "VIP1" && orderCount === 0 && balance < 30) || (user_level === "VIP2" && orderCount === 0 && balance <= 39)) {
+    setMessageF("Forbidden, contact Administrator");
+    setShowModalF(true);
+
+  } else if (user_level === "VIP2" && orderCount === 1 && balance < 19) {
+    setMessageF("Top up $20 to Continue Grabbing"); 
+    setShowModalF(true);
+
+  } else if (user_level === "VIP3" && orderCount === 0 && balance < 70) {
+    setMessageF("Top up $70 to start Grabbing"); 
+    setShowModalF(true);
+
+  } else if (user_level === "VIP3" && orderCount === 1 && balance < 120) {
+    setMessageF("Top up $120 to start Grabbing"); 
+    setShowModalF(true);
+
+  } else if (user_level === "VIP3" && orderCount === 2 && balance < 200) {
+    setMessageF("Top up $200 to start Grabbing"); 
+    setShowModalF(true);
+
+  } else if (user_level === "VIP3" && orderCount === 3 && balance < 500) {
+    setMessageF("Top up $500 to start Grabbing"); 
+    setShowModalF(true);
+
+  } else if (user_level === "VIP3" && orderCount === 4 && balance < 900) {
+    setMessageF("Top up $900 to start Grabbing"); 
+    setShowModalF(true);
+
+  } else if (user_level === "VIP3" && orderCount === 5 && balance < 1200) {
+    setMessageF("Top up $1200 to start Grabbing"); 
+    setShowModalF(true);
+
+  } else if (user_level === "VIP3" && orderCount === 6 && balance < 1500) {
+    setMessageF("Top up $1500 to start Grabbing"); 
+    setShowModalF(true);
+  } else if (user_level === "VIP3" && orderCount === 7 && balance < 2200) {
+    setMessageF("Top up $2200 to start Grabbing"); 
+    setShowModalF(true);
+  } else if (user_level === "VIP3" && orderCount === 8 && balance < 3000) {
+    setMessageF("Top up $3000 to start Grabbing"); 
+    setShowModalF(true);
+  } else if (user_level === "VIP3" && orderCount === 9 && balance < 3500) {
+    setMessageF("Top up $3500 to start Grabbing"); 
+    setShowModalF(true);
+  } else if (user_level === "VIP3" && orderCount === 10 && balance < 3950) {
+    setMessageF("Top up $3950 to start Grabbing"); 
+    setShowModalF(true);
+  } else if (user_level === "VIP3" && orderCount === 11 && balance < 4200) {
+    setMessageF("Top up $4200 to start Grabbing"); 
+    setShowModalF(true);
+  } 
+  else if (grabAttempts < 3) {
+    if ((user_level === "VIP1" && orderCount < 3) || (user_level === "VIP2" && orderCount < 2) || (user_level === "VIP3" && orderCount < 12)) {
+      setCurrentImage(getRandomImage());
+      setShowModal(true);
+      setGrabAttempts(prev => prev + 1);
     } else {
       setShowTaskCompletedModal(true);
     }
-  };
+  } else {
+    setShowTaskCompletedModal(true);
+  }
+};
 
-  const handlePay = async () => {
-    if (orderCount < 3 && balance >= amount) {
-      const commissionAmount = amount * 0.2;
-      const authToken = localStorage.getItem('token');
-
-      try {
-        await axios.post(`${djangoHostname}/api/orders/order-grabbings/`, {
-          order: 1,
-          amount: amount,
-          commission: commissionAmount
-        }, {
-          headers: {
-            'Authorization': `Token ${authToken}`
-          }
-        });
-
-        setBalance(balance - amount);
-        setOrderCount(orderCount + 1);
-        setProgress(progress + 33.3333);
-        setCommission2(commission2 + commissionAmount);
-      } catch (error) {
-        console.error("Error during payment:", error);
-      }
-    }
-    setShowModal(false);
-  };
 
   const handleClose = () => {
     setShowModal(false);
   };
+ 
 
   const handleTaskCompletedClose = () => {
     setShowTaskCompletedModal(false);
+  };
+  const handleTaskForbiddenClose = () => {
+    // window.location.reload()
+    setShowModalF(false); // This will hide the modal
   };
 
   useEffect(() => {
@@ -206,8 +247,10 @@ const GrabOrder = () => {
           </button>
         </div>
       </div>
+      <ModalTaskForbidden showF={showModalF} handleCloseF={handleTaskForbiddenClose} messageF={messageF} />
       <Modal1 show={showModal} handleClose={handleClose} user_level={user_level} amount={amount} balance={Number(balance)} orderCounts={orderCount}/>
       <ModalTaskCompleted show={showTaskCompletedModal} handleClose={handleTaskCompletedClose} />
+      
       <NavigationBar />
     </div>
   );
