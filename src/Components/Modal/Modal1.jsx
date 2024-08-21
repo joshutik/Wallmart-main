@@ -133,12 +133,12 @@ const Modal1 = ({ show, handleClose, user_level, amount, balance, orderCounts}) 
   const handlePay = async () => {
 
     // Change the image randomly
-    const randomIndex = Math.floor(Math.random() * images.length);
-    setCurrentImage(images[randomIndex]);
-
-
+    
+    
     if (balance >= amount) {
-
+      const randomIndex = Math.floor(Math.random() * images.length);
+      setCurrentImage(images[randomIndex]);
+      
       setIsLoading(true);
 
 
