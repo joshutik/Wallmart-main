@@ -246,7 +246,7 @@ const Withdrawal = () => {
                 onChange={(e) => setCryptoWallet(e.target.value)}
                 required
               >
-                <option value="choose wallet" selected>{t('choose_wallet')}</option>
+                <option value="" selected>{t('Choose_wallet')}</option>
                 <option value="USDT">USDT</option>
                 <option value="BINANCE">BINANCE</option>
                 <option value="TON">TON</option>

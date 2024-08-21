@@ -337,7 +337,7 @@ const Recharge = () => {
                 disabled={isWalletLocked} // Disable if wallet is locked
                 required
               >
-                <option value="">Choose Wallet</option>
+                <option value="">{t('Choose_wallet')}</option>
                 <option value="USDT">USDT</option>
                 <option value="BINANCE">BINANCE</option>
                 <option value="TON">TON</option>
@@ -355,7 +355,7 @@ const Recharge = () => {
                 type="text"
                 id="wallet-address"
                 className="form-control py-3 rounded-4 w-50 bg-dark text-light"
-                value={walletAddress || "Fetching Address"}
+                value={walletAddress || t('fetch_address')}
                 readOnly
               />
               <p className="py-4">{t("messages")}</p>
@@ -386,7 +386,7 @@ const Recharge = () => {
                 ) : isWalletLocked ? (
                   "Submit Proof"
                 ) : (
-                  "Generate Payment"
+                  t('generate')
                 )}
               </button>
             </div>
@@ -485,7 +485,7 @@ const Recharge = () => {
                       role="status"
                       aria-hidden="true"
                     ></span>
-                    Uploading...
+                    {t('recharge_now')}...
                   </>
                 ) : (
                   t("upload_prof")

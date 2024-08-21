@@ -76,7 +76,11 @@
     "scan": "ESCANEAR CÓDIGO QR",
     "messages_2": "Escanea el código QR o copia el enlace para realizar el pago",
     "deposite_address": "Dirección de depósito",
-    "copy_link": "Copiar enlace"
+    "copy_link": "Copiar enlace",
+    "uploading": "Subiendo",
+    "generate": "Generar",
+    "fetch_address": "Obteniendo dirección"
+
 
 
 

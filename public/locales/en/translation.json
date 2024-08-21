@@ -77,7 +77,10 @@
     "scan": "SCAN QR CODE",
     "messages_2": "Scan the QR code or copy the link to make payment",
     "deposite_address": "Deposit Address",
-    "copy_link": "Copy Link"
+    "copy_link": "Copy Link",
+    "uploading": "Uploading",
+    "generate": "Generate",
+    "fetch_address": "Fetching Address"
 
 
 

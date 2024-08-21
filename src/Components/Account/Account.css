@@ -191,7 +191,7 @@ box-sizing: border-box;
 }
 
 .container-fluid, .row, .col-lg-9, .sidebar {
-  overflow-x: hidden;
+  overflow-x: auto;
 }
 
 .profile-pic {

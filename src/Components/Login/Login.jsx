@@ -127,7 +127,7 @@ const { t } = useTranslation()
   return (
     <div className="container-fluid header py-5">
       <NavigationBar2/>
-      <section className="container">
+      <div className="container">
         <div className="row justify-content-center align-items-center">
           <div className="col-lg-6 col-md-6 col-sm-12 text-center mt-5">
             <div>
@@ -241,7 +241,7 @@ const { t } = useTranslation()
             </div>
           </div>
         </div>
-      </section>
+      </div>
     </div>
   );
 };
