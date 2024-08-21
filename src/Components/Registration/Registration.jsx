@@ -688,7 +688,7 @@ import { Link, useNavigate } from "react-router-dom";
 import "bootstrap-icons/font/bootstrap-icons.css";
 import NavigationBar2 from "../NavigationBar2/NavigationBar2";
 import { useTranslation } from 'react-i18next';
-import './Registration.css'
+import './registration.css'
 
 
 const Registration = () => {
