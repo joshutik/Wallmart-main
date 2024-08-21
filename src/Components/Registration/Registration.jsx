@@ -681,7 +681,6 @@
 
 import { useState, useEffect } from "react";
 import axios from "axios";
-import "./Registration.css";
 import img1 from "../assets/walmart.png";
 import img2 from "../assets/bg.png";
 import img3 from "../assets/reg-img.png";
@@ -689,6 +688,7 @@ import { Link, useNavigate } from "react-router-dom";
 import "bootstrap-icons/font/bootstrap-icons.css";
 import NavigationBar2 from "../NavigationBar2/NavigationBar2";
 import { useTranslation } from 'react-i18next';
+import './Registration.css'
 
 
 const Registration = () => {
