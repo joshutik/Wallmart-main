@@ -486,7 +486,7 @@ const Recharge = () => {
                 required
               />
             </div>
-            <div className="container my-3">
+            {/* <div className="container my-3">
               <label htmlFor="uploadProf">{t("upload_prof")}</label>
               <input
                 type="file"
@@ -496,7 +496,25 @@ const Recharge = () => {
                 className="form-control border border-3 rounded-3 ps-5 py-3 file-input"
                 required
               />
-            </div>
+            </div> */}
+            <div className="my-3">
+                <label htmlFor="uploadProf">{t("upload_prof")}</label>
+                <div className="custom-file-upload">
+                  <label htmlFor="uploadProf" className="custom-file-label">
+                    {t("choose_file")}
+                  </label>
+                  <input
+                    type="file"
+                    name="uploadProf"
+                    id="uploadProf"
+                    onChange={handleFileChange}
+                    className="form-control border border-3 rounded-3 ps-5 file-input"
+                    required
+                    style={{ display: "none" }} // Hide the default file input
+                  />
+                  <span id="file-name">{t("no_file_chosen")}</span>
+                </div>
+              </div>
             <div className="container text-center">
               <button
                 className="rounded-pill py-2 w-75 border-0 draw-btn fw-bold text-light fs-5 my-5"

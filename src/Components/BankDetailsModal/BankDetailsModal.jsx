@@ -146,7 +146,7 @@ const BankDetailsModal = ({ show, handleClose }) => {
               <div className="w-75 me-lg-auto mx-auto">
                 <hr className="horizontal border-3 text-white" />
               </div>
-              <p>ruth Number</p>
+              <p>RUT Number</p>
               <p>{bankDetails.ruth}</p>
             </div>
           </div>
