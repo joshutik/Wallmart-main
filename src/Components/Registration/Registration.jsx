@@ -764,12 +764,14 @@ const Registration = () => {
 
     // Perform validation
     if (formData.password !== formData.confirmPassword) {
-      setError("Passwords do not match");
+      // setError("Passwords do not match");
+      setError(t('Passwords_do_not_match'));
       return;
     }
 
     if (!formData.termsAccepted) {
-      setError("You must accept the terms and conditions");
+      // setError("You must accept the terms and conditions");
+      setError(t('terms_and_conditions'));
       return;
     }
 

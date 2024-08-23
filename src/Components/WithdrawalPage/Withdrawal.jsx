@@ -7,9 +7,12 @@ import axios from "axios";
 import SliderToggle from "../SliderToggle/SliderToggle";
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import './Withdrawal.css';
+// import { useTranslation } from 'react-i18next';
+
 
 const Withdrawal = () => {
 
+  const { t } = useTranslation();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -22,7 +25,7 @@ const Withdrawal = () => {
     }
   }, [navigate]);
 
-  const { t } = useTranslation()
+  // const { t } = useTranslation()
   const [selectedMethod, setSelectedMethod] = useState("crypto");
   const [amount, setAmount] = useState("");
   const [orderNumber, setOrderNumber] = useState("");
@@ -72,14 +75,16 @@ const Withdrawal = () => {
       if (
         (userlevel == "VIP2" && availableBalance < 60)
       ) {
-        setFlashMessage("You cannot withdraw, Please top up $20 and grab the second order");
+        // setFlashMessage("You cannot withdraw, Please top up $20 and grab the second order");
+        setFlashMessage(t("you_cannot_withdraw"));
         return;
       }
       // Validation for available Balance in unsettle
       if (
         (userlevel == "VIP3" && orderNumber < 11)
       ) {
-        setFlashMessage("You cannot withdraw, Please top and grab order");
+        // setFlashMessage("You cannot withdraw, Please top and grab order");
+        setFlashMessage(t("you_cannot_withdraw_2"));
         return;
       }
 
@@ -87,7 +92,8 @@ const Withdrawal = () => {
      if (
       (amount > availableBalance)
     ) {
-      setFlashMessage("You cannot withdraw more than your unsettlement amount");
+      // setFlashMessage("You cannot withdraw more than your unsettlement amount");
+      setFlashMessage(t("you_cannot_withdraw_3"));
       return;
     }
  
@@ -97,7 +103,8 @@ const Withdrawal = () => {
       selectedMethod === "crypto" &&
       (!amount || !cryptoWallet || !walletAddress || !withdrawalPassword)
     ) {
-      setFlashMessage("Please fill in all fields for crypto withdrawal");
+      // setFlashMessage("Please fill in all fields for crypto withdrawal");
+      setFlashMessage(t("please_fill_in_all"));
       setFlashMessageType("error");
       return;
     }
@@ -107,7 +114,8 @@ const Withdrawal = () => {
       selectedMethod === "bank" &&
       (!amount || !bankName || !bankAccountNumber || !phoneNumber || !withdrawalPassword)
     ) {
-      setFlashMessage("Please fill in all fields for bank withdrawal");
+      // setFlashMessage("Please fill in all fields for bank withdrawal");
+      setFlashMessage(t("please_fill_in_all_bank"));
       setFlashMessageType("error");
       return;
     }
@@ -143,14 +151,16 @@ const Withdrawal = () => {
         },
       });
 
-      setFlashMessage("Request sent successfully.  Awaiting approval");
+      // setFlashMessage("Request sent successfully.  Awaiting approval");
+      setFlashMessage(t("Awaiting_approval"));
       setFlashMessageType("success");
 
       // handleUserUnsettle(user, availableBalance)
       
     } catch (error) {
       console.error("Error processing withdrawal:", error);
-      setFlashMessage("Error processing withdrawal");
+      // setFlashMessage("Error processing withdrawal");
+      setFlashMessage(t("Error_processing_withdrawal"));
       setFlashMessageType("error");
     } finally {
       setWithdrawalPassword("")

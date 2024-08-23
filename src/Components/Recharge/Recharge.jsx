@@ -23,6 +23,10 @@ const Recharge = () => {
 
   const { t } = useTranslation();
 
+//   const handleFileChange = (e) => {
+   
+// };
+
   const userID = localStorage.getItem("user_id");
   const djangoHostname = import.meta.env.VITE_DJANGO_HOSTNAME;
   const location = useLocation();
@@ -140,7 +144,7 @@ const Recharge = () => {
   const handleCopy = (textToCopy) => {
     navigator.clipboard.writeText(textToCopy).then(() => {
       setIsCopied(true); // Set the state to true when clicked
-      setFlashMessage("Copied to clipboard!");
+      setFlashMessage(t("Copied_to_clipboard"));
       setFlashType("success");
       setIsWalletLocked(true); // Lock the wallet after copying
 
@@ -153,6 +157,8 @@ const Recharge = () => {
 
   const handleFileChange = (e) => {
     setUploadProf(e.target.files[0]);
+    const fileName = e.target.files[0] ? e.target.files[0].name : t('no_file_chosen');
+    document.getElementById('file-name').textContent = fileName;
   };
 
   const handleFileUpload = async (formData) => {
@@ -168,7 +174,7 @@ const Recharge = () => {
 
       if (response.ok) {
         const responseData = await response.json();
-        setFlashMessage("File uploaded successfully!");
+        setFlashMessage(t("file_uploaded"));
         setFlashType("success");
 
         // Clear the input fields after successful upload
@@ -187,12 +193,12 @@ const Recharge = () => {
           window.location.reload();
         }, 3000); // 3 seconds delay
       } else {
-        setFlashMessage("Failed to upload the file.");
+        setFlashMessage(t("failed_to_upload"));
         setFlashType("error");
       }
     } catch (error) {
       console.error("Error uploading file:", error);
-      setFlashMessage("An error occurred during file upload.");
+      setFlashMessage(t("an_error_occurred"));
       setFlashType("error");
     } finally {
       setLoading(false); // Set loading to false
@@ -204,7 +210,7 @@ const Recharge = () => {
 
     if (selectedMethod === "wallet") {
       if (!cryptoWallet) {
-        setFlashMessage("Please select a crypto wallet.");
+        setFlashMessage(t("select_a_crypto"));
         setFlashType("error");
         return;
       }
@@ -246,7 +252,7 @@ const Recharge = () => {
       }
 
       if (!uploadProf) {
-        setFlashMessage("Please upload proof of payment.");
+        setFlashMessage(t("Please_upload_proof_of_payment"));
         setFlashType("error");
         return;
       }
@@ -268,7 +274,7 @@ const Recharge = () => {
     // Existing bank payment logic...
     if (selectedMethod === "bank-payment") {
       if (!senderName || !uploadProf) {
-        setFlashMessage("Select Receipt");
+        setFlashMessage(t("select_receipt"));
         setFlashType("error");
         return;
       }
@@ -337,7 +343,7 @@ const Recharge = () => {
                 disabled={isWalletLocked} // Disable if wallet is locked
                 required
               >
-                <option value="">{t('Choose_wallet')}</option>
+                <option value="">{t("Choose_wallet")}</option>
                 <option value="USDT">USDT</option>
                 <option value="BINANCE">BINANCE</option>
                 <option value="TON">TON</option>
@@ -355,23 +361,41 @@ const Recharge = () => {
                 type="text"
                 id="wallet-address"
                 className="form-control py-3 rounded-4 w-50 bg-dark text-light"
-                value={walletAddress || t('fetch_address')}
+                value={walletAddress || t("fetch_address")}
                 readOnly
               />
               <p className="py-4">{t("messages")}</p>
             </div>
 
             {isWalletLocked && (
+              // <div className="my-3">
+              //   <label htmlFor="uploadProf">{t("upload_prof")}</label>
+              //   <input
+              //     type="file"
+              //     name="uploadProf"
+              //     id="uploadProf"
+              //     onChange={handleFileChange}
+              //     className="form-control border border-3 rounded-3 ps-5 file-input"
+              //     required
+              //   />
+              // </div>
               <div className="my-3">
                 <label htmlFor="uploadProf">{t("upload_prof")}</label>
-                <input
-                  type="file"
-                  name="uploadProf"
-                  id="uploadProf"
-                  onChange={handleFileChange}
-                  className="form-control border border-3 rounded-3 ps-5 file-input"
-                  required
-                />
+                <div className="custom-file-upload">
+                  <label htmlFor="uploadProf" className="custom-file-label">
+                    {t("choose_file")}
+                  </label>
+                  <input
+                    type="file"
+                    name="uploadProf"
+                    id="uploadProf"
+                    onChange={handleFileChange}
+                    className="form-control border border-3 rounded-3 ps-5 file-input"
+                    required
+                    style={{ display: "none" }} // Hide the default file input
+                  />
+                  <span id="file-name">{t("no_file_chosen")}</span>
+                </div>
               </div>
             )}
 
@@ -385,9 +409,9 @@ const Recharge = () => {
                   <i className="fas fa-spinner fa-spin"></i> // Spinner icon while loading
                 ) : isWalletLocked ? (
                   // "Submit Proof"
-                  t('upload_prof')
+                  t("upload_prof")
                 ) : (
-                  t('generate')
+                  t("generate")
                 )}
               </button>
             </div>
@@ -486,10 +510,10 @@ const Recharge = () => {
                       role="status"
                       aria-hidden="true"
                     ></span>
-                    {t('recharge_now')}...
+                    {t("recharge_now")}...
                   </>
                 ) : (
-                  t('upload_prof')
+                  t("upload_prof")
                 )}
               </button>
             </div>

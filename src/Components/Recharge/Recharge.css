@@ -116,4 +116,25 @@
     transition: background-color 0.3s ease-in-out;
   }
 
-  
+  .custom-file-upload {
+    display: flex;
+    align-items: center;
+}
+
+.custom-file-label {
+    background-color: #ffa500;
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-right: 10px;
+}
+
+#file-name {
+    font-size: 14px;
+    color: #999;
+}
+
+input[type="file"]{
+  border: 2px solid gray !important;
+}

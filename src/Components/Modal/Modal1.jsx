@@ -172,55 +172,72 @@ const Modal1 = ({ show, handleClose, user_level, amount, balance, orderCounts}) 
 
         // Set flash message based on user level and order count
         if (userLevel === "VIP1" && orderCount === 1) {
-          setFlashMessage("Order completed. Grab two more");
+          // setFlashMessage("Order completed. Grab two more");
+          setFlashMessage(t("Grab_two_more"));
         } 
         if (userLevel === "VIP1" && orderCount === 2) {
-          setFlashMessage("Order completed. Grab one more");
+          // setFlashMessage("Order completed. Grab one more");
+          setFlashMessage(t("Grab_one_more"));
         }
         if (userLevel === "VIP1" && orderCount === 3) {
-          setFlashMessage("3 Orders completely Grabbed. Withdraw");
+          // setFlashMessage("3 Orders completely Grabbed. Withdraw");
+          setFlashMessage(t("Grab_3_more"));
         }
         if (userLevel === "VIP2" && orderCount === 1) {
-          setFlashMessage("Top up $20 for the next Order");
+          // setFlashMessage("Top up $20 for the next Order");
+          setFlashMessage(t("next_Order"));
         }
         if (userLevel === "VIP2" && orderCount === 2) {
-          setFlashMessage("Orders completed. Withdraw.");
+          // setFlashMessage("Orders completed. Withdraw.");
+          setFlashMessage(t("completed_withdraw"));
         }
         if (userLevel === "VIP3" && orderCount === 1) {
-          setFlashMessage("Top up $120 for the next Order");
+          // setFlashMessage("Top up $120 for the next Order");
+          setFlashMessage(t("Top_up_$120_next"));
         }
         if (userLevel === "VIP3" && orderCount === 2) {
-          setFlashMessage("Top up $200 for the next Order");
+          // setFlashMessage("Top up $200 for the next Order");
+          setFlashMessage(t("Top_up_$200_next"));
         }
         if (userLevel === "VIP3" && orderCount === 3) {
-          setFlashMessage("Top up $500 for the next Order");
+          // setFlashMessage("Top up $500 for the next Order");
+          setFlashMessage(t("Top_up_$500_next"));
         }
         if (userLevel === "VIP3" && orderCount === 4) {
-          setFlashMessage("Top up $900 for the next Order");
+          // setFlashMessage("Top up $900 for the next Order");
+          setFlashMessage(t("Top_up_$900_next"));
         }
         if (userLevel === "VIP3" && orderCount === 5) {
-          setFlashMessage("Top up $1200 for the next Order");
+          // setFlashMessage("Top up $1200 for the next Order");
+          setFlashMessage(t("Top_up_$1200_next"));
         }
         if (userLevel === "VIP3" && orderCount === 6) {
-          setFlashMessage("Top up $1500 for the next Order");
+          // setFlashMessage("Top up $1500 for the next Order");
+          setFlashMessage(t("Top_up_$1500_next"));
         }
         if (userLevel === "VIP3" && orderCount === 7) {
-          setFlashMessage("Top up $2200 for the next Order");
+          // setFlashMessage("Top up $2200 for the next Order");
+          setFlashMessage(t("Top_up_$2200_next"));
         }
         if (userLevel === "VIP3" && orderCount === 8) {
-          setFlashMessage("Top up $3000 for the next Order");
+          // setFlashMessage("Top up $3000 for the next Order");
+          setFlashMessage(t("Top_up_$3000_next"));
         }
         if (userLevel === "VIP3" && orderCount === 9) {
-          setFlashMessage("Top up $3500 for the next Order");
+          // setFlashMessage("Top up $3500 for the next Order");
+          setFlashMessage(t("Top_up_$3500_next"));
         }
         if (userLevel === "VIP3" && orderCount === 10) {
-          setFlashMessage("Top up $3950 for the next Order");
+          // setFlashMessage("Top up $3950 for the next Order");
+          setFlashMessage(t("Top_up_$3950_next"));
         }
         if (userLevel === "VIP3" && orderCount === 11) {
-          setFlashMessage("Top up $4200 for the next Order");
+          // setFlashMessage("Top up $4200 for the next Order");
+          setFlashMessage(t("Top_up_$4200_next"));
         }
         if (userLevel === "VIP3" && orderCount === 12) {
-          setFlashMessage("Order Completed. Withdraw");
+          // setFlashMessage("Order Completed. Withdraw");
+          setFlashMessage(t("completed_withdraw"));
         }
        
 

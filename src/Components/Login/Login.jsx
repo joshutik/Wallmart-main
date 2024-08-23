@@ -92,7 +92,8 @@ const { t } = useTranslation()
       });
   
       if (!response.ok) {
-        throw new Error("Network response was not ok");
+        // throw new Error("Network response was not ok");
+        throw new Error(t('Network_response'));
       }
   
       const result = await response.json();
@@ -116,7 +117,7 @@ const { t } = useTranslation()
       }
   
     } catch (error) {
-      setError("Login failed: " + error.message);
+      setError(t('Login_failed') + error.message);
       console.error("Error:", error);
     } finally {
       setLoading(false);

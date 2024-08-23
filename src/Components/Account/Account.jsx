@@ -262,13 +262,13 @@ const Account = () => {
                     <h4 className="border border-3 py-2 text-light rounded-pill fs-5">
                     {t('account_bal')}
                     </h4>
-                    <p className="fw-bold text-center display-1">${balance}</p>
+                    <p className="fw-bold text-center display-2">${balance}</p>
                   </div>
                   <div className="col-lg-1 mt-5 d-none d-lg-block">
                     <div className="vr h-100"></div>
                   </div>
                   <div className="col-lg-3 col-md-6 col-sm-12 text-light">
-                    <h4 className="border border-3 py-2 text-light rounded-pill mt-5">
+                    <h4 className="border border-3 py-1 text-light rounded-pill mt-5">
                     {t('unsettled')}
                     </h4>
                     <p className="fw-bold display-1 text-start text-center ">
@@ -276,8 +276,8 @@ const Account = () => {
                     </p>
                   </div>
                   <div className="col-lg-4 col-md-6 col-sm-12 text-light">
-                    <div className="w-100 mx-auto my-5">
-                      <div className="rounded-circle position-relative w-75 mx-auto p-3 bg-light">
+                    <div className="100 mx-auto my-5">
+                      <div className="rounded-circle rounded-pro position-relative p-3 bg-light">
                         <Circle
                           percent={progress}
                           strokeWidth={10}
