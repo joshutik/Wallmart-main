@@ -118,6 +118,7 @@ import Homepage from "./Components/Homepage/Homepage.jsx";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import "./index.css";
 import Registration from "./Components/Registration/Registration.jsx";
+import Profile from "./Components/Profile/Profile.jsx";
 import Login from "./Components/Login/Login.jsx";
 import GrabOrder from "./Components/GrabOrder/GrabOrder.jsx";
 import Account from "./Components/Account/Account.jsx";
@@ -171,6 +172,10 @@ const router = createBrowserRouter([
   {
     path: "/admin-regiration",
     element: <AdminReg />,
+  },
+  {
+    path: "/profile",
+    element: <Profile />,
   },
 ]);
 i18n
